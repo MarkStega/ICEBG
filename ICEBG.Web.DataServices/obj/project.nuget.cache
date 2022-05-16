@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "cTmveR1TXQ8s12CXH68bgSATm9VHIyOPNIkPqQ90FVbnkqRDNhxg25Jue4xwH1PLgNkTfdW3A/XLVxTgdb+Gfg==",
+  "success": true,
+  "projectFilePath": "C:\\Solutions\\OHI\\ICEBG\\ICEBG.Web.DataServices\\ICEBG.Web.DataServices.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.server\\6.0.5\\microsoft.aspnetcore.components.webassembly.server.6.0.5.nupkg.sha512"
+  ],
+  "logs": []
+}

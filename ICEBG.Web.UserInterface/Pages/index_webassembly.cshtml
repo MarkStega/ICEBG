@@ -1,0 +1,80 @@
+﻿@page "/index_webassembly"
+@namespace Optimiser.Web.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Optimiser.2021 (UserInterface - WebAssembly)</title>
+
+    <base href="/" />
+
+    @*<script type="text/javascript">
+            var appBase = document.createElement('base');
+            appBase.href = "/Optimiser.2021/";
+            if (window.location.href.indexOf("localhost") > -1) {
+                appBase.href = "/";
+            }
+            document.head.appendChild(appBase);
+    </script>*@
+
+    <link href="manifest.json" rel="manifest" />
+
+    <link href="_content/material.blazor/material.blazor.min.css" rel="stylesheet" />
+
+    <link href="_content/Optimiser.2021/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="_content/Optimiser.2021/images/favicon.ico" rel="icon" type="image/x-icon">
+    <link href="_content/Optimiser.2021/css/optimiser.min.css" rel="stylesheet" />
+
+    <!-- General Components MUST come after o.2021 as there are css overrides -->
+    <link href="_content/GeneralComponents/css/general.components.min.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <!-- CSE -->
+    <div id="app">
+        <div component="Spinner">
+            <div class="grid glow">
+                <div class="grid-content">
+                    <div class="grid-center">
+                        <div class="spinner-loading">
+                            <h1>Loading Optimi$er.2021 (WebAssembly)...</h1>
+                            <h1>Please wait.</h1>
+                            <div class="spinner">
+                                <div class="rect1"></div>
+                                <div class="rect2"></div>
+                                <div class="rect3"></div>
+                                <div class="rect4"></div>
+                                <div class="rect5"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="https://shboptimiser:444" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_content/Material.Blazor/material.blazor.min.js"></script>
+
+    <script src="_content/GeneralComponents/scripts/general.components.js"></script>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
+
+</body>
+</html>
