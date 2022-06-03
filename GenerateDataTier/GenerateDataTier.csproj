@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>disable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Configurations>Develop_WebAssembly;Develop_Server;DEMO;LBH;WASM</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY;gRPC;xREST;ICEBG_NG</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_SERVER;gRPC;xREST;ICEBG_NG</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEMO|AnyCPU'">
+		<DefineConstants>DEMO;BLAZOR_SERVER;gRPC;xREST;ICEBG_NG</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LBH|AnyCPU'">
+		<DefineConstants>LBH;BLAZOR_SERVER;gRPC;xREST;ICEBG_NG</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='WASM|AnyCPU'">
+		<DefineConstants>WASM;BLAZOR_WEBASSEMBLY;gRPC;xREST;ICEBG_NG</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\DataTier\DataTier.csproj" />
+		<ProjectReference Include="..\GeneratorUtilities\GeneratorUtilities.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,42 @@
+﻿syntax = "proto3";
+option csharp_namespace = "ICEBG.DataTier.gRPCClient";
+package grpcProto;
+
+service ConfigurationProto {
+  rpc Select (ConfigurationSelectRequest) returns (ConfigurationSelectReply);
+  rpc SelectAll (ConfigurationSelectAllRequest) returns (ConfigurationSelectAllReply);
+  rpc Upsert (ConfigurationUpsertRequest) returns (ConfigurationUpsertReply);
+}
+
+message ConfigurationDD {
+	string Id = 1;
+	string Configuration = 2;
+}
+
+message ConfigurationSelectRequest {
+	string Id = 1;
+}
+
+message ConfigurationSelectReply{
+	bool successIndicator = 1;
+	string errorMessage = 2;
+	ConfigurationDD returnedConfiguration = 3;
+}
+
+message ConfigurationSelectAllRequest {
+}
+
+message ConfigurationSelectAllReply{
+	bool successIndicator = 1;
+	string errorMessage = 2;
+	repeated ConfigurationDD ConfigurationList = 3;
+}
+
+message ConfigurationUpsertRequest{
+    ConfigurationDD Configuration = 1;
+}
+
+message ConfigurationUpsertReply {
+	bool successIndicator = 1;
+	string errorMessage = 2;
+}

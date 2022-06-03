@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>SharedUtilities</RootNamespace>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Configurations>Develop_WebAssembly;Develop_Server;DEMO;LBH;WASM</Configurations>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
+        <DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY;gRPC;xREST;OPTIMISER_NG</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
+        <DefineConstants>DEVELOP;BLAZOR_SERVER;gRPC;xREST;OPTIMISER_NG</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEMO|AnyCPU'">
+        <DefineConstants>DEMO;BLAZOR_SERVER;gRPC;xREST;OPTIMISER_NG</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LBH|AnyCPU'">
+        <DefineConstants>LBH;BLAZOR_SERVER;gRPC;xREST;OPTIMISER_NG</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='WASM|AnyCPU'">
+        <DefineConstants>WASM;BLAZOR_WEBASSEMBLY;gRPC;xREST;OPTIMISER_NG</DefineConstants>
+    </PropertyGroup>
+
+</Project>
+

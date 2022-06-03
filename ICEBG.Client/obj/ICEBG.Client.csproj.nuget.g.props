@@ -13,4 +13,57 @@
     <SourceRoot Include="C:\Users\ms\.nuget\packages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Content Include="$(NuGetPackageRoot)material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material-components-web.css" Condition="Exists('$(NuGetPackageRoot)material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material-components-web.css')">
+      <NuGetPackageId>Material.Blazor</NuGetPackageId>
+      <NuGetPackageVersion>2.5.0</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
+      <Private>False</Private>
+      <Link>wwwroot\material-components-web.css</Link>
+    </Content>
+    <Content Include="$(NuGetPackageRoot)material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material-components-web.min.css" Condition="Exists('$(NuGetPackageRoot)material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material-components-web.min.css')">
+      <NuGetPackageId>Material.Blazor</NuGetPackageId>
+      <NuGetPackageVersion>2.5.0</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
+      <Private>False</Private>
+      <Link>wwwroot\material-components-web.min.css</Link>
+    </Content>
+    <Content Include="$(NuGetPackageRoot)material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material.blazor.css" Condition="Exists('$(NuGetPackageRoot)material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material.blazor.css')">
+      <NuGetPackageId>Material.Blazor</NuGetPackageId>
+      <NuGetPackageVersion>2.5.0</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
+      <Private>False</Private>
+      <Link>wwwroot\material.blazor.css</Link>
+    </Content>
+    <Content Include="$(NuGetPackageRoot)material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material.blazor.js" Condition="Exists('$(NuGetPackageRoot)material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material.blazor.js')">
+      <NuGetPackageId>Material.Blazor</NuGetPackageId>
+      <NuGetPackageVersion>2.5.0</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
+      <Private>False</Private>
+      <Link>wwwroot\material.blazor.js</Link>
+    </Content>
+    <Content Include="$(NuGetPackageRoot)material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material.blazor.min.css" Condition="Exists('$(NuGetPackageRoot)material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material.blazor.min.css')">
+      <NuGetPackageId>Material.Blazor</NuGetPackageId>
+      <NuGetPackageVersion>2.5.0</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
+      <Private>False</Private>
+      <Link>wwwroot\material.blazor.min.css</Link>
+    </Content>
+    <Content Include="$(NuGetPackageRoot)material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material.blazor.min.js" Condition="Exists('$(NuGetPackageRoot)material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material.blazor.min.js')">
+      <NuGetPackageId>Material.Blazor</NuGetPackageId>
+      <NuGetPackageVersion>2.5.0</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
+      <Private>False</Private>
+      <Link>wwwroot\material.blazor.min.js</Link>
+    </Content>
+  </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)material.blazor\2.5.0\buildTransitive\Material.Blazor.props" Condition="Exists('$(NuGetPackageRoot)material.blazor\2.5.0\buildTransitive\Material.Blazor.props')" />
+  </ImportGroup>
 </Project>

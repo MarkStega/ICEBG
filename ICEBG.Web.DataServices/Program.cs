@@ -1,39 +1,88 @@
+using System;
+
+using Grpc.Core;
+
+using ICEBG.Web.DataServices.Services.Configuration;
+
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
-var builder = WebApplication.CreateBuilder(args);
+using Serilog;
 
-// Add services to the container.
-builder.Services.AddRazorPages();
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-var app = builder.Build();
+Log.Information("Starting up");
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+try
 {
-    app.UseDeveloperExceptionPage();
+    var builder = WebApplication.CreateBuilder(args);
+
+    builder.Host.UseSerilog((ctx, lc) => lc
+        .WriteTo.Console()
+        .WriteTo.File("c:/temp/Serilog.Data.log"));
+    
+    // Add services to the container.
+
+    builder.Services.AddRazorPages();
+
+    Log.Debug("Adding gRPC...");
+    builder.Services.AddGrpc(options =>
+    {
+        options.EnableDetailedErrors = true;
+        options.MaxReceiveMessageSize = null;
+        options.MaxSendMessageSize = null;
+    });
+    builder.Services.AddGrpcReflection();
+
+    var app = builder.Build();
+
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+    else
+    {
+        app.UseExceptionHandler("/Error");
+        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+        app.UseHsts();
+    }
+
+    app.UseHttpsRedirection();
+
+    app.UseStaticFiles();
+
+    app.UseRouting();
+
+    // This must be between UseRouting & UseEndpoints
+    Log.Debug("UseGrpcWeb...");
+    app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapGrpcService<ConfigurationService>();
+        endpoints.MapFallbackToPage("/index_server");
+    });
+
+    app.Run();
 }
-else
+catch (Exception ex)
 {
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    Log.Fatal(ex, "Unhandled exception");
 }
-
-app.UseHttpsRedirection();
-
-app.UseBlazorFrameworkFiles();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.UseEndpoints(endpoints =>
+finally
 {
-    endpoints.MapFallbackToPage("/index_server");
-});
-
-app.Run();
+    Log.Information("Shut down complete");
+    Log.CloseAndFlush();
+}

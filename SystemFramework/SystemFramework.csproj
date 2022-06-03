@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>ICEBG.SystemFramework</RootNamespace>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Configurations>Develop_WebAssembly;Develop_Server;DEMO;LBH;WASM</Configurations>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
+        <DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY;gRPC;xREST;SERVER;ICEBG_NG</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
+        <DefineConstants>DEVELOP;BLAZOR_SERVER;gRPC;xREST;SERVER;ICEBG_NG</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEMO|AnyCPU'">
+        <DefineConstants>DEMO;BLAZOR_SERVER;gRPC;xREST;SERVER;ICEBG_NG</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LBH|AnyCPU'">
+        <DefineConstants>LBH;BLAZOR_SERVER;gRPC;xREST;SERVER;ICEBG_NG</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='WASM|AnyCPU'">
+        <DefineConstants>WASM;BLAZOR_WEBASSEMBLY;gRPC;xREST;SERVER;ICEBG_NG</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="System.ServiceModel.Duplex" Version="4.9.0" />
+        <PackageReference Include="System.ServiceModel.Http" Version="4.9.0" />
+        <PackageReference Include="System.ServiceModel.NetTcp" Version="4.9.0" />
+        <PackageReference Include="System.ServiceModel.Security" Version="4.9.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <WCFMetadata Include="Connected Services" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="System.ServiceModel" />
+    </ItemGroup>
+
+</Project>
+
