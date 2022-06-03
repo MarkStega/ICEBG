@@ -12,8 +12,8 @@
 		<DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
 		<DockerServiceName>icebg.web.userinterface</DockerServiceName>-->
 		<Configurations>Develop_WebAssembly;Develop_Server;DEMO;LBH;WASM</Configurations>
-		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-		<DockerComposeProjectPath>..\ICEBG.Web.UserInterface.Compose.dcproj</DockerComposeProjectPath>
+		<!--<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerComposeProjectPath>..\ICEBG.Web.UserInterface.Compose.dcproj</DockerComposeProjectPath>-->
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
