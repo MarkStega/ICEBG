@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-#if gRPC
+//#if gRPC
 using System.Net.Http;
 
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 
 using ICEBG.DataTier.gRPCClient;
-#endif
+//#endif
 
 namespace ICEBG.Infrastructure.ClientServices
 {

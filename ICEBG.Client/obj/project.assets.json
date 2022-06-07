@@ -184,6 +184,21 @@
           "lib/net6.0/Microsoft.AspNetCore.Components.Web.dll": {}
         }
       },
+      "Microsoft.AspNetCore.Components.WebAssembly.Server/6.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Microsoft.AspNetCore.Components.WebAssembly.Server.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Components.WebAssembly.Server.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ],
+        "build": {
+          "build/_._": {}
+        }
+      },
       "Microsoft.AspNetCore.Metadata/6.0.5": {
         "type": "package",
         "compile": {
@@ -828,6 +843,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Microsoft.AspNetCore.Components": "6.0.5",
+          "Microsoft.AspNetCore.Components.Web": "6.0.5",
+          "Microsoft.AspNetCore.Components.WebAssembly.Server": "6.0.5",
           "System.ServiceModel.Duplex": "4.9.0",
           "System.ServiceModel.Http": "4.9.0",
           "System.ServiceModel.NetTcp": "4.9.0",
@@ -1092,6 +1110,29 @@
         "lib/net6.0/Microsoft.AspNetCore.Components.Web.xml",
         "microsoft.aspnetcore.components.web.6.0.5.nupkg.sha512",
         "microsoft.aspnetcore.components.web.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Components.WebAssembly.Server/6.0.5": {
+      "sha512": "nTqbZtSn3+IysiXlS0zAWFSX3sp3gQmUxc3XnlHf8TKqGABH3O4vKqs13ErI8lfixiN2ZybV0C2Jb/YeI+OR/Q==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.components.webassembly.server/6.0.5",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/Microsoft.AspNetCore.Components.WebAssembly.Server.targets",
+        "lib/net6.0/Microsoft.AspNetCore.Components.WebAssembly.Server.dll",
+        "lib/net6.0/Microsoft.AspNetCore.Components.WebAssembly.Server.xml",
+        "microsoft.aspnetcore.components.webassembly.server.6.0.5.nupkg.sha512",
+        "microsoft.aspnetcore.components.webassembly.server.nuspec",
+        "tools/BlazorDebugProxy/BrowserDebugHost.dll",
+        "tools/BlazorDebugProxy/BrowserDebugHost.runtimeconfig.json",
+        "tools/BlazorDebugProxy/BrowserDebugProxy.dll",
+        "tools/BlazorDebugProxy/Microsoft.CodeAnalysis.CSharp.dll",
+        "tools/BlazorDebugProxy/Microsoft.CodeAnalysis.dll",
+        "tools/BlazorDebugProxy/Newtonsoft.Json.dll"
       ]
     },
     "Microsoft.AspNetCore.Metadata/6.0.5": {

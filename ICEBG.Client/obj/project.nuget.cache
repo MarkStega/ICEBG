@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Ln0VhlXEO+IsXt7HaovDpeCRJFj5g7F+bXyf0OLLWPv8PSXW3GibCwv/jOXVioYwk7flI0AFh3ksFwvPEnLcgA==",
+  "dgSpecHash": "+CmPPf6ACA/c4ZIaPrnTPf4pjxyjb7clzS1Fbq3KrOHQHYv1xi73euOhdf/tCsrOdB3YYf6J1r77qwVtTTqO7Q==",
   "success": true,
   "projectFilePath": "C:\\Solutions\\OHI\\ICEBG\\ICEBG.Client\\ICEBG.Client.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,7 @@
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.components.authorization\\6.0.5\\microsoft.aspnetcore.components.authorization.6.0.5.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\6.0.5\\microsoft.aspnetcore.components.forms.6.0.5.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.components.web\\6.0.5\\microsoft.aspnetcore.components.web.6.0.5.nupkg.sha512",
+    "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.server\\6.0.5\\microsoft.aspnetcore.components.webassembly.server.6.0.5.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.metadata\\6.0.5\\microsoft.aspnetcore.metadata.6.0.5.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.0\\microsoft.extensions.dependencyinjection.6.0.0.nupkg.sha512",

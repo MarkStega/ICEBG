@@ -254,14 +254,6 @@
               "target": "Package",
               "version": "[2.46.0, )"
             },
-            "Grpc.Net.Client": {
-              "target": "Package",
-              "version": "[2.46.0, )"
-            },
-            "Grpc.Net.Client.Web": {
-              "target": "Package",
-              "version": "[2.46.0, )"
-            },
             "Microsoft.AspNetCore.Components.WebAssembly.Server": {
               "target": "Package",
               "version": "[6.0.5, )"
@@ -273,10 +265,6 @@
             "Serilog.AspNetCore": {
               "target": "Package",
               "version": "[5.0.0, )"
-            },
-            "Serilog.Sinks.Console": {
-              "target": "Package",
-              "version": "[4.0.1, )"
             },
             "Serilog.Sinks.File": {
               "target": "Package",
@@ -409,6 +397,18 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Components": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.AspNetCore.Components.Web": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.Server": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
             "System.ServiceModel.Duplex": {
               "target": "Package",
               "version": "[4.9.0, )"

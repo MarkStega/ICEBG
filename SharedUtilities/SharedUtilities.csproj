@@ -5,28 +5,24 @@
         <RootNamespace>SharedUtilities</RootNamespace>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
-		<Configurations>Develop_WebAssembly;Develop_Server;DEMO;LBH;WASM</Configurations>
-    </PropertyGroup>
+		<Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
+	</PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
-        <DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY;gRPC;xREST;OPTIMISER_NG</DefineConstants>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
+	</PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
-        <DefineConstants>DEVELOP;BLAZOR_SERVER;gRPC;xREST;OPTIMISER_NG</DefineConstants>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
+	</PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEMO|AnyCPU'">
-        <DefineConstants>DEMO;BLAZOR_SERVER;gRPC;xREST;OPTIMISER_NG</DefineConstants>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
+	</PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LBH|AnyCPU'">
-        <DefineConstants>LBH;BLAZOR_SERVER;gRPC;xREST;OPTIMISER_NG</DefineConstants>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='WASM|AnyCPU'">
-        <DefineConstants>WASM;BLAZOR_WEBASSEMBLY;gRPC;xREST;OPTIMISER_NG</DefineConstants>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssemply|AnyCPU'">
+		<DefineConstants>RELEASE;BLAZOR_WEBASSEMBLY</DefineConstants>
+	</PropertyGroup>
 
 </Project>
 

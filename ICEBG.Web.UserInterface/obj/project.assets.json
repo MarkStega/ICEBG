@@ -1077,6 +1077,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Microsoft.AspNetCore.Components": "6.0.5",
+          "Microsoft.AspNetCore.Components.Web": "6.0.5",
+          "Microsoft.AspNetCore.Components.WebAssembly.Server": "6.0.5",
           "System.ServiceModel.Duplex": "4.9.0",
           "System.ServiceModel.Http": "4.9.0",
           "System.ServiceModel.NetTcp": "4.9.0",
@@ -3203,13 +3206,10 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Grpc.AspNetCore.Web >= 2.46.0",
-      "Grpc.Net.Client >= 2.46.0",
-      "Grpc.Net.Client.Web >= 2.46.0",
       "ICEBG.Client >= 1.0.0",
       "Microsoft.AspNetCore.Components.WebAssembly.Server >= 6.0.5",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.15.1",
       "Serilog.AspNetCore >= 5.0.0",
-      "Serilog.Sinks.Console >= 4.0.1",
       "Serilog.Sinks.File >= 5.0.0"
     ]
   },
@@ -3268,14 +3268,6 @@
             "target": "Package",
             "version": "[2.46.0, )"
           },
-          "Grpc.Net.Client": {
-            "target": "Package",
-            "version": "[2.46.0, )"
-          },
-          "Grpc.Net.Client.Web": {
-            "target": "Package",
-            "version": "[2.46.0, )"
-          },
           "Microsoft.AspNetCore.Components.WebAssembly.Server": {
             "target": "Package",
             "version": "[6.0.5, )"
@@ -3287,10 +3279,6 @@
           "Serilog.AspNetCore": {
             "target": "Package",
             "version": "[5.0.0, )"
-          },
-          "Serilog.Sinks.Console": {
-            "target": "Package",
-            "version": "[4.0.1, )"
           },
           "Serilog.Sinks.File": {
             "target": "Package",

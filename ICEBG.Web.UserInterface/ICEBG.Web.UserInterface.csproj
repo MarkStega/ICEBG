@@ -6,49 +6,47 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<UserSecretsId>ICEBG.UI.Server-9042ECD1-A92B-4B48-B0EA-E54F5A5A6F9A</UserSecretsId>
 		<WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
-		<!--<DockerComposeProjectPath>..\ICEBG.Web.UserInterface.Compose.dcproj</DockerComposeProjectPath>
-		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-		<DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-		<DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
-		<DockerServiceName>icebg.web.userinterface</DockerServiceName>-->
-		<Configurations>Develop_WebAssembly;Develop_Server;DEMO;LBH;WASM</Configurations>
-		<!--<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-		<DockerComposeProjectPath>..\ICEBG.Web.UserInterface.Compose.dcproj</DockerComposeProjectPath>-->
+		<Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
-		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY;gRPC;xREST;ICEBG_NG</DefineConstants>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
-		<DefineConstants>DEVELOP;BLAZOR_SERVER;gRPC;xREST;ICEBG_NG</DefineConstants>
+		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEMO|AnyCPU'">
-		<DefineConstants>DEMO;BLAZOR_SERVER;gRPC;xREST;ICEBG_NG</DefineConstants>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LBH|AnyCPU'">
-		<DefineConstants>LBH;BLAZOR_SERVER;gRPC;xREST;ICEBG_NG</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='WASM|AnyCPU'">
-		<DefineConstants>WASM;BLAZOR_WEBASSEMBLY;gRPC;xREST;ICEBG_NG</DefineConstants>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssemply|AnyCPU'">
+		<DefineConstants>RELEASE;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="appsettings.Develop_Server" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="appsettings.Develop_Server" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.46.0" />
-		<PackageReference Include="Grpc.Net.Client" Version="2.46.0" />
-		<PackageReference Include="Grpc.Net.Client.Web" Version="2.46.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.5" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
 		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
-		<PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\ICEBG.Client\ICEBG.Client.csproj" />
 	</ItemGroup>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+		<Copy SourceFiles="$(ProjectDir)appsettings.$(ConfigurationName)" DestinationFiles="$(ProjectDir)appsettings.json" />
+	</Target>
 
 </Project>

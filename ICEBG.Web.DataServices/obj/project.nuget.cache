@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5HH8vkj/p3rs0L1J05Jf7WBjo0HjCUKnb5LaKV6H2We8lewgmJ5fDlJqs+GffMZdtQvU1zl73ImW3pP0/GsKHw==",
+  "dgSpecHash": "lJ7R4yzTpWOtJHIYhZ4R82JyHpHZWF4o4a54N7mEkbBNWJ/Lk/27Il7cPSzdc8nuzrHn397aWAee0YTmXA8zxg==",
   "success": true,
   "projectFilePath": "C:\\Solutions\\OHI\\ICEBG\\ICEBG.Web.DataServices\\ICEBG.Web.DataServices.csproj",
   "expectedPackageFiles": [
@@ -20,6 +20,8 @@
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.5\\microsoft.aspnetcore.authorization.6.0.5.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.components\\6.0.5\\microsoft.aspnetcore.components.6.0.5.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\6.0.5\\microsoft.aspnetcore.components.analyzers.6.0.5.nupkg.sha512",
+    "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\6.0.5\\microsoft.aspnetcore.components.forms.6.0.5.nupkg.sha512",
+    "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.components.web\\6.0.5\\microsoft.aspnetcore.components.web.6.0.5.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.server\\6.0.5\\microsoft.aspnetcore.components.webassembly.server.6.0.5.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.metadata\\6.0.5\\microsoft.aspnetcore.metadata.6.0.5.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
@@ -39,6 +41,7 @@
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\2.0.0\\microsoft.extensions.options.configurationextensions.2.0.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\ms\\.nuget\\packages\\microsoft.jsinterop\\6.0.5\\microsoft.jsinterop.6.0.5.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.15.1\\microsoft.visualstudio.azure.containers.tools.targets.1.15.1.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
@@ -61,6 +64,7 @@
     "C:\\Users\\ms\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\system.formats.asn1\\5.0.0\\system.formats.asn1.5.0.0.nupkg.sha512",
+    "C:\\Users\\ms\\.nuget\\packages\\system.io.pipelines\\6.0.3\\system.io.pipelines.6.0.3.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\system.private.servicemodel\\4.9.0\\system.private.servicemodel.4.9.0.nupkg.sha512",
