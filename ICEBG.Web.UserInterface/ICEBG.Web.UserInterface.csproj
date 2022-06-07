@@ -26,10 +26,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="appsettings.Azure" />
 	  <None Remove="appsettings.Develop_Server" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="appsettings.Azure" />
 	  <Content Include="appsettings.Develop_Server" />
 	</ItemGroup>
 

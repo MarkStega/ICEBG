@@ -17,7 +17,7 @@ RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages\
 COPY . .
 WORKDIR "/src/ICEBG.Web.DataServices"
 RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages\
-	dotnet publish "ICEBG.Web.DataServices.csproj" -c Release -o /app/publish
+	dotnet publish "ICEBG.Web.DataServices.csproj" -c Azure -o /app/publish
 
 FROM base AS final
 WORKDIR /app

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hCYX3zyffv0ZzKqWkv+fjsFyJ5TmMve+zOy2t4UkK4XQp7vbEJzTkvQgt0MTaZu4ySE88ONKBa5+TM4IAtt6/Q==",
+  "dgSpecHash": "3yImC+Iy2wi4RNprViC20y3xveURjLfx6QSWsUrHizIf7G2wRhUXanD1I81DvWTvBRcAbqIhkoHIEwEJpjPKxg==",
   "success": true,
   "projectFilePath": "C:\\Solutions\\OHI\\ICEBG\\ICEBG.Web.UserInterface\\ICEBG.Web.UserInterface.csproj",
   "expectedPackageFiles": [
@@ -28,10 +28,8 @@
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.dependencymodel\\3.0.0\\microsoft.extensions.dependencymodel.3.0.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\3.1.8\\microsoft.extensions.fileproviders.abstractions.3.1.8.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\3.1.8\\microsoft.extensions.hosting.abstractions.3.1.8.nupkg.sha512",
-    "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.http\\6.0.0\\microsoft.extensions.http.6.0.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.logging\\6.0.0\\microsoft.extensions.logging.6.0.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.1\\microsoft.extensions.logging.abstractions.6.0.1.nupkg.sha512",
-    "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.logging.debug\\6.0.0\\microsoft.extensions.logging.debug.6.0.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.objectpool\\5.0.10\\microsoft.extensions.objectpool.5.0.10.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\2.0.0\\microsoft.extensions.options.configurationextensions.2.0.0.nupkg.sha512",
@@ -41,7 +39,6 @@
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.15.1\\microsoft.visualstudio.azure.containers.tools.targets.1.15.1.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
-    "C:\\Users\\ms\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
