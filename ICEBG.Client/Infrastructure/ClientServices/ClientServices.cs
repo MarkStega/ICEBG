@@ -11,6 +11,7 @@ using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 
 using ICEBG.DataTier.gRPCClient;
+using ICEBG.DataTier.Interfaces;
 //#endif
 
 namespace ICEBG.Infrastructure.ClientServices
@@ -70,7 +71,15 @@ namespace ICEBG.Infrastructure.ClientServices
                     MaxReceiveMessageSize = null
                 });
 #endif
-            
+
+            pLogger?.LogInformation("Adding gRPC iConfigurationClient...");
+            serviceCollection.AddScoped<iConfigurationClient, ConfigurationClientGRPC>();
+            pLogger?.LogInformation("Adding gRPC ConfigurationProtoClient...");
+            serviceCollection.AddScoped(user =>
+            {
+                return new ConfigurationProto.ConfigurationProtoClient(channel);
+            });
+
         }
     }
 }

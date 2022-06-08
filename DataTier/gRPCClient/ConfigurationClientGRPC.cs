@@ -33,8 +33,7 @@ namespace ICEBG.DataTier.gRPCClient
         }
 
         public async Task<ServiceResult<Configuration_DD>> SelectAsync(
-            string requestedId,
-            Metadata header)
+            string requestedId)
         {
             try
             {
@@ -42,7 +41,7 @@ namespace ICEBG.DataTier.gRPCClient
                 {
                     Id = requestedId
                 };
-                var reply = await pConfigurationProtoClient.SelectAsync(request, header);
+                var reply = await pConfigurationProtoClient.SelectAsync(request);
 
                 if (reply.SuccessIndicator)
                 {

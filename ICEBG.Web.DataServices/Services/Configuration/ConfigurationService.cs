@@ -34,7 +34,7 @@ namespace ICEBG.Web.DataServices.Services.Configuration
             ILogger<LoggingFramework> logger)
         {
             pConfiguration = configuration;
-            //pConfigurationBL = new Configuration_BL(ApplicationConfiguration.pSQL_ConnectionString_Current);
+            pConfigurationBL = new Configuration_BL(ApplicationConfiguration.pSqlConnectionString);
             pLogger = logger;
             pLogger.LogInformation("ConfigurationService ctor");
         }

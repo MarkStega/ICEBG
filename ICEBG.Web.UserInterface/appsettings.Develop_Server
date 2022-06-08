@@ -10,6 +10,7 @@
     "BaseConfiguration": {
       "ConfigurationIdentifier": "ICEBG",
       "GrpcEndpointPrefix": "https://localhost:7173/",
+      "SqlConnectionString": "n/a",
       "WeatherEndpoint": "https://localhost:7173/WeatherForecast"
     }
   }

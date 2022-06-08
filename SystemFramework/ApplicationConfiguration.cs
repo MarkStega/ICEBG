@@ -19,6 +19,7 @@ public static class ApplicationConfiguration
 
     public static string pConfigurationIdentifier { get; set; }
     public static string pGrpcEndpointPrefix { get; set; }
+    public static string pSqlConnectionString { get; set; }
     public static string pWeatherEndpoint { get; set; }
 
     #endregion
@@ -28,6 +29,7 @@ public static class ApplicationConfiguration
     {
         pConfigurationIdentifier = builder.Configuration["ICEBG:BaseConfiguration:ConfigurationIdentifier"];
         pGrpcEndpointPrefix = builder.Configuration["ICEBG:BaseConfiguration:GrpcEndpointPrefix"];
+        pSqlConnectionString = builder.Configuration["ICEBG:BaseConfiguration:SqlConnectionString"];
         pWeatherEndpoint = builder.Configuration["ICEBG:BaseConfiguration:WeatherEndpoint"];
     }
 

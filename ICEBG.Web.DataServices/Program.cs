@@ -2,6 +2,7 @@ using System;
 
 using Grpc.Core;
 
+using ICEBG.SystemFramework;
 using ICEBG.Web.DataServices.Services.Configuration;
 
 using Microsoft.AspNetCore.Builder;
@@ -22,6 +23,8 @@ Log.Information("Starting up");
 try
 {
     var builder = WebApplication.CreateBuilder(args);
+
+    ApplicationConfiguration.Initialize(builder);
 
     builder.Host.UseSerilog((ctx, lc) => lc
         .WriteTo.Console()

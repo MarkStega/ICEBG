@@ -110,6 +110,15 @@
           "lib/net6.0/Grpc.Net.Client.dll": {}
         }
       },
+      "Grpc.Net.Client.Web/2.46.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Grpc.Net.Client.Web.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Grpc.Net.Client.Web.dll": {}
+        }
+      },
       "Grpc.Net.ClientFactory/2.46.0": {
         "type": "package",
         "dependencies": {
@@ -1033,6 +1042,7 @@
         "dependencies": {
           "Google.Protobuf": "3.21.1",
           "Grpc.Net.Client": "2.46.0",
+          "Grpc.Net.Client.Web": "2.46.0",
           "System.Data.SqlClient": "4.8.3",
           "SystemFramework": "1.0.0"
         },
@@ -1236,6 +1246,31 @@
         "lib/netstandard2.1/Grpc.Net.Client.dll",
         "lib/netstandard2.1/Grpc.Net.Client.pdb",
         "lib/netstandard2.1/Grpc.Net.Client.xml",
+        "packageIcon.png"
+      ]
+    },
+    "Grpc.Net.Client.Web/2.46.0": {
+      "sha512": "QO2Cw3btIfXHme9SOLNWB2TYraUCtQYiIIFmNvDcfmm++dKNG2MO4vINSMXY0zmX8TD7AWcXBzielIx2r2eirQ==",
+      "type": "package",
+      "path": "grpc.net.client.web/2.46.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "grpc.net.client.web.2.46.0.nupkg.sha512",
+        "grpc.net.client.web.nuspec",
+        "lib/net5.0/Grpc.Net.Client.Web.dll",
+        "lib/net5.0/Grpc.Net.Client.Web.pdb",
+        "lib/net5.0/Grpc.Net.Client.Web.xml",
+        "lib/net6.0/Grpc.Net.Client.Web.dll",
+        "lib/net6.0/Grpc.Net.Client.Web.pdb",
+        "lib/net6.0/Grpc.Net.Client.Web.xml",
+        "lib/netstandard2.0/Grpc.Net.Client.Web.dll",
+        "lib/netstandard2.0/Grpc.Net.Client.Web.pdb",
+        "lib/netstandard2.0/Grpc.Net.Client.Web.xml",
+        "lib/netstandard2.1/Grpc.Net.Client.Web.dll",
+        "lib/netstandard2.1/Grpc.Net.Client.Web.pdb",
+        "lib/netstandard2.1/Grpc.Net.Client.Web.xml",
         "packageIcon.png"
       ]
     },

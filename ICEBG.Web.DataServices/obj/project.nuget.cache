@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/mMifYb1Rl79ycecJXHLFjnrZulvcOneCdWJX3Rkm0fx9y2+1xAyMcPHjG8wio8PypYv6kuBwHOyLxXgYX47iw==",
+  "dgSpecHash": "ZeNeLVuNz9Cz8G2kfPSJNz3JdfIQRM2hJAFGrHIHnFjSSJSBE51PK69G0wRTCoqj+Kll1f5DDVaZPQub38bqig==",
   "success": true,
   "projectFilePath": "C:\\Solutions\\OHI\\ICEBG\\ICEBG.Web.DataServices\\ICEBG.Web.DataServices.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\ms\\.nuget\\packages\\grpc.aspnetcore.web\\2.46.0\\grpc.aspnetcore.web.2.46.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\grpc.core.api\\2.46.1\\grpc.core.api.2.46.1.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\grpc.net.client\\2.46.0\\grpc.net.client.2.46.0.nupkg.sha512",
+    "C:\\Users\\ms\\.nuget\\packages\\grpc.net.client.web\\2.46.0\\grpc.net.client.web.2.46.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\grpc.net.clientfactory\\2.46.0\\grpc.net.clientfactory.2.46.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\grpc.net.common\\2.46.0\\grpc.net.common.2.46.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\grpc.reflection\\2.46.1\\grpc.reflection.2.46.1.nupkg.sha512",

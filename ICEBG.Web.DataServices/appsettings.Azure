@@ -10,7 +10,7 @@
     "BaseConfiguration": {
       "ConfigurationIdentifier": "ICEBG",
       "GrpcEndpointPrefix": "https://icebgdata.azurewebsites.net/",
-      "SqlConnectionString": "n/a",
+      "SqlConnectionString": "Azure",
       "WeatherEndpoint": "https://icebgdata.azurewebsites.net/WeatherForecast"
     }
   }
