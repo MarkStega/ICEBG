@@ -1,16 +1,74 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+@inject NavigationManager NavigationService
+@inject IJSRuntime JsRuntime
 
-    <main>
-        <div class="top-row px-4 auth">
-        </div>
+<MBDrawer @ref="@Drawer"
+          IsDismissible="true">
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+    <nav class="mdc-list">
+        <MBListItem LeadingIcon="home" Label="Home" @onclick="@(() => ListItemClickHandler(""))" />
+        <MBListItem LeadingIcon="assignment" Label="Configuration" @onclick="@(() => ListItemClickHandler("configuration"))" />
+        <MBListItem LeadingIcon="money" Label="Counter" @onclick="@(() => ListItemClickHandler("counter"))" />
+        <MBListItem LeadingIcon="table_chart" Label="Weather" @onclick="@(() => ListItemClickHandler("weather"))" />
+    </nav>
+</MBDrawer>
+
+<div class="mdc-drawer-app-content">
+    <MBTopAppBar Title="Material.Blazor"
+                 @onclick="@SideBarToggle"
+                 NavIcon="menu"
+                 ScrollTarget="#main-content"
+                 TopAppBarType="@MBTopAppBarType.Dense"
+                 class="app-bar mdc-top-app-bar--short-has-action-item mdc-elevation--z5">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+            <MBIconButton @onclick="@OpenMenuAsync" Icon="more_vert" />
+            <div class="mdc-menu-surface--anchor">
+            </div>
+        </section>
+    </MBTopAppBar>
 </div>
+
+<main class="main-content" id="main-content">
+    <div class="max-width-content">
+        <div class="mdc-top-app-bar--dense-fixed-adjust">
+            <div style="margin:25px;">
+                @Body
+            </div>
+        </div>
+    </div>
+</main>
+
+@code {
+    private const string materialDocRef = "https://github.com/material-components/material-components-web/tree/master/packages/";
+
+    private MBDrawer Drawer { get; set; }
+
+    private MBMenu Menu { get; set; }
+
+    private string Theme { get; set; } = "material-default-theme";
+
+    private async Task OpenMenuAsync()
+    {
+        await Menu.ToggleAsync();
+    }
+
+    protected async Task ThemeSetterAsync(string theme)
+    {
+        await JsRuntime.InvokeAsync<object>("material_blazor_website.themeSetter.setTheme", theme, true);
+        Theme = theme;
+        StateHasChanged();
+    }
+
+
+    private void ListItemClickHandler(string NavigationReference)
+    {
+        Drawer.NotifyNavigation();
+        NavigationService.NavigateTo(NavigationReference);
+    }
+
+    private void SideBarToggle()
+    {
+        Drawer.Toggle();
+    }
+}

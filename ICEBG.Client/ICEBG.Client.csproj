@@ -25,6 +25,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Remove="C:\Users\ms\.nuget\packages\material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material-components-web.css" />
+	  <Content Remove="C:\Users\ms\.nuget\packages\material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material-components-web.min.css" />
+	  <Content Remove="C:\Users\ms\.nuget\packages\material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material.blazor.css" />
+	  <Content Remove="C:\Users\ms\.nuget\packages\material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material.blazor.js" />
+	  <Content Remove="C:\Users\ms\.nuget\packages\material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material.blazor.min.css" />
+	  <Content Remove="C:\Users\ms\.nuget\packages\material.blazor\2.5.0\contentFiles\any\net6.0\wwwroot\material.blazor.min.js" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Grpc.Net.Client" Version="2.46.0" />
 		<PackageReference Include="Grpc.Net.Client.Web" Version="2.46.0" />
 		<PackageReference Include="Material.Blazor" Version="2.5.0" />
@@ -35,11 +44,29 @@
 
 	<ItemGroup>
 		<Folder Include="Properties\" />
+		<Folder Include="wwwroot\css\" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\DataTier\DataTier.csproj" />
 	  <ProjectReference Include="..\SharedUtilities\SharedUtilities.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<InputStaticAssetsStyles Include="styles\**\*.scss" />
+		<OutputStaticAssetsStyles Include="wwwroot\css\icebg.min.css" />
+	</ItemGroup>
+
+	<Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent">
+		<Exec Command="echo ***** npm install" />
+		<Exec Command="npm install" />
+
+		<!--<Exec Command="echo ***** npm run build-css" />
+		<Exec Command="npm run build-css" />-->
+
+		<Exec Command="echo ***** npm run build-min-css" />
+		<Exec Command="npm run build-min-css" />
+
+	</Target>
 
 </Project>
