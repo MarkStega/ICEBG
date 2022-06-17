@@ -57,11 +57,11 @@
           "lib/net6.0/Grpc.Net.Common.dll": {}
         }
       },
-      "Material.Blazor/2.5.0": {
+      "Material.Blazor/3.0.0-preview.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Components": "6.0.4",
-          "Microsoft.AspNetCore.Components.Web": "6.0.4",
+          "Microsoft.AspNetCore.Components": "6.0.5",
+          "Microsoft.AspNetCore.Components.Web": "6.0.5",
           "Microsoft.Extensions.Logging": "6.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "6.0.1"
         },
@@ -1023,10 +1023,10 @@
         "packageIcon.png"
       ]
     },
-    "Material.Blazor/2.5.0": {
-      "sha512": "1r9MG9ZBaIEFV6ztXQPPSRWapcoy3tuFF4te3+EsQ4DT5CJ6/r9hSdL/8xayKx42NGOeRu+Pz5uyhZeMfA2Ppg==",
+    "Material.Blazor/3.0.0-preview.2": {
+      "sha512": "ZkLGgvh+4Z8rr94fvYiQcddk8NM3HhS8DxEQNWesmmffwKjXM2TxN3wH4YdlfahpyiAoxMtwzsAtyYjPMX1qKg==",
       "type": "package",
-      "path": "material.blazor/2.5.0",
+      "path": "material.blazor/3.0.0-preview.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1048,7 +1048,7 @@
         "contentFiles/any/net6.0/wwwroot/material.blazor.min.css",
         "contentFiles/any/net6.0/wwwroot/material.blazor.min.js",
         "lib/net6.0/Material.Blazor.dll",
-        "material.blazor.2.5.0.nupkg.sha512",
+        "material.blazor.3.0.0-preview.2.nupkg.sha512",
         "material.blazor.nuspec",
         "staticwebassets/material-components-web.css",
         "staticwebassets/material-components-web.min.css",
@@ -2649,7 +2649,7 @@
       "DataTier >= 1.0.0",
       "Grpc.Net.Client >= 2.46.0",
       "Grpc.Net.Client.Web >= 2.46.0",
-      "Material.Blazor >= 2.5.0",
+      "Material.Blazor >= 3.0.0-preview.2",
       "Microsoft.AspNetCore.Components.Authorization >= 6.0.5",
       "Microsoft.AspNetCore.Components.Web >= 6.0.5",
       "Microsoft.AspNetCore.Http >= 2.2.2",
@@ -2720,7 +2720,7 @@
           },
           "Material.Blazor": {
             "target": "Package",
-            "version": "[2.5.0, )"
+            "version": "[3.0.0-preview.2, )"
           },
           "Microsoft.AspNetCore.Components.Authorization": {
             "target": "Package",
@@ -2741,7 +2741,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -2750,7 +2751,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400-preview.22301.10\\RuntimeIdentifierGraph.json"
       }
     }
   }

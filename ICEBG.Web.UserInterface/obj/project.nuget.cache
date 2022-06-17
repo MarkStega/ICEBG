@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Iuc9lIH6RDn7t+NleSfbmq5nOOWpnt9fM86VHLA5x6cC89f+JF6Y+Mq2z5/63+nGQZ1XGtC37mKk8tzsBUx8Uw==",
+  "dgSpecHash": "6wRcKxO7bNelFp/VxifjxQGo1kNk27R6GCulJaSQevIUS3RBqz16/0B5thJwedbPTVBNUfj56ijnnX3iPRIqSQ==",
   "success": true,
   "projectFilePath": "C:\\Solutions\\OHI\\ICEBG\\ICEBG.Web.UserInterface\\ICEBG.Web.UserInterface.csproj",
   "expectedPackageFiles": [
@@ -15,7 +15,7 @@
     "C:\\Users\\ms\\.nuget\\packages\\grpc.net.clientfactory\\2.46.0\\grpc.net.clientfactory.2.46.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\grpc.net.common\\2.46.0\\grpc.net.common.2.46.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\grpc.tools\\2.46.1\\grpc.tools.2.46.1.nupkg.sha512",
-    "C:\\Users\\ms\\.nuget\\packages\\material.blazor\\2.5.0\\material.blazor.2.5.0.nupkg.sha512",
+    "C:\\Users\\ms\\.nuget\\packages\\material.blazor\\3.0.0-preview.2\\material.blazor.3.0.0-preview.2.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.5\\microsoft.aspnetcore.authorization.6.0.5.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.components\\6.0.5\\microsoft.aspnetcore.components.6.0.5.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\6.0.5\\microsoft.aspnetcore.components.analyzers.6.0.5.nupkg.sha512",
