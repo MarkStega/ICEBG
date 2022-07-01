@@ -31,6 +31,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <_WebToolingArtifacts Remove="Properties\PublishProfiles\crICEBG-UI.pubxml" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Content Include="appsettings.Azure" />
 	  <Content Include="appsettings.Develop_Server" />
 	</ItemGroup>

@@ -15,17 +15,12 @@
 </MBDrawer>
 
 <div class="mdc-drawer-app-content">
-    <MBTopAppBar Title="Material.Blazor"
+    <MBTopAppBar Title="ICEBG"
                  @onclick="@SideBarToggle"
                  NavIcon="menu"
                  ScrollTarget="#main-content"
                  TopAppBarType="@MBTopAppBarType.Dense"
                  class="app-bar mdc-top-app-bar--short-has-action-item mdc-elevation--z5">
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-            <MBIconButton @onclick="@OpenMenuAsync" Icon="more_vert" />
-            <div class="mdc-menu-surface--anchor">
-            </div>
-        </section>
     </MBTopAppBar>
 </div>
 
@@ -44,14 +39,7 @@
 
     private MBDrawer Drawer { get; set; }
 
-    private MBMenu Menu { get; set; }
-
     private string Theme { get; set; } = "material-default-theme";
-
-    private async Task OpenMenuAsync()
-    {
-        await Menu.ToggleAsync();
-    }
 
     protected async Task ThemeSetterAsync(string theme)
     {

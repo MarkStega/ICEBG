@@ -30,10 +30,10 @@ namespace ICEBG.GenerateDataTier
 
                     // Generate the SQL and C# code
                     connectionString =
-                        "Server=localhost; Database=ICEBG; Integrated Security=SSPI;";
+                        "Server=localhost; Database=dbICEBG; Integrated Security=SSPI;";
                     GenerateDataTier.GenerateDataTierElements(
                         connectionString,
-                        "ICEBG",
+                        "dbICEBG",
                         outputDirectory,
                         true);
 

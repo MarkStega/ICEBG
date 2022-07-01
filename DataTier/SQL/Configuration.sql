@@ -1,12 +1,12 @@
 
 /******************************************************************************
-Generated file - Created on 5/23/2022; Do not edit!
+Generated file - Created on 7/1/2022; Do not edit!
 ******************************************************************************/
-use [ICEBG]
+use [dbICEBG]
 go
 
 /******************************************************************************
-Generated file - Created on 5/23/2022; Do not edit!
+Generated file - Created on 7/1/2022; Do not edit!
 ******************************************************************************/
 if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[Configuration_Insert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 	drop procedure [dbo].[Configuration_Insert]
@@ -36,7 +36,7 @@ VALUES
 GO
 
 /******************************************************************************
-Generated file - Created on 5/23/2022; Do not edit!
+Generated file - Created on 7/1/2022; Do not edit!
 ******************************************************************************/
 if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[Configuration_Update]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 	drop procedure [dbo].[Configuration_Update]
@@ -58,7 +58,7 @@ WHERE [Id] = @Id
 GO
 
 /******************************************************************************
-Generated file - Created on 5/23/2022; Do not edit!
+Generated file - Created on 7/1/2022; Do not edit!
 ******************************************************************************/
 if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[Configuration_Upsert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 	drop procedure [dbo].[Configuration_Upsert]
@@ -101,7 +101,7 @@ COMMIT
 GO
 
 /******************************************************************************
-Generated file - Created on 5/23/2022; Do not edit!
+Generated file - Created on 7/1/2022; Do not edit!
 ******************************************************************************/
 if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[Configuration_Delete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 	drop procedure [dbo].[Configuration_Delete]
@@ -121,7 +121,7 @@ WHERE [Id] = @Id
 GO
 
 /******************************************************************************
-Generated file - Created on 5/23/2022; Do not edit!
+Generated file - Created on 7/1/2022; Do not edit!
 ******************************************************************************/
 if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[Configuration_Select]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 	drop procedure [dbo].[Configuration_Select]
@@ -143,7 +143,7 @@ WHERE [Id] = @Id
 GO
 
 /******************************************************************************
-Generated file - Created on 5/23/2022; Do not edit!
+Generated file - Created on 7/1/2022; Do not edit!
 ******************************************************************************/
 if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[Configuration_SelectAll]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 	drop procedure [dbo].[Configuration_SelectAll]

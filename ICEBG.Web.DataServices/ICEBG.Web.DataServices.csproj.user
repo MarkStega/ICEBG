@@ -5,7 +5,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <ActiveDebugProfile>ICEBG.Data.Server</ActiveDebugProfile>
-    <NameOfLastUsedPublishProfile>C:\Solutions\OHI\ICEBG\ICEBG.Web.DataServices\Properties\PublishProfiles\acrICEBG.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Solutions\OHI\ICEBG\ICEBG.Web.DataServices\Properties\PublishProfiles\crICEBG-DS.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEMO|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
