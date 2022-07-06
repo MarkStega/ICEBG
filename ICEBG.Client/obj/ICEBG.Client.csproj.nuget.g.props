@@ -14,49 +14,49 @@
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Content Include="$(NuGetPackageRoot)material.blazor\3.0.0-preview.2\contentFiles\any\net6.0\wwwroot\material-components-web.css" Condition="Exists('$(NuGetPackageRoot)material.blazor\3.0.0-preview.2\contentFiles\any\net6.0\wwwroot\material-components-web.css')">
+    <Content Include="$(NuGetPackageRoot)material.blazor\3.0.0-preview.6\contentFiles\any\net6.0\wwwroot\material-components-web.css" Condition="Exists('$(NuGetPackageRoot)material.blazor\3.0.0-preview.6\contentFiles\any\net6.0\wwwroot\material-components-web.css')">
       <NuGetPackageId>Material.Blazor</NuGetPackageId>
-      <NuGetPackageVersion>3.0.0-preview.2</NuGetPackageVersion>
+      <NuGetPackageVersion>3.0.0-preview.6</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
       <Pack>false</Pack>
       <Private>False</Private>
       <Link>wwwroot\material-components-web.css</Link>
     </Content>
-    <Content Include="$(NuGetPackageRoot)material.blazor\3.0.0-preview.2\contentFiles\any\net6.0\wwwroot\material-components-web.min.css" Condition="Exists('$(NuGetPackageRoot)material.blazor\3.0.0-preview.2\contentFiles\any\net6.0\wwwroot\material-components-web.min.css')">
+    <Content Include="$(NuGetPackageRoot)material.blazor\3.0.0-preview.6\contentFiles\any\net6.0\wwwroot\material-components-web.min.css" Condition="Exists('$(NuGetPackageRoot)material.blazor\3.0.0-preview.6\contentFiles\any\net6.0\wwwroot\material-components-web.min.css')">
       <NuGetPackageId>Material.Blazor</NuGetPackageId>
-      <NuGetPackageVersion>3.0.0-preview.2</NuGetPackageVersion>
+      <NuGetPackageVersion>3.0.0-preview.6</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
       <Pack>false</Pack>
       <Private>False</Private>
       <Link>wwwroot\material-components-web.min.css</Link>
     </Content>
-    <Content Include="$(NuGetPackageRoot)material.blazor\3.0.0-preview.2\contentFiles\any\net6.0\wwwroot\material.blazor.css" Condition="Exists('$(NuGetPackageRoot)material.blazor\3.0.0-preview.2\contentFiles\any\net6.0\wwwroot\material.blazor.css')">
+    <Content Include="$(NuGetPackageRoot)material.blazor\3.0.0-preview.6\contentFiles\any\net6.0\wwwroot\material.blazor.css" Condition="Exists('$(NuGetPackageRoot)material.blazor\3.0.0-preview.6\contentFiles\any\net6.0\wwwroot\material.blazor.css')">
       <NuGetPackageId>Material.Blazor</NuGetPackageId>
-      <NuGetPackageVersion>3.0.0-preview.2</NuGetPackageVersion>
+      <NuGetPackageVersion>3.0.0-preview.6</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
       <Pack>false</Pack>
       <Private>False</Private>
       <Link>wwwroot\material.blazor.css</Link>
     </Content>
-    <Content Include="$(NuGetPackageRoot)material.blazor\3.0.0-preview.2\contentFiles\any\net6.0\wwwroot\material.blazor.js" Condition="Exists('$(NuGetPackageRoot)material.blazor\3.0.0-preview.2\contentFiles\any\net6.0\wwwroot\material.blazor.js')">
+    <Content Include="$(NuGetPackageRoot)material.blazor\3.0.0-preview.6\contentFiles\any\net6.0\wwwroot\material.blazor.js" Condition="Exists('$(NuGetPackageRoot)material.blazor\3.0.0-preview.6\contentFiles\any\net6.0\wwwroot\material.blazor.js')">
       <NuGetPackageId>Material.Blazor</NuGetPackageId>
-      <NuGetPackageVersion>3.0.0-preview.2</NuGetPackageVersion>
+      <NuGetPackageVersion>3.0.0-preview.6</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
       <Pack>false</Pack>
       <Private>False</Private>
       <Link>wwwroot\material.blazor.js</Link>
     </Content>
-    <Content Include="$(NuGetPackageRoot)material.blazor\3.0.0-preview.2\contentFiles\any\net6.0\wwwroot\material.blazor.min.css" Condition="Exists('$(NuGetPackageRoot)material.blazor\3.0.0-preview.2\contentFiles\any\net6.0\wwwroot\material.blazor.min.css')">
+    <Content Include="$(NuGetPackageRoot)material.blazor\3.0.0-preview.6\contentFiles\any\net6.0\wwwroot\material.blazor.min.css" Condition="Exists('$(NuGetPackageRoot)material.blazor\3.0.0-preview.6\contentFiles\any\net6.0\wwwroot\material.blazor.min.css')">
       <NuGetPackageId>Material.Blazor</NuGetPackageId>
-      <NuGetPackageVersion>3.0.0-preview.2</NuGetPackageVersion>
+      <NuGetPackageVersion>3.0.0-preview.6</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
       <Pack>false</Pack>
       <Private>False</Private>
       <Link>wwwroot\material.blazor.min.css</Link>
     </Content>
-    <Content Include="$(NuGetPackageRoot)material.blazor\3.0.0-preview.2\contentFiles\any\net6.0\wwwroot\material.blazor.min.js" Condition="Exists('$(NuGetPackageRoot)material.blazor\3.0.0-preview.2\contentFiles\any\net6.0\wwwroot\material.blazor.min.js')">
+    <Content Include="$(NuGetPackageRoot)material.blazor\3.0.0-preview.6\contentFiles\any\net6.0\wwwroot\material.blazor.min.js" Condition="Exists('$(NuGetPackageRoot)material.blazor\3.0.0-preview.6\contentFiles\any\net6.0\wwwroot\material.blazor.min.js')">
       <NuGetPackageId>Material.Blazor</NuGetPackageId>
-      <NuGetPackageVersion>3.0.0-preview.2</NuGetPackageVersion>
+      <NuGetPackageVersion>3.0.0-preview.6</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
       <Pack>false</Pack>
       <Private>False</Private>
@@ -64,9 +64,9 @@
     </Content>
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)material.blazor\3.0.0-preview.2\buildTransitive\Material.Blazor.props" Condition="Exists('$(NuGetPackageRoot)material.blazor\3.0.0-preview.2\buildTransitive\Material.Blazor.props')" />
+    <Import Project="$(NuGetPackageRoot)material.blazor\3.0.0-preview.6\buildTransitive\Material.Blazor.props" Condition="Exists('$(NuGetPackageRoot)material.blazor\3.0.0-preview.6\buildTransitive\Material.Blazor.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgMicrosoft_AspNetCore_Components_WebAssembly_Server Condition=" '$(PkgMicrosoft_AspNetCore_Components_WebAssembly_Server)' == '' ">C:\Users\ms\.nuget\packages\microsoft.aspnetcore.components.webassembly.server\6.0.5</PkgMicrosoft_AspNetCore_Components_WebAssembly_Server>
+    <PkgMicrosoft_AspNetCore_Components_WebAssembly_Server Condition=" '$(PkgMicrosoft_AspNetCore_Components_WebAssembly_Server)' == '' ">C:\Users\ms\.nuget\packages\microsoft.aspnetcore.components.webassembly.server\6.0.6</PkgMicrosoft_AspNetCore_Components_WebAssembly_Server>
   </PropertyGroup>
 </Project>

@@ -1,7 +1,9 @@
 ﻿@page "/index_server"
 @namespace ICEBG.Web.UserInterface.Pages
 @using ICEBG.Client
+@using ICEBG.Web.UserInterface
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject NonceService NonceService
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,8 +38,9 @@
         <a class="dismiss">🗙</a>
     </div>
 
-    <script src="_content/Material.Blazor/material.blazor.min.js"></script>
-    <script src="_framework/blazor.server.js"></script>
+    <script nonce="@NonceService.nonceValue" src="_framework/blazor.server.js"></script>
+    @*    <script nonce="@NonceService.nonceValue" src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js"></script>*@
+    <script nonce="@NonceService.nonceValue" src="_content/Material.Blazor/material.blazor.min.js"></script>
 
 </body>
 </html>

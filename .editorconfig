@@ -204,7 +204,7 @@ dotnet_naming_rule.static_field_should_be_begins_with_k.style = begins_with_k
 
 dotnet_naming_rule.nonstatic_field_should_be_begins_with_m_.severity = warning
 dotnet_naming_rule.nonstatic_field_should_be_begins_with_m_.symbols = nonstatic_field
-dotnet_naming_rule.nonstatic_field_should_be_begins_with_m_.style = begins_with_m_
+dotnet_naming_rule.nonstatic_field_should_be_begins_with_m_.style = camel_case
 
 dotnet_naming_rule.types_should_be_begins_with_t.severity = warning
 dotnet_naming_rule.types_should_be_begins_with_t.symbols = types
@@ -320,9 +320,14 @@ dotnet_naming_style.begins_with_t.word_separator =
 dotnet_naming_style.begins_with_t.capitalization = pascal_case
 csharp_style_namespace_declarations = block_scoped:silent
 csharp_style_prefer_method_group_conversion = true:silent
+csharp_style_prefer_top_level_statements = true:silent
 
 [*.{cs,vb}]
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 tab_width = 4
 indent_size = 4
 end_of_line = crlf
+dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_null_propagation = true:suggestion
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion
+dotnet_style_prefer_auto_properties = true:silent

@@ -26,26 +26,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="appsettings.Azure" />
-	  <None Remove="appsettings.Develop_Server" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <_WebToolingArtifacts Remove="Properties\PublishProfiles\crICEBG-UI.pubxml" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="appsettings.Azure" />
-	  <Content Include="appsettings.Develop_Server" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Grpc.AspNetCore" Version="2.46.0" />
-		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.46.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.5" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
-		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
-		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.47.0" />
+		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.47.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.6" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.16.1" />
+		<PackageReference Include="NLog" Version="5.0.1" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -53,7 +43,8 @@
 	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-		<Copy SourceFiles="$(ProjectDir)appsettings.$(ConfigurationName)" DestinationFiles="$(ProjectDir)appsettings.json" />
+		<Copy SourceFiles="$(ProjectDir)appsettings.$(ConfigurationName).json" DestinationFiles="$(ProjectDir)appsettings.json" />
+		<Copy SourceFiles="$(ProjectDir)nlog.$(ConfigurationName).config" DestinationFiles="$(ProjectDir)nlog.config" />
 	</Target>
 
 </Project>

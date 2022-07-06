@@ -28,8 +28,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Solutions\\Local NuGet Packages": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet7/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -53,21 +52,21 @@
           "dependencies": {
             "Google.Protobuf": {
               "target": "Package",
-              "version": "[3.21.1, )"
+              "version": "[3.21.2, )"
             },
             "Grpc.Net.Client": {
               "target": "Package",
-              "version": "[2.46.0, )"
+              "version": "[2.47.0, )"
             },
             "Grpc.Net.Client.Web": {
               "target": "Package",
-              "version": "[2.46.0, )"
+              "version": "[2.47.0, )"
             },
             "Grpc.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.46.3, )"
+              "version": "[2.47.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
@@ -117,8 +116,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Solutions\\Local NuGet Packages": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet7/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -145,23 +143,23 @@
           "dependencies": {
             "Grpc.Net.Client": {
               "target": "Package",
-              "version": "[2.46.0, )"
+              "version": "[2.47.0, )"
             },
             "Grpc.Net.Client.Web": {
               "target": "Package",
-              "version": "[2.46.0, )"
+              "version": "[2.47.0, )"
             },
             "Material.Blazor": {
               "target": "Package",
-              "version": "[3.0.0-preview.2, )"
+              "version": "[3.0.0-preview.6, )"
             },
             "Microsoft.AspNetCore.Components.Authorization": {
               "target": "Package",
-              "version": "[6.0.5, )"
+              "version": "[6.0.6, )"
             },
             "Microsoft.AspNetCore.Components.Web": {
               "target": "Package",
-              "version": "[6.0.5, )"
+              "version": "[6.0.6, )"
             },
             "Microsoft.AspNetCore.Http": {
               "target": "Package",
@@ -211,8 +209,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Solutions\\Local NuGet Packages": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet7/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -236,25 +233,25 @@
           "dependencies": {
             "Grpc.AspNetCore": {
               "target": "Package",
-              "version": "[2.46.0, )"
+              "version": "[2.47.0, )"
             },
             "Grpc.AspNetCore.Web": {
               "target": "Package",
-              "version": "[2.46.0, )"
+              "version": "[2.47.0, )"
             },
             "Microsoft.AspNetCore.Components.WebAssembly.Server": {
               "target": "Package",
-              "version": "[6.0.5, )"
+              "version": "[6.0.6, )"
             },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
-              "version": "[1.15.1, )"
+              "version": "[1.16.1, )"
             },
-            "Serilog.AspNetCore": {
+            "NLog": {
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[5.0.1, )"
             },
-            "Serilog.Sinks.File": {
+            "NLog.Web.AspNetCore": {
               "target": "Package",
               "version": "[5.0.0, )"
             }
@@ -305,8 +302,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Solutions\\Local NuGet Packages": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet7/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -366,8 +362,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Solutions\\Local NuGet Packages": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet7/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -387,15 +382,15 @@
           "dependencies": {
             "Microsoft.AspNetCore.Components": {
               "target": "Package",
-              "version": "[6.0.5, )"
+              "version": "[6.0.6, )"
             },
             "Microsoft.AspNetCore.Components.Web": {
               "target": "Package",
-              "version": "[6.0.5, )"
+              "version": "[6.0.6, )"
             },
             "Microsoft.AspNetCore.Components.WebAssembly.Server": {
               "target": "Package",
-              "version": "[6.0.5, )"
+              "version": "[6.0.6, )"
             },
             "System.ServiceModel.Duplex": {
               "target": "Package",

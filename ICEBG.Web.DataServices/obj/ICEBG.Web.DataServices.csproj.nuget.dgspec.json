@@ -28,8 +28,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Solutions\\Local NuGet Packages": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet7/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -53,25 +52,118 @@
           "dependencies": {
             "Google.Protobuf": {
               "target": "Package",
-              "version": "[3.21.1, )"
+              "version": "[3.21.2, )"
             },
             "Grpc.Net.Client": {
               "target": "Package",
-              "version": "[2.46.0, )"
+              "version": "[2.47.0, )"
             },
             "Grpc.Net.Client.Web": {
               "target": "Package",
-              "version": "[2.46.0, )"
+              "version": "[2.47.0, )"
             },
             "Grpc.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.46.3, )"
+              "version": "[2.47.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Solutions\\OHI\\ICEBG\\ICEBG.Client\\ICEBG.Client.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Solutions\\OHI\\ICEBG\\ICEBG.Client\\ICEBG.Client.csproj",
+        "projectName": "ICEBG.Client",
+        "projectPath": "C:\\Solutions\\OHI\\ICEBG\\ICEBG.Client\\ICEBG.Client.csproj",
+        "packagesPath": "C:\\Users\\ms\\.nuget\\packages\\",
+        "outputPath": "C:\\Solutions\\OHI\\ICEBG\\ICEBG.Client\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Solutions\\OHI\\ICEBG\\NuGet.Config",
+          "C:\\Users\\ms\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Solutions\\Local NuGet Packages": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Solutions\\OHI\\ICEBG\\DataTier\\DataTier.csproj": {
+                "projectPath": "C:\\Solutions\\OHI\\ICEBG\\DataTier\\DataTier.csproj"
+              },
+              "C:\\Solutions\\OHI\\ICEBG\\SharedUtilities\\SharedUtilities.csproj": {
+                "projectPath": "C:\\Solutions\\OHI\\ICEBG\\SharedUtilities\\SharedUtilities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Grpc.Net.Client": {
+              "target": "Package",
+              "version": "[2.47.0, )"
+            },
+            "Grpc.Net.Client.Web": {
+              "target": "Package",
+              "version": "[2.47.0, )"
+            },
+            "Material.Blazor": {
+              "target": "Package",
+              "version": "[3.0.0-preview.6, )"
+            },
+            "Microsoft.AspNetCore.Components.Authorization": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "Microsoft.AspNetCore.Components.Web": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
             }
           },
           "imports": [
@@ -117,8 +209,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Solutions\\Local NuGet Packages": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet7/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -126,6 +217,9 @@
             "projectReferences": {
               "C:\\Solutions\\OHI\\ICEBG\\DataTier\\DataTier.csproj": {
                 "projectPath": "C:\\Solutions\\OHI\\ICEBG\\DataTier\\DataTier.csproj"
+              },
+              "C:\\Solutions\\OHI\\ICEBG\\ICEBG.Client\\ICEBG.Client.csproj": {
+                "projectPath": "C:\\Solutions\\OHI\\ICEBG\\ICEBG.Client\\ICEBG.Client.csproj"
               }
             }
           }
@@ -142,33 +236,29 @@
           "dependencies": {
             "Grpc.AspNetCore": {
               "target": "Package",
-              "version": "[2.46.0, )"
+              "version": "[2.47.0, )"
             },
             "Grpc.AspNetCore.Server.Reflection": {
               "target": "Package",
-              "version": "[2.46.0, )"
+              "version": "[2.47.0, )"
             },
             "Grpc.AspNetCore.Web": {
               "target": "Package",
-              "version": "[2.46.0, )"
+              "version": "[2.47.0, )"
             },
             "Microsoft.AspNetCore.Components.WebAssembly.Server": {
               "target": "Package",
-              "version": "[6.0.5, )"
+              "version": "[6.0.6, )"
             },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
-              "version": "[1.15.1, )"
+              "version": "[1.16.1, )"
             },
-            "Serilog.AspNetCore": {
+            "NLog": {
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[5.0.1, )"
             },
-            "Serilog.Sinks.Console": {
-              "target": "Package",
-              "version": "[4.0.1, )"
-            },
-            "Serilog.Sinks.File": {
+            "NLog.Web.AspNetCore": {
               "target": "Package",
               "version": "[5.0.0, )"
             }
@@ -187,6 +277,66 @@
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Solutions\\OHI\\ICEBG\\SharedUtilities\\SharedUtilities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Solutions\\OHI\\ICEBG\\SharedUtilities\\SharedUtilities.csproj",
+        "projectName": "SharedUtilities",
+        "projectPath": "C:\\Solutions\\OHI\\ICEBG\\SharedUtilities\\SharedUtilities.csproj",
+        "packagesPath": "C:\\Users\\ms\\.nuget\\packages\\",
+        "outputPath": "C:\\Solutions\\OHI\\ICEBG\\SharedUtilities\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Solutions\\OHI\\ICEBG\\NuGet.Config",
+          "C:\\Users\\ms\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Solutions\\Local NuGet Packages": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -219,8 +369,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Solutions\\Local NuGet Packages": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet7/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -240,15 +389,15 @@
           "dependencies": {
             "Microsoft.AspNetCore.Components": {
               "target": "Package",
-              "version": "[6.0.5, )"
+              "version": "[6.0.6, )"
             },
             "Microsoft.AspNetCore.Components.Web": {
               "target": "Package",
-              "version": "[6.0.5, )"
+              "version": "[6.0.6, )"
             },
             "Microsoft.AspNetCore.Components.WebAssembly.Server": {
               "target": "Package",
-              "version": "[6.0.5, )"
+              "version": "[6.0.6, )"
             },
             "System.ServiceModel.Duplex": {
               "target": "Package",
