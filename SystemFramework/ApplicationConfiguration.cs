@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
 
 //
 //  2018-06-29  Mark Stega

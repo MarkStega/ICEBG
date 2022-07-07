@@ -14,7 +14,7 @@ COPY ["DataTier/DataTier.csproj", "DataTier/"]
 COPY ["SystemFramework/SystemFramework.csproj", "SystemFramework/"]
 COPY ["SharedUtilities/SharedUtilities.csproj", "SharedUtilities/"]
 RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages\
-	dotnet restore "ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj"
+	dotnet restore --disable-parallel "ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj"
 COPY . .
 WORKDIR "/src/ICEBG.Web.UserInterface"
 RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages\

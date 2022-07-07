@@ -231,6 +231,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "GoogleAnalytics.Blazor": {
+              "target": "Package",
+              "version": "[1.0.0-preview.3, )"
+            },
             "Grpc.AspNetCore": {
               "target": "Package",
               "version": "[2.47.0, )"

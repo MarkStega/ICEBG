@@ -1,4 +1,5 @@
 using System;
+using System.IO.Compression;
 
 using ICEBG.Client;
 using ICEBG.Infrastructure.ClientServices;
@@ -7,6 +8,7 @@ using ICEBG.Web.UserInterface;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -32,10 +34,28 @@ try
     logger.Debug("ApplicationConfiguration.Initialize");
     ApplicationConfiguration.Initialize(builder);
 
+    // Add services to the container.
     logger.Debug("ClientServices.Inject");
     ClientServices.Inject(ApplicationConfiguration.pGrpcEndpointPrefix, builder.Services);
 
-    // Add services to the container.
+    logger.Debug("ResponseCompression");
+    builder.Services.AddResponseCompression(options =>
+    {
+        options.EnableForHttps = true;
+        options.Providers.Add<BrotliCompressionProvider>();
+        options.Providers.Add<GzipCompressionProvider>();
+    });
+
+    builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+    {
+        options.Level = CompressionLevel.Fastest;
+    });
+
+    builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+    {
+        options.Level = CompressionLevel.SmallestSize;
+    });
+
     logger.Debug("Adding razor pages");
     builder.Services.AddRazorPages();
 
@@ -76,34 +96,35 @@ try
 
     app.Use(async (context, next) =>
     {
-        var nonceValue = context.RequestServices.GetService<NonceService>()?.nonceValue ?? throw new Exception("Nonce service unavailable");
+        logger.Debug("Middleware csp invoked for '" + context.Request.Path + "'");
 
-        var source = (app.Environment.IsDevelopment() ? "'self' " : "") + $"'nonce-{nonceValue}'";
+        var nonceValue = context.RequestServices.GetService<NonceService>().nonceValue;
+        var sourceJS = "script-src 'self' 'report-sample' 'nonce-" + nonceValue + "' ;";
 
         var baseUri = context.Request.Host.ToString();
         var baseDomain = context.Request.Host.Host;
 
-        var cspDioptra =
-            "base-uri 'self'; " +
-            "block-all-mixed-content; " +
-            "child-src 'self' ; " +
-            $"connect-src 'self' wss://{baseDomain}:* www.google-analytics.com; " +
-            "default-src 'self'; " +
-            "font-src use.typekit.net fonts.gstatic.com; " +
-            "frame-ancestors 'none'; " +
-            "frame-src 'self'; " +
-            "form-action 'none'; " +
-            "img-src 'self' www.google-analytics.com *.openstreetmap.org data: w3.org/svg/2000; " +
-            "manifest-src 'self'; " +
-            "media-src 'self'; " +
-            "prefetch-src 'self'; " +
-            "object-src 'none'; " +
-            $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
-            $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
-            $"script-src {source} 'report-sample' 'strict-dynamic';" +
-            "style-src 'self' 'unsafe-inline' 'report-sample' p.typekit.net use.typekit.net fonts.gstatic.com; " +
-            "upgrade-insecure-requests; " +
-            "worker-src 'self';";
+        //var cspDioptra =
+        //    "base-uri 'self'; " +
+        //    "block-all-mixed-content; " +
+        //    "child-src 'self' ; " +
+        //    $"connect-src 'self' wss://{baseDomain}:* www.google-analytics.com; " +
+        //    "default-src 'self'; " +
+        //    "font-src use.typekit.net fonts.gstatic.com; " +
+        //    "frame-ancestors 'none'; " +
+        //    "frame-src 'self'; " +
+        //    "form-action 'none'; " +
+        //    "img-src 'self' www.google-analytics.com *.openstreetmap.org data: w3.org/svg/2000; " +
+        //    "manifest-src 'self'; " +
+        //    "media-src 'self'; " +
+        //    "prefetch-src 'self'; " +
+        //    "object-src 'none'; " +
+        //    $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
+        //    $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
+        //    $"script-src {source} 'report-sample' 'strict-dynamic';" +
+        //    "style-src 'self' 'unsafe-inline' 'report-sample' p.typekit.net use.typekit.net fonts.gstatic.com; " +
+        //    "upgrade-insecure-requests; " +
+        //    "worker-src 'self';";
 
         var csp =
             "base-uri 'self'; " +
@@ -111,17 +132,19 @@ try
             "child-src 'self' ; " +
             $"connect-src 'self' wss://{baseDomain}:* www.google-analytics.com; " +
             "default-src 'self'; " +
+            "font-src fonts.gstatic.com; " +
+            "form-action 'none'; " +
             "frame-ancestors 'none'; " +
             "frame-src 'self'; " +
-            "form-action 'none'; " +
             "img-src 'self' www.google-analytics.com; " +
             "manifest-src 'self'; " +
             "media-src 'self'; " +
             "prefetch-src 'self'; " +
             "object-src 'none'; " +
             $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
-            $"script-src {source}; " +
-            "style-src 'self' 'unsafe-inline'; " +
+            $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
+            $"{sourceJS}" +
+            "style-src 'self' 'report-sample'; " +
             "upgrade-insecure-requests; " +
             "worker-src 'self';";
 
