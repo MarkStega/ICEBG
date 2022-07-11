@@ -231,6 +231,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AspNetCoreRateLimit": {
+              "target": "Package",
+              "version": "[4.0.2, )"
+            },
+            "Blazored.LocalStorage": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
             "GoogleAnalytics.Blazor": {
               "target": "Package",
               "version": "[1.0.0-preview.3, )"

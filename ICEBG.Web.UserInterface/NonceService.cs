@@ -10,7 +10,7 @@ public class NonceService
     /// <summary>
     /// The Scoped nonce value.
     /// </summary>
-    public readonly string nonceValue = "";
+    public readonly string NonceValue = "";
 
     public NonceService()
     {
@@ -20,6 +20,6 @@ public class NonceService
 
         rnd.NextBytes(bytes);
 
-        nonceValue = Convert.ToBase64String(bytes);
+        NonceValue = Convert.ToBase64String(bytes);
     }
 }

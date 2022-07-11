@@ -30,6 +30,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AspNetCoreRateLimit" Version="4.0.2" />
+		<PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
 		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.0-preview.3" />
 		<PackageReference Include="Grpc.AspNetCore" Version="2.47.0" />
 		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.47.0" />
@@ -47,5 +49,16 @@
 		<Copy SourceFiles="$(ProjectDir)appsettings.$(ConfigurationName).json" DestinationFiles="$(ProjectDir)appsettings.json" />
 		<Copy SourceFiles="$(ProjectDir)nlog.$(ConfigurationName).config" DestinationFiles="$(ProjectDir)nlog.config" />
 	</Target>
+
+	<!--<ItemGroup>
+		<FilesToHash Include="$(MSBuildThisFileDirectory)\*.js" />
+	</ItemGroup>
+	<Target Name="GetHash">
+		<GetFileHash Files="@(FilesToHash)">
+			<Output TaskParameter="Items" ItemName="FilesWithHashes" />
+		</GetFileHash>
+
+		<Message Importance="High" Text="@(FilesWithHashes->'%(Identity): %(FileHash)')" />
+	</Target>-->
 
 </Project>

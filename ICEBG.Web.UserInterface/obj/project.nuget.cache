@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "wXFKT1u/9JPXCNrfja2O6qhh0OZ6gGkIiuDQoTxzyBNrnCPAH48RemAiv1yORiGclifperRzRioh29ObpwLcrQ==",
+  "dgSpecHash": "p4GVaxlQ714EN2dQV5E2uhNR0SOoi0Yxai2eIxLexQLJJG0QxD/9QRBkmESDeX/0ZzXqTzOJ0S2k6Ezn8Qieww==",
   "success": true,
   "projectFilePath": "C:\\Solutions\\OHI\\ICEBG\\ICEBG.Web.UserInterface\\ICEBG.Web.UserInterface.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ms\\.nuget\\packages\\aspnetcoreratelimit\\4.0.2\\aspnetcoreratelimit.4.0.2.nupkg.sha512",
+    "C:\\Users\\ms\\.nuget\\packages\\blazored.localstorage\\4.2.0\\blazored.localstorage.4.2.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\google.protobuf\\3.21.2\\google.protobuf.3.21.2.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\googleanalytics.blazor\\1.0.0-preview.3\\googleanalytics.blazor.1.0.0-preview.3.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\grpc.aspnetcore\\2.47.0\\grpc.aspnetcore.2.47.0.nupkg.sha512",
@@ -34,6 +36,7 @@
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.metadata\\6.0.6\\microsoft.aspnetcore.metadata.6.0.6.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.2.0\\microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
+    "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.configuration\\2.2.0\\microsoft.extensions.configuration.2.2.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.extensions.configuration.environmentvariables\\2.2.4\\microsoft.extensions.configuration.environmentvariables.2.2.4.nupkg.sha512",
@@ -56,6 +59,7 @@
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.16.1\\microsoft.visualstudio.azure.containers.tools.targets.1.16.1.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\ms\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\nlog\\5.0.1\\nlog.5.0.1.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\nlog.extensions.logging\\5.0.0\\nlog.extensions.logging.5.0.0.nupkg.sha512",
     "C:\\Users\\ms\\.nuget\\packages\\nlog.web.aspnetcore\\5.0.0\\nlog.web.aspnetcore.5.0.0.nupkg.sha512",

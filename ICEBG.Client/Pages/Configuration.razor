@@ -40,12 +40,3 @@ else
         </tbody>
     </table>
 }
-
-@code {
-    private ServiceResult<Configuration_DD> configuration;
-
-    protected override async Task OnInitializedAsync()
-    {
-        configuration = await ConfigurationClient.SelectAsync(ApplicationConfiguration.pConfigurationIdentifier);
-    }
-}

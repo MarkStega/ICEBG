@@ -38,14 +38,13 @@
         <a class="dismiss">🗙</a>
     </div>
 
-    @*
-    <script nonce="@NonceService.nonceValue" src="_framework/blazor.server.js"></script>
-    <script nonce="@NonceService.nonceValue" src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js"></script>
-    <script nonce="@NonceService.nonceValue" src="_content/Material.Blazor/material.blazor.min.js"></script>
-    *@
-    <script src="_framework/blazor.server.js"></script>
+@*    <script src="_framework/blazor.server.js"></script>
     <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js"></script>
     <script src="_content/Material.Blazor/material.blazor.min.js"></script>
+*@
+    <script nonce="@NonceService.NonceValue" src="_framework/blazor.server.js"></script>
+    <script nonce="@NonceService.NonceValue" src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js"></script>
+    <script nonce="@NonceService.NonceValue" src="_content/Material.Blazor/material.blazor.min.js"></script>
 
 </body>
 </html>

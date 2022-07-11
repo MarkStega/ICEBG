@@ -29,7 +29,7 @@ namespace ICEBG.DataTier.gRPCClient
         {
             pLogger = logger;
             pConfigurationProtoClient = protoClient;
-            pLogger.LogInformation("ConfigurationClientGRPC constructor");
+            pLogger.LogDebug("ConfigurationClientGRPC constructor");
         }
 
         public async Task<ServiceResult<Configuration_DD>> SelectAsync(
