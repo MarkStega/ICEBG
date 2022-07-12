@@ -11,6 +11,10 @@ using ICEBG.Client;
 using ICEBG.Infrastructure.ClientServices;
 using ICEBG.SystemFramework;
 using ICEBG.Web.UserInterface;
+using ICEBG.Web.UserInterface.Middleware;
+using ICEBG.Web.UserInterface.Services;
+
+using Material.Blazor;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
@@ -67,22 +71,22 @@ try
     logger.Debug("Adding razor pages");
     builder.Services.AddRazorPages();
 
-    logger.Debug("Add server side blazor");
-    builder.Services.AddServerSideBlazor();
+    logger.Debug("AddControllersWithViews");
+    builder.Services.AddControllersWithViews();
 
-    logger.Debug("Add WeatherForecastService");
-    builder.Services.AddSingleton<WeatherForecastService>();
+    logger.Debug("AddMvc");
+    builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
-    builder.Services.AddScoped<NonceService>();
+    logger.Debug("AddMBServices");
+    builder.Services.AddMBServices(loggingServiceConfiguration: Utilities.GetDefaultLoggingServiceConfiguration(), toastServiceConfiguration: Utilities.GetDefaultToastServiceConfiguration(), snackbarServiceConfiguration: Utilities.GetDefaultSnackbarServiceConfiguration());
 
-    logger.Debug("Add Grpc");
-    builder.Services.AddGrpc(options =>
-    {
-        options.EnableDetailedErrors = true;
-        options.MaxReceiveMessageSize = null;
-        options.MaxSendMessageSize = null;
-    });
+    logger.Debug("AddHttpClient");
+    builder.Services.AddHttpClient();
 
+    logger.Debug("ContentSecurityPolicyService");
+    builder.Services.AddSingleton<ContentSecurityPolicyService>();
+
+    logger.Debug("Configure<CookiePolicyOptions>");
     builder.Services.Configure<CookiePolicyOptions>(options =>
     {
         options.CheckConsentNeeded = context => true;
@@ -91,20 +95,56 @@ try
         options.Secure = CookieSecurePolicy.Always;
     });
 
+    logger.Debug("Configure<StaticFileOptions>");
+    builder.Services.Configure<StaticFileOptions>(options =>
+    {
+        options.OnPrepareResponse = ctx =>
+        {
+            ctx.Context.Response.Headers.Add("Cache-Control", "public, max-age=86400");
+            ctx.Context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+        };
+    });
+
+    logger.Debug("AddOptions");
     builder.Services.AddOptions();
-    // needed to store rate limit counters and ip rules
+
+    logger.Debug("AddMemoryCache");
     builder.Services.AddMemoryCache();
 
-    //load general configuration from appsettings.json
+    logger.Debug("Configure<ClientRateLimitOptions>");
     builder.Services.Configure<ClientRateLimitOptions>(builder.Configuration.GetSection("ClientRateLimiting"));
 
-    //load client rules from appsettings.json
+    logger.Debug("Configure<ClientRateLimitPolicies>");
     builder.Services.Configure<ClientRateLimitPolicies>(builder.Configuration.GetSection("ClientRateLimitPolicies"));
 
+    logger.Debug("AddInMemoryRateLimiting");
     builder.Services.AddInMemoryRateLimiting();
 
-    // configuration (resolvers, counter key builders)
+    logger.Debug("AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>");
     builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+
+    logger.Debug("AddHttpContextAccessor");
+    builder.Services.AddHttpContextAccessor();
+
+    logger.Debug("AddBlazoredLocalStorage");
+    builder.Services.AddBlazoredLocalStorage();
+
+    logger.Debug("AddGBService");
+    builder.Services.AddGBService(trackingId: "G-2VZJ2X14RH");
+
+    logger.Debug("Add server side blazor");
+    builder.Services.AddServerSideBlazor();
+
+    logger.Debug("Add WeatherForecastService");
+    builder.Services.AddSingleton<WeatherForecastService>();
+
+    logger.Debug("Add Grpc");
+    builder.Services.AddGrpc(options =>
+    {
+        options.EnableDetailedErrors = true;
+        options.MaxReceiveMessageSize = null;
+        options.MaxSendMessageSize = null;
+    });
 
     builder.Services.AddHttpContextAccessor();
 
@@ -132,61 +172,25 @@ try
         app.UseHsts();
     }
 
+    app.UseResponseCompression();
+
+    app.UseCookiePolicy();
+
     app.UseHttpsRedirection();
 
-    app.UseBlazorFrameworkFiles();
-
-    app.Use(async (context, next) =>
-    {
-        var nonceValue = context.RequestServices.GetService<NonceService>()?.NonceValue ?? throw new Exception("Nonce service unavailable");
-        logger.Debug("Middleware csp invoked for '" + context.Request.Path + "'");
-        logger.Debug("                           '" + nonceValue + "'");
-
-        var baseUri = context.Request.Host.ToString();
-        var baseDomain = context.Request.Host.Host;
-
-        var csp =
-            "base-uri 'self'; " +
-            "block-all-mixed-content; " +
-            "child-src 'self' ; " +
-            $"connect-src 'self' wss://{baseDomain}:* www.google-analytics.com; " +
-            "default-src 'self'; " +
-            "font-src fonts.gstatic.com; " +
-            "form-action 'none'; " +
-            "frame-ancestors 'none'; " +
-            "frame-src 'self'; " +
-            "img-src 'self' www.google-analytics.com; " +
-            "manifest-src 'self'; " +
-            "media-src 'self'; " +
-            "prefetch-src 'self'; " +
-            "object-src 'none'; " +
-            $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
-            $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
-            $"script-src 'self' 'report-sample' ;" +
-            "style-src 'self' 'report-sample'; " +
-            "upgrade-insecure-requests; " +
-            "worker-src 'self';";
-
-        context.Response.Headers.Add("X-Frame-Options", "DENY");
-        context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-        context.Response.Headers.Add("X-Xss-Protection", "1; mode=block");
-        context.Response.Headers.Add("X-ClientId", "dioptra");
-        context.Response.Headers.Add("Referrer-Policy", "no-referrer");
-        context.Response.Headers.Add("X-Permitted-Cross-Domain-Policies", "none");
-        context.Response.Headers.Add("Permissions-Policy", "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()");
-        context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000");
-        context.Response.Headers.Add("Content-Security-Policy", csp);
-
-        await next();
-    });
-
     app.UseStaticFiles();
+
+    app.UseContentSecurityPolicy();
 
     app.UseMiddleware<NoCacheMiddleware>();
 
     app.UseRouting();
 
     app.UseClientRateLimiting();
+
+
+
+
 
     app.UseAuthentication();
     app.UseAuthorization();

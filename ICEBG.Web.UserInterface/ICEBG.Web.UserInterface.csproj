@@ -50,15 +50,19 @@
 		<Copy SourceFiles="$(ProjectDir)nlog.$(ConfigurationName).config" DestinationFiles="$(ProjectDir)nlog.config" />
 	</Target>
 
-	<!--<ItemGroup>
-		<FilesToHash Include="$(MSBuildThisFileDirectory)\*.js" />
-	</ItemGroup>
-	<Target Name="GetHash">
-		<GetFileHash Files="@(FilesToHash)">
+	<Target Name="BuildHashes" AfterTargets="Publish">
+		<ItemGroup>
+			<FilesToHash Include="$(PublishDir)wwwroot\**\*.js;$(PublishDir)wwwroot\**\*.css;$(PublishDir)wwwroot\**\*.json" />
+			<HashFileOutput Include="$(PublishDir)hashes.csv" />
+		</ItemGroup>
+
+		<GetFileHash Files="@(FilesToHash)" Algorithm="SHA256" HashEncoding="base64">
 			<Output TaskParameter="Items" ItemName="FilesWithHashes" />
 		</GetFileHash>
 
 		<Message Importance="High" Text="@(FilesWithHashes->'%(Identity): %(FileHash)')" />
-	</Target>-->
+
+		<WriteLinesToFile File="@(HashFileOutput)" Lines="@(FilesWithHashes->'%(Identity),%(FileHash)')" Overwrite="true" Encoding="Unicode" />
+	</Target>
 
 </Project>

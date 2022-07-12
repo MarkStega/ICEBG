@@ -2,13 +2,13 @@
 
 using Microsoft.AspNetCore.Http;
 
-namespace ICEBG.Web.UserInterface;
+namespace ICEBG.Web.UserInterface.Middleware;
 public class NoCacheMiddleware
 {
-    private readonly RequestDelegate m_next;
+    private readonly RequestDelegate next;
     public NoCacheMiddleware(RequestDelegate next)
     {
-        m_next = next;
+        this.next = next;
     }
     public async Task Invoke(HttpContext httpContext)
     {
@@ -20,6 +20,6 @@ public class NoCacheMiddleware
             httpContext.Response.Headers.Append("Expires", "0");
             return Task.FromResult(0);
         }, null);
-        await m_next.Invoke(httpContext);
+        await next.Invoke(httpContext);
     }
 }

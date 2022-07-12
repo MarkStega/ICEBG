@@ -2,8 +2,9 @@
 @namespace ICEBG.Web.UserInterface.Pages
 @using ICEBG.Client
 @using ICEBG.Web.UserInterface
+@using ICEBG.Web.UserInterface.Services
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@inject NonceService NonceService
+@inject ContentSecurityPolicyService CspService
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,12 +15,11 @@
 
     <base href="~/" />
 
-    <link href="_content/Material.Blazor/material.blazor.min.css" rel="stylesheet" />
-
     <link href="_content/ICEBG.Client/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="_content/ICEBG.Client/images/favicon.ico" rel="icon" type="image/x-icon">
 
-    <link href="_content/ICEBG.Client/css/icebg.min.css" rel="stylesheet" />
+    <link href="_content/material.blazor/material.blazor.min.css" integrity="@CspService.GetFileHashString("material.blazor.min.css")" rel="stylesheet" />
+    <link href="_content/ICEBG.Client/css/ICEBG.min.css" integrity="@CspService.GetFileHashString("ICEBG.min.css")" rel="stylesheet" />
 
 </head>
 
@@ -38,13 +38,9 @@
         <a class="dismiss">🗙</a>
     </div>
 
-@*    <script src="_framework/blazor.server.js"></script>
-    <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js"></script>
-    <script src="_content/Material.Blazor/material.blazor.min.js"></script>
-*@
-    <script nonce="@NonceService.NonceValue" src="_framework/blazor.server.js"></script>
-    <script nonce="@NonceService.NonceValue" src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js"></script>
-    <script nonce="@NonceService.NonceValue" src="_content/Material.Blazor/material.blazor.min.js"></script>
+    <script src="_framework/blazor.server.js" integrity="@CspService.GetFileHashString("blazor.server.js")"></script>
+    <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js" integrity="@CspService.GetFileHashString("googleanalytics.blazor.js")"></script>
+    <script src="_content/Material.Blazor/material.blazor.min.js" integrity="@CspService.GetFileHashString("material.blazor.min.js")"></script>
 
 </body>
 </html>
