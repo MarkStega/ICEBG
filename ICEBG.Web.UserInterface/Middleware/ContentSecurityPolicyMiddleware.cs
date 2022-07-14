@@ -25,18 +25,12 @@ public class ContentSecurityPolicyMiddleware
         this.next = next;
     }
 
-    public static ContentSecurityPolicyService? pCspService { get; set; } = null;
-    public static IWebHostEnvironment? pWebHostEnvironment{get;set; } = null;
-
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(
+        HttpContext context,
+        ContentSecurityPolicyService cspService,
+        IWebHostEnvironment env)
     {
-        if (pCspService == null)
-        {
-            pCspService = context.RequestServices.GetService<ContentSecurityPolicyService>();
-            pWebHostEnvironment = context.RequestServices.GetService<IWebHostEnvironment>();
-        }
-
-        var source = pWebHostEnvironment.IsDevelopment() ? "'self' " : "";
+        var source = env.IsDevelopment() ? "'self' " : "";
 
         var baseUri = context.Request.Host.ToString();
         var baseDomain = context.Request.Host.Host;
@@ -55,12 +49,12 @@ public class ContentSecurityPolicyMiddleware
             "manifest-src 'self'; " +
             "media-src 'self'; " +
             "prefetch-src 'self'; " +
-            "object-src  data: 'unsafe-eval'; " +
+            "object-src 'none'; " +
             $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
             $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
             // The sha-256 hash relates to an inline script added by blazor's javascript
-            $"script-src {pCspService.ScriptSrcPart} 'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=' 'report-sample' 'unsafe-eval' https://www.googletagmanager.com; " +
-            $"style-src {pCspService.StyleSrcPart} 'unsafe-inline' 'report-sample' fonts.googleapis.com fonts.gstatic.com; " +
+            $"script-src {cspService.scriptSrcPart} 'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=' 'report-sample' 'unsafe-eval' https://www.googletagmanager.com; " +
+            $"style-src 'self' 'unsafe-inline' 'report-sample' fonts.googleapis.com fonts.gstatic.com; " +
             "upgrade-insecure-requests; " +
             "worker-src 'self';";
 
@@ -73,7 +67,7 @@ public class ContentSecurityPolicyMiddleware
         context.Response.Headers.Add("Permissions-Policy", "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()");
         context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
 
-        if (pCspService.ApplyContentSecurityPolicy)
+        if (cspService.applyContentSecurityPolicy)
         {
             context.Response.Headers.Add("Content-Security-Policy", csp);
         }
@@ -86,7 +80,7 @@ public class ContentSecurityPolicyMiddleware
 public static partial class MiddlewareExtensions
 {
     /// <summary>
-    /// Middleware that pump primes the Vectis server, ensuring that it populates caches from the database. Place at the start of the middleware sequence.
+    /// Middleware that pump primes the server, ensuring that it populates caches from the database. Place at the start of the middleware sequence.
     /// </summary>
     /// <param name="builder"></param>
     /// <returns></returns>

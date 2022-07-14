@@ -50,87 +50,84 @@ try
     logger.Debug("ClientServices.Inject");
     ClientServices.Inject(ApplicationConfiguration.pGrpcEndpointPrefix, builder.Services);
 
-    //logger.Debug("ResponseCompression");
-    //builder.Services.AddResponseCompression(options =>
-    //{
-    //    options.EnableForHttps = true;
-    //    options.Providers.Add<BrotliCompressionProvider>();
-    //    options.Providers.Add<GzipCompressionProvider>();
-    //});
+    logger.Debug("ResponseCompression");
+    builder.Services.AddResponseCompression(options =>
+    {
+        options.EnableForHttps = true;
+        options.Providers.Add<BrotliCompressionProvider>();
+        options.Providers.Add<GzipCompressionProvider>();
+    });
 
-    //builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
-    //{
-    //    options.Level = CompressionLevel.Fastest;
-    //});
+    builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+    {
+        options.Level = CompressionLevel.Fastest;
+    });
 
-    //builder.Services.Configure<GzipCompressionProviderOptions>(options =>
-    //{
-    //    options.Level = CompressionLevel.SmallestSize;
-    //});
+    builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+    {
+        options.Level = CompressionLevel.SmallestSize;
+    });
 
     logger.Debug("Adding razor pages");
     builder.Services.AddRazorPages();
 
-    //logger.Debug("AddControllersWithViews");
-    //builder.Services.AddControllersWithViews();
+    logger.Debug("AddControllersWithViews");
+    builder.Services.AddControllersWithViews();
 
-    //logger.Debug("AddMvc");
-    //builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
-
-    logger.Debug("AddMBServices");
-    builder.Services.AddMBServices(loggingServiceConfiguration: Utilities.GetDefaultLoggingServiceConfiguration(), toastServiceConfiguration: Utilities.GetDefaultToastServiceConfiguration(), snackbarServiceConfiguration: Utilities.GetDefaultSnackbarServiceConfiguration());
+    logger.Debug("AddMvc");
+    builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
     logger.Debug("AddHttpClient");
     builder.Services.AddHttpClient();
 
-    //logger.Debug("ContentSecurityPolicyService");
-    //builder.Services.AddSingleton<ContentSecurityPolicyService>();
+    logger.Debug("ContentSecurityPolicyService");
+    builder.Services.AddSingleton<ContentSecurityPolicyService>();
 
-    //logger.Debug("Configure<CookiePolicyOptions>");
-    //builder.Services.Configure<CookiePolicyOptions>(options =>
-    //{
-    //    options.CheckConsentNeeded = context => true;
-    //    options.HttpOnly = HttpOnlyPolicy.Always;
-    //    options.MinimumSameSitePolicy = SameSiteMode.Strict;
-    //    options.Secure = CookieSecurePolicy.Always;
-    //});
+    logger.Debug("Configure<CookiePolicyOptions>");
+    builder.Services.Configure<CookiePolicyOptions>(options =>
+    {
+        options.CheckConsentNeeded = context => true;
+        options.HttpOnly = HttpOnlyPolicy.Always;
+        options.MinimumSameSitePolicy = SameSiteMode.Strict;
+        options.Secure = CookieSecurePolicy.Always;
+    });
 
-    //logger.Debug("Configure<StaticFileOptions>");
-    //builder.Services.Configure<StaticFileOptions>(options =>
-    //{
-    //    options.OnPrepareResponse = ctx =>
-    //    {
-    //        ctx.Context.Response.Headers.Add("Cache-Control", "public, max-age=86400");
-    //        ctx.Context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-    //    };
-    //});
+    logger.Debug("Configure<StaticFileOptions>");
+    builder.Services.Configure<StaticFileOptions>(options =>
+    {
+        options.OnPrepareResponse = ctx =>
+        {
+            ctx.Context.Response.Headers.Add("Cache-Control", "public, max-age=86400");
+            ctx.Context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+        };
+    });
 
     logger.Debug("AddOptions");
     builder.Services.AddOptions();
 
-    //logger.Debug("AddMemoryCache");
-    //builder.Services.AddMemoryCache();
+    logger.Debug("AddMemoryCache");
+    builder.Services.AddMemoryCache();
 
-    //logger.Debug("Configure<ClientRateLimitOptions>");
-    //builder.Services.Configure<ClientRateLimitOptions>(builder.Configuration.GetSection("ClientRateLimiting"));
+    logger.Debug("Configure<ClientRateLimitOptions>");
+    builder.Services.Configure<ClientRateLimitOptions>(builder.Configuration.GetSection("ClientRateLimiting"));
 
-    //logger.Debug("Configure<ClientRateLimitPolicies>");
-    //builder.Services.Configure<ClientRateLimitPolicies>(builder.Configuration.GetSection("ClientRateLimitPolicies"));
+    logger.Debug("Configure<ClientRateLimitPolicies>");
+    builder.Services.Configure<ClientRateLimitPolicies>(builder.Configuration.GetSection("ClientRateLimitPolicies"));
 
-    //logger.Debug("AddInMemoryRateLimiting");
-    //builder.Services.AddInMemoryRateLimiting();
+    logger.Debug("AddInMemoryRateLimiting");
+    builder.Services.AddInMemoryRateLimiting();
 
-    //logger.Debug("AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>");
-    //builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+    logger.Debug("AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>");
+    builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
-    //logger.Debug("AddHttpContextAccessor");
-    //builder.Services.AddHttpContextAccessor();
+    logger.Debug("AddHttpContextAccessor");
+    builder.Services.AddHttpContextAccessor();
 
-    //logger.Debug("AddBlazoredLocalStorage");
-    //builder.Services.AddBlazoredLocalStorage();
+    logger.Debug("AddBlazoredLocalStorage");
+    builder.Services.AddBlazoredLocalStorage();
 
-    //logger.Debug("AddGBService");
-    //builder.Services.AddGBService(trackingId: "G-2VZJ2X14RH");
+    logger.Debug("AddGBService");
+    builder.Services.AddGBService(trackingId: "G-2VZJ2X14RH");
 
     logger.Debug("Add server side blazor");
     builder.Services.AddServerSideBlazor();
@@ -146,11 +143,18 @@ try
         options.MaxSendMessageSize = null;
     });
 
-    //builder.Services.AddHttpContextAccessor();
+    builder.Services.AddHttpContextAccessor();
 
-    //builder.Services.AddBlazoredLocalStorage();
+    builder.Services.AddBlazoredLocalStorage();
 
-    //builder.Services.AddGBService(trackingId: "G-2VZJ2X14RH");
+    builder.Services.AddGBService(trackingId: "G-2VZJ2X14RH");
+
+    builder.Services.AddHsts(options =>
+    {
+        options.Preload = true;
+        options.IncludeSubDomains = true;
+        options.MaxAge = TimeSpan.FromDays(365);
+    });
 
     var app = builder.Build();
 
@@ -163,54 +167,41 @@ try
     {
         app.UseExceptionHandler("/Error");
         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-        builder.Services.AddHsts(options =>
-        {
-            options.Preload = true;
-            options.IncludeSubDomains = true;
-            options.MaxAge = TimeSpan.FromDays(365);
-        });
         app.UseHsts();
     }
 
-    //app.UseResponseCompression();
+    app.UseResponseCompression();
 
-    //app.UseCookiePolicy();
+    app.UseCookiePolicy();
 
     app.UseHttpsRedirection();
 
-//    app.UseStaticFiles();
+    app.UseStaticFiles();
 
-    //app.UseContentSecurityPolicy();
+    app.UseContentSecurityPolicy();
 
-    //app.UseMiddleware<NoCacheMiddleware>();
+    app.UseMiddleware<NoCacheMiddleware>();
 
     app.UseRouting();
 
-    //app.UseClientRateLimiting();
+    app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
 
-    //app.UseAuthentication();
-    //app.UseAuthorization();
+    app.UseClientRateLimiting();
 
-    logger.Debug("UseEndpoints...");
+    app.UseAuthentication();
+
+    app.UseAuthorization();
+
 #if BLAZOR_WEBASSEMBLY
-    app.UseEndpoints(endpoints =>
-    {
-        endpoints.MapFallbackToPage("/index_webassembly");
-    });
+    app.MapFallbackToPage("/index_webassembly");
 #endif
 
 #if BLAZOR_SERVER
-    app.UseEndpoints(endpoints =>
-    {
-        endpoints.MapBlazorHub();
-        endpoints.MapFallbackToPage("/index_server");
-    });
+    app.MapBlazorHub();
+    app.MapFallbackToPage("/index_server");
 #endif
 
-
-    //    app.MapGet("/sitemap.xml", async context => {
-    //      await Sitemap.Generate(context);
-    //});
+    app.MapGet("/sitemap.xml", async context => {await Sitemap.Generate(context);});
 
     logger.Debug("Completing startup, executing app.Run()...");
     logger.Debug(" ");
@@ -224,5 +215,5 @@ finally
 {
     // Ensure message flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
     logger.Debug("Shutting down NLOG");
-    NLog.LogManager.Shutdown();
+    //NLog.LogManager.Shutdown();
 }
