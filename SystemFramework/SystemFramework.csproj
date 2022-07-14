@@ -5,31 +5,30 @@
         <RootNamespace>ICEBG.SystemFramework</RootNamespace>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
-		<Configurations>Develop_WebAssembly;Develop_Server;DEMO;LBH;WASM</Configurations>
-    </PropertyGroup>
+		<Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
+	</PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
-        <DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY;gRPC;xREST;SERVER;ICEBG_NG</DefineConstants>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
+	</PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
-        <DefineConstants>DEVELOP;BLAZOR_SERVER;gRPC;xREST;SERVER;ICEBG_NG</DefineConstants>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
+	</PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEMO|AnyCPU'">
-        <DefineConstants>DEMO;BLAZOR_SERVER;gRPC;xREST;SERVER;ICEBG_NG</DefineConstants>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
+	</PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LBH|AnyCPU'">
-        <DefineConstants>LBH;BLAZOR_SERVER;gRPC;xREST;SERVER;ICEBG_NG</DefineConstants>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='WASM|AnyCPU'">
-        <DefineConstants>WASM;BLAZOR_WEBASSEMBLY;gRPC;xREST;SERVER;ICEBG_NG</DefineConstants>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssemply|AnyCPU'">
+		<DefineConstants>RELEASE;BLAZOR_WEBASSEMBLY</DefineConstants>
+	</PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.ServiceModel.Duplex" Version="4.9.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.7" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.7" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.7" />
+		<PackageReference Include="System.ServiceModel.Duplex" Version="4.9.0" />
         <PackageReference Include="System.ServiceModel.Http" Version="4.9.0" />
         <PackageReference Include="System.ServiceModel.NetTcp" Version="4.9.0" />
         <PackageReference Include="System.ServiceModel.Security" Version="4.9.0" />

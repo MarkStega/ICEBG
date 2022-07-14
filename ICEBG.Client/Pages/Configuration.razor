@@ -1,0 +1,42 @@
+﻿@page "/Configuration"
+
+<PageTitle>Configuration</PageTitle>
+
+@using ICEBG.DataTier.DataDefinitions
+@using ICEBG.DataTier.gRPCClient
+@using ICEBG.DataTier.HelperClasses
+@using ICEBG.DataTier.Interfaces
+@using ICEBG.SharedUtilities
+@using ICEBG.SystemFramework
+
+@inject iConfigurationClient ConfigurationClient
+
+<h1>Configuration</h1>
+
+<p>This component demonstrates fetching data from a GRPC service.</p>
+
+@if (configuration == null)
+{
+    <h1>Loading...</h1>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>pSuccess</th>
+                <th>pError</th>
+                <th>pResult</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@configuration.pResult.Id</td>
+                <td>@configuration.pSuccess.ToString()</td>
+                <td>@configuration.pError.ToString()</td>
+                <td>@configuration.pResult.Configuration</td>
+            </tr>
+        </tbody>
+    </table>
+}

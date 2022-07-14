@@ -29,12 +29,11 @@ namespace ICEBG.DataTier.gRPCClient
         {
             pLogger = logger;
             pConfigurationProtoClient = protoClient;
-            pLogger.LogInformation("ConfigurationClientGRPC constructor");
+            pLogger.LogDebug("ConfigurationClientGRPC constructor");
         }
 
         public async Task<ServiceResult<Configuration_DD>> SelectAsync(
-            string requestedId,
-            Metadata header)
+            string requestedId)
         {
             try
             {
@@ -42,7 +41,7 @@ namespace ICEBG.DataTier.gRPCClient
                 {
                     Id = requestedId
                 };
-                var reply = await pConfigurationProtoClient.SelectAsync(request, header);
+                var reply = await pConfigurationProtoClient.SelectAsync(request);
 
                 if (reply.SuccessIndicator)
                 {

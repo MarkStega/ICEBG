@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  icebg.web.dataservices:
-    image: ${DOCKER_REGISTRY-}icebgwebdataservices
-    build:
-      context: .
-      dockerfile: ICEBG.Web.DataServices/Dockerfile

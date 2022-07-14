@@ -1,37 +1,45 @@
 using System;
 
-using Grpc.Core;
-
-using ICEBG.Web.DataServices.Services.Configuration;
+using ICEBG.Infrastructure.ClientServices;
+using ICEBG.SystemFramework;
+using ICEBG.Web.DataServices;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-using Serilog;
+using NLog.Web;
 
-Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
-    .CreateBootstrapLogger();
 
-Log.Information("Starting up");
+// NLog: setup the logger first to catch all errors
+NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 
 try
 {
+    logger.Debug("______________________________________________________________________");
+    logger.Debug("Building and Starting Host in Main()");
     var builder = WebApplication.CreateBuilder(args);
 
-    builder.Host.UseSerilog((ctx, lc) => lc
-        .WriteTo.Console()
-        .WriteTo.File("c:/temp/Serilog.Data.log"));
-    
+    builder.Logging.ClearProviders();
+    builder.Logging.SetMinimumLevel(LogLevel.Trace);
+    builder.Host.UseNLog();
+
+    logger.Debug("");
+
+    logger.Debug("ApplicationConfiguration.Initialize");
+    ApplicationConfiguration.Initialize(builder);
+
+    logger.Debug("ClientServices.Inject");
+    ClientServices.Inject(ApplicationConfiguration.pGrpcEndpointPrefix, builder.Services);
+
     // Add services to the container.
 
+    logger.Debug("Adding razor pages");
     builder.Services.AddRazorPages();
 
-    Log.Debug("Adding gRPC...");
+    logger.Debug("Adding gRPC");
     builder.Services.AddGrpc(options =>
     {
         options.EnableDetailedErrors = true;
@@ -61,7 +69,7 @@ try
     app.UseRouting();
 
     // This must be between UseRouting & UseEndpoints
-    Log.Debug("UseGrpcWeb...");
+    logger.Debug("UseGrpcWeb");
     app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
 
     app.UseAuthentication();
@@ -75,14 +83,17 @@ try
         endpoints.MapFallbackToPage("/index_server");
     });
 
+    logger.Debug("Completing startup, executing app.Run()");
+    logger.Debug(" ");
     app.Run();
 }
 catch (Exception ex)
 {
-    Log.Fatal(ex, "Unhandled exception");
+    logger.Fatal(ex, "Unhandled exception");
 }
 finally
 {
-    Log.Information("Shut down complete");
-    Log.CloseAndFlush();
+    // Ensure message flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
+    logger.Debug("Shutting down NLOG");
+    NLog.LogManager.Shutdown();
 }

@@ -5,27 +5,23 @@
 		<RootNamespace>ICEBG.DataTier</RootNamespace>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
-		<Configurations>Develop_WebAssembly;Develop_Server;DEMO;LBH;WASM</Configurations>
+		<Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
-		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY;gRPC;xREST;ICEBG_NG</DefineConstants>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
-		<DefineConstants>DEVELOP;BLAZOR_SERVER;gRPC;xREST;ICEBG_NG</DefineConstants>
+		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEMO|AnyCPU'">
-		<DefineConstants>DEMO;BLAZOR_SERVER;gRPC;xREST;ICEBG_NG</DefineConstants>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LBH|AnyCPU'">
-		<DefineConstants>LBH;BLAZOR_SERVER;gRPC;xREST;ICEBG_NG</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='WASM|AnyCPU'">
-		<DefineConstants>WASM;BLAZOR_WEBASSEMBLY;gRPC;xREST;ICEBG_NG</DefineConstants>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssemply|AnyCPU'">
+		<DefineConstants>RELEASE;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -33,23 +29,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Grpc.Net.Client.Web" Version="2.46.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.5" />
-		<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Grpc.Net.Client.Web" Version="2.47.0" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
-		<PackageReference Include="Google.Protobuf" Version="3.21.1" />
-		<PackageReference Include="Grpc.Net.Client" Version="2.46.0" />
-		<PackageReference Include="Grpc.Tools" Version="2.46.3">
+		<PackageReference Include="Google.Protobuf" Version="3.21.2" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.47.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.47.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\SharedUtilities\SharedUtilities.csproj" />
 		<ProjectReference Include="..\SystemFramework\SystemFramework.csproj" />
 	</ItemGroup>
 

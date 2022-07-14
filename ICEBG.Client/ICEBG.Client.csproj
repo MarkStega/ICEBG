@@ -1,47 +1,63 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<OutputType>Library</OutputType>
-		<Configurations>Develop_WebAssembly;Develop_Server;DEMO;LBH;WASM</Configurations>
+		<Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
-		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY;gRPC;xREST;ICEBG_NG</DefineConstants>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
-		<DefineConstants>DEVELOP;BLAZOR_SERVER;gRPC;xREST;ICEBG_NG</DefineConstants>
+		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEMO|AnyCPU'">
-		<DefineConstants>DEMO;BLAZOR_SERVER;gRPC;xREST;ICEBG_NG</DefineConstants>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LBH|AnyCPU'">
-		<DefineConstants>LBH;BLAZOR_SERVER;gRPC;xREST;ICEBG_NG</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='WASM|AnyCPU'">
-		<DefineConstants>WASM;BLAZOR_WEBASSEMBLY;gRPC;xREST;ICEBG_NG</DefineConstants>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssemply|AnyCPU'">
+		<DefineConstants>RELEASE;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Grpc.Net.Client" Version="2.46.0" />
-		<PackageReference Include="Grpc.Net.Client.Web" Version="2.46.0" />
-		<PackageReference Include="Material.Blazor" Version="2.5.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.5" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.5" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.47.0" />
+		<PackageReference Include="Grpc.Net.Client.Web" Version="2.47.0" />
+		<PackageReference Include="Material.Blazor" Version="3.0.0-preview.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Folder Include="Properties\" />
+		<Folder Include="wwwroot\css\" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\DataTier\DataTier.csproj" />
+	  <ProjectReference Include="..\SharedUtilities\SharedUtilities.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<InputStaticAssetsStyles Include="styles\**\*.scss" />
+		<OutputStaticAssetsStyles Include="wwwroot\css\icebg.min.css" />
+	</ItemGroup>
+
+	<Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent">
+		<Exec Command="echo ***** npm install" />
+		<Exec Command="npm install" />
+
+		<!--<Exec Command="echo ***** npm run build-css" />
+		<Exec Command="npm run build-css" />-->
+
+		<Exec Command="echo ***** npm run build-min-css" />
+		<Exec Command="npm run build-min-css" />
+
+	</Target>
 
 </Project>

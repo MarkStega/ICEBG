@@ -4,13 +4,16 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <NameOfLastUsedPublishProfile>C:\Solutions\OHI\ICEBG\ICEBG.Web.UserInterface\Properties\PublishProfiles\acrICEBG.pubxml</NameOfLastUsedPublishProfile>
-    <ActiveDebugProfile>Docker</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>C:\Solutions\OHI\ICEBG\ICEBG.Web.UserInterface\Properties\PublishProfiles\crICEBG-UI.pubxml</NameOfLastUsedPublishProfile>
+    <ActiveDebugProfile>ICEBG.UI.Server</ActiveDebugProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEMO|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <!--<PropertyGroup>

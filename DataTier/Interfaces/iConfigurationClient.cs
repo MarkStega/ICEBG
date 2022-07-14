@@ -16,8 +16,7 @@ namespace ICEBG.DataTier.Interfaces;
 public interface iConfigurationClient
 {
     Task<ServiceResult<Configuration_DD>> SelectAsync(
-        string id,
-        Metadata header);
+        string id);
     Task<ServiceResult<List<Configuration_DD>>> SelectAllAsync(
         Metadata header);
     Task<ServiceResult<string>> UpsertAsync(
