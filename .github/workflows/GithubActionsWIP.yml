@@ -176,9 +176,9 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
         docker build . --file ./ICEBG.Web.DataServices/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/icebg.web.ds:${{ needs.version.outputs.suffix }}
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/icebg.web.ds:${{ github.sha }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/icebg.web.ds:${{ needs.version.outputs.suffix }}
         docker build . --file ./ICEBG.Web.UserInterface/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/icebg.web.ui:${{ needs.version.outputs.suffix }}
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/icebg.web.ui:${{ github.sha }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/icebg.web.ui:${{ needs.version.outputs.suffix }}
 
     - name: 'Deploy to Azure Container Instances'
       uses: 'azure/aci-deploy@v1'
