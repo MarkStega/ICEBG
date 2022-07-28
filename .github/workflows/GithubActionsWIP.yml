@@ -1,0 +1,235 @@
+﻿name: GithubActionsWIP
+
+on:
+  push:
+    branches: [ main ]
+
+  pull_request:
+    branches: [ main ]
+
+env:
+#  buildPlatform: 'Any CPU'
+#  buildConfiguration: 'Release'
+#  outputCSFB: ${{github.workspace}}/siteCSFB
+  webassemblyDC: './docker-compose-blazor-webassembly.yml'
+  serverDC: './docker-compose-blazor-server.yml'
+#  projectCSFB: 'Website.BlazorWebAssembly/Server/Website.BlazorWebAssembly.Server.csproj'
+#  projectTest: 'CompressedStaticFiles.AspNetCore.Test/CompressedStaticFiles.AspNetCore.Test.csproj'
+
+jobs:
+
+############################################################################################################
+# These jobs are used to gate actions. By creating these jobs we don't need to proliferate the repo checks
+############################################################################################################
+  is-on-fork:
+    name: Running on a fork?
+    runs-on: ubuntu-latest
+    if: github.repository != 'MarkStega/ICEBG'
+    steps:
+    - name: Nothing to see here
+      run: echo ""
+
+  is-on-primary-repository:
+    name: Running on MarkStega/ICEBG?
+    runs-on: ubuntu-latest
+    if: github.repository == 'MarkStega/ICEBG'
+    steps:
+    - name: Nothing to see here
+      run: echo ""
+
+############################################################################################################
+# This job is only to display some CI information
+############################################################################################################
+  info:
+    name: Display CI information
+    runs-on: windows-latest
+
+    steps:
+
+    - name: DotNet info
+      run: dotnet --info
+      if: github.event_name != 'workflow_dispatch'
+
+    - name: Set ciSuffix as env variable
+      run: echo "ciSuffix=ci.$(date +'%Y-%m-%d--%H-%M-%S')" >> $GITHUB_ENV
+      shell: bash
+      if: github.event_name != 'workflow_dispatch'
+
+    - name: Echo ciSuffix
+      run: echo "CI suffix is $ciSuffix"
+      shell: bash
+      if: github.event_name != 'workflow_dispatch'
+
+    - name: Get the branch
+      id: get_branch
+      run: echo ::set-output name=branch::${GITHUB_REF/refs\/heads\//}
+      shell: bash
+      if: github.event_name != 'workflow_dispatch'
+
+    - name: Get the pullrequest
+      id: get_pullrequest
+      run: echo ::set-output name=pullrequest::${GITHUB_REF/refs\/pull\//}
+      shell: bash
+      if: github.event_name != 'workflow_dispatch'
+
+    - name: Get the tag
+      id: get_tag
+      run: echo ::set-output name=tag::${GITHUB_REF/refs\/tags\//}
+      shell: bash
+      if: github.event_name != 'workflow_dispatch'
+
+    - name: Show branch name Ꙫ
+      run: echo GitHub indicates that this is a branch push request of ${{steps.get_branch.outputs.branch}}
+      if: github.event_name != 'workflow_dispatch' && contains(github.ref, 'refs/heads')
+
+    - name: Show PR name Ꙫ
+      run: echo GitHub indicates that this is a pull request called ${{steps.get_pullrequest.outputs.pullrequest}}
+      if: github.event_name != 'workflow_dispatch' && contains(github.ref, 'refs/pull')
+
+    - name: Show Tag name Ꙫ
+      run: echo GitHub indicates that this is a tag creation with ${{steps.get_tag.outputs.tag}}
+      if: github.event_name != 'workflow_dispatch' && contains(github.ref, 'refs/tag')
+
+############################################################################################################
+# Store the version information
+############################################################################################################
+  version:
+    name: Set version suffix
+    runs-on: ubuntu-latest
+
+    steps:
+    - id: get
+      run: |
+        echo "::set-output name=suffix::ci.$(date +'%Y-%m-%d--%H-%M-%S')"
+    - id: show
+      run: |
+        echo "${{ steps.get.outputs.suffix }}"
+    outputs:
+      suffix: ${{ steps.get.outputs.suffix }}
+      
+      
+############################################################################################################
+# Run the test project. Should this fail, the deploy step (job deployghpages) is skipped
+# This is soft-skipped when we only want to perform a comparison (github.event_name != 'workflow_dispatch')
+############################################################################################################
+  #test:
+  #  name: Run .NET tests
+  #  runs-on: windows-latest
+  #  env:
+  #    config: 'Release'
+
+  #  steps:
+  #  - uses: actions/checkout@v2
+  #  - name: Setup .NET6
+  #    uses: actions/setup-dotnet@v1
+  #    with:
+  #      dotnet-version: '6.0.x'
+  #      include-prerelease: true
+
+
+#    - name: Install dependencies
+#      run: dotnet restore --verbosity normal
+#    - name: Build
+#      run: dotnet build --configuration $config --no-restore
+#    - name: Test
+#      run: dotnet test --configuration $config --no-restore --no-build --verbosity normal --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=lcov
+#    - name: Find lcov file path
+#      id: find-lcov-file-path
+#      shell: pwsh
+#      run: |
+#        $FilePath = (Get-ChildItem CompressedStaticFiles.Tests\TestResults\* | Select-Object -First 1 | Get-ChildItem).FullName
+#        Write-Host ::set-output name=path::$FilePath
+#    - name: Publish coverage report to coveralls.io
+#      uses: coverallsapp/github-action@master
+#      with:
+#        github-token: ${{ secrets.GITHUB_TOKEN }}
+#        path-to-lcov: ${{ steps.find-lcov-file-path.outputs.path }}
+      
+############################################################################################################
+# Build nuget package
+# This is hard-skipped when we only want to perform a comparison (github.event_name != 'workflow_dispatch')
+############################################################################################################
+  #build-blazor-webassembly:
+  #  name: Build Blazor WebAssembly docker container
+  #  #needs: [info, test, version]
+  #  needs: [info, version]
+
+  #  runs-on: ubuntu-latest
+  #  #runs-on: windows-latest
+  #  if: github.event_name != 'workflow_dispatch'
+
+  #  steps:
+  #  - name: Cleanup
+  #    uses: AutoModality/action-clean@v1
+
+  #  - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
+  #    uses: actions/checkout@v2
+  #    with:
+  #      persist-credentials: false
+
+  #  #- name: Use prelease dotnet
+  #  #  uses: actions/setup-dotnet@v1
+  #  #  with:
+  #  #    dotnet-version: '6.0.x'
+  #  #    include-prerelease: true
+  #  #  if: github.event_name != 'workflow_dispatch'
+
+  #  - name: Docker Compose Blazor WebAssembly 🔧
+  #    run: docker build . --file ./Website.BlazorWebAssembly/Server/Dockerfile --tag my-image-name:"a-tag"
+  #    #run: docker-compose --verbose --file ${{env.webassemblyDC}} up
+  #    #run: dotnet build ${{env.projectCSFB}} --configuration ${{env.buildConfiguration}} --version-suffix ${{needs.version.outputs.suffix}}
+
+  ##  - name: Generate the NuGet package 🔧
+  ##    run: dotnet pack ${{env.projectCSFB}} --no-build --configuration ${{env.buildConfiguration}} --output ${{env.outputCSFB}} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg --version-suffix ${{needs.version.outputs.suffix}}
+
+  ##  - name: Display CompressedStaticFiles.AspNetCore package output Ꙫ
+  ##    run: dir ${{env.outputCSFB}}
+      
+############################################################################################################
+# Build blazor server container
+# This is hard-skipped when we only want to perform a comparison (github.event_name != 'workflow_dispatch')
+############################################################################################################
+  build-ds-ui:
+    name: Build ICEBG docker containers
+    needs: [info, version]
+
+    runs-on: ubuntu-latest
+
+    - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+
+    - name: looksee
+      run: pwd && ls -alt
+
+    #- name: Docker build 🔧
+    #  run: docker build . --file ./ICEBG.Web.DataSevices/Dockerfile --tag ICEBG.Web.DS:${{needs.version.outputs.suffix}}
+    #  run: docker build . --file ./ICEBG.Web.UserInterface/Dockerfile --tag ICEBG.Web.UI:${{needs.version.outputs.suffix}}
+
+    - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - name: 'Build and push images'
+        uses: azure/docker-login@v1
+        with:
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+        docker build . --file ./ICEBG.Web.DataSevices/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}
+
+    - name: 'Deploy to Azure Container Instances'
+        uses: 'azure/aci-deploy@v1'
+        with:
+        resource-group: ${{ secrets.RESOURCE_GROUP }}
+        dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+        image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}
+        registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        registry-username: ${{ secrets.REGISTRY_USERNAME }}
+        registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+        name: aci-sampleapp
+        location: 'east us'
