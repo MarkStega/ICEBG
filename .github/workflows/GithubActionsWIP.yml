@@ -203,9 +203,9 @@ jobs:
     - name: looksee
       run: pwd && ls -alt
 
-    #- name: Docker build 🔧
-    #  run: docker build . --file ./ICEBG.Web.DataSevices/Dockerfile --tag ICEBG.Web.DS:${{needs.version.outputs.suffix}}
-    #  run: docker build . --file ./ICEBG.Web.UserInterface/Dockerfile --tag ICEBG.Web.UI:${{needs.version.outputs.suffix}}
+#- name: Docker build 🔧
+#  run: docker build . --file ./ICEBG.Web.DataSevices/Dockerfile --tag ICEBG.Web.DS:${{needs.version.outputs.suffix}}
+#  run: docker build . --file ./ICEBG.Web.UserInterface/Dockerfile --tag ICEBG.Web.UI:${{needs.version.outputs.suffix}}
 
     - name: 'Login via Azure CLI'
         uses: azure/login@v1
