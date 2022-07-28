@@ -59,7 +59,7 @@ jobs:
 ############################################################################################################
   build-ds-ui:
     name: Build ICEBG docker containers
-    needs: [info, version]
+    needs: [version]
     runs-on: ubuntu-latest
 
     steps:
