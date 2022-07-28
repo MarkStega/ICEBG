@@ -156,6 +156,11 @@ try
         options.MaxAge = TimeSpan.FromDays(365);
     });
 
+    builder.WebHost.ConfigureKestrel(serverOptions =>
+    {
+        serverOptions.AddServerHeader = false;
+    });
+
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
