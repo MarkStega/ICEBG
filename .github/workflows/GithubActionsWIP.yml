@@ -192,9 +192,9 @@ jobs:
   build-ds-ui:
     name: Build ICEBG docker containers
     needs: [info, version]
-
     runs-on: ubuntu-latest
 
+    steps:
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
       uses: actions/checkout@v2
       with:
