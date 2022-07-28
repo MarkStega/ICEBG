@@ -1,6 +1,6 @@
 ﻿using Material.Blazor;
 
-namespace ICEBG.Web.UserInterface;
+namespace ICEBG.Client;
 public static class Utilities
 {
     public const string NonInteraction = "non_interaction";
