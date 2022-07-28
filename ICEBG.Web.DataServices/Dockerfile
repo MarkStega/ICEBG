@@ -13,12 +13,10 @@ COPY ["ICEBG.Client/ICEBG.Client.csproj", "ICEBG.Client/"]
 COPY ["DataTier/DataTier.csproj", "DataTier/"]
 COPY ["SystemFramework/SystemFramework.csproj", "SystemFramework/"]
 COPY ["SharedUtilities/SharedUtilities.csproj", "SharedUtilities/"]
-RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages\
-	dotnet restore --disable-parallel "ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj"
+RUN dotnet restore --disable-parallel "ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj"
 COPY . .
 WORKDIR "/src/ICEBG.Web.DataServices"
-RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages\
-	dotnet publish "ICEBG.Web.DataServices.csproj" -c Azure -o /app/publish
+RUN dotnet publish "ICEBG.Web.DataServices.csproj" -c Azure -o /app/publish
 
 FROM base AS final
 WORKDIR /app
