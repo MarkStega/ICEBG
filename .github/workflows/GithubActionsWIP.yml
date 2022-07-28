@@ -85,7 +85,7 @@ jobs:
         docker build . --file ./ICEBG.Web.UserInterface/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/icebg.web.ui:${{ needs.version.outputs.suffix }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/icebg.web.ui:${{ needs.version.outputs.suffix }}
 
-    - name: 'Deploy to Azure Container Instances'
+    - name: 'Deploy DS to Azure Container Instances'
       uses: 'azure/aci-deploy@v1'
       with:
         resource-group: ${{ secrets.RESOURCE_GROUP }}
@@ -97,7 +97,7 @@ jobs:
         name: cricebg
         location: 'east us'
 
-    - name: 'Deploy to Azure Container Instances'
+    - name: 'Deploy UI to Azure Container Instances'
       uses: 'azure/aci-deploy@v1'
       with:
         resource-group: ${{ secrets.RESOURCE_GROUP }}
