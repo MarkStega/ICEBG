@@ -6,6 +6,7 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+ARG version
 WORKDIR /src
 COPY ["NuGet.Config", "."]
 COPY ["ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj", "ICEBG.Web.UserInterface/"]
@@ -16,7 +17,7 @@ COPY ["SharedUtilities/SharedUtilities.csproj", "SharedUtilities/"]
 RUN dotnet restore --disable-parallel "ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj"
 COPY . .
 WORKDIR "/src/ICEBG.Web.UserInterface"
-RUN dotnet publish "ICEBG.Web.UserInterface.csproj" -c Azure -o /app/publish
+RUN dotnet publish "ICEBG.Web.UserInterface.csproj" -c Azure -o /app/publish -p:Version=$version
 
 FROM base AS final
 WORKDIR /app

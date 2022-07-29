@@ -6,6 +6,7 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+ARG version
 WORKDIR /src
 COPY ["NuGet.Config", "."]
 COPY ["ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj", "ICEBG.Web.DataServices/"]
@@ -16,7 +17,7 @@ COPY ["SharedUtilities/SharedUtilities.csproj", "SharedUtilities/"]
 RUN dotnet restore --disable-parallel "ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj"
 COPY . .
 WORKDIR "/src/ICEBG.Web.DataServices"
-RUN dotnet publish "ICEBG.Web.DataServices.csproj" -c Azure -o /app/publish
+RUN dotnet publish "ICEBG.Web.DataServices.csproj" -c Azure -o /app/publish -p:Version=$version
 
 FROM base AS final
 WORKDIR /app

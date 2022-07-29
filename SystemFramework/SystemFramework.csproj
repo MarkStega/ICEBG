@@ -28,13 +28,5 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.7" />
     </ItemGroup>
 
-    <ItemGroup>
-        <WCFMetadata Include="Connected Services" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Reference Include="System.ServiceModel" />
-    </ItemGroup>
-
 </Project>
 

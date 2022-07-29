@@ -9,25 +9,25 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
-		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
+		<DefineConstants>DEVELOP;BLAZOR_SERVER;Azure</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
-		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
+		<DefineConstants>DEVELOP;BLAZOR_SERVER;Develop_Server</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
-		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
+		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY;Develop_WebAssembly</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssemply|AnyCPU'">
-		<DefineConstants>RELEASE;BLAZOR_WEBASSEMBLY</DefineConstants>
+		<DefineConstants>RELEASE;BLAZOR_WEBASSEMBLY;Release_WebAssemply</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Grpc.Net.Client" Version="2.47.0" />
 		<PackageReference Include="Grpc.Net.Client.Web" Version="2.47.0" />
-		<PackageReference Include="Material.Blazor" Version="3.0.0-preview.6" />
+		<PackageReference Include="Material.Blazor" Version="3.0.0-preview.9" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
