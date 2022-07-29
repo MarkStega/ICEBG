@@ -5,15 +5,8 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-ARG version
-
-ENV DEBIAN_FRONTEND noninteractive
-ENV DEBCONF_NOWARNINGS="yes"
-RUN apt-get update
-RUN apt-get install --no-install-recommends --yes apt-utils npm
-RUN dotnet --info
-
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+ARG version
 WORKDIR /src
 COPY ["NuGet.Config", "."]
 COPY ["ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj", "ICEBG.Web.UserInterface/"]
