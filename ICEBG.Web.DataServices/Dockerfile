@@ -8,6 +8,12 @@ EXPOSE 443
 ARG version
 ENV VERSION $version
 
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NOWARNINGS="yes"
+RUN apt-get update
+RUN apt-get install --no-install-recommends --yes apt-utils npm
+RUN dotnet --info
+
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["NuGet.Config", "."]
