@@ -8,10 +8,10 @@ on:
     branches: [ main ]
 
 env:
-  appNameDS 'icebg.web.ds'
-  appNameUI 'icebg.web.ui'
-  dockerFileDS './ICEBG.Web.DataServices/Dockerfile'
-  dockerFileUI './ICEBG.Web.UserInterface/Dockerfile'
+  appNameDS: 'icebg.web.ds'
+  appNameUI: 'icebg.web.ui'
+  dockerFileDS: './ICEBG.Web.DataServices/Dockerfile'
+  dockerFileUI: './ICEBG.Web.UserInterface/Dockerfile'
 
 jobs:
 
