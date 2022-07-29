@@ -6,7 +6,6 @@ EXPOSE 80
 EXPOSE 443
 
 ARG version
-ENV VERSION $version
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NOWARNINGS="yes"
@@ -25,7 +24,7 @@ COPY ["SharedUtilities/SharedUtilities.csproj", "SharedUtilities/"]
 RUN dotnet restore --disable-parallel "ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj"
 COPY . .
 WORKDIR "/src/ICEBG.Web.UserInterface"
-RUN dotnet publish "ICEBG.Web.UserInterface.csproj" -c Azure -o /app/publish -p:Version=$VERSION
+RUN dotnet publish "ICEBG.Web.UserInterface.csproj" -c Azure -o /app/publish -p:Version=$version
 
 FROM base AS final
 WORKDIR /app
