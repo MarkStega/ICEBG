@@ -1,5 +1,8 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
+ARG version
+ENV VERSION $version
+
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
@@ -16,7 +19,7 @@ COPY ["SharedUtilities/SharedUtilities.csproj", "SharedUtilities/"]
 RUN dotnet restore --disable-parallel "ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj"
 COPY . .
 WORKDIR "/src/ICEBG.Web.DataServices"
-RUN dotnet publish "ICEBG.Web.DataServices.csproj" -c Azure -o /app/publish
+RUN dotnet publish "ICEBG.Web.DataServices.csproj" -c Azure -o /app/publish -p:Version=$VERSION
 
 FROM base AS final
 WORKDIR /app
