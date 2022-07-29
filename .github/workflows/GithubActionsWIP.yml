@@ -33,10 +33,10 @@ jobs:
       suffix: ${{ steps.get.outputs.suffix }}
       
 ############################################################################################################
-# Build blazor DS container
+# Build blazor DS & UI containers
 ############################################################################################################
   build-ds:
-    name: Build ICEBG DS docker container
+    name: Build ICEBG DS & UI docker containers
     needs: [version]
     runs-on: ubuntu-latest
 
@@ -51,7 +51,7 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
         
-    - name: 'Build and push images'
+    - name: 'Build and push DS image'
       uses: azure/docker-login@v1
       with:
         login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
@@ -73,26 +73,7 @@ jobs:
         name: cricebg
         location: 'east us'
 
-############################################################################################################
-# Build blazor UI container
-############################################################################################################
-  build-ui:
-    name: Build ICEBG UI docker container
-    needs: [version]
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
-      uses: actions/checkout@v2
-      with:
-        persist-credentials: false
-
-    - name: 'Login via Azure CLI'
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
-    - name: 'Build and push images'
+    - name: 'Build and push UI image'
       uses: azure/docker-login@v1
       with:
         login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
