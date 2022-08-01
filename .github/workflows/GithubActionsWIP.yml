@@ -8,8 +8,8 @@ on:
     branches: [ main ]
 
 env:
-  appNameDS: 'icebg.web.ds'
-  appNameUI: 'icebg.web.ui'
+  appNameDS: 'icebg.web.ds.wip'
+  appNameUI: 'icebg.web.ui.wip'
   dockerFileDS: './ICEBG.Web.DataServices/Dockerfile'
   dockerFileUI: './ICEBG.Web.UserInterface/Dockerfile'
 
