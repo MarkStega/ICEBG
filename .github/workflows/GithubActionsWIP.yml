@@ -8,8 +8,8 @@ on:
     branches: [ main ]
 
 env:
-  appNameDS: 'icebg.web.ds'
-  appNameUI: 'icebg.web.ui'
+  appNameDS: 'icebg.web.ds.wip'
+  appNameUI: 'icebg.web.ui.wip'
   dockerFileDS: './ICEBG.Web.DataServices/Dockerfile'
   dockerFileUI: './ICEBG.Web.UserInterface/Dockerfile'
 
@@ -33,10 +33,10 @@ jobs:
       suffix: ${{ steps.get.outputs.suffix }}
       
 ############################################################################################################
-# Build blazor DS & UI containers
+# Build blazor DS container
 ############################################################################################################
   build-ds:
-    name: Build ICEBG DS & UI docker containers
+    name: Build ICEBG DS docker container
     needs: [version]
     runs-on: ubuntu-latest
 
@@ -61,18 +61,37 @@ jobs:
         docker build . --file ${{env.dockerFileDS}} -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }} --build-arg version=${{ needs.version.outputs.suffix }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
 
-    - name: 'Deploy DS to Azure Container Instances'
-      uses: 'azure/aci-deploy@v1'
-      with:
-        resource-group: ${{ secrets.RESOURCE_GROUP }}
-        dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-        image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
-        registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        registry-username: ${{ secrets.REGISTRY_USERNAME }}
-        registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-        name: cricebg
-        location: 'east us'
+    #- name: 'Deploy DS to Azure Container Instances'
+    #  uses: 'azure/aci-deploy@v1'
+    #  with:
+    #    resource-group: ${{ secrets.RESOURCE_GROUP }}
+    #    dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+    #    image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
+    #    registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+    #    registry-username: ${{ secrets.REGISTRY_USERNAME }}
+    #    registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+    #    name: cricebg
+    #    location: 'east us'
+      
+############################################################################################################
+# Build blazor UI container
+############################################################################################################
+  build-ui:
+    name: Build ICEBG UI docker container
+    needs: [version]
+    runs-on: ubuntu-latest
 
+    steps:
+    - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
     - name: 'Build and push UI image'
       uses: azure/docker-login@v1
       with:
@@ -83,14 +102,14 @@ jobs:
         docker build . --file ${{env.dockerFileUI}} -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ needs.version.outputs.suffix }} --build-arg version=${{ needs.version.outputs.suffix }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ needs.version.outputs.suffix }}
 
-    - name: 'Deploy UI to Azure Container Instances'
-      uses: 'azure/aci-deploy@v1'
-      with:
-        resource-group: ${{ secrets.RESOURCE_GROUP }}
-        dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-        image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ needs.version.outputs.suffix }}
-        registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        registry-username: ${{ secrets.REGISTRY_USERNAME }}
-        registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-        name: cricebg
-        location: 'east us'
+    #- name: 'Deploy UI to Azure Container Instances'
+    #  uses: 'azure/aci-deploy@v1'
+    #  with:
+    #    resource-group: ${{ secrets.RESOURCE_GROUP }}
+    #    dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+    #    image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ needs.version.outputs.suffix }}
+    #    registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+    #    registry-username: ${{ secrets.REGISTRY_USERNAME }}
+    #    registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+    #    name: cricebg
+    #    location: 'east us'
