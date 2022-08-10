@@ -4,10 +4,13 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
+RUN dotnet --info
+
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG version
 WORKDIR /src
+RUN dotnet --info
 COPY ["NuGet.Config", "."]
 COPY ["ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj", "ICEBG.Web.UserInterface/"]
 COPY ["ICEBG.Client/ICEBG.Client.csproj", "ICEBG.Client/"]
@@ -17,7 +20,6 @@ COPY ["SharedUtilities/SharedUtilities.csproj", "SharedUtilities/"]
 RUN dotnet restore --disable-parallel "ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj"
 COPY . .
 WORKDIR "/src/ICEBG.Web.UserInterface"
-RUN dotnet --info
 RUN dotnet publish "ICEBG.Web.UserInterface.csproj" -c Azure -o /app/publish -p:Version=$version
 
 FROM base AS final
