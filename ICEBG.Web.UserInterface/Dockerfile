@@ -8,7 +8,7 @@ RUN dotnet --info
 
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-ARG version
+ARG version=2022-01-01--13-00-00--WIP
 WORKDIR /src
 RUN dotnet --info
 COPY ["NuGet.Config", "."]

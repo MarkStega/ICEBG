@@ -6,7 +6,7 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-ARG version
+ARG version=2022-01-01--13-00-00--WIP
 WORKDIR /src
 COPY ["NuGet.Config", "."]
 COPY ["ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj", "ICEBG.Web.DataServices/"]
