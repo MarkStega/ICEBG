@@ -17,6 +17,7 @@ COPY ["SharedUtilities/SharedUtilities.csproj", "SharedUtilities/"]
 RUN dotnet restore --disable-parallel "ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj"
 COPY . .
 WORKDIR "/src/ICEBG.Web.UserInterface"
+RUN dotnet --info
 RUN dotnet publish "ICEBG.Web.UserInterface.csproj" -c Azure -o /app/publish -p:Version=$version
 
 FROM base AS final
