@@ -1,8 +1,7 @@
 ﻿name: GithubActionsRelease
 
 ############################################################################################################
-# All of thes jobs runs commands only on a tag push in the Material-Blazor\Material.Blazor repository
-# The publishing actions in forked repositories were handled by the WIP workflow
+# All of thes jobs runs commands only on a tag push in the MarkStega\ICEBG repository
 # An 'ExitWorkflow' action is sorely needed
 ############################################################################################################
 # NUGET_API_KEY is valid through 9/11/2021
@@ -58,10 +57,10 @@ jobs:
       suffix: ${{ steps.get.outputs.suffix }}
 
 ############################################################################################################
-# Build blazor DS & UI containers
+# Build blazor DS image
 ############################################################################################################
   build-ds:
-    name: Build ICEBG DS & UI docker containers
+    name: Build ICEBG DS docker image
     needs: [version]
     runs-on: ubuntu-latest
 
@@ -86,18 +85,25 @@ jobs:
         docker build . --file ${{env.dockerFileDS}} -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }} --build-arg version=${{ needs.version.outputs.suffix }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
 
-    - name: 'Deploy DS to Azure Container Instances'
-      uses: 'azure/aci-deploy@v1'
-      with:
-        resource-group: ${{ secrets.RESOURCE_GROUP }}
-        dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-        image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
-        registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        registry-username: ${{ secrets.REGISTRY_USERNAME }}
-        registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-        name: cricebg
-        location: 'east us'
+############################################################################################################
+# Build blazor UI image
+############################################################################################################
+  build-ui:
+    name: Build ICEBG UI docker image
+    needs: [version]
+    runs-on: ubuntu-latest
 
+    steps:
+    - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
     - name: 'Build and push UI image'
       uses: azure/docker-login@v1
       with:
@@ -107,15 +113,3 @@ jobs:
     - run: |
         docker build . --file ${{env.dockerFileUI}} -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ needs.version.outputs.suffix }} --build-arg version=${{ needs.version.outputs.suffix }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ needs.version.outputs.suffix }}
-
-    - name: 'Deploy UI to Azure Container Instances'
-      uses: 'azure/aci-deploy@v1'
-      with:
-        resource-group: ${{ secrets.RESOURCE_GROUP }}
-        dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-        image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ needs.version.outputs.suffix }}
-        registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        registry-username: ${{ secrets.REGISTRY_USERNAME }}
-        registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-        name: cricebg
-        location: 'east us'
