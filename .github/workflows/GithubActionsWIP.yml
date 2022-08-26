@@ -66,7 +66,8 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
         dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ needs.version.outputs.suffix }}
-        docker ps -a
+        sudo docker ps -a
+        sudo docker images
 
     - name: Tag built container with Azure Container Registry url
       uses: actions-hub/docker/cli@master
