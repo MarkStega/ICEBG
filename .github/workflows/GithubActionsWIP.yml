@@ -60,7 +60,7 @@ jobs:
 
     - name: Publish, tag, and push DS image
       uses: actions-hub/docker/login@master
-      with:
+      env:
         DOCKER_REGISTRY_URL: ${{ secrets.REGISTRY_LOGIN_SERVER }}
         DOCKER_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
