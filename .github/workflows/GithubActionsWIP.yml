@@ -48,33 +48,27 @@ jobs:
       with:
         persist-credentials: false
 
-    #- name: 'Login via Azure CLI'
-    #  uses: azure/login@v1
+    #- name: 'Build and push DS image'
+    #  uses: azure/docker-login@v1
     #  with:
-    #    creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
-    - name: 'Build and push DS image'
+    #    login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+    #    username: ${{ secrets.REGISTRY_USERNAME }}
+    #    password: ${{ secrets.REGISTRY_PASSWORD }}
+    #- run: |
+    #    docker build . --file ${{env.dockerFileDS}} -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }} --build-arg version=${{ needs.version.outputs.suffix }}
+    #    docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
+
+    - name: Publish, tag, and push DS image
       uses: azure/docker-login@v1
       with:
         login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build . --file ${{env.dockerFileDS}} -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }} --build-arg version=${{ needs.version.outputs.suffix }}
+        dotnet publish ICEBG.Web.DataServices\ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ needs.version.outputs.suffix }}
+        docker tag ${{env.appNameDS}}:${{ needs.version.outputs.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
 
-    #- name: 'Deploy DS to Azure Container Instances'
-    #  uses: 'azure/aci-deploy@v1'
-    #  with:
-    #    resource-group: ${{ secrets.RESOURCE_GROUP }}
-    #    dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-    #    image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
-    #    registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-    #    registry-username: ${{ secrets.REGISTRY_USERNAME }}
-    #    registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-    #    name: cricebg
-    #    location: 'east us'
-      
 ############################################################################################################
 # Build blazor UI container
 ############################################################################################################
@@ -89,11 +83,6 @@ jobs:
       with:
         persist-credentials: false
 
-    #- name: 'Login via Azure CLI'
-    #  uses: azure/login@v1
-    #  with:
-    #    creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
     - name: 'Build and push UI image'
       uses: azure/docker-login@v1
       with:
