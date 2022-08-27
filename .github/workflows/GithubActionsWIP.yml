@@ -101,11 +101,11 @@ jobs:
       uses: actions/setup-dotnet@v2
 
     - name: Publish, tag, and push UI image
-    #  uses: azure/docker-login@v1
-    #  with:
-    #    login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-    #    username: ${{ secrets.REGISTRY_USERNAME }}
-    #    password: ${{ secrets.REGISTRY_PASSWORD }}
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
         dotnet --info
         sudo docker images -a
