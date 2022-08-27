@@ -9,9 +9,15 @@ on:
     branches:
       - 'main'
 
+#env:
+#  appNameDS: 'icebg.web.ds.wip'
+#  appNameUI: 'icebg.web.ui.wip'
+#  dockerFileDS: './ICEBG.Web.DataServices/Dockerfile'
+#  dockerFileUI: './ICEBG.Web.UserInterface/Dockerfile'
+
 env:
-  appNameDS: 'icebg.web.ds.wip'
-  appNameUI: 'icebg.web.ui.wip'
+  appNameDS: 'icebg.web.ds'
+  appNameUI: 'icebg.web.ui'
   dockerFileDS: './ICEBG.Web.DataServices/Dockerfile'
   dockerFileUI: './ICEBG.Web.UserInterface/Dockerfile'
 
@@ -70,16 +76,8 @@ jobs:
     - run: |
         dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ needs.version.outputs.suffix }}
         sudo docker images -a
-
-    - name: Tag built container with Azure Container Registry url
-      uses: actions-hub/docker/cli@master
-      with:
-        args: tag ${{env.appNameDS}}:${{ needs.version.outputs.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
-        
-    - name: Push tagged container to Azure Container Registry
-      uses: actions-hub/docker/cli@master
-      with:
-        args: push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
+        docker tag ${{env.appNameDS}}:${{ needs.version.outputs.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
 
 ############################################################################################################
 # Build blazor UI container
