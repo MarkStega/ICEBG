@@ -68,6 +68,8 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
+        dotnet --info
+        sudo docker images -a
         dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ needs.version.outputs.suffix }}
         sudo docker images -a
 
@@ -76,7 +78,10 @@ jobs:
     #  with:
     #    args: tag ${{env.appNameDS}}:${{ needs.version.outputs.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
         
-        #docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
+    #- name: Push tagged container to Azure Container Registry
+    #  uses: actions-hub/docker/cli@master
+    #  with:
+    #    args: push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
 
 ############################################################################################################
 # Build blazor UI container
@@ -96,11 +101,15 @@ jobs:
       uses: actions/setup-dotnet@v2
 
     - name: Publish, tag, and push UI image
-      uses: actions-hub/docker/login@master
-      env:
-        DOCKER_REGISTRY_URL: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        DOCKER_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+    #  uses: azure/docker-login@v1
+    #  with:
+    #    login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+    #    username: ${{ secrets.REGISTRY_USERNAME }}
+    #    password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
+        dotnet --info
+        sudo docker images -a
         dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ needs.version.outputs.suffix }}
         sudo docker images -a
+        docker tag ${{env.appNameDS}}:${{ needs.version.outputs.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
