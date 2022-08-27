@@ -16,8 +16,8 @@ on:
 #  dockerFileUI: './ICEBG.Web.UserInterface/Dockerfile'
 
 env:
-  appNameDS: 'icebg.web.ds'
-  appNameUI: 'icebg.web.ui'
+  appNameDS: 'ICEBG.Web.DataServices'
+  appNameUI: 'ICEBG.Web.UserInterface'
   dockerFileDS: './ICEBG.Web.DataServices/Dockerfile'
   dockerFileUI: './ICEBG.Web.UserInterface/Dockerfile'
 
