@@ -21,22 +21,40 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Key</th>
-                <th>pSuccess</th>
-                <th>pError</th>
-                <th>pResult</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>@configuration.pResult.Id</td>
-                <td>@configuration.pSuccess.ToString()</td>
-                <td>@configuration.pError.ToString()</td>
-                <td>@configuration.pResult.Configuration</td>
-            </tr>
-        </tbody>
-    </table>
+    @if (configuration.pSuccess)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Success</th>
+                    <th>Key</th>
+                    <th>pResult</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>true</td>
+                    <td>@configuration.pResult.Id</td>
+                    <td>@configuration.pResult.Configuration</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Success</th>
+                    <th>pError</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>false</td>
+                    <td>@configuration.pError</td>
+                </tr>
+            </tbody>
+        </table>
+    }
 }

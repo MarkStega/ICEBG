@@ -1,0 +1,1 @@
+docker build --file ./ICEBG.Web.UserInterface/Dockerfile . --progress=plain
