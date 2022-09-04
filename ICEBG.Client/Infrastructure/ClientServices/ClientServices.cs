@@ -26,12 +26,13 @@ public static class ClientServices
         // Third party library services
         //
         pLogger?.LogInformation("Adding MBServices...");
-        serviceCollection.AddMBServices(
-            loggingServiceConfiguration : new MBLoggingServiceConfiguration()
+        serviceCollection.AddMBServices(options =>
+        {
+            options.LoggingServiceConfiguration = new MBLoggingServiceConfiguration()
             {
                 LoggingLevel = MBLoggingLevel.Debug
-            },
-            toastServiceConfiguration: new MBToastServiceConfiguration()
+            };
+            options.ToastServiceConfiguration = new MBToastServiceConfiguration()
             {
                 InfoDefaultHeading = "Info",
                 SuccessDefaultHeading = "Success",
@@ -41,8 +42,8 @@ public static class ClientServices
                 MaxToastsShowing = 3,
                 CloseMethod = MBNotifierCloseMethod.TimeoutAndDismissButton,
                 Position = MBToastPosition.CenterLeft
-                }
-            );
+            };
+        });
 
         //
         // Data access services
