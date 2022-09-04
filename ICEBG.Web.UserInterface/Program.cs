@@ -127,7 +127,10 @@ try
     builder.Services.AddBlazoredLocalStorage();
 
     logger.Debug("AddGBService");
-    builder.Services.AddGBService(trackingId: "G-2VZJ2X14RH");
+    builder.Services.AddGBService(options =>
+    {
+        options.TrackingId = "G-2VZJ2X14RH";
+    });
 
     logger.Debug("Add server side blazor");
     builder.Services.AddServerSideBlazor();
@@ -146,8 +149,6 @@ try
     builder.Services.AddHttpContextAccessor();
 
     builder.Services.AddBlazoredLocalStorage();
-
-    builder.Services.AddGBService(trackingId: "G-2VZJ2X14RH");
 
     builder.Services.AddHsts(options =>
     {
@@ -206,7 +207,7 @@ try
     app.MapFallbackToPage("/index_server");
 #endif
 
-    app.MapGet("/sitemap.xml", async context => {await Sitemap.Generate(context);});
+    app.MapGet("/sitemap.xml", async context => { await Sitemap.Generate(context); });
 
     logger.Debug("Completing startup, executing app.Run()...");
     logger.Debug(" ");
