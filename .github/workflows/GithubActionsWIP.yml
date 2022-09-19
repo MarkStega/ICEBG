@@ -12,8 +12,6 @@ on:
 env:
   appNameDS: 'icebg.web.ds.wip'
   appNameUI: 'icebg.web.ui.wip'
-#  dockerFileDS: './ICEBG.Web.DataServices/Dockerfile'
-#  dockerFileUI: './ICEBG.Web.UserInterface/Dockerfile'
 
 jobs:
 
