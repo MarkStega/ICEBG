@@ -8,7 +8,6 @@ namespace ICEBG.Client.Pages;
 [Sitemap(SitemapAttribute.eChangeFreqType.Weekly, 0.8)]
 public partial class About : ComponentBase
 {
-    //		<Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
 
 #if Azure
     private string pBuildMode { get; set; } = "Azure";
