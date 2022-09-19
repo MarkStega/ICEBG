@@ -58,11 +58,17 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
+    - name: Publish DS image
+      run: |
+        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ needs.version.outputs.suffix }} -p:ContainerImageName=${{env.appNameDS}}
+      if: github.repository != 'MarkStega/ICEBG' || github.actor == 'dependabot[bot]'
+
     - name: Publish, tag, and push DS image
       run: |
         dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ needs.version.outputs.suffix }} -p:ContainerImageName=${{env.appNameDS}}
         docker tag ${{env.appNameDS}}:${{ needs.version.outputs.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
+      if: github.repository == 'MarkStega/ICEBG' || github.actor != 'dependabot[bot]'
 
 ############################################################################################################
 # Build blazor UI container
@@ -88,8 +94,14 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
+    - name: Publish UI image
+      run: |
+        dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ needs.version.outputs.suffix }} -p:ContainerImageName=${{env.appNameUI}}
+      if: github.repository != 'MarkStega/ICEBG' || github.actor == 'dependabot[bot]'
+
     - name: Publish, tag, and push UI image
       run: |
         dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ needs.version.outputs.suffix }} -p:ContainerImageName=${{env.appNameUI}}
         docker tag ${{env.appNameUI}}:${{ needs.version.outputs.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ needs.version.outputs.suffix }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ needs.version.outputs.suffix }}
+      if: github.repository == 'MarkStega/ICEBG' || github.actor != 'dependabot[bot]'
