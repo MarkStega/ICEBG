@@ -116,7 +116,7 @@ jobs:
 # Build blazor DS image
 ############################################################################################################
   build-ds:
-    name: Build ICEBG DS docker image
+    name: Build ICEBG DS
     needs: [version, skip-deployment]
     runs-on: ubuntu-latest
 
@@ -137,7 +137,7 @@ jobs:
 # Build blazor UI image
 ############################################################################################################
   build-ui:
-    name: Build ICEBG UI docker image
+    name: Build ICEBG UI
     needs: [version, skip-deployment]
     runs-on: ubuntu-latest
 
