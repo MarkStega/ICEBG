@@ -32,7 +32,15 @@ jobs:
   skip-deployment:
     name: Skip deployment
     runs-on: ubuntu-latest
-    if: github.repository != 'MarkStega/ICEBG' || github.actor == 'dependabot[bot]'
+    if: github.repository != 'MarkStega/ICEBG'
+    steps:
+    - name: Nothing to see here
+      run: echo ""
+
+  build-allowed:
+    name: Build allowed
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
     steps:
     - name: Nothing to see here
       run: echo ""
@@ -58,7 +66,7 @@ jobs:
 # Build and deploy blazor DS image
 ############################################################################################################
   build-deploy-ds:
-    name: Build and deploy ICEBG DS docker image
+    name: Build and deploy ICEBG DS
     needs: [version, perform-deployment]
     runs-on: ubuntu-latest
 
@@ -88,7 +96,7 @@ jobs:
 # Build and deploy blazor UI image
 ############################################################################################################
   build-deploy-ui:
-    name: Build and deploy ICEBG UI docker image
+    name: Build and deploy ICEBG UI
     needs: [version, perform-deployment]
     runs-on: ubuntu-latest
 
@@ -119,7 +127,7 @@ jobs:
 ############################################################################################################
   build-ds:
     name: Build ICEBG DS
-    needs: [version, skip-deployment]
+    needs: [version, skip-deployment, build-allowed]
     runs-on: ubuntu-latest
 
     steps:
@@ -140,7 +148,7 @@ jobs:
 ############################################################################################################
   build-ui:
     name: Build ICEBG UI
-    needs: [version, skip-deployment]
+    needs: [version, skip-deployment, build-allowed]
     runs-on: ubuntu-latest
 
     steps:
