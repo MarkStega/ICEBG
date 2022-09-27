@@ -25,7 +25,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Grpc.Net.Client" Version="2.48.0" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.49.0" />
 		<PackageReference Include="Grpc.Net.Client.Web" Version="2.48.0" />
 		<PackageReference Include="Material.Blazor" Version="3.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.0-rc.1.22427.2" />
