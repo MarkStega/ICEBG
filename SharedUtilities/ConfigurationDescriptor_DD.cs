@@ -71,7 +71,7 @@ public class ConfigurationDescriptor_DD
         pUI_AutoLogoffInterval = 0;
 
         // GRPC
-        pGRPC_Endpoint = "https://localhost:44350/";
+        pGRPC_Endpoint = "https://T570:44350/";
 
     }
 
