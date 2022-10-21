@@ -22,3 +22,6 @@ namespace ICEBG.Client
         }
     }
 }
+
+//[2022-10-19T21:27:27.516Z] Error: System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+//--->System.Security.Authentication.AuthenticationException: The remote certificate is invalid because of errors in the certificate chain: NotTimeValid

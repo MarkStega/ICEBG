@@ -1,13 +1,13 @@
 {
   "profiles": {
-    "ICEBG.Data.Server": {
+    "ICEBG.Web.DataServices": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://T570:7173;http://T570:5173"
+      "applicationUrl": "https://localhost:7173;http://localhost:5173"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -15,21 +15,14 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
-    "Docker": {
-      "commandName": "Docker",
-      "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
-      "publishAllPorts": true,
-      "useSSL": true
     }
   },
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://T570:5173",
-      "sslPort": 7173
+      "applicationUrl": "http://localhost:63048/",
+      "sslPort": 44361
     }
   }
 }
