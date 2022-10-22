@@ -1,4 +1,10 @@
 using System;
+using System.IO.Compression;
+using System.Threading.RateLimiting;
+
+using CompressedStaticFiles;
+
+using HttpSecurity.AspNet;
 
 using ICEBG.Infrastructure.ClientServices;
 using ICEBG.SystemFramework;
@@ -6,9 +12,12 @@ using ICEBG.Web.DataServices;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 using NLog.Web;
 
@@ -36,6 +45,26 @@ try
 
     // Add services to the container.
 
+    builder.Services.AddResponseCompression(options =>
+    {
+        options.EnableForHttps = true;
+        options.Providers.Add<BrotliCompressionProvider>();
+        options.Providers.Add<GzipCompressionProvider>();
+    });
+
+    // Performance test (performed in debug mode locally):
+    // NoCompression - material.blazor.min.css takes circa 10 to 20 ms to download, 270 Kb - page load 95 to 210 ms - 3.2 MB transfered
+    // Fastest - material.blazor.min.css takes circa 12 to 28 ms to download, 34.7 Kb - page load 250 to 270 ms - 2.2 MB transfered
+    // SmallestSize & Optimal - material.blazor.min.css takes circa 500 to 800 ms to download, 16.2 Kb - page load 900 to 1100 ms (unacceptably slow) - 2.1 MB transfered
+    builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+    {
+        options.Level = CompressionLevel.Fastest;
+    });
+
+    builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+    {
+        options.Level = CompressionLevel.SmallestSize;
+    });
     logger.Debug("Adding razor pages");
     builder.Services.AddRazorPages();
 
@@ -47,6 +76,17 @@ try
         options.MaxSendMessageSize = null;
     });
     builder.Services.AddGrpcReflection();
+
+    // needed to store rate limit counters and ip rules
+    builder.Services.AddMemoryCache();
+
+    builder.Services.AddHttpsSecurityHeaders(
+        options => OptionsBuilder.BuildGeneralHeaderOptions(builder, options),
+                   onStartupOptions =>
+                                      OptionsBuilder.BuildOnStartupHeaderOptions(builder,
+                                      onStartupOptions));
+
+    builder.Services.AddCompressedStaticFiles();
 
     var app = builder.Build();
 
@@ -66,7 +106,28 @@ try
 
     app.UseStaticFiles();
 
+    app.UseHttpSecurityHeaders();
+
+    app.UseCompressedStaticFiles();
+
     app.UseRouting();
+
+    // Limit api calls to 10 in a second to prevent external denial of service.
+    app.UseRateLimiter(new()
+    {
+        GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
+        {
+            return RateLimitPartition.GetFixedWindowLimiter("GeneralLimit",
+                _ => new FixedWindowRateLimiterOptions()
+                {
+                    Window = TimeSpan.FromSeconds(1),
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 10,
+                });
+        }),
+        RejectionStatusCode = 429,
+    });
 
     // This must be between UseRouting & UseEndpoints
     logger.Debug("UseGrpcWeb");
@@ -77,11 +138,9 @@ try
 
     app.MapControllers();
 
-    app.UseEndpoints(endpoints =>
-    {
-        endpoints.MapGrpcService<ConfigurationService>();
-        endpoints.MapFallbackToPage("/index_server");
-    });
+    app.MapGrpcService<ConfigurationService>();
+
+    app.MapFallbackToPage("/host");
 
     logger.Debug("Completing startup, executing app.Run()");
     logger.Debug(" ");

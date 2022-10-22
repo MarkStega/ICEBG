@@ -119,57 +119,5 @@ UpgradeLog*.htm
 *.mdf
 *.ldf
 
-#WiX HEAT files
-HeatService1.wxs
-HeatService2.wxs
-HeatService3.wxs
-HeatService4.wxs
-HeatService5.wxs
-HeatService6.wxs
-HeatService7.wxs
-HeatService8.wxs
-
-#Copied config files
-[aA]pp.config
-[wW]eb.config
-# But keep the app.config in the Optimiser.Web project as well as the standalone app config's
-!**/GenerateCodes/app.config
-!**/GenerateDataTier/app.config
-!**/GenerateProperties/app.config
-!**/LCIFileTestClient/app.config
-!**/Optimiser.2012/app.config
-!**/PATFileTestClient/app.config
-!**/RIAOFileTestClient/app.config
-!**/SystemFramework/app.config
-!**/SystemFramework.2012/app.config
-!**/VerifyConfigFiles/app.config
-!**/UnityEHR/App.config
-!**/UnityPM/App.config
-
-#Generated CSS & JS files
-**/GeneralComponents/wwwroot/css/*.css
-**/GeneralComponents/wwwroot/scripts/*.js
-**/GeneralComponents/wwwroot/scripts/*.js.map
-**/Optimiser.2021/wwwroot/css/*.css
-**/Optimiser.2021/wwwroot/scripts/*.js
-**/Optimiser.2021/wwwroot/scripts/*.js.map
-
 #Node modules
 **/node_modules/
-
-#Documents & Reports
-**/Optimiser.2012.Web/Documents/
-!**/Optimiser.2012.Web/Documents/Assets/*.html
-!**/Optimiser.2012.Web/Documents/Assets/*.jpg
-!**/Optimiser.2012.Web/Documents/Assets/LiquidBlueprint/*.css
-!**/Optimiser.2012.Web/Documents/Assets/LiquidBlueprint/mint
-**/Optimiser.2012.Web/Reports/
-
-**/Optimiser.2021.Web/Documents/
-**/Optimiser.2021.Web/Reports/
-
-**/Optimiser.2021.Web.DataServices/Documents/
-**/Optimiser.2021.Web.DataServices/Reports/
-
-**/Optimiser.2021.Web.UserInterface/Documents/
-**/Optimiser.2021.Web.UserInterface/Reports/
