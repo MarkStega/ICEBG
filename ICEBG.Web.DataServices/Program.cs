@@ -1,4 +1,3 @@
-using System;
 using System.IO.Compression;
 using System.Threading.RateLimiting;
 
@@ -10,14 +9,7 @@ using ICEBG.Infrastructure.ClientServices;
 using ICEBG.SystemFramework;
 using ICEBG.Web.DataServices;
 
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 using NLog.Web;
 
@@ -80,11 +72,72 @@ try
     // needed to store rate limit counters and ip rules
     builder.Services.AddMemoryCache();
 
-    builder.Services.AddHttpsSecurityHeaders(
-        options => OptionsBuilder.BuildGeneralHeaderOptions(builder, options),
-                   onStartupOptions =>
-                                      OptionsBuilder.BuildOnStartupHeaderOptions(builder,
-                                      onStartupOptions));
+    //    builder.Services.AddHttpsSecurityHeaders(options => OptionsBuilder.BuildGeneralHeaderOptions(builder, options), onStartupOptions => OptionsBuilder.BuildOnStartupHeaderOptions(builder, onStartupOptions));
+
+    builder.Services.AddHttpsSecurityHeaders(options =>
+    {
+        options
+            .AddContentSecurityOptions(cspOptions =>
+            {
+                cspOptions
+                    .AddBaseUri(o => o.AddSelf())
+                    .AddBlockAllMixedContent()
+                    .AddChildSrc(o => o.AddSelf())
+                    .AddConnectSrc(o => o
+                        .AddSelf()
+                        .AddUri((baseUri, baseDomain) => $"wss://{baseDomain}:*"))
+                    // The generated hashes do nothing here, and we include it here only to show that generated hash values can be added to policies - script-src would generally be the policy where you use this technique.
+                    .AddDefaultSrc(o => o
+                        .AddSelf()
+                        .AddStrictDynamicIf(() => !builder.Environment.IsDevelopment())
+                        .AddUnsafeInline()
+                        .AddGeneratedHashValues(StaticFileExtension.CSS))
+                    .AddFontSrc(o => o.AddSelf())
+                    .AddFrameAncestors(o => o.AddNone())
+                    .AddFrameSrc(o => o.AddSelf())
+                    .AddFormAction(o => o.AddNone())
+                    .AddImgSrc(o => o
+                        .AddSelf()
+                        .AddUri("www.google-analytics.com")
+                        .AddSchemeSource(SchemeSource.Data, "w3.org/svg/2000"))
+                    .AddManifestSrc(o => o.AddSelf())
+                    .AddMediaSrc(o => o.AddSelf())
+                    .AddPrefetchSrc(o => o.AddSelf())
+                    .AddObjectSrc(o => o.AddNone())
+                    .AddReportUri(o => o.AddUri((baseUri, baseDomain) => $"https://{baseUri}/api/CspReporting/UriReport"))
+                    .AddScriptSrc(o => o
+                        .AddSelf()
+                        .AddNonce()
+                        .AddHashValue(HashAlgorithm.SHA256, "v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=")
+                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
+                        .AddStrictDynamicIf(() => !builder.Environment.IsDevelopment())
+                        .AddUnsafeInline().AddReportSample().AddUnsafeEval().AddUri("https://www.googletagmanager.com/gtag/js")
+                        .AddGeneratedHashValues(StaticFileExtension.JS))
+                    .AddStyleSrc(o => o
+                        .AddSelf()
+                        .AddUnsafeInline()
+                        .AddUnsafeHashes()
+                        .AddReportSample())
+                    .AddUpgradeInsecureRequests()
+                    .AddWorkerSrc(o => o.AddSelf());
+            })
+            .AddAccessControlAllowOriginSingle("a.com")
+            .AddReferrerPolicy(ReferrerPolicyDirective.NoReferrer)
+            .AddPermissionsPolicy("accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()")
+            .AddStrictTransportSecurity(31536000, true)
+            .AddXClientId("ICEBG.Web.DataServices")
+            .AddXContentTypeOptionsNoSniff()
+            .AddXFrameOptionsDirective(XFrameOptionsDirective.Deny)
+            .AddXXssProtectionDirective(XXssProtectionDirective.OneModeBlock)
+            .AddXPermittedCrossDomainPoliciesDirective(XPermittedCrossDomainPoliciesDirective.None);
+    },
+    onStartingOptions =>
+    {
+        onStartingOptions
+            .AddCacheControl("max-age=86400, no-cache, public")
+            .AddExpires("0");
+    });
+
 
     builder.Services.AddCompressedStaticFiles();
 
@@ -99,10 +152,10 @@ try
     {
         app.UseExceptionHandler("/Error");
         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-        app.UseHsts();
+        //app.UseHsts();
     }
 
-    app.UseHttpsRedirection();
+    //app.UseHttpsRedirection();
 
     app.UseStaticFiles();
 

@@ -37,6 +37,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solutio
 		SuperClean.cmd = SuperClean.cmd
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceGenerator", "SourceGenerator\SourceGenerator.csproj", "{F021F0F1-EE93-4307-9163-4941EF77D48F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpSecurity.AspNet", "HttpSecurity.AspNet\HttpSecurity.AspNet.csproj", "{D94C2A83-3293-44B0-A2F8-94FF746A3700}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Azure|Any CPU = Azure|Any CPU
@@ -103,6 +107,22 @@ Global
 		{3CD27E1E-BFF2-4F33-AB9D-CF43216B2805}.Develop_WebAssembly|Any CPU.Build.0 = Develop_WebAssembly|Any CPU
 		{3CD27E1E-BFF2-4F33-AB9D-CF43216B2805}.Release_WebAssembly|Any CPU.ActiveCfg = Release_WebAssembly|Any CPU
 		{3CD27E1E-BFF2-4F33-AB9D-CF43216B2805}.Release_WebAssembly|Any CPU.Build.0 = Release_WebAssembly|Any CPU
+		{F021F0F1-EE93-4307-9163-4941EF77D48F}.Azure|Any CPU.ActiveCfg = Azure|Any CPU
+		{F021F0F1-EE93-4307-9163-4941EF77D48F}.Azure|Any CPU.Build.0 = Azure|Any CPU
+		{F021F0F1-EE93-4307-9163-4941EF77D48F}.Develop_Server|Any CPU.ActiveCfg = Develop_Server|Any CPU
+		{F021F0F1-EE93-4307-9163-4941EF77D48F}.Develop_Server|Any CPU.Build.0 = Develop_Server|Any CPU
+		{F021F0F1-EE93-4307-9163-4941EF77D48F}.Develop_WebAssembly|Any CPU.ActiveCfg = Develop_WebAssembly|Any CPU
+		{F021F0F1-EE93-4307-9163-4941EF77D48F}.Develop_WebAssembly|Any CPU.Build.0 = Develop_WebAssembly|Any CPU
+		{F021F0F1-EE93-4307-9163-4941EF77D48F}.Release_WebAssembly|Any CPU.ActiveCfg = Release_WebAssembly|Any CPU
+		{F021F0F1-EE93-4307-9163-4941EF77D48F}.Release_WebAssembly|Any CPU.Build.0 = Release_WebAssembly|Any CPU
+		{D94C2A83-3293-44B0-A2F8-94FF746A3700}.Azure|Any CPU.ActiveCfg = Azure|Any CPU
+		{D94C2A83-3293-44B0-A2F8-94FF746A3700}.Azure|Any CPU.Build.0 = Azure|Any CPU
+		{D94C2A83-3293-44B0-A2F8-94FF746A3700}.Develop_Server|Any CPU.ActiveCfg = Develop_Server|Any CPU
+		{D94C2A83-3293-44B0-A2F8-94FF746A3700}.Develop_Server|Any CPU.Build.0 = Develop_Server|Any CPU
+		{D94C2A83-3293-44B0-A2F8-94FF746A3700}.Develop_WebAssembly|Any CPU.ActiveCfg = Develop_WebAssembly|Any CPU
+		{D94C2A83-3293-44B0-A2F8-94FF746A3700}.Develop_WebAssembly|Any CPU.Build.0 = Develop_WebAssembly|Any CPU
+		{D94C2A83-3293-44B0-A2F8-94FF746A3700}.Release_WebAssembly|Any CPU.ActiveCfg = Release_WebAssembly|Any CPU
+		{D94C2A83-3293-44B0-A2F8-94FF746A3700}.Release_WebAssembly|Any CPU.Build.0 = Release_WebAssembly|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +136,8 @@ Global
 		{C5D84A57-8A0F-484A-997F-B563547FB934} = {9886105C-5495-40DF-99F0-EE0D030ED66D}
 		{3F2AEEC4-C240-4960-85FF-5496863A37EF} = {3CD20226-A598-40E4-AA51-BAF056124CA9}
 		{3CD27E1E-BFF2-4F33-AB9D-CF43216B2805} = {3CD20226-A598-40E4-AA51-BAF056124CA9}
+		{F021F0F1-EE93-4307-9163-4941EF77D48F} = {3CD20226-A598-40E4-AA51-BAF056124CA9}
+		{D94C2A83-3293-44B0-A2F8-94FF746A3700} = {3CD20226-A598-40E4-AA51-BAF056124CA9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0E6360A2-10BB-41CA-97A0-F20A3A1CD7A8}

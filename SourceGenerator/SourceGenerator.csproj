@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>11</LangVersion>
+
+		<!-- Uncomment the line below to debug the source generator -->
+		
+		<!--<DefineConstants>GENERATOR_DEBUG</DefineConstants>-->
+	
+		<Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_SERVER;Azure</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_SERVER;Develop_Server</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY;Develop_WebAssembly</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssemply|AnyCPU'">
+		<DefineConstants>RELEASE;BLAZOR_WEBASSEMBLY;Release_WebAssemply</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.2.0" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="6.0.0-preview.4.21253.7" />
+	</ItemGroup>
+
+</Project>
