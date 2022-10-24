@@ -26,7 +26,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AspNetCoreRateLimit" Version="4.0.2" />
 		<PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
 		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.2" />
 		<PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />

@@ -1,14 +1,15 @@
-using System;
+using System.IO.Compression;
+using System.Threading.RateLimiting;
+
+using CompressedStaticFiles;
+
+using HttpSecurity.AspNet;
 
 using ICEBG.Infrastructure.ClientServices;
 using ICEBG.SystemFramework;
 using ICEBG.Web.DataServices;
 
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.ResponseCompression;
 
 using NLog.Web;
 
@@ -36,6 +37,26 @@ try
 
     // Add services to the container.
 
+    builder.Services.AddResponseCompression(options =>
+    {
+        options.EnableForHttps = true;
+        options.Providers.Add<BrotliCompressionProvider>();
+        options.Providers.Add<GzipCompressionProvider>();
+    });
+
+    // Performance test (performed in debug mode locally):
+    // NoCompression - material.blazor.min.css takes circa 10 to 20 ms to download, 270 Kb - page load 95 to 210 ms - 3.2 MB transfered
+    // Fastest - material.blazor.min.css takes circa 12 to 28 ms to download, 34.7 Kb - page load 250 to 270 ms - 2.2 MB transfered
+    // SmallestSize & Optimal - material.blazor.min.css takes circa 500 to 800 ms to download, 16.2 Kb - page load 900 to 1100 ms (unacceptably slow) - 2.1 MB transfered
+    builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+    {
+        options.Level = CompressionLevel.Fastest;
+    });
+
+    builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+    {
+        options.Level = CompressionLevel.SmallestSize;
+    });
     logger.Debug("Adding razor pages");
     builder.Services.AddRazorPages();
 
@@ -48,6 +69,78 @@ try
     });
     builder.Services.AddGrpcReflection();
 
+    // needed to store rate limit counters and ip rules
+    builder.Services.AddMemoryCache();
+
+    //    builder.Services.AddHttpsSecurityHeaders(options => OptionsBuilder.BuildGeneralHeaderOptions(builder, options), onStartupOptions => OptionsBuilder.BuildOnStartupHeaderOptions(builder, onStartupOptions));
+
+    builder.Services.AddHttpsSecurityHeaders(options =>
+    {
+        options
+            .AddContentSecurityOptions(cspOptions =>
+            {
+                cspOptions
+                    .AddBaseUri(o => o.AddSelf())
+                    .AddBlockAllMixedContent()
+                    .AddChildSrc(o => o.AddSelf())
+                    .AddConnectSrc(o => o
+                        .AddSelf()
+                        .AddUri((baseUri, baseDomain) => $"wss://{baseDomain}:*"))
+                    // The generated hashes do nothing here, and we include it here only to show that generated hash values can be added to policies - script-src would generally be the policy where you use this technique.
+                    .AddDefaultSrc(o => o
+                        .AddSelf()
+                        .AddStrictDynamicIf(() => !builder.Environment.IsDevelopment())
+                        .AddUnsafeInline()
+                        .AddGeneratedHashValues(StaticFileExtension.CSS))
+                    .AddFontSrc(o => o.AddSelf())
+                    .AddFrameAncestors(o => o.AddNone())
+                    .AddFrameSrc(o => o.AddSelf())
+                    .AddFormAction(o => o.AddNone())
+                    .AddImgSrc(o => o
+                        .AddSelf()
+                        .AddUri("www.google-analytics.com")
+                        .AddSchemeSource(SchemeSource.Data, "w3.org/svg/2000"))
+                    .AddManifestSrc(o => o.AddSelf())
+                    .AddMediaSrc(o => o.AddSelf())
+                    .AddPrefetchSrc(o => o.AddSelf())
+                    .AddObjectSrc(o => o.AddNone())
+                    .AddReportUri(o => o.AddUri((baseUri, baseDomain) => $"https://{baseUri}/api/CspReporting/UriReport"))
+                    .AddScriptSrc(o => o
+                        .AddSelf()
+                        .AddNonce()
+                        .AddHashValue(HashAlgorithm.SHA256, "v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=")
+                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
+                        .AddStrictDynamicIf(() => !builder.Environment.IsDevelopment())
+                        .AddUnsafeInline().AddReportSample().AddUnsafeEval().AddUri("https://www.googletagmanager.com/gtag/js")
+                        .AddGeneratedHashValues(StaticFileExtension.JS))
+                    .AddStyleSrc(o => o
+                        .AddSelf()
+                        .AddUnsafeInline()
+                        .AddUnsafeHashes()
+                        .AddReportSample())
+                    .AddUpgradeInsecureRequests()
+                    .AddWorkerSrc(o => o.AddSelf());
+            })
+            .AddAccessControlAllowOriginSingle("a.com")
+            .AddReferrerPolicy(ReferrerPolicyDirective.NoReferrer)
+            .AddPermissionsPolicy("accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()")
+            .AddStrictTransportSecurity(31536000, true)
+            .AddXClientId("ICEBG.Web.DataServices")
+            .AddXContentTypeOptionsNoSniff()
+            .AddXFrameOptionsDirective(XFrameOptionsDirective.Deny)
+            .AddXXssProtectionDirective(XXssProtectionDirective.OneModeBlock)
+            .AddXPermittedCrossDomainPoliciesDirective(XPermittedCrossDomainPoliciesDirective.None);
+    },
+    onStartingOptions =>
+    {
+        onStartingOptions
+            .AddCacheControl("max-age=86400, no-cache, public")
+            .AddExpires("0");
+    });
+
+
+    builder.Services.AddCompressedStaticFiles();
+
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -59,14 +152,35 @@ try
     {
         app.UseExceptionHandler("/Error");
         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-        app.UseHsts();
+        //app.UseHsts();
     }
 
-    app.UseHttpsRedirection();
+    //app.UseHttpsRedirection();
 
     app.UseStaticFiles();
 
+    app.UseHttpSecurityHeaders();
+
+    app.UseCompressedStaticFiles();
+
     app.UseRouting();
+
+    // Limit api calls to 10 in a second to prevent external denial of service.
+    app.UseRateLimiter(new()
+    {
+        GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
+        {
+            return RateLimitPartition.GetFixedWindowLimiter("GeneralLimit",
+                _ => new FixedWindowRateLimiterOptions()
+                {
+                    Window = TimeSpan.FromSeconds(1),
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 10,
+                });
+        }),
+        RejectionStatusCode = 429,
+    });
 
     // This must be between UseRouting & UseEndpoints
     logger.Debug("UseGrpcWeb");
@@ -77,11 +191,9 @@ try
 
     app.MapControllers();
 
-    app.UseEndpoints(endpoints =>
-    {
-        endpoints.MapGrpcService<ConfigurationService>();
-        endpoints.MapFallbackToPage("/index_server");
-    });
+    app.MapGrpcService<ConfigurationService>();
+
+    app.MapFallbackToPage("/host");
 
     logger.Debug("Completing startup, executing app.Run()");
     logger.Debug(" ");

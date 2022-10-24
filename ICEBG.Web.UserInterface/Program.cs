@@ -1,8 +1,6 @@
 using System;
 using System.IO.Compression;
 
-using AspNetCoreRateLimit;
-
 using Blazored.LocalStorage;
 
 using GoogleAnalytics.Blazor;
@@ -108,18 +106,6 @@ try
     logger.Debug("AddMemoryCache");
     builder.Services.AddMemoryCache();
 
-    logger.Debug("Configure<ClientRateLimitOptions>");
-    builder.Services.Configure<ClientRateLimitOptions>(builder.Configuration.GetSection("ClientRateLimiting"));
-
-    logger.Debug("Configure<ClientRateLimitPolicies>");
-    builder.Services.Configure<ClientRateLimitPolicies>(builder.Configuration.GetSection("ClientRateLimitPolicies"));
-
-    logger.Debug("AddInMemoryRateLimiting");
-    builder.Services.AddInMemoryRateLimiting();
-
-    logger.Debug("AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>");
-    builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
-
     logger.Debug("AddHttpContextAccessor");
     builder.Services.AddHttpContextAccessor();
 
@@ -191,8 +177,6 @@ try
     app.UseRouting();
 
     app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
-
-    app.UseClientRateLimiting();
 
     app.UseAuthentication();
 

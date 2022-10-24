@@ -1,0 +1,42 @@
+﻿@page "/host"
+@using Microsoft.AspNetCore.Components.Web
+@using HttpSecurity.AspNet
+@using ICEBG.Web.DataServices
+@namespace Website.Server.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject IHttpSecurityService HttpSecurityService
+
+@{
+    RenderMode RenderMode = PlatformDetermination.kIsBlazorServer ? RenderMode.ServerPrerendered : RenderMode.WebAssemblyPrerendered;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ICEBG (DataServices - Server)</title>
+    <base href="~/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://use.typekit.net/zjb3qsk.css">
+    <link rel="stylesheet" type="text/css" href="_content/Material.Blazor/material.blazor.min.css" integrity="@HttpSecurityService.GetFileHashString("material.blazor.min.css")" />
+</head>
+
+<body>
+    <div style="font-size:xx-large;">This is the only page served from ICEBG.Web.DataServer</div>
+    <div style="font-size:xx-large;">1.0</div>
+</body>
+
+<script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js" integrity="@HttpSecurityService.GetFileHashString("googleanalytics.blazor.js")"></script>
+<script src="_content/Material.Blazor/material.blazor.min.js" integrity="@HttpSecurityService.GetFileHashString("material.blazor.min.js")"></script>
+
+@if (PlatformDetermination.kIsBlazorServer)
+{
+    <script src="_framework/blazor.server.js" nonce="@HttpSecurityService.GetNonce()"></script>
+}
+else
+{
+    <script src="_framework/blazor.webassembly.js" integrity="@HttpSecurityService.GetFileHashString("blazor.webassembly.js")"></script>
+}
+
+</html>
