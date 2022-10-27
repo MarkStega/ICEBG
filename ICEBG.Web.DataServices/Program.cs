@@ -1,8 +1,6 @@
 using System.IO.Compression;
 using System.Threading.RateLimiting;
 
-using CompressedStaticFiles;
-
 using HttpSecurity.AspNet;
 
 using ICEBG.Infrastructure.ClientServices;
@@ -37,26 +35,6 @@ try
 
     // Add services to the container.
 
-    builder.Services.AddResponseCompression(options =>
-    {
-        options.EnableForHttps = true;
-        options.Providers.Add<BrotliCompressionProvider>();
-        options.Providers.Add<GzipCompressionProvider>();
-    });
-
-    // Performance test (performed in debug mode locally):
-    // NoCompression - material.blazor.min.css takes circa 10 to 20 ms to download, 270 Kb - page load 95 to 210 ms - 3.2 MB transfered
-    // Fastest - material.blazor.min.css takes circa 12 to 28 ms to download, 34.7 Kb - page load 250 to 270 ms - 2.2 MB transfered
-    // SmallestSize & Optimal - material.blazor.min.css takes circa 500 to 800 ms to download, 16.2 Kb - page load 900 to 1100 ms (unacceptably slow) - 2.1 MB transfered
-    builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
-    {
-        options.Level = CompressionLevel.Fastest;
-    });
-
-    builder.Services.Configure<GzipCompressionProviderOptions>(options =>
-    {
-        options.Level = CompressionLevel.SmallestSize;
-    });
     logger.Debug("Adding razor pages");
     builder.Services.AddRazorPages();
 
@@ -138,9 +116,6 @@ try
             .AddExpires("0");
     });
 
-
-    builder.Services.AddCompressedStaticFiles();
-
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -160,8 +135,6 @@ try
     app.UseStaticFiles();
 
     app.UseHttpSecurityHeaders();
-
-    app.UseCompressedStaticFiles();
 
     app.UseRouting();
 

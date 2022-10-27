@@ -43,32 +43,18 @@ jobs:
       run: echo ""
 
 ############################################################################################################
-# Store the version information
-############################################################################################################
-  version:
-    name: Set version suffix
-    runs-on: ubuntu-latest
-
-    steps:
-    - id: get
-      run: |
-        echo "::set-output name=suffix::$(date +'%Y-%m-%d--%H-%M-%S')--WIP"
-    - id: show
-      run: |
-        echo "${{ steps.get.outputs.suffix }}"
-    outputs:
-      suffix: ${{ steps.get.outputs.suffix }}
-      
-
-############################################################################################################
 # Build and deploy blazor DS image
 ############################################################################################################
   build-deploy-ds:
     name: Build and deploy ICEBG DS
-    needs: [version, perform-deployment]
+    needs: [perform-deployment]
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set suffix as env variable
+      run: echo "suffix=$(date +'%Y-%m-%d--%H-%M-%S')--WIP" >> $GITHUB_ENV
+      shell: bash
+
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
       uses: actions/checkout@v3
 
@@ -84,19 +70,23 @@ jobs:
 
     - name: Publish, tag, and push DS image
       run: |
-        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ needs.version.outputs.suffix }} -p:ContainerImageName=${{env.appNameDS}}
-        docker tag ${{env.appNameDS}}:${{ needs.version.outputs.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ needs.version.outputs.suffix }}
+        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }} -p:ContainerImageName=${{env.appNameDS}}
+        docker tag ${{env.appNameDS}}:${{ env.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.suffix }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.suffix }}
 
 ############################################################################################################
 # Build and deploy blazor UI image
 ############################################################################################################
   build-deploy-ui:
     name: Build and deploy ICEBG UI
-    needs: [version, perform-deployment]
+    needs: [perform-deployment]
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set suffix as env variable
+      run: echo "suffix=$(date +'%Y-%m-%d--%H-%M-%S')--WIP" >> $GITHUB_ENV
+      shell: bash
+
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
       uses: actions/checkout@v2
       with:
@@ -114,19 +104,23 @@ jobs:
 
     - name: Publish, tag, and push UI image
       run: |
-        dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ needs.version.outputs.suffix }} -p:ContainerImageName=${{env.appNameUI}}
-        docker tag ${{env.appNameUI}}:${{ needs.version.outputs.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ needs.version.outputs.suffix }}
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ needs.version.outputs.suffix }}
+        dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }} -p:ContainerImageName=${{env.appNameUI}}
+        docker tag ${{env.appNameUI}}:${{ env.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.suffix }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.suffix }}
 
 ############################################################################################################
 # Build blazor DS image
 ############################################################################################################
   build-ds:
     name: Build ICEBG DS
-    needs: [version, skip-deployment, build-allowed]
+    needs: [skip-deployment, build-allowed]
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set suffix as env variable
+      run: echo "suffix=$(date +'%Y-%m-%d--%H-%M-%S')--WIP" >> $GITHUB_ENV
+      shell: bash
+
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
       uses: actions/checkout@v2
       with:
@@ -137,17 +131,21 @@ jobs:
 
     - name: Build DS image
       run: |
-        dotnet build ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:Version=${{ needs.version.outputs.suffix }}
+        dotnet build ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:Version=${{ env.suffix }}
 
 ############################################################################################################
 # Build blazor UI image
 ############################################################################################################
   build-ui:
     name: Build ICEBG UI
-    needs: [version, skip-deployment, build-allowed]
+    needs: [skip-deployment, build-allowed]
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set suffix as env variable
+      run: echo "suffix=$(date +'%Y-%m-%d--%H-%M-%S')--WIP" >> $GITHUB_ENV
+      shell: bash
+
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
       uses: actions/checkout@v2
       with:
@@ -158,4 +156,4 @@ jobs:
 
     - name: Build UI image
       run: |
-        dotnet build ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ needs.version.outputs.suffix }} -p:ContainerImageName=${{env.appNameUI}}
+        dotnet build ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }}
