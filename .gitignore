@@ -121,3 +121,14 @@ UpgradeLog*.htm
 
 #Node modules
 **/node_modules/
+
+ICEBG.Client/wwwroot/*.css
+ICEBG.Client/wwwroot/*.br
+ICEBG.Client/wwwroot/*.gz
+ICEBG.Client/wwwroot/css/*.css
+ICEBG.Client/wwwroot/css/*.br
+ICEBG.Client/wwwroot/css/*.gz
+ICEBG.Client/wwwroot/js/*.js
+ICEBG.Client/wwwroot/js/*.br
+ICEBG.Client/wwwroot/js/*.gz
+

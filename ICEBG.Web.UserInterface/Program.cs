@@ -3,6 +3,8 @@ using System.IO.Compression;
 
 using Blazored.LocalStorage;
 
+using CompressedStaticFiles;
+
 using GoogleAnalytics.Blazor;
 
 using ICEBG.Client;
@@ -148,6 +150,8 @@ try
         serverOptions.AddServerHeader = false;
     });
 
+    builder.Services.AddCompressedStaticFiles();
+
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -168,7 +172,7 @@ try
 
     app.UseHttpsRedirection();
 
-    app.UseStaticFiles();
+    app.UseCompressedStaticFiles();
 
     app.UseContentSecurityPolicy();
 
