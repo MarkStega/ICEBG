@@ -14,9 +14,6 @@ using ICEBG.Client;
 using ICEBG.Infrastructure.ClientServices;
 using ICEBG.SystemFramework;
 using ICEBG.Web.UserInterface;
-using ICEBG.Web.UserInterface.Middleware;
-
-using Material.Blazor;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
@@ -26,7 +23,6 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
 
 using NLog.Web;
 
@@ -53,7 +49,7 @@ try
     logger.Debug("ClientServices.Inject");
     ClientServices.Inject(ApplicationConfiguration.pGrpcEndpointPrefix, builder.Services);
 
-    logger.Debug("ResponseCompression");
+    //  Response compression
     builder.Services.AddResponseCompression(options =>
     {
         options.EnableForHttps = true;
@@ -61,6 +57,10 @@ try
         options.Providers.Add<GzipCompressionProvider>();
     });
 
+    // Performance test (performed in debug mode locally):
+    // NoCompression - material.blazor.min.css takes circa 10 to 20 ms to download, 270 Kb - page load 95 to 210 ms - 3.2 MB transfered
+    // Fastest - material.blazor.min.css takes circa 12 to 28 ms to download, 34.7 Kb - page load 250 to 270 ms - 2.2 MB transfered
+    // SmallestSize & Optimal - material.blazor.min.css takes circa 500 to 800 ms to download, 16.2 Kb - page load 900 to 1100 ms (unacceptably slow) - 2.1 MB transfered
     builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
     {
         options.Level = CompressionLevel.Fastest;
@@ -71,17 +71,98 @@ try
         options.Level = CompressionLevel.SmallestSize;
     });
 
+    builder.Services.AddHttpsSecurityHeaders(options =>
+    {
+        options
+            .AddContentSecurityOptions(cspOptions =>
+            {
+                cspOptions
+                    .AddBaseUri(o => o.AddSelf())
+                    .AddBlockAllMixedContent()
+                    .AddChildSrc(o => o.AddSelf())
+                    .AddConnectSrc(o => o
+                        .AddSelf()
+                        .AddUri((baseUri, baseDomain) => $"wss://{baseDomain}:*"))
+                    // The generated hashes do nothing here, and we include it here only to show that generated hash values can be added to policies - script-src would generally be the policy where you use this technique.
+                    .AddDefaultSrc(o => o
+                        .AddSelf()
+                        .AddStrictDynamicIf(() => !builder.Environment.IsDevelopment())
+                        .AddUnsafeInline()
+                        .AddGeneratedHashValues(StaticFileExtension.CSS))
+                    .AddFontSrc(o => o
+                        .AddUri("https://fonts.googleapis.com")
+                        .AddUri("https://fonts.gstatic.com"))
+                    .AddFrameAncestors(o => o.AddNone())
+                    .AddFrameSrc(o => o.AddSelf())
+                    .AddFormAction(o => o.AddNone())
+                    .AddImgSrc(o => o
+                        .AddSelf()
+                        .AddUri("www.google-analytics.com")
+                        .AddSchemeSource(SchemeSource.Data, "w3.org/svg/2000"))
+                    .AddManifestSrc(o => o.AddSelf())
+                    .AddMediaSrc(o => o.AddSelf())
+                    .AddPrefetchSrc(o => o.AddSelf())
+                    .AddObjectSrc(o => o.AddNone())
+                    .AddReportUri(o => o.AddUri((baseUri, baseDomain) => $"https://{baseUri}/api/CspReporting/UriReport"))
+                    // The sha-256 hash relates to an inline script added by blazor's javascript
+                    .AddScriptSrc(o => o
+                        .AddHashValue(HashAlgorithm.SHA256, "v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=")
+                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
+                        .AddSelfIf(() => builder.Environment.IsDevelopment() || PlatformDetermination.kIsBlazorWebAssembly)
+                        //.AddStrictDynamicIf(() => !builder.Environment.IsDevelopment() && PlatformDetermination.IsBlazorWebAssembly) // this works on Chromium browswers but fails for both Firefox and Safari
+                        .AddUnsafeInlineIf(() => PlatformDetermination.kIsBlazorWebAssembly)
+                        .AddReportSample()
+                        .AddUnsafeEvalIf(() => PlatformDetermination.kIsBlazorWebAssembly)
+                        .AddUri("https://www.googletagmanager.com/gtag/js")
+                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js") // Required to work on Safari
+                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor/material.blazor.min.js") // Required to work on Safari
+                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.server.js", () => PlatformDetermination.kIsBlazorServer) // Required to work on Safari
+                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.webassembly.js", () => PlatformDetermination.kIsBlazorWebAssembly) // Required to work on Safari
+                        .AddGeneratedHashValues(StaticFileExtension.JS))
+                    .AddStyleSrc(o => o
+                        .AddSelf()
+                        .AddUnsafeInline()
+                        .AddUnsafeHashes()
+                        .AddReportSample())
+                    .AddUpgradeInsecureRequests()
+                    .AddWorkerSrc(o => o.AddSelf());
+            })
+            .AddAccessControlAllowOriginAll()
+            .AddReferrerPolicy(ReferrerPolicyDirective.NoReferrer)
+            .AddPermissionsPolicy("accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()")
+            .AddStrictTransportSecurity(31536000, true)
+            .AddXClientId("ICEBG.Web.UserInterface")
+            .AddXContentTypeOptionsNoSniff()
+            .AddXFrameOptionsDirective(XFrameOptionsDirective.Deny)
+            .AddXXssProtectionDirective(XXssProtectionDirective.OneModeBlock)
+            .AddXPermittedCrossDomainPoliciesDirective(XPermittedCrossDomainPoliciesDirective.None);
+    },
+    onStartingOptions =>
+    {
+        onStartingOptions
+            .AddCacheControl("max-age=86400, no-cache, public")
+            .AddExpires("0");
+    });
+
+    builder.Services.AddResponseCaching();
+
     logger.Debug("Adding razor pages");
     builder.Services.AddRazorPages();
 
-    logger.Debug("AddControllersWithViews");
-    builder.Services.AddControllersWithViews();
-
+#if BLAZOR_SERVER
     logger.Debug("AddMvc");
     builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
-    logger.Debug("AddHttpClient");
-    builder.Services.AddHttpClient();
+    logger.Debug("Add server side blazor");
+    builder.Services.AddServerSideBlazor();
+#endif
+
+    builder.Services.AddHsts(options =>
+    {
+        options.Preload = true;
+        options.IncludeSubDomains = true;
+        options.MaxAge = TimeSpan.FromDays(365);
+    });
 
     logger.Debug("Configure<CookiePolicyOptions>");
     builder.Services.Configure<CookiePolicyOptions>(options =>
@@ -90,16 +171,6 @@ try
         options.HttpOnly = HttpOnlyPolicy.Always;
         options.MinimumSameSitePolicy = SameSiteMode.Strict;
         options.Secure = CookieSecurePolicy.Always;
-    });
-
-    logger.Debug("Configure<StaticFileOptions>");
-    builder.Services.Configure<StaticFileOptions>(options =>
-    {
-        options.OnPrepareResponse = ctx =>
-        {
-            ctx.Context.Response.Headers.Add("Cache-Control", "public, max-age=86400");
-            ctx.Context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-        };
     });
 
     logger.Debug("AddOptions");
@@ -120,8 +191,15 @@ try
         options.TrackingId = "G-2VZJ2X14RH";
     });
 
-    logger.Debug("Add server side blazor");
-    builder.Services.AddServerSideBlazor();
+    builder.WebHost.ConfigureKestrel(serverOptions =>
+    {
+        serverOptions.AddServerHeader = false;
+    });
+
+    builder.Services.AddCompressedStaticFiles();
+
+    //logger.Debug("AddHttpClient");
+    //builder.Services.AddHttpClient();
 
     logger.Debug("Add WeatherForecastService");
     builder.Services.AddSingleton<WeatherForecastService>();
@@ -132,91 +210,6 @@ try
         options.EnableDetailedErrors = true;
         options.MaxReceiveMessageSize = null;
         options.MaxSendMessageSize = null;
-    });
-
-    builder.Services.AddHttpContextAccessor();
-
-    builder.Services.AddBlazoredLocalStorage();
-
-    builder.Services.AddHsts(options =>
-    {
-        options.Preload = true;
-        options.IncludeSubDomains = true;
-        options.MaxAge = TimeSpan.FromDays(365);
-    });
-
-    builder.WebHost.ConfigureKestrel(serverOptions =>
-    {
-        serverOptions.AddServerHeader = false;
-    });
-
-    builder.Services.AddCompressedStaticFiles();
-
-    // needed to store rate limit counters and ip rules
-    builder.Services.AddMemoryCache();
-
-    builder.Services.AddHttpsSecurityHeaders(options =>
-    {
-        options
-            .AddContentSecurityOptions(cspOptions =>
-            {
-                cspOptions
-                    .AddBaseUri(o => o.AddSelf())
-                    .AddBlockAllMixedContent()
-                    .AddChildSrc(o => o.AddSelf())
-                    .AddConnectSrc(o => o
-                        .AddSelf()
-                        .AddUri((baseUri, baseDomain) => $"wss://{baseDomain}:*"))
-                    // The generated hashes do nothing here, and we include it here only to show that generated hash values can be added to policies - script-src would generally be the policy where you use this technique.
-                    .AddDefaultSrc(o => o
-                        .AddSelf()
-                        .AddStrictDynamicIf(() => !builder.Environment.IsDevelopment())
-                        .AddUnsafeInline()
-                        .AddGeneratedHashValues(StaticFileExtension.CSS))
-                    .AddFontSrc(o => o.AddUri("https://fonts.googleapis.com").AddUri("https://fonts.gstatic.com"))
-                    .AddFrameAncestors(o => o.AddNone())
-                    .AddFrameSrc(o => o.AddSelf())
-                    .AddFormAction(o => o.AddNone())
-                    .AddImgSrc(o => o
-                        .AddSelf()
-                        .AddUri("www.google-analytics.com")
-                        .AddSchemeSource(SchemeSource.Data, "w3.org/svg/2000"))
-                    .AddManifestSrc(o => o.AddSelf())
-                    .AddMediaSrc(o => o.AddSelf())
-                    .AddPrefetchSrc(o => o.AddSelf())
-                    .AddObjectSrc(o => o.AddNone())
-                    .AddReportUri(o => o.AddUri((baseUri, baseDomain) => $"https://{baseUri}/api/CspReporting/UriReport"))
-                    .AddScriptSrc(o => o
-                        .AddSelf()
-                        .AddNonce()
-                        .AddHashValue(HashAlgorithm.SHA256, "v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=")
-                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
-                        .AddStrictDynamicIf(() => !builder.Environment.IsDevelopment())
-                        .AddUnsafeInline().AddReportSample().AddUnsafeEval().AddUri("https://www.googletagmanager.com/gtag/js")
-                        .AddGeneratedHashValues(StaticFileExtension.JS))
-                    .AddStyleSrc(o => o
-                        .AddSelf()
-                        .AddUnsafeInline()
-                        .AddUnsafeHashes()
-                        .AddReportSample())
-                    .AddUpgradeInsecureRequests()
-                    .AddWorkerSrc(o => o.AddSelf());
-            })
-            .AddAccessControlAllowOriginSingle("a.com")
-            .AddReferrerPolicy(ReferrerPolicyDirective.NoReferrer)
-            .AddPermissionsPolicy("accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()")
-            .AddStrictTransportSecurity(31536000, true)
-            .AddXClientId("ICEBG.Web.UserInterface")
-            .AddXContentTypeOptionsNoSniff()
-            .AddXFrameOptionsDirective(XFrameOptionsDirective.Deny)
-            .AddXXssProtectionDirective(XXssProtectionDirective.OneModeBlock)
-            .AddXPermittedCrossDomainPoliciesDirective(XPermittedCrossDomainPoliciesDirective.None);
-    },
-    onStartingOptions =>
-    {
-        onStartingOptions
-            .AddCacheControl("max-age=86400, no-cache, public")
-            .AddExpires("0");
     });
 
     var app = builder.Build();
@@ -239,11 +232,9 @@ try
 
     app.UseHttpsRedirection();
 
-    app.UseHttpSecurityHeaders();
+    //app.UseHttpSecurityHeaders();
 
     app.UseCompressedStaticFiles();
-
-    app.UseMiddleware<NoCacheMiddleware>();
 
     app.UseRouting();
 
@@ -266,12 +257,12 @@ try
 
     app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
 
-    app.UseAuthentication();
-
-    app.UseAuthorization();
+    app.MapControllers();
 
 #if BLAZOR_SERVER
     app.MapBlazorHub();
+#else
+    app.UseBlazorFrameworkFiles();
 #endif
 
     app.MapFallbackToPage("/host");

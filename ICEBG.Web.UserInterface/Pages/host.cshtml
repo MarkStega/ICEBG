@@ -20,9 +20,6 @@
 
     <base href="~/" />
 
-    <link href="_content/ICEBG.Client/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
-    <link href="_content/ICEBG.Client/images/favicon.ico" rel="icon" type="image/x-icon">
-
     <link href="_content/Material.Blazor/material.blazor.min.css" integrity="@HttpSecurityService.GetFileHashString("material.blazor.min.css")" rel="stylesheet" />
     <link href="_content/ICEBG.Client/css/icebg.min.css" integrity="@HttpSecurityService.GetFileHashString("icebg.min.css")" rel="stylesheet" />
 
@@ -33,7 +30,7 @@
     <link rel="apple-touch-icon" sizes="512x512" href="_content/ICEBG.Client/ios-images/512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="_content/ICEBG.Client/ios-images/192.png" />
 
-    @if (PlatformDetermination.kIsBlazorServer)
+    @if (PlatformDetermination.kIsBlazorWebAssembly)
     {
         <link rel="manifest" href="_content/ICEBG.Client/pwa/manifest.json" />
     }
@@ -42,8 +39,20 @@
 </head>
 
 <body>
-    <!-- SSE -->
-    <component type="typeof(App)" render-mode="Server" />
+    @if (PlatformDetermination.kIsBlazorServer)
+    {
+        <component type="typeof(App)" render-mode="Server" />
+    }
+    else
+    {
+        <div id="app">
+            <svg class="loading-progress">
+                <circle r="40%" cx="50%" cy="50%" />
+                <circle r="40%" cx="50%" cy="50%" />
+            </svg>
+            <div class="loading-progress-text"></div>
+        </div>
+    }
 
     <div id="blazor-error-ui">
         <environment include="Staging,Production">
@@ -56,6 +65,9 @@
         <a class="dismiss">🗙</a>
     </div>
 
+    <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js" integrity="@HttpSecurityService.GetFileHashString("googleanalytics.blazor.js")"></script>
+    <script src="_content/Material.Blazor/material.blazor.min.js" integrity="@HttpSecurityService.GetFileHashString("material.blazor.min.js")"></script>
+
     @if (PlatformDetermination.kIsBlazorServer)
     {
         <script src="_framework/blazor.server.js" nonce="@HttpSecurityService.GetNonce()"></script>
@@ -63,10 +75,10 @@
     else
     {
         <script src="_framework/blazor.webassembly.js" integrity="@HttpSecurityService.GetFileHashString("blazor.webassembly.js")"></script>
+        @*
+        <script>navigator.serviceWorker.register('service-worker.js');</script>
+        *@    
     }
-
-    <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js" integrity="@HttpSecurityService.GetFileHashString("googleanalytics.blazor.js")"></script>
-    <script src="_content/Material.Blazor/material.blazor.min.js" integrity="@HttpSecurityService.GetFileHashString("material.blazor.min.js")"></script>
 
 </body>
 </html>
