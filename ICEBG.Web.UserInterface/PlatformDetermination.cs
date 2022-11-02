@@ -1,4 +1,4 @@
-﻿namespace ICEBG.Web.DataServices;
+﻿namespace ICEBG.Web.UserInterface;
 
 /// <summary>
 /// A class that determines the current platform as being either Blazor Server or WebAssembly.
