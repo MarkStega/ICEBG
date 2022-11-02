@@ -15,7 +15,6 @@ using ICEBG.Infrastructure.ClientServices;
 using ICEBG.SystemFramework;
 using ICEBG.Web.UserInterface;
 using ICEBG.Web.UserInterface.Middleware;
-using ICEBG.Web.UserInterface.Services;
 
 using Material.Blazor;
 
@@ -83,9 +82,6 @@ try
 
     logger.Debug("AddHttpClient");
     builder.Services.AddHttpClient();
-
-    logger.Debug("ContentSecurityPolicyService");
-    builder.Services.AddSingleton<ContentSecurityPolicyService>();
 
     logger.Debug("Configure<CookiePolicyOptions>");
     builder.Services.Configure<CookiePolicyOptions>(options =>
@@ -243,9 +239,9 @@ try
 
     app.UseHttpsRedirection();
 
-    app.UseCompressedStaticFiles();
+    app.UseHttpSecurityHeaders();
 
-    app.UseContentSecurityPolicy();
+    app.UseCompressedStaticFiles();
 
     app.UseMiddleware<NoCacheMiddleware>();
 
