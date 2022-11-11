@@ -1,5 +1,5 @@
 using System.IO.Compression;
-using ICEBG.Infrastructure.ClientServices;
+using ICEBG.Client.Infrastructure.ClientServices;
 using ICEBG.SystemFramework;
 using ICEBG.Web.DataServices;
 

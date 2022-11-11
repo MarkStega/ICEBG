@@ -26,13 +26,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
+		<PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
 		<PackageReference Include="CompressedStaticFiles.AspNet" Version="1.0.0" />
 		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.2" />
 		<PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
 		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.49.0" />
-		<PackageReference Include="HttpSecurity.AspNet" Version="1.0.0-preview.5" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.0-rc.2.22476.2" />
+		<PackageReference Include="HttpSecurity.AspNet" Version="1.0.0-preview.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
 		<PackageReference Include="NLog.Web.AspNetCore" Version="5.1.5" />
 		<PackageReference Include="Microsoft.NET.Build.Containers" Version="0.2.7" />

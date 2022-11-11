@@ -11,7 +11,7 @@ using GoogleAnalytics.Blazor;
 using HttpSecurity.AspNet;
 
 using ICEBG.Client;
-using ICEBG.Infrastructure.ClientServices;
+using ICEBG.Client.Infrastructure.ClientServices;
 using ICEBG.SystemFramework;
 using ICEBG.Web.UserInterface;
 

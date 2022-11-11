@@ -14,7 +14,7 @@ using ICEBG.DataTier.gRPCClient;
 using ICEBG.DataTier.Interfaces;
 //#endif
 
-namespace ICEBG.Infrastructure.ClientServices;
+namespace ICEBG.Client.Infrastructure.ClientServices;
 
 public static class ClientServices
 {
