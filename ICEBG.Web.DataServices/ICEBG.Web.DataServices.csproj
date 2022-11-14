@@ -37,6 +37,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\ApplicationConfigurationServer\ApplicationConfigurationServer.csproj" />
+	  <ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
 	  <ProjectReference Include="..\DataTier\DataTier.csproj" />
 	  <ProjectReference Include="..\ICEBG.Client\ICEBG.Client.csproj" />
 	</ItemGroup>

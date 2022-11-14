@@ -25,6 +25,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\ApplicationConfigurationWASM\ApplicationConfigurationWASM.csproj" />
+		<ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
 		<ProjectReference Include="..\ICEBG.Client\ICEBG.Client.csproj" />
 		<ProjectReference Include="..\SystemFramework\SystemFramework.csproj" />
 	</ItemGroup>

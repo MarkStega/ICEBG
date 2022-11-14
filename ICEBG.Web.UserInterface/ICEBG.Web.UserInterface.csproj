@@ -39,6 +39,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\ApplicationConfigurationServer\ApplicationConfigurationServer.csproj" />
+		<ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
+		<ProjectReference Include="..\ICEBG.Blazor\ICEBG.Blazor.csproj" />
 		<ProjectReference Include="..\ICEBG.Client\ICEBG.Client.csproj" />
 	</ItemGroup>
 

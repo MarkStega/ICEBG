@@ -1,10 +1,4 @@
-﻿using Material.Blazor;
-
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-
-//#if gRPC
+﻿//#if gRPC
 using System.Net.Http;
 
 using Grpc.Net.Client;
@@ -12,6 +6,11 @@ using Grpc.Net.Client.Web;
 
 using ICEBG.DataTier.gRPCClient;
 using ICEBG.DataTier.Interfaces;
+
+using Material.Blazor;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 //#endif
 
 namespace ICEBG.Client.Infrastructure.ClientServices;
@@ -80,6 +79,10 @@ public static class ClientServices
         {
             return new ConfigurationProto.ConfigurationProtoClient(channel);
         });
+
+        pLogger?.LogDebug("Add WeatherForecastService");
+        serviceCollection.AddSingleton<WeatherForecastService>();
+
     }
 }
 

@@ -28,7 +28,6 @@
 		<PackageReference Include="Grpc.Net.Client" Version="2.49.0" />
 		<PackageReference Include="Grpc.Net.Client.Web" Version="2.49.0" />
 		<PackageReference Include="Material.Blazor" Version="3.3.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 	</ItemGroup>
@@ -39,6 +38,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
 		<ProjectReference Include="..\DataTier\DataTier.csproj" />
 		<ProjectReference Include="..\SharedUtilities\SharedUtilities.csproj" />
 	</ItemGroup>

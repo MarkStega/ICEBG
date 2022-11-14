@@ -10,6 +10,7 @@ using GoogleAnalytics.Blazor;
 
 using HttpSecurity.AspNet;
 
+using ICEBG.AppConfig;
 using ICEBG.Client;
 using ICEBG.Client.Infrastructure.ClientServices;
 using ICEBG.SystemFramework;
@@ -43,7 +44,7 @@ try
     logger.Debug("");
 
     logger.Debug("ApplicationConfiguration.Initialize");
-    ApplicationConfiguration.Initialize(builder);
+    ApplicationConfigurationServer.Initialize(builder);
 
     // Add services to the container.
     logger.Debug("ClientServices.Inject");
@@ -198,12 +199,6 @@ try
 
     builder.Services.AddCompressedStaticFiles();
 
-    //logger.Debug("AddHttpClient");
-    //builder.Services.AddHttpClient();
-
-    logger.Debug("Add WeatherForecastService");
-    builder.Services.AddSingleton<WeatherForecastService>();
-
     logger.Debug("Add Grpc");
     builder.Services.AddGrpc(options =>
     {
@@ -232,7 +227,7 @@ try
 
     app.UseHttpsRedirection();
 
-    //app.UseHttpSecurityHeaders();
+    app.UseHttpSecurityHeaders();
 
     app.UseCompressedStaticFiles();
 

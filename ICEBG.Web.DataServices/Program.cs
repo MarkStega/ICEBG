@@ -1,4 +1,6 @@
 using System.IO.Compression;
+
+using ICEBG.AppConfig;
 using ICEBG.Client.Infrastructure.ClientServices;
 using ICEBG.SystemFramework;
 using ICEBG.Web.DataServices;
@@ -22,7 +24,7 @@ try
     logger.Debug("");
 
     logger.Debug("ApplicationConfiguration.Initialize");
-    ApplicationConfiguration.Initialize(builder);
+    ApplicationConfigurationServer.Initialize(builder);
 
     logger.Debug("ClientServices.Inject");
     ClientServices.Inject(ApplicationConfiguration.pGrpcEndpointPrefix, builder.Services);
@@ -40,6 +42,26 @@ try
         options.MaxSendMessageSize = null;
     });
     builder.Services.AddGrpcReflection();
+
+#if BLAZOR_WEBASSEMBLY
+    const string corsPolicy = "_corsPolicy";
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(name: corsPolicy,
+                          policy =>
+                          {
+                              policy.WithOrigins("https://localhost:7175",
+                                                 "https://T570:7175",
+                                                 "http://localhost:7175",
+                                                 "http://T570:7175")
+                                    .AllowCredentials()
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod()
+                                    .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
+                          });
+    });
+    builder.Services.AddCors();
+#endif
 
     var app = builder.Build();
 
@@ -60,6 +82,24 @@ try
     app.UseStaticFiles();
 
     app.UseRouting();
+
+#if BLAZOR_WEBASSEMBLY
+    // This must be between UseRouting & UseEndpoints
+    logger.Debug("UseCors...");
+    //app.UseCors(corsPolicy);
+    app.UseCors(builder =>
+    {
+        builder.WithOrigins("https://localhost:7175",
+                            "https://T570:7175",
+                            "http://localhost:7175",
+                            "http://T570:7175")
+        .AllowCredentials()
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
+    });
+
+#endif
 
     // This must be between UseRouting & UseEndpoints
     logger.Debug("UseGrpcWeb");

@@ -16,6 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 using ICEBG.Client.Infrastructure.ClientServices;
+using ICEBG.AppConfig;
+using ICEBG.Client;
 
 namespace ICEBG.Blazor;
 public class Program
@@ -39,7 +41,7 @@ public class Program
 
         builder.Services.AddOptions();
 
-        ClientServices.Inject(ApplicationConfiguration.pGRPC_EndpointPrefix, builder.Services);
+        ClientServices.Inject(ApplicationConfiguration.pGrpcEndpointPrefix, builder.Services);
 
         await builder.Build().RunAsync();
     }
