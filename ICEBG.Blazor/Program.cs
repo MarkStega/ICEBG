@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using ICEBG.Client.Infrastructure.ClientServices;
 using ICEBG.AppConfig;
 using ICEBG.Client;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace ICEBG.Blazor;
 public class Program
@@ -27,6 +28,7 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.Logging.SetMinimumLevel(LogLevel.Information);
         builder.RootComponents.Add<App>("#app");
+        builder.RootComponents.Add<HeadOutlet>("head::after");
 
         // Initialize defaults
         ApplicationConfigurationWASM.Initialize();

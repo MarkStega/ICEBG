@@ -11,6 +11,16 @@
     "ICEBG.Web.UserInterface": {
       "commandName": "Project",
       "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "hotReloadEnabled": false,
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7175"
+    },
+    "ICEBG.Web.UserInterface.WASM": {
+      "commandName": "Project",
+      "launchBrowser": true,
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

@@ -1,8 +1,5 @@
-using System.IO.Compression;
-
 using ICEBG.AppConfig;
 using ICEBG.Client.Infrastructure.ClientServices;
-using ICEBG.SystemFramework;
 using ICEBG.Web.DataServices;
 
 using NLog.Web;
@@ -86,19 +83,7 @@ try
 #if BLAZOR_WEBASSEMBLY
     // This must be between UseRouting & UseEndpoints
     logger.Debug("UseCors...");
-    //app.UseCors(corsPolicy);
-    app.UseCors(builder =>
-    {
-        builder.WithOrigins("https://localhost:7175",
-                            "https://T570:7175",
-                            "http://localhost:7175",
-                            "http://T570:7175")
-        .AllowCredentials()
-        .AllowAnyHeader()
-        .AllowAnyMethod()
-        .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
-    });
-
+    app.UseCors(corsPolicy);
 #endif
 
     // This must be between UseRouting & UseEndpoints

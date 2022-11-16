@@ -212,7 +212,11 @@ try
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
+#if BLAZOR_SERVER
         app.UseDeveloperExceptionPage();
+#else
+        app.UseWebAssemblyDebugging();
+#endif
     }
     else
     {
@@ -227,7 +231,13 @@ try
 
     app.UseHttpsRedirection();
 
-    app.UseHttpSecurityHeaders();
+    //    app.UseHttpSecurityHeaders();
+
+#if BLAZOR_SERVER
+    app.MapBlazorHub();
+#else
+    app.UseBlazorFrameworkFiles();
+#endif
 
     app.UseCompressedStaticFiles();
 
@@ -253,12 +263,6 @@ try
     app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
 
     app.MapControllers();
-
-#if BLAZOR_SERVER
-    app.MapBlazorHub();
-#else
-    app.UseBlazorFrameworkFiles();
-#endif
 
     app.MapFallbackToPage("/host");
 
