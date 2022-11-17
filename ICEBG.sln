@@ -37,6 +37,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solutio
 		SuperClean.cmd = SuperClean.cmd
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICEBG.Blazor", "ICEBG.Blazor\ICEBG.Blazor.csproj", "{E07619FC-A0FC-4C85-9992-BBF3256598EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationConfiguration", "ApplicationConfiguration\ApplicationConfiguration.csproj", "{D66E8FD0-0CD6-48F3-A4EF-FB480618A18E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationConfigurationServer", "ApplicationConfigurationServer\ApplicationConfigurationServer.csproj", "{437C4260-725A-4BE2-946E-A7AAB4A3F711}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationConfigurationWASM", "ApplicationConfigurationWASM\ApplicationConfigurationWASM.csproj", "{0734A003-51F8-4A6C-AC45-7962BB6CCE9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Azure|Any CPU = Azure|Any CPU
@@ -103,6 +111,38 @@ Global
 		{3CD27E1E-BFF2-4F33-AB9D-CF43216B2805}.Develop_WebAssembly|Any CPU.Build.0 = Develop_WebAssembly|Any CPU
 		{3CD27E1E-BFF2-4F33-AB9D-CF43216B2805}.Release_WebAssembly|Any CPU.ActiveCfg = Release_WebAssembly|Any CPU
 		{3CD27E1E-BFF2-4F33-AB9D-CF43216B2805}.Release_WebAssembly|Any CPU.Build.0 = Release_WebAssembly|Any CPU
+		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Azure|Any CPU.ActiveCfg = Azure|Any CPU
+		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Azure|Any CPU.Build.0 = Azure|Any CPU
+		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Develop_Server|Any CPU.ActiveCfg = Develop_Server|Any CPU
+		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Develop_Server|Any CPU.Build.0 = Develop_Server|Any CPU
+		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Develop_WebAssembly|Any CPU.ActiveCfg = Develop_WebAssembly|Any CPU
+		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Develop_WebAssembly|Any CPU.Build.0 = Develop_WebAssembly|Any CPU
+		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Release_WebAssembly|Any CPU.ActiveCfg = Release_WebAssembly|Any CPU
+		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Release_WebAssembly|Any CPU.Build.0 = Release_WebAssembly|Any CPU
+		{D66E8FD0-0CD6-48F3-A4EF-FB480618A18E}.Azure|Any CPU.ActiveCfg = Azure|Any CPU
+		{D66E8FD0-0CD6-48F3-A4EF-FB480618A18E}.Azure|Any CPU.Build.0 = Azure|Any CPU
+		{D66E8FD0-0CD6-48F3-A4EF-FB480618A18E}.Develop_Server|Any CPU.ActiveCfg = Develop_Server|Any CPU
+		{D66E8FD0-0CD6-48F3-A4EF-FB480618A18E}.Develop_Server|Any CPU.Build.0 = Develop_Server|Any CPU
+		{D66E8FD0-0CD6-48F3-A4EF-FB480618A18E}.Develop_WebAssembly|Any CPU.ActiveCfg = Develop_WebAssembly|Any CPU
+		{D66E8FD0-0CD6-48F3-A4EF-FB480618A18E}.Develop_WebAssembly|Any CPU.Build.0 = Develop_WebAssembly|Any CPU
+		{D66E8FD0-0CD6-48F3-A4EF-FB480618A18E}.Release_WebAssembly|Any CPU.ActiveCfg = Release_WebAssembly|Any CPU
+		{D66E8FD0-0CD6-48F3-A4EF-FB480618A18E}.Release_WebAssembly|Any CPU.Build.0 = Release_WebAssembly|Any CPU
+		{437C4260-725A-4BE2-946E-A7AAB4A3F711}.Azure|Any CPU.ActiveCfg = Azure|Any CPU
+		{437C4260-725A-4BE2-946E-A7AAB4A3F711}.Azure|Any CPU.Build.0 = Azure|Any CPU
+		{437C4260-725A-4BE2-946E-A7AAB4A3F711}.Develop_Server|Any CPU.ActiveCfg = Develop_Server|Any CPU
+		{437C4260-725A-4BE2-946E-A7AAB4A3F711}.Develop_Server|Any CPU.Build.0 = Develop_Server|Any CPU
+		{437C4260-725A-4BE2-946E-A7AAB4A3F711}.Develop_WebAssembly|Any CPU.ActiveCfg = Develop_WebAssembly|Any CPU
+		{437C4260-725A-4BE2-946E-A7AAB4A3F711}.Develop_WebAssembly|Any CPU.Build.0 = Develop_WebAssembly|Any CPU
+		{437C4260-725A-4BE2-946E-A7AAB4A3F711}.Release_WebAssembly|Any CPU.ActiveCfg = Release_WebAssembly|Any CPU
+		{437C4260-725A-4BE2-946E-A7AAB4A3F711}.Release_WebAssembly|Any CPU.Build.0 = Release_WebAssembly|Any CPU
+		{0734A003-51F8-4A6C-AC45-7962BB6CCE9E}.Azure|Any CPU.ActiveCfg = Azure|Any CPU
+		{0734A003-51F8-4A6C-AC45-7962BB6CCE9E}.Azure|Any CPU.Build.0 = Azure|Any CPU
+		{0734A003-51F8-4A6C-AC45-7962BB6CCE9E}.Develop_Server|Any CPU.ActiveCfg = Develop_Server|Any CPU
+		{0734A003-51F8-4A6C-AC45-7962BB6CCE9E}.Develop_Server|Any CPU.Build.0 = Develop_Server|Any CPU
+		{0734A003-51F8-4A6C-AC45-7962BB6CCE9E}.Develop_WebAssembly|Any CPU.ActiveCfg = Develop_WebAssembly|Any CPU
+		{0734A003-51F8-4A6C-AC45-7962BB6CCE9E}.Develop_WebAssembly|Any CPU.Build.0 = Develop_WebAssembly|Any CPU
+		{0734A003-51F8-4A6C-AC45-7962BB6CCE9E}.Release_WebAssembly|Any CPU.ActiveCfg = Release_WebAssembly|Any CPU
+		{0734A003-51F8-4A6C-AC45-7962BB6CCE9E}.Release_WebAssembly|Any CPU.Build.0 = Release_WebAssembly|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +156,10 @@ Global
 		{C5D84A57-8A0F-484A-997F-B563547FB934} = {9886105C-5495-40DF-99F0-EE0D030ED66D}
 		{3F2AEEC4-C240-4960-85FF-5496863A37EF} = {3CD20226-A598-40E4-AA51-BAF056124CA9}
 		{3CD27E1E-BFF2-4F33-AB9D-CF43216B2805} = {3CD20226-A598-40E4-AA51-BAF056124CA9}
+		{E07619FC-A0FC-4C85-9992-BBF3256598EA} = {3CD20226-A598-40E4-AA51-BAF056124CA9}
+		{D66E8FD0-0CD6-48F3-A4EF-FB480618A18E} = {3CD20226-A598-40E4-AA51-BAF056124CA9}
+		{437C4260-725A-4BE2-946E-A7AAB4A3F711} = {3CD20226-A598-40E4-AA51-BAF056124CA9}
+		{0734A003-51F8-4A6C-AC45-7962BB6CCE9E} = {3CD20226-A598-40E4-AA51-BAF056124CA9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0E6360A2-10BB-41CA-97A0-F20A3A1CD7A8}

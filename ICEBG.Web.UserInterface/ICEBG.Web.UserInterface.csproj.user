@@ -5,7 +5,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <NameOfLastUsedPublishProfile>C:\Solutions\OHI\ICEBG\ICEBG.Web.UserInterface\Properties\PublishProfiles\crICEBG-UI.pubxml</NameOfLastUsedPublishProfile>
-    <ActiveDebugProfile>ICEBG.UI.Server</ActiveDebugProfile>
+    <ActiveDebugProfile>ICEBG.Web.UserInterface.WASM</ActiveDebugProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEMO|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>

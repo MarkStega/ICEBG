@@ -11,7 +11,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
-		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
+		<DefineConstants>AZURE;BLAZOR_SERVER</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
@@ -30,16 +30,25 @@
 		<PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
 		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.49.0" />
 		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.49.0" />
-		<PackageReference Include="HttpSecurity.AspNet" Version="1.0.0-preview.5" />
 		<PackageReference Include="Microsoft.AspNetCore.RateLimiting" Version="7.0.0-rc.2.22476.2" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
 		<PackageReference Include="NLog.Web.AspNetCore" Version="5.1.5" />
-		<PackageReference Include="Microsoft.NET.Build.Containers" Version="0.1.8" />
+		<PackageReference Include="Microsoft.NET.Build.Containers" Version="0.2.7" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\ApplicationConfigurationServer\ApplicationConfigurationServer.csproj" />
+	  <ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
 	  <ProjectReference Include="..\DataTier\DataTier.csproj" />
 	  <ProjectReference Include="..\ICEBG.Client\ICEBG.Client.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="nlog.Develop_WebAssembly.config">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
 	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">

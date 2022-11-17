@@ -1,4 +1,12 @@
 {
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:63049/",
+      "sslPort": 44333
+    }
+  },
   "profiles": {
     "ICEBG.Web.UserInterface": {
       "commandName": "Project",
@@ -8,23 +16,18 @@
       },
       "hotReloadEnabled": false,
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7175;http://localhost:5175"
+      "applicationUrl": "https://localhost:7175"
     },
-    "IIS Express": {
-      "commandName": "IISExpress",
+    "ICEBG.Web.UserInterface.WASM": {
+      "commandName": "Project",
       "launchBrowser": true,
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "hotReloadEnabled": false
-    }
-  },
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:63049/",
-      "sslPort": 44333
+      "hotReloadEnabled": false,
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7175;http://localhost:5175"
     }
   }
 }
