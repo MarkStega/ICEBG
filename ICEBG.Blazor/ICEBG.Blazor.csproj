@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
-		<DefineConstants>DEVELOP;BLAZOR_SERVER;Azure</DefineConstants>
+		<DefineConstants>AZURE;BLAZOR_SERVER;Azure</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">

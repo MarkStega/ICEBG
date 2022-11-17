@@ -117,8 +117,8 @@ Global
 		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Develop_Server|Any CPU.Build.0 = Develop_Server|Any CPU
 		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Develop_WebAssembly|Any CPU.ActiveCfg = Develop_WebAssembly|Any CPU
 		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Develop_WebAssembly|Any CPU.Build.0 = Develop_WebAssembly|Any CPU
-		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Release_WebAssembly|Any CPU.ActiveCfg = Develop_WebAssembly|Any CPU
-		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Release_WebAssembly|Any CPU.Build.0 = Develop_WebAssembly|Any CPU
+		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Release_WebAssembly|Any CPU.ActiveCfg = Release_WebAssembly|Any CPU
+		{E07619FC-A0FC-4C85-9992-BBF3256598EA}.Release_WebAssembly|Any CPU.Build.0 = Release_WebAssembly|Any CPU
 		{D66E8FD0-0CD6-48F3-A4EF-FB480618A18E}.Azure|Any CPU.ActiveCfg = Azure|Any CPU
 		{D66E8FD0-0CD6-48F3-A4EF-FB480618A18E}.Azure|Any CPU.Build.0 = Azure|Any CPU
 		{D66E8FD0-0CD6-48F3-A4EF-FB480618A18E}.Develop_Server|Any CPU.ActiveCfg = Develop_Server|Any CPU

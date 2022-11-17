@@ -9,16 +9,16 @@ namespace ICEBG.Client.Pages;
 public partial class About : ComponentBase
 {
 
-#if Azure
+#if AZURE
     private string pBuildMode { get; set; } = "Azure";
 #endif
-#if Develop_Server
+#if DEVELOP && BLAZOR_SERVER
     private string pBuildMode { get; set; } = "Develop_Server";
 #endif
-#if Develop_WebAssembly
+#if DEVELOP && BLAZOR_WEBASSEMBLY
     private string pBuildMode { get; set; } = "Develop_WebAssembly";
 #endif
-#if Release_WebAssembly
+#if RELEASE && BLAZOR_WEBASSEMBLY
     private string pBuildMode { get; set; } = "Release_WebAssembly";
 #endif
 
