@@ -17,15 +17,10 @@ public static class ApplicationConfigurationWASM
 
         #region AZURE
 #if AZURE
-        // GRPC
-        ApplicationConfiguration.pGRPC_EndpointPrefix = "https://localhost:443/";
-
-        // MB
-        ApplicationConfiguration.pMB_LoggingLevel = MBLoggingLevel.Warning;
-
-        // UI
-        ApplicationConfiguration.pUI_AutoLogoffInterval = 1440;
-        ApplicationConfiguration.pUI_PMIProtection = true;
+        ApplicationConfiguration.pGrpcEndpointPrefix = "https://waicebg-ds.azurewebsites.net/";
+        ApplicationConfiguration.pConfigurationIdentifier = "ICEBG";
+        ApplicationConfiguration.pSqlConnectionString = "n/a";
+        ApplicationConfiguration.pWeatherEndpoint = "https://waicebg-ds.azurewebsites.net/WeatherForecast";
 #endif
         #endregion
 

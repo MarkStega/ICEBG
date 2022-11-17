@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
-	  <DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
+	  <DefineConstants>AZURE;BLAZOR_SERVER</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
@@ -19,7 +19,7 @@
 	  <DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssemply|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssembly|AnyCPU'">
 	  <DefineConstants>RELEASE;BLAZOR_WEBASSEMBLY</DefineConstants>
   </PropertyGroup>
 
