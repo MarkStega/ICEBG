@@ -51,7 +51,7 @@ jobs:
   build-deploy-ds:
     name: Build and deploy ICEBG DS
     needs: [perform-deployment]
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Set suffix as env variable
@@ -85,7 +85,7 @@ jobs:
   build-deploy-ui:
     name: Build and deploy ICEBG UI
     needs: [perform-deployment]
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Set suffix as env variable
