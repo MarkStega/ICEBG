@@ -24,7 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Material.Blazor" Version="3.3.1" />
+    <PackageReference Include="Material.Blazor" Version="4.0.0-preview.3" />
   </ItemGroup>
 
 </Project>
