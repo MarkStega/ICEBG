@@ -11,9 +11,7 @@ using GoogleAnalytics.Blazor;
 using HttpSecurity.AspNet;
 
 using ICEBG.AppConfig;
-using ICEBG.Client;
 using ICEBG.Client.Infrastructure.ClientServices;
-using ICEBG.SystemFramework;
 using ICEBG.Web.UserInterface;
 
 using Microsoft.AspNetCore.Builder;
@@ -270,7 +268,7 @@ try
 
     logger.Debug("Completing startup, executing app.Run()...");
     logger.Debug(" ");
-    app.Run();
+    await app.RunAsync();
 }
 catch (Exception ex)
 {

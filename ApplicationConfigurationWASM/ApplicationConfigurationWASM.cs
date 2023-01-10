@@ -33,20 +33,6 @@ public static class ApplicationConfigurationWASM
 #endif
         #endregion
 
-        #region LBH
-#if LBH
-        // GRPC
-        ApplicationConfiguration.pGRPC_EndpointPrefix = "https://localhost:44350/";
-
-        // MB
-        ApplicationConfiguration.pMB_LoggingLevel = MBLoggingLevel.Warning;
-
-        // UI
-        ApplicationConfiguration.pUI_AutoLogoffInterval = 60;
-        ApplicationConfiguration.pUI_PMIProtection = false;
-#endif
-        #endregion
-
         #region WASM
 #if WASM
 

@@ -25,9 +25,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Grpc.Net.Client" Version="2.50.0" />
-		<PackageReference Include="Grpc.Net.Client.Web" Version="2.50.0" />
-		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.3" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.51.0" />
+		<PackageReference Include="Grpc.Net.Client.Web" Version="2.51.0" />
+		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 	</ItemGroup>
@@ -41,6 +41,11 @@
 		<ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
 		<ProjectReference Include="..\DataTier\DataTier.csproj" />
 		<ProjectReference Include="..\SharedUtilities\SharedUtilities.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<UpToDateCheckInput Include="@(InputStaticAssetsStyles)" Set="Styles" />
+		<UpToDateCheckOutput Include="@(OutputStaticAssetsStyles)" Set="Styles" />
 	</ItemGroup>
 
 	<ItemGroup>

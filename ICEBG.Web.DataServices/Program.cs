@@ -101,7 +101,7 @@ try
 
     logger.Debug("Completing startup, executing app.Run()");
     logger.Debug(" ");
-    app.Run();
+    await app.RunAsync();
 }
 catch (Exception ex)
 {
