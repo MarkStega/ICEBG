@@ -62,7 +62,7 @@ jobs:
 ############################################################################################################
   build-deploy-ds:
     name: Build and deploy ICEBG DS
-    needs: [perform-deployment]
+    needs: [set-suffix]
     runs-on: ubuntu-latest
 
     steps:
@@ -87,18 +87,18 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    - name: Publish, tag, and push DS image
-      run: |
-        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }} -p:ContainerImageName=${{env.appNameDS}}
-        docker tag ${{env.appNameDS}}:${{ env.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.suffix }}
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.suffix }}
+    #- name: Publish, tag, and push DS image
+    #  run: |
+    #    dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }} -p:ContainerImageName=${{env.appNameDS}}
+    #    docker tag ${{env.appNameDS}}:${{ env.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.suffix }}
+    #    docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.suffix }}
 
 ############################################################################################################
 # Build and deploy blazor UI image
 ############################################################################################################
   build-deploy-ui:
     name: Build and deploy ICEBG UI
-    needs: [perform-deployment]
+    needs: [set-suffix]
     runs-on: ubuntu-latest
 
     steps:
@@ -125,11 +125,11 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    - name: Publish, tag, and push UI image
-      run: |
-        dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }} -p:ContainerImageName=${{env.appNameUI}} --sc
-        docker tag ${{env.appNameUI}}:${{ env.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.suffix }}
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.suffix }}
+    #- name: Publish, tag, and push UI image
+    #  run: |
+    #    dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }} -p:ContainerImageName=${{env.appNameUI}} --sc
+    #    docker tag ${{env.appNameUI}}:${{ env.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.suffix }}
+    #    docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.suffix }}
 
 ############################################################################################################
 # Build blazor DS image
