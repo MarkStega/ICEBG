@@ -18,7 +18,7 @@ public static class ApplicationConfiguration
 
 
     public static string pConfigurationIdentifier { get; set; }
-    public static string pGrpcEndpointPrefix { get; set; }
+    public static string pDataServicesEndpointPrefix { get; set; }
     public static string pSqlConnectionString { get; set; }
     public static string pWeatherEndpoint { get; set; }
 
@@ -28,8 +28,8 @@ public static class ApplicationConfiguration
 
     public static void Initialize()
     {
-        pAPP_ReleaseDate = "10/09/2022";
-        pAPP_Version = "3.2.9";
+        pAPP_ReleaseDate = "01/16/2023";
+        pAPP_Version = "3.2.10";
     }
 
     #endregion

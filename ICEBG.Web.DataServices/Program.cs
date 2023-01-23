@@ -24,7 +24,7 @@ try
     ApplicationConfigurationServer.Initialize(builder);
 
     logger.Debug("ClientServices.Inject");
-    ClientServices.Inject(ApplicationConfiguration.pGrpcEndpointPrefix, builder.Services);
+    ClientServices.Inject(ApplicationConfiguration.pDataServicesEndpointPrefix, builder.Services);
 
     // Add services to the container.
 
@@ -47,11 +47,7 @@ try
         options.AddPolicy(name: corsPolicy,
                           policy =>
                           {
-                              policy.WithOrigins("https://localhost:7175",
-                                                 "https://T570:7175",
-                                                 "http://localhost:7175",
-                                                 "http://T570:7175")
-                                    .AllowCredentials()
+                              policy.AllowAnyOrigin()
                                     .AllowAnyHeader()
                                     .AllowAnyMethod()
                                     .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");

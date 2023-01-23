@@ -21,21 +21,17 @@
 		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssemply|AnyCPU'">
-		<DefineConstants>RELEASE;BLAZOR_WEBASSEMBLY</DefineConstants>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
 		<PackageReference Include="CompressedStaticFiles.AspNet" Version="1.0.0" />
-		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.2" />
+		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.3" />
 		<PackageReference Include="Grpc.AspNetCore" Version="2.51.0" />
 		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.51.0" />
-		<PackageReference Include="HttpSecurity.AspNet" Version="1.0.0-preview.6" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.1" />
+		<PackageReference Include="HttpSecurity.AspNet" Version="1.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.2" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
 		<PackageReference Include="NLog.Web.AspNetCore" Version="5.2.1" />
-		<PackageReference Include="Microsoft.NET.Build.Containers" Version="0.2.7" />
+		<PackageReference Include="Microsoft.NET.Build.Containers" Version="0.3.2" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -46,7 +42,7 @@
 	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-		<Copy SourceFiles="$(ProjectDir)appsettings.$(ConfigurationName).json" DestinationFiles="$(ProjectDir)appsettings.json" />
+		<Copy SourceFiles="$(SolutionDir)appsettings.$(ConfigurationName).json" DestinationFiles="$(ProjectDir)appsettings.json" />
 		<Copy SourceFiles="$(ProjectDir)nlog.$(ConfigurationName).config" DestinationFiles="$(ProjectDir)nlog.config" />
 	</Target>
 

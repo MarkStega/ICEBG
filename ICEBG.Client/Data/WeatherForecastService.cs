@@ -15,7 +15,7 @@ namespace ICEBG.Client
             using (var client = new System.Net.Http.HttpClient())
             {
                 var request = new System.Net.Http.HttpRequestMessage();
-                request.RequestUri = new Uri(ApplicationConfiguration.pWeatherEndpoint);
+                request.RequestUri = new Uri(ApplicationConfiguration.pDataServicesEndpointPrefix + ApplicationConfiguration.pWeatherEndpoint);
                 var response = await client.SendAsync(request);
                 var forecasts = await response.Content.ReadFromJsonAsync<WeatherForecast[]>();
                 return forecasts;

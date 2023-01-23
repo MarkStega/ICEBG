@@ -46,7 +46,7 @@ try
 
     // Add services to the container.
     logger.Debug("ClientServices.Inject");
-    ClientServices.Inject(ApplicationConfiguration.pGrpcEndpointPrefix, builder.Services);
+    ClientServices.Inject(ApplicationConfiguration.pDataServicesEndpointPrefix, builder.Services);
 
     //  Response compression
     builder.Services.AddResponseCompression(options =>
@@ -79,15 +79,20 @@ try
                     .AddBaseUri(o => o.AddSelf())
                     .AddBlockAllMixedContent()
                     .AddChildSrc(o => o.AddSelf())
+
                     .AddConnectSrc(o => o
                         .AddSelf()
-                        .AddUri((baseUri, baseDomain) => $"wss://{baseDomain}:*"))
+                        .AddUri((baseUri, baseDomain) => $"wss://{baseDomain}:*")
+                        .AddUri((baseUri, baseDomain) => ApplicationConfiguration.pDataServicesEndpointPrefix))
+
                     // The generated hashes do nothing here, and we include it here only to show that generated hash values can be added to policies - script-src would generally be the policy where you use this technique.
                     .AddDefaultSrc(o => o
                         .AddSelf()
                         .AddStrictDynamicIf(() => !builder.Environment.IsDevelopment())
                         .AddUnsafeInline()
-                        .AddGeneratedHashValues(StaticFileExtension.CSS))
+                        .AddGeneratedHashValues(StaticFileExtension.CSS)
+                        .AddUri((baseUri, baseDomain) => ApplicationConfiguration.pDataServicesEndpointPrefix))
+
                     .AddFontSrc(o => o
                         .AddUri("https://fonts.googleapis.com")
                         .AddUri("https://fonts.gstatic.com"))
@@ -126,7 +131,6 @@ try
                     .AddUpgradeInsecureRequests()
                     .AddWorkerSrc(o => o.AddSelf());
             })
-            .AddAccessControlAllowOriginAll()
             .AddReferrerPolicy(ReferrerPolicyDirective.NoReferrer)
             .AddPermissionsPolicy("accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()")
             .AddStrictTransportSecurity(31536000, true)
@@ -229,7 +233,7 @@ try
 
     app.UseHttpsRedirection();
 
-    //    app.UseHttpSecurityHeaders();
+    app.UseHttpSecurityHeaders();
 
 #if BLAZOR_SERVER
     app.MapBlazorHub();
