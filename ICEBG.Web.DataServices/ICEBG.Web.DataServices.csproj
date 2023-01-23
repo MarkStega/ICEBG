@@ -47,7 +47,7 @@
 	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-		<Copy SourceFiles="$(SolutionDir)appsettings.$(ConfigurationName).json" DestinationFiles="$(ProjectDir)appsettings.json" />
+		<Copy SourceFiles="$(ProjectDir)appsettings.$(ConfigurationName).json" DestinationFiles="$(ProjectDir)appsettings.json" />
 		<Copy SourceFiles="$(ProjectDir)nlog.$(ConfigurationName).config" DestinationFiles="$(ProjectDir)nlog.config" />
 	</Target>
 
