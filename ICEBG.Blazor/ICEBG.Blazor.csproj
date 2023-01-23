@@ -20,10 +20,6 @@
 		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY;Develop_WebAssembly</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssemply|AnyCPU'">
-		<DefineConstants>RELEASE;BLAZOR_WEBASSEMBLY;Release_WebAssemply</DefineConstants>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationConfigurationWASM\ApplicationConfigurationWASM.csproj" />
 		<ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
@@ -33,9 +29,9 @@
 
 	<ItemGroup>
 		<PackageReference Include="Blazor.Extensions.Logging" Version="2.0.4" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.2" PrivateAssets="all" />
 		<PackageReference Include="System.Net.Http.Json" Version="7.0.0" />
 	</ItemGroup>
 

@@ -19,12 +19,8 @@
 	  <DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssemply|AnyCPU'">
-	  <DefineConstants>RELEASE;BLAZOR_WEBASSEMBLY</DefineConstants>
-  </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Material.Blazor" Version="3.3.1" />
+    <PackageReference Include="Material.Blazor" Version="4.0.0-preview.9" />
   </ItemGroup>
 
 </Project>

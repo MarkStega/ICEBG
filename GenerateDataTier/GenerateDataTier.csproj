@@ -21,10 +21,6 @@
 		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssemply|AnyCPU'">
-		<DefineConstants>RELEASE;BLAZOR_WEBASSEMBLY</DefineConstants>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<ProjectReference Include="..\DataTier\DataTier.csproj" />
 		<ProjectReference Include="..\GeneratorUtilities\GeneratorUtilities.csproj" />

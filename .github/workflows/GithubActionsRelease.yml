@@ -46,16 +46,31 @@ jobs:
       run: echo ""
 
 ############################################################################################################
+# Set unified suffix for the two deployed applications
+############################################################################################################
+  set-suffix:
+    name: Create the date based suffix
+    needs: [perform-deployment]
+    runs-on: ubuntu-latest
+    outputs:
+      outputSuffix: ${{ steps.setSuffix.outputs.GlobalSuffix }}
+
+    steps:
+    - id: setSuffix
+      run: echo "GlobalSuffix=$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
+      shell: bash
+
+############################################################################################################
 # Build and deploy blazor DS image
 ############################################################################################################
   build-deploy-ds:
     name: Build and deploy ICEBG DS
-    needs: [perform-deployment]
+    needs: [set-suffix]
     runs-on: ubuntu-latest
 
     steps:
-    - name: Set suffix as env variable
-      run: echo "suffix=$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+    - name: Retrieve the global suffix
+      run: echo "suffix=${{needs.set-suffix.outputs.outputSuffix}}" >> $GITHUB_ENV
       shell: bash
 
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
@@ -84,12 +99,12 @@ jobs:
 ############################################################################################################
   build-deploy-ui:
     name: Build and deploy ICEBG UI
-    needs: [perform-deployment]
+    needs: [set-suffix]
     runs-on: ubuntu-latest
 
     steps:
-    - name: Set suffix as env variable
-      run: echo "suffix=$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+    - name: Retrieve the global suffix
+      run: echo "suffix=${{needs.set-suffix.outputs.outputSuffix}}" >> $GITHUB_ENV
       shell: bash
 
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️

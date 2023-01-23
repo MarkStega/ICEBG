@@ -17,51 +17,21 @@ public static class ApplicationConfigurationWASM
 
         #region AZURE
 #if AZURE
-        ApplicationConfiguration.pGrpcEndpointPrefix = "https://waicebg-ds.azurewebsites.net/";
         ApplicationConfiguration.pConfigurationIdentifier = "ICEBG";
+        ApplicationConfiguration.pDataServicesEndpointPrefix = "https://waicebg-ds.azurewebsites.net/";
         ApplicationConfiguration.pSqlConnectionString = "n/a";
-        ApplicationConfiguration.pWeatherEndpoint = "https://waicebg-ds.azurewebsites.net/WeatherForecast";
+        ApplicationConfiguration.pWeatherEndpoint = "WeatherForecast";
 #endif
         #endregion
 
         #region DEVELOP
 #if DEVELOP
-        ApplicationConfiguration.pGrpcEndpointPrefix = "https://localhost:7173/";
         ApplicationConfiguration.pConfigurationIdentifier = "ICEBG";
+        ApplicationConfiguration.pDataServicesEndpointPrefix = "https://192.168.1.95:7173/";
         ApplicationConfiguration.pSqlConnectionString = "n/a";
-        ApplicationConfiguration.pWeatherEndpoint = "https://localhost:7173/WeatherForecast";
+        ApplicationConfiguration.pWeatherEndpoint = "WeatherForecast";
 #endif
         #endregion
-
-        #region LBH
-#if LBH
-        // GRPC
-        ApplicationConfiguration.pGRPC_EndpointPrefix = "https://localhost:44350/";
-
-        // MB
-        ApplicationConfiguration.pMB_LoggingLevel = MBLoggingLevel.Warning;
-
-        // UI
-        ApplicationConfiguration.pUI_AutoLogoffInterval = 60;
-        ApplicationConfiguration.pUI_PMIProtection = false;
-#endif
-        #endregion
-
-        #region WASM
-#if WASM
-
-        // GRPC
-        ApplicationConfiguration.pGRPC_EndpointPrefix = "https://localhost:44350/";
-
-        // MB
-        ApplicationConfiguration.pMB_LoggingLevel = MBLoggingLevel.Warning;
-
-        // UI
-        ApplicationConfiguration.pUI_AutoLogoffInterval = 1440;
-        ApplicationConfiguration.pUI_PMIProtection = false;
-#endif
-        #endregion
-
     }
 
     #endregion

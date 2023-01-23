@@ -30,12 +30,14 @@
     <link rel="apple-touch-icon" sizes="512x512" href="_content/ICEBG.Client/ios-images/512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="_content/ICEBG.Client/ios-images/192.png" />
 
-    @if (PlatformDetermination.kIsBlazorWebAssembly)
+    @if (PlatformDetermination.kIsBlazorServer)
+    {
+        <component type="typeof(HeadOutlet)" render-mode="@RenderMode" />
+    }
+    else
     {
         <link rel="manifest" href="_content/ICEBG.Client/pwa/manifest.json" />
     }
-
-    <component type="typeof(HeadOutlet)" render-mode="@RenderMode" />
 </head>
 
 <body>

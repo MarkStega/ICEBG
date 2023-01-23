@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "GenerateDataTier": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:58753;http://localhost:58754"
+    }
+  }
+}

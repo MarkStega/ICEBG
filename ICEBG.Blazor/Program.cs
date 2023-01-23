@@ -43,7 +43,7 @@ public class Program
 
         builder.Services.AddOptions();
 
-        ClientServices.Inject(ApplicationConfiguration.pGrpcEndpointPrefix, builder.Services);
+        ClientServices.Inject(ApplicationConfiguration.pDataServicesEndpointPrefix, builder.Services);
 
         await builder.Build().RunAsync();
     }

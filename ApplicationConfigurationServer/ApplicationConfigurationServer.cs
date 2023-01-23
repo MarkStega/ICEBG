@@ -25,7 +25,7 @@ public static class ApplicationConfigurationServer
         ApplicationConfiguration.Initialize();
 
         ApplicationConfiguration.pConfigurationIdentifier = builder.Configuration["ICEBG:BaseConfiguration:ConfigurationIdentifier"];
-        ApplicationConfiguration.pGrpcEndpointPrefix = builder.Configuration["ICEBG:BaseConfiguration:GrpcEndpointPrefix"];
+        ApplicationConfiguration.pDataServicesEndpointPrefix = builder.Configuration["ICEBG:BaseConfiguration:DataServicesEndpointPrefix"];
         ApplicationConfiguration.pSqlConnectionString = builder.Configuration["ICEBG:BaseConfiguration:SqlConnectionString"];
         ApplicationConfiguration.pWeatherEndpoint = builder.Configuration["ICEBG:BaseConfiguration:WeatherEndpoint"];
     }
