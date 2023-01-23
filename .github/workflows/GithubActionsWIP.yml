@@ -66,6 +66,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Display the global suffix
+      run: echo ${{needs.set-suffix.outputs.outputSuffix}}
+      shell: bash
+
     - name: Retrieve the global suffix
       run: echo "suffix=${{needs.set-suffix.outputs.outputSuffix}}" >> $GITHUB_ENV
       shell: bash
@@ -98,6 +102,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Display the global suffix
+      run: echo ${{needs.set-suffix.outputs.outputSuffix}}
+      shell: bash
+
     - name: Retrieve the global suffix
       run: echo "suffix=${{needs.set-suffix.outputs.outputSuffix}}" >> $GITHUB_ENV
       shell: bash
