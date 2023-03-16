@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<OutputType>Library</OutputType>
@@ -21,10 +21,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Grpc.Net.Client" Version="2.51.0" />
-		<PackageReference Include="Grpc.Net.Client.Web" Version="2.51.0" />
-		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.10" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.2" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.52.0" />
+		<PackageReference Include="Grpc.Net.Client.Web" Version="2.52.0" />
+		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.16" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0-preview.2.23153.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0-preview.2.23153.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 	</ItemGroup>
 
@@ -73,17 +74,17 @@
 		-->
 
 		<!-- First, we strip the property value back to the root SDKs level and then down into the WebAssembly SDK -->
-		<_SDKRoot>$(ILLinkTasksAssembly.Substring(0,$(ILLinkTasksAssembly.LastIndexOf('Microsoft.NET.ILLink.Tasks'))))</_SDKRoot>
-		<BlazorWebAssemblySdkDirectoryRoot>$(_SDKRoot)Microsoft.NET.Sdk.BlazorWebAssembly\</BlazorWebAssemblySdkDirectoryRoot>
+		<!--<_SDKRoot>$(ILLinkTasksAssembly.Substring(0,$(ILLinkTasksAssembly.LastIndexOf('Microsoft.NET.ILLink.Tasks'))))</_SDKRoot>
+		<BlazorWebAssemblySdkDirectoryRoot>$(_SDKRoot)Microsoft.NET.Sdk.BlazorWebAssembly\</BlazorWebAssemblySdkDirectoryRoot>-->
 
 		<!-- The next two lines are derived from examples posted by the .NET Foundation. -->
-		<_BlazorWebAssemblySdkTasksAssembly>$(BlazorWebAssemblySdkDirectoryRoot)tools\net472\Microsoft.NET.Sdk.BlazorWebAssembly.Tasks.dll</_BlazorWebAssemblySdkTasksAssembly>
-		<_BlazorWebAssemblySdkToolAssembly>$(BlazorWebAssemblySdkDirectoryRoot)tools\$(TargetFramework)\Microsoft.NET.Sdk.BlazorWebAssembly.Tool.dll</_BlazorWebAssemblySdkToolAssembly>
+		<!--<_BlazorWebAssemblySdkTasksAssembly>$(BlazorWebAssemblySdkDirectoryRoot)tools\net472\Microsoft.NET.Sdk.BlazorWebAssembly.Tasks.dll</_BlazorWebAssemblySdkTasksAssembly>
+		<_BlazorWebAssemblySdkToolAssembly>$(BlazorWebAssemblySdkDirectoryRoot)tools\$(TargetFramework)\Microsoft.NET.Sdk.BlazorWebAssembly.Tool.dll</_BlazorWebAssemblySdkToolAssembly>-->
 	</PropertyGroup>
 
 	<!-- The next two lines are Copyright (c) .NET Foundation. All rights reserved. -->
-	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.BrotliCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)" />
-	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.GzipCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)" />
+	<!--<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.BrotliCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)" />
+	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.GzipCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)" />-->
 
 	<!--
 		This target runs after build. If you want to run after Publish, change:
@@ -106,21 +107,21 @@
 		</ItemGroup>
 
 		<!--Call the BlazorWebAssembly Task GZipCompress and store the results in MyCompressedFiles-->
-		<GZipCompress FilesToCompress="@(MyStaticFiles)" OutputDirectory="$(IntermediateOutputPath)compress\">
+		<!--<GZipCompress FilesToCompress="@(MyStaticFiles)" OutputDirectory="$(IntermediateOutputPath)compress\">
 			<Output TaskParameter="CompressedFiles" ItemName="MyCompressedFiles" />
-		</GZipCompress>
+		</GZipCompress>-->
 
 		<!--Call the BlazorWebAssembly Task BrotliCompress and store the results in MyCompressedFiles-->
-		<BrotliCompress FilesToCompress="@(MyStaticFiles)" OutputDirectory="$(IntermediateOutputPath)compress\" ToolAssembly="$(_BlazorWebAssemblySdkToolAssembly)" ToolExe="$(_RazorSdkDotNetHostFileName)" ToolPath="$(_RazorSdkDotNetHostDirectory)">
+		<!--<BrotliCompress FilesToCompress="@(MyStaticFiles)" OutputDirectory="$(IntermediateOutputPath)compress\" ToolAssembly="$(_BlazorWebAssemblySdkToolAssembly)" ToolExe="$(_RazorSdkDotNetHostFileName)" ToolPath="$(_RazorSdkDotNetHostDirectory)">
 			<Output TaskParameter="CompressedFiles" ItemName="MyCompressedFiles" />
-		</BrotliCompress>
+		</BrotliCompress>-->
 
 		<!--Log what we have done-->
 		<Message Importance="High" Text="======= Brotli/GZip Compression For @(MyCompressedFiles-&gt;Count()) Static Files =======" />
 		<Message Importance="High" Text=" Compressed: %(MyCompressedFiles.OriginalItemSpec)%(MyCompressedFiles.Extension)" />
 
 		<!--Rename/move the compressed files back to to the correct place/names as they have "hashed" names at this stage.-->
-		<Move SourceFiles="%(MyCompressedFiles.FullPath)" DestinationFiles="%(MyCompressedFiles.OriginalItemSpec)%(MyCompressedFiles.Extension)" />
+		<!--<Move SourceFiles="%(MyCompressedFiles.FullPath)" DestinationFiles="%(MyCompressedFiles.OriginalItemSpec)%(MyCompressedFiles.Extension)" />-->
 
 	</Target>
 
