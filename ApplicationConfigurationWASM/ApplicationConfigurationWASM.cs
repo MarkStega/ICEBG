@@ -27,7 +27,7 @@ public static class ApplicationConfigurationWASM
         #region DEVELOP
 #if DEVELOP
         ApplicationConfiguration.pConfigurationIdentifier = "ICEBG";
-        ApplicationConfiguration.pDataServicesEndpointPrefix = "https://192.168.1.95:7173/";
+        ApplicationConfiguration.pDataServicesEndpointPrefix = "https://localhost:7173/";
         ApplicationConfiguration.pSqlConnectionString = "n/a";
         ApplicationConfiguration.pWeatherEndpoint = "WeatherForecast";
 #endif
