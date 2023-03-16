@@ -78,8 +78,11 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v2
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+        include-prerelease: true
 
     - name: 'Docker login'
       uses: azure/docker-login@v1
@@ -112,8 +115,11 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v2
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+        include-prerelease: true
 
     - name: 'Docker login'
       uses: azure/docker-login@v1
@@ -146,8 +152,11 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v2
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+        include-prerelease: true
 
     - name: Build DS image
       run: |
@@ -171,8 +180,11 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v2
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+        include-prerelease: true
 
     - name: Build UI image
       run: |
