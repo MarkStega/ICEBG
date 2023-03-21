@@ -8,6 +8,8 @@
 		<UserSecretsId>ICEBG.Data.Server-9042ECD1-A92B-4B48-B0EA-E54F5A5A6F9A</UserSecretsId>
 		<WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
 		<Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
+
+		<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-preview</ContainerBaseImage>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
