@@ -10,6 +10,7 @@
 		<Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
 
 		<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-preview</ContainerBaseImage>
+		<ContainerPort Include="80" Type="tcp" />
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
