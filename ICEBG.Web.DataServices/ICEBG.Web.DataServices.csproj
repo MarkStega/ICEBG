@@ -1,13 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<LangVersion>11</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<UserSecretsId>ICEBG.Data.Server-9042ECD1-A92B-4B48-B0EA-E54F5A5A6F9A</UserSecretsId>
 		<WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
 		<Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
+
+		<SelfContained>false</SelfContained>
+		<EnableSdkContainerSupport>true</EnableSdkContainerSupport>
+		<SdkContainerSupportPackageVersion>0.4.*</SdkContainerSupportPackageVersion>
+
+		<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-preview</ContainerBaseImage>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
@@ -23,12 +29,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Grpc.AspNetCore" Version="2.51.0" />
-		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.51.0" />
-		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.51.0" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
-		<PackageReference Include="NLog.Web.AspNetCore" Version="5.2.1" />
-		<PackageReference Include="Microsoft.NET.Build.Containers" Version="0.3.2" />
+		<ContainerPort Include="80" Type="tcp" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Grpc.AspNetCore" Version="2.52.0" />
+		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.52.0" />
+		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.52.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>

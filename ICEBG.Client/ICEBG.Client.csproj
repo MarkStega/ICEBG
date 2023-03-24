@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<OutputType>Library</OutputType>
@@ -21,10 +21,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Grpc.Net.Client" Version="2.51.0" />
-		<PackageReference Include="Grpc.Net.Client.Web" Version="2.51.0" />
-		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.9" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.2" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.52.0" />
+		<PackageReference Include="Grpc.Net.Client.Web" Version="2.52.0" />
+		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.16" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0-preview.2.23153.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0-preview.2.23153.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 	</ItemGroup>
 
@@ -61,24 +62,16 @@
 
 	</Target>
 
-
 	<!--All subsequent code contributed by https://github.com/SQL-MisterMagoo-->
 
-	<PropertyGroup>
-		<!--Paths to tools, tasks, and extensions are calculated relative to the BlazorWebAssemblySdkDirectoryRoot.
-			But there does not seem to be a property for that, so after much trial and error, using the property 
-			ILLinkTasksAssembly seems most reliable as it contains the same value whether the build is run from VS 
-			or the command line, unlike many others such as MSBuildSDKsPath.
-			If a better property is identified, this can be changed.			
-		-->
-
+	<PropertyGroup Condition="'$(_BlazorWebAssemblySdkToolAssembly)'==''">
 		<!-- First, we strip the property value back to the root SDKs level and then down into the WebAssembly SDK -->
-		<_SDKRoot>$(ILLinkTasksAssembly.Substring(0,$(ILLinkTasksAssembly.LastIndexOf('Microsoft.NET.ILLink.Tasks'))))</_SDKRoot>
-		<BlazorWebAssemblySdkDirectoryRoot>$(_SDKRoot)Microsoft.NET.Sdk.BlazorWebAssembly\</BlazorWebAssemblySdkDirectoryRoot>
+		<_SDKRoot>$(NetCoreRoot)sdk\$(NETCoreSDKVersion)\Sdks</_SDKRoot>
+		<BlazorWebAssemblySdkDirectoryRoot>$(_SDKRoot)\Microsoft.NET.Sdk.BlazorWebAssembly\</BlazorWebAssemblySdkDirectoryRoot>
 
 		<!-- The next two lines are derived from examples posted by the .NET Foundation. -->
-		<_BlazorWebAssemblySdkTasksAssembly>$(BlazorWebAssemblySdkDirectoryRoot)tools\net472\Microsoft.NET.Sdk.BlazorWebAssembly.Tasks.dll</_BlazorWebAssemblySdkTasksAssembly>
-		<_BlazorWebAssemblySdkToolAssembly>$(BlazorWebAssemblySdkDirectoryRoot)tools\$(TargetFramework)\Microsoft.NET.Sdk.BlazorWebAssembly.Tool.dll</_BlazorWebAssemblySdkToolAssembly>
+		<_BlazorWebAssemblySdkTasksAssembly Condition="'$(_BlazorWebAssemblySdkTasksAssembly)'==''">$(BlazorWebAssemblySdkDirectoryRoot)tools\net472\Microsoft.NET.Sdk.BlazorWebAssembly.Tasks.dll</_BlazorWebAssemblySdkTasksAssembly>
+		<_BlazorWebAssemblySdkToolAssembly Condition="'$(_BlazorWebAssemblySdkToolAssembly)'==''">$(BlazorWebAssemblySdkDirectoryRoot)tools\$(TargetFramework)\Microsoft.NET.Sdk.BlazorWebAssembly.Tool.dll</_BlazorWebAssemblySdkToolAssembly>
 	</PropertyGroup>
 
 	<!-- The next two lines are Copyright (c) .NET Foundation. All rights reserved. -->

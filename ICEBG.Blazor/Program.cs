@@ -23,9 +23,9 @@ using Microsoft.AspNetCore.Components.Web;
 namespace ICEBG.Blazor;
 public class Program
 {
-    public static async Task Main(string[] args)
+    public static async Task Main(string[] arguments)
     {
-        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        var builder = WebAssemblyHostBuilder.CreateDefault(arguments);
         builder.Logging.SetMinimumLevel(LogLevel.Information);
         builder.RootComponents.Add<App>("#app");
         builder.RootComponents.Add<HeadOutlet>("head::after");

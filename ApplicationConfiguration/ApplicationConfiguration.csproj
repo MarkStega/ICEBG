@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
 	  <Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Material.Blazor" Version="4.0.0-preview.9" />
+    <PackageReference Include="Material.Blazor" Version="4.0.0-preview.16" />
   </ItemGroup>
 
 </Project>
