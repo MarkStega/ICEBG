@@ -18,7 +18,7 @@ public static class ApplicationConfigurationWASM
         #region AZURE
 #if AZURE
         ApplicationConfiguration.pConfigurationIdentifier = "ICEBG";
-        ApplicationConfiguration.pDataServicesEndpointPrefix = "https://waicebg-ds.azurewebsites.net/";
+        ApplicationConfiguration.pDataServicesEndpointPrefix = "https://waicebg-ds.azurewebsites.net:8080/";
         ApplicationConfiguration.pSqlConnectionString = "n/a";
         ApplicationConfiguration.pWeatherEndpoint = "WeatherForecast";
 #endif
