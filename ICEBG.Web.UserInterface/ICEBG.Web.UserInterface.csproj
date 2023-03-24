@@ -8,6 +8,10 @@
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
 
+		<SelfContained>false</SelfContained>
+		<EnableSdkContainerSupport>true</EnableSdkContainerSupport>
+		<SdkContainerSupportPackageVersion>0.4.*</SdkContainerSupportPackageVersion>
+
 		<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-preview</ContainerBaseImage>
 	</PropertyGroup>
 
@@ -35,7 +39,6 @@
 		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.52.0" />
 		<PackageReference Include="HttpSecurity.AspNet" Version="1.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-preview.2.23153.2" />
-		<PackageReference Include="Microsoft.NET.Build.Containers" Version="0.3.2" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
 		<PackageReference Include="NLog.Web.AspNetCore" Version="5.2.2" />
 	</ItemGroup>
