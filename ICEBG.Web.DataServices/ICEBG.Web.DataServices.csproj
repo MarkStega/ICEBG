@@ -9,9 +9,9 @@
 		<WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
 		<Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
 
-		<SelfContained>false</SelfContained>
 		<EnableSdkContainerSupport>true</EnableSdkContainerSupport>
 		<SdkContainerSupportPackageVersion>0.4.*</SdkContainerSupportPackageVersion>
+		<SelfContained>false</SelfContained>
 
 		<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-preview</ContainerBaseImage>
 	</PropertyGroup>
@@ -37,7 +37,7 @@
 		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.52.0" />
 		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.52.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
-		<PackageReference Include="NLog.Web.AspNetCore" Version="5.2.2" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.2.3" />
 	</ItemGroup>
 
 	<ItemGroup>
