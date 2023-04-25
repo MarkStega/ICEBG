@@ -2,6 +2,29 @@
 
 @inherits LayoutComponentBase
 
+@inject NavigationManager NavigationService
+@inject IJSRuntime JsRuntime
+
+<MBDrawer @ref="@Drawer"
+          IsDismissible="true">
+
+    <nav class="mdc-list">
+        <MBListItem LeadingIcon="home" Label="Home" @onclick="@(() => ListItemClickHandler(""))" />
+        <MBListItem LeadingIcon="assignment" Label="GRPC configuration" @onclick="@(() => ListItemClickHandler("configuration"))" />
+        <MBListItem LeadingIcon="table_chart" Label="REST weather" @onclick="@(() => ListItemClickHandler("weather"))" />
+        <MBListItem LeadingIcon="info" Label="About" @onclick="@(() => ListItemClickHandler("about"))" />
+    </nav>
+</MBDrawer>
+
+<div class="mdc-drawer-app-content">
+    <MBTopAppBar Title="ICEBG"
+    @onclick="@SideBarToggle"
+                 NavIcon="menu"
+                 ScrollTarget="#main-content"
+                 TopAppBarType="@MBTopAppBarType.Dense"
+                 class="app-bar mdc-top-app-bar--short-has-action-item mdc-elevation--z5">
+    </MBTopAppBar>
+</div>
 
 <CascadingValue Value="@this" IsFixed="true">
     <div id="dw-main-top" class="mdc-drawer-app-content dw-main-content dw-yellow">
@@ -32,7 +55,7 @@
                 <MBFloatingActionButton Icon="home" Exited="@HomeButtonExited" @onclick="HomeClick" />
             </div>
 
-            <main>
+            <main style="margin:25px;">
                 @Body
             </main>
         </div>

@@ -24,6 +24,19 @@ public partial class MainLayout : LayoutComponentBase
     private bool HomeButtonExited { get; set; } = true;
     private ContactMessage ContactMessage { get; set; } = new();
 
+    private MBDrawer Drawer { get; set; }
+
+
+    private void ListItemClickHandler(string NavigationReference)
+    {
+        Drawer.NotifyNavigation();
+        NavigationService.NavigateTo(NavigationReference);
+    }
+
+    private void SideBarToggle()
+    {
+        Drawer.Toggle();
+    }
 
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
