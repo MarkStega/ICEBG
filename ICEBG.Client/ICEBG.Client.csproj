@@ -148,13 +148,13 @@
 	</Target>
 
 	<Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
-		<Exec Command="echo ***** npm install (styles)" />
+		<Message Importance="high" Text="***** npm install (styles)" />
 		<Exec Command="npm install" />
 
-		<Exec Command="echo ***** npm run build-css" />
+		<Message Importance="high" Text="***** npm run build-css" />
 		<Exec Command="npm run build-css" />
 
-		<Exec Command="echo ***** npm run build-min-css" />
+		<Message Importance="high" Text="***** npm run build-min-css" />
 		<Exec Command="npm run build-min-css" />
 
 	</Target>
