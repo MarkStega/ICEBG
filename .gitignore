@@ -132,7 +132,3 @@ ICEBG.Client/wwwroot/css/*.gz
 ICEBG.Client/wwwroot/js/*.js
 ICEBG.Client/wwwroot/js/*.br
 ICEBG.Client/wwwroot/js/*.gz
-
-#Copied configuration files
-appsettings.json
-nlog.config
