@@ -11,7 +11,7 @@
                     TwitterImage="">
     @foreach (var item in CarouselImages)
     {
-        <link rel="@item.Rel" href="@item.Uri" as="image">
+        <link rel="prefetch" href="@item.Uri" as="image">
     }
 
     @foreach (var item in SkylineImages)
