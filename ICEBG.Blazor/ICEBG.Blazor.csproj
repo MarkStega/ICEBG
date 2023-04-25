@@ -5,19 +5,19 @@
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
-		<Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
+		<Configurations>Azure;DevServer;DevWebAssembly</Configurations>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
-		<DefineConstants>AZURE;BLAZOR_SERVER;Azure</DefineConstants>
+		<DefineConstants>AZURE;BLAZOR_SERVER</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
-		<DefineConstants>DEVELOP;BLAZOR_SERVER;Develop_Server</DefineConstants>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DevServer|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
-		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY;Develop_WebAssembly</DefineConstants>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DevWebAssembly|AnyCPU'">
+		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>

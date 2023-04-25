@@ -8,7 +8,7 @@
 @inject IHttpSecurityService HttpSecurityService
 
 @{
-    RenderMode RenderMode = PlatformDetermination.kIsBlazorServer ? RenderMode.ServerPrerendered : RenderMode.WebAssemblyPrerendered;
+    RenderMode RenderModeSelected = PlatformDetermination.kIsBlazorServer ? RenderMode.ServerPrerendered : RenderMode.WebAssemblyPrerendered;
 }
 
 <!DOCTYPE html>
@@ -32,7 +32,7 @@
 
     @if (PlatformDetermination.kIsBlazorServer)
     {
-        <component type="typeof(HeadOutlet)" render-mode="@RenderMode" />
+        <component type="typeof(HeadOutlet)" render-mode="@RenderModeSelected" />
     }
     else
     {
@@ -57,18 +57,39 @@
     }
 
     <div id="blazor-error-ui">
-        <environment include="Staging,Production">
-            An error has occurred. This application may no longer respond until reloaded.
-        </environment>
-        <environment include="Development">
-            An unhandled exception has occurred. See browser dev tools for details.
-        </environment>
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
+        <div id="reload-dialog" class="mdc-dialog">
+            <div id="reload-container" class="mdc-dialog__container">
+                <div class="mdc-dialog__surface"
+                     role="alertdialog"
+                     aria-modal="true"
+                     aria-labelledby="my-dialog-title"
+                     aria-describedby="my-dialog-content">
+                    <h2 class="mdc-dialog__title" id="my-dialog-title">
+                        <span class="material-icons-outlined">error</span> Website Error
+                    </h2>
+                    <div class="mdc-dialog__content" id="my-dialog-content">
+                        <environment include="Staging,Production">
+                            Click the button to reload the website.
+                        </environment>
+                        <environment include="Development">
+                            An unhandled exception has occurred. See browser dev tools for details.
+                        </environment>
+                    </div>
+                    <div class="mdc-dialog__actions" tabindex="1">
+                        <button id="reload-button" type="button" class="mdc-button mdc-dialog__button mdc-button--raised" data-mdc-dialog-action="discard">
+                            <div class="mdc-button__ripple"></div>
+                            <span class="mdc-button__label">Reload</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="reload-scrim" class="mdc-dialog__scrim"></div>
+        </div>
     </div>
 
     <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js" integrity="@HttpSecurityService.GetFileHashString("googleanalytics.blazor.js")"></script>
     <script src="_content/Material.Blazor/material.blazor.min.js" integrity="@HttpSecurityService.GetFileHashString("material.blazor.min.js")"></script>
+    <script src="_content/ICEBG.Client/js/icebg.min.js" integrity="@HttpSecurityService.GetFileHashString("icebg.min.js")"></script>
 
     @if (PlatformDetermination.kIsBlazorServer)
     {

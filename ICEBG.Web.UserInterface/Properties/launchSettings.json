@@ -7,6 +7,8 @@
       "sslPort": 44333
     }
   },
+  "DetailedErrors": "true",
+  "CircuitOptions.DetailedErrors":  "true",
   "profiles": {
     "ICEBG.Web.UserInterface": {
       "commandName": "Project",
@@ -16,6 +18,8 @@
       },
       "hotReloadEnabled": false,
       "dotnetRunMessages": true,
+      "DetailedErrors": "true",
+      "CircuitOptions.DetailedErrors": "true",
       "applicationUrl": "https://localhost:7175"
     },
     "ICEBG.Web.UserInterface.WASM": {

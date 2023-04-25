@@ -7,24 +7,24 @@
 		<Nullable>enable</Nullable>
 		<UserSecretsId>ICEBG.Data.Server-9042ECD1-A92B-4B48-B0EA-E54F5A5A6F9A</UserSecretsId>
 		<WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
-		<Configurations>Azure;Develop_Server;Develop_WebAssembly;Release_WebAssembly;</Configurations>
 
 		<EnableSdkContainerSupport>true</EnableSdkContainerSupport>
 		<SdkContainerSupportPackageVersion>0.4.*</SdkContainerSupportPackageVersion>
 		<SelfContained>false</SelfContained>
 
 		<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-preview</ContainerBaseImage>
+		<Configurations>Azure;DevServer;DevWebAssembly</Configurations>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
 		<DefineConstants>AZURE;BLAZOR_SERVER</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_Server|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DevServer|AnyCPU'">
 		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop_WebAssembly|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DevWebAssembly|AnyCPU'">
 		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
@@ -48,7 +48,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Update="nlog.Develop_WebAssembly.config">
+	  <Content Update="nlog.DevWebAssembly.config">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

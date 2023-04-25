@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 using Microsoft.AspNetCore.Components;
 
-namespace ICEBG.Client.Pages;
+namespace ICEBG.Client;
 
 [Sitemap(SitemapAttribute.eChangeFreqType.Weekly, 0.8)]
 public partial class About : ComponentBase
