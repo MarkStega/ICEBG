@@ -47,14 +47,6 @@
 	  <ProjectReference Include="..\ICEBG.Client\ICEBG.Client.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Content Update="nlog.DevWebAssembly.config">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	</ItemGroup>
-
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
 		<Copy SourceFiles="$(ProjectDir)appsettings.$(ConfigurationName).json" DestinationFiles="$(ProjectDir)appsettings.json" />
 		<Copy SourceFiles="$(ProjectDir)nlog.$(ConfigurationName).config" DestinationFiles="$(ProjectDir)nlog.config" />
