@@ -21,7 +21,7 @@ public partial class Index : ComponentBase
         public string Caption { get; set; } = "";
         public string Width { get; set; } = "";
         public string Height { get; set; } = "";
-        public bool Preload { get; set; } = false;
+        public bool Preload { get; set; } = true;
         public string Rel => Preload ? "preload" : "prefetch";
     }
 
