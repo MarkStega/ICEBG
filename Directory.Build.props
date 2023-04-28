@@ -10,15 +10,15 @@
 		<Configurations>Azure;DevServer;DevWebAssembly</Configurations>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
-		<DefineConstants>AZURE;BLAZOR_SERVER;BLAZOR_WEBASSEMBLY_NOT</DefineConstants>
+	<PropertyGroup Condition="'$(Configuration)'=='Azure'">
+		<DefineConstants>AZURE;BLAZOR_SERVER;NOT_BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DevServer|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)'=='DevServer'">
 		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DevWebAssembly|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)'=='DevWebAssembly'">
 		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
