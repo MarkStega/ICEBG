@@ -81,17 +81,19 @@
 	</ItemGroup>
 
 	<!-- Remove comments once migrated to .net7 and dynamically copied content automatically copies to output -->
+	<!--Add Importance="high" to see this step logged in the VS build-->
 	<Target Name="WWWRootFileCopy" BeforeTargets="PreBuildEvent">
-		<Message Importance="high" Text="***** WWWRootFileCopy" />
+		<Message Text="***** WWWRootFileCopy" />
 		<!--<Copy SourceFiles="@(InputImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
 		<Copy SourceFiles="@(InputPWAFiles)" DestinationFolder="$(ProjectDir)wwwroot/pwa" />
 		<Copy SourceFiles="@(InputAndroidInputImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/android-images" />
 		<Copy SourceFiles="@(InputIOSInputImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/ios-images" />
 		<Copy SourceFiles="@(InputWindows11InputImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/windows11-images" />-->
 	</Target>
-
+	
+	<!--Add Importance="high" to see this step logged in the VS build-->
 	<Target Name="CheckIfNpmExists" BeforeTargets="PreBuildEvent" AfterTargets="WWWRootFileCopy">
-		<Message Importance="high" Text="***** npm install (test)" />
+		<Message Text="***** npm install (test)" />
 		<Exec Command="npm install" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
 			<Output TaskParameter="ExitCode" PropertyName="NpmReturnCode" />
 		</Exec>

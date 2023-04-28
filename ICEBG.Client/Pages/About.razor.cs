@@ -18,9 +18,6 @@ public partial class About : ComponentBase
 #if DEVELOP && BLAZOR_WEBASSEMBLY
     private string pBuildMode { get; set; } = "Develop_WebAssembly";
 #endif
-#if RELEASE && BLAZOR_WEBASSEMBLY
-    private string pBuildMode { get; set; } = "Release_WebAssembly";
-#endif
 
     private string pOSArchitecture { get; set; }
     private string pOSDescription { get; set; }

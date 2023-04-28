@@ -107,7 +107,7 @@
                 <div class="mdc-layout-grid__cell--span-4 dw-feature">
                     <h2 class="mdc-typography--headline3">Revealing opportunity</h2>
                     <p class="mdc-typography--body1">
-                        Our fund management suite will have advanced what-if capabilities so you can compare diverse asset management options. For instance comparing the 
+                        Our fund management suite will have advanced what-if capabilities so you can compare diverse asset management options. For instance comparing the
                         impact on fund equity of increasing CAPEX on a specific asset, versus divestment, versus doing nothing.
                     </p>
                 </div>
@@ -152,7 +152,7 @@
                         <p class="mdc-typography--headline4">Work for Dioptra</p>
                         <p class="mdc-typography--body1">
                             We will soon be hiring technologists and financial analysts to dramatcally
-                            enhance our PropTech/FinTech enterprise SaaS product offering. 
+                            enhance our PropTech/FinTech enterprise SaaS product offering.
                         </p>
                         <MBButton ButtonStyle="@MBButtonStyle.ContainedUnelevated" Label="Find out More" @onclick="@WorkForUsClick" />
                     </div>
@@ -163,53 +163,77 @@
                         <source media="(min-width: 1220px)" srcset="@ProgrammerImages[0].Uri" width="@ProgrammerImages[0].Width" height="@ProgrammerImages[0].Height">
                         <img src="@ProgrammerImages[0].Uri" alt="@ProgrammerImages[0].Caption">
                     </picture>
+
                 </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dw-section-regular">
+    <div class="dw-max-width-content">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell--span-12 dw-tagline">
+                    <div class="dw-picture-right">
+                        <p class="mdc-typography--headline4">More work for Dioptra</p>
+                        <p class="mdc-typography--body1">
+                            We need these shelves organized.
+                        </p>
+                    </div>
+
+                    <br />
+                    <img src="_content/ICEBG.Client/images/book-shelves.jpg" alt="book-shelves" width="640px" height="420px">
+
+                </div>
+
             </div>
         </div>
     </div>
 </div>
 
 <MBDialog class="dw-dialog"
-            EscapeKeyAction=""
-            @ref="@Dialog"
-            ScrimClickAction=""
-            Title="Join the Client Waitlist">
+          EscapeKeyAction=""
+          @ref="@Dialog"
+          ScrimClickAction=""
+          Title="Join the Client Waitlist">
     <Body>
         <EditForm Model="@RealEstateInvestorEnquiry"
-                    OnValidSubmit="@DialogSubmittedAsync">
+                  OnValidSubmit="@DialogSubmittedAsync">
 
             <DataAnnotationsValidator />
 
             <MBTextField @bind-Value="@RealEstateInvestorEnquiry.Name"
-                            Label="Name"
-                            style="width: 100%; margin-top: 6px;"
-                            TextInputStyle="@MBTextInputStyle.Outlined"
-                            ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Name)" />
+                         Label="Name"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Name)" />
 
 
             <MBTextField @bind-Value="@RealEstateInvestorEnquiry.Email"
-                            Label="Email"
-                            style="width: 100%; margin-top: 6px;"
-                            TextInputStyle="@MBTextInputStyle.Outlined"
-                            ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Email)" />
+                         Label="Email"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Email)" />
 
             <MBTextField @bind-Value="@RealEstateInvestorEnquiry.Phone"
-                            Label="Phone Number"
-                            style="width: 100%; margin-top: 6px;"
-                            TextInputStyle="@MBTextInputStyle.Outlined"
-                            ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Phone)" />
+                         Label="Phone Number"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Phone)" />
 
             <MBTextField @bind-Value="@RealEstateInvestorEnquiry.CompanyName"
-                            Label="Company Name"
-                            style="width: 100%; margin-top: 6px;"
-                            TextInputStyle="@MBTextInputStyle.Outlined"
-                            ValidationMessageFor="@(() => RealEstateInvestorEnquiry.CompanyName)" />
+                         Label="Company Name"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RealEstateInvestorEnquiry.CompanyName)" />
 
             <MBTextField @bind-Value="@RealEstateInvestorEnquiry.Website"
-                            Label="Website"
-                            style="width: 100%; margin-top: 6px;"
-                            TextInputStyle="@MBTextInputStyle.Outlined"
-                            ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Website)" />
+                         Label="Website"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Website)" />
 
             <MBTextArea @bind-Value="@RealEstateInvestorEnquiry.HowCanWeHelp"
                         Label="How can we help you?"
@@ -220,15 +244,15 @@
 
             <div class="mdc-layout-grid__cell--span-12" style="text-align: right;">
                 <MBButton Label="Send"
-                            ButtonStyle="@MBButtonStyle.ContainedUnelevated"
-                            style="margin: 0.75em 0.25em 0.25em 0.25em;"
-                            type="submit" />
+                          ButtonStyle="@MBButtonStyle.ContainedUnelevated"
+                          style="margin: 0.75em 0.25em 0.25em 0.25em;"
+                          type="submit" />
 
                 <MBButton Label="Cancel"
-                            ButtonStyle="@MBButtonStyle.Outlined"
-                            @onclick="@CloseDialogAsync"
-                            style="margin: 0.75em 0.25em 0.25em 0.25em;"
-                            type="button" />
+                          ButtonStyle="@MBButtonStyle.Outlined"
+                          @onclick="@CloseDialogAsync"
+                          style="margin: 0.75em 0.25em 0.25em 0.25em;"
+                          type="button" />
             </div>
         </EditForm>
     </Body>
