@@ -11,7 +11,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
-		<DefineConstants>AZURE;BLAZOR_WEBASSEMBLY</DefineConstants>
+		<DefineConstants>AZURE;BLAZOR_SERVER;BLAZOR_WEBASSEMBLY_NOT</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DevServer|AnyCPU'">
