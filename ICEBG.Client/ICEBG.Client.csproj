@@ -58,8 +58,8 @@
 		<InputWindows11InputImageFiles Include="$(ProjectDir)WebAssets\windows11-images\*.*" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<!-- Temporary fixes until .net7 when dynamically copied content automatically copies to output -->
+	<!--<ItemGroup>
+		 Temporary fixes until .net7 when dynamically copied content automatically copies to output 
 		<OutputImagesAndroid Include="$(ProjectDir)wwwroot\android-images\*.*" />
 		<Content Remove="@(OutputImagesAndroid)" />
 		<Content Include="@(OutputImagesAndroid)" />
@@ -75,7 +75,7 @@
 		<OutputImagesWindows11 Include="$(ProjectDir)wwwroot\windows11-images\*.*" />
 		<Content Remove="@(OutputImagesWindows11)" />
 		<Content Include="@(OutputImagesWindows11)" />
-	</ItemGroup>
+	</ItemGroup>-->
 
 	<ItemGroup>
 		<InputStaticAssetsScripts Include="$(ProjectDir)WebAssets\**\*.ts" />
