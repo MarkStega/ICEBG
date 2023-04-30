@@ -36,13 +36,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<UpToDateCheckInput Include="@(InputStaticAssetsScripts)" Set="Scripts" />
-		<UpToDateCheckOutput Include="@(OutputStaticAssetsScripts)" Set="Scripts" />
-		<UpToDateCheckInput Include="@(InputStaticAssetsStyles)" Set="Styles" />
-		<UpToDateCheckOutput Include="@(OutputStaticAssetsStyles)" Set="Styles" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Include="Pages\About.razor" />
 		<None Include="Pages\Configuration.razor" />
 		<None Include="Pages\Index.razor" />
@@ -50,16 +43,15 @@
 		<None Include="Shared\MainLayout.razor" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<!--<ItemGroup>
+		 Temporary fixes until .net7 when dynamically copied content automatically copies to output 
+
 		<InputImageFiles Include="$(ProjectDir)WebAssets\Images\*.*" />
 		<InputPWAFiles Include="$(ProjectDir)WebAssets\PWA\*.*" />
 		<InputAndroidInputImageFiles Include="$(ProjectDir)WebAssets\android-images\*.*" />
 		<InputIOSInputImageFiles Include="$(ProjectDir)WebAssets\ios-images\*.*" />
 		<InputWindows11InputImageFiles Include="$(ProjectDir)WebAssets\windows11-images\*.*" />
-	</ItemGroup>
-
-	<!--<ItemGroup>
-		 Temporary fixes until .net7 when dynamically copied content automatically copies to output 
+	
 		<OutputImagesAndroid Include="$(ProjectDir)wwwroot\android-images\*.*" />
 		<Content Remove="@(OutputImagesAndroid)" />
 		<Content Include="@(OutputImagesAndroid)" />
@@ -83,14 +75,17 @@
 
 		<Content Remove="@(OutputStaticAssetsScripts)" />
 		<Content Include="@(OutputStaticAssetsScripts)" />
-		<Content Remove="@(OutputStaticAssetsStyles)" />
-		<Content Include="@(OutputStaticAssetsStyles)" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<InputStaticAssetsStyles Include="$(ProjectDir)WebAssets\**\*.scss;" />
 		<OutputStaticAssetsStyles Include="$(ProjectDir)wwwroot\css\icebg.css;wwwroot\css\icebg.min.css" />
 
+		<Content Remove="@(OutputStaticAssetsStyles)" />
+		<Content Include="@(OutputStaticAssetsStyles)" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<UpToDateCheckInput Include="@(InputStaticAssetsScripts)" Set="Scripts" />
 		<UpToDateCheckOutput Include="@(OutputStaticAssetsScripts)" Set="Scripts" />
 		<UpToDateCheckInput Include="@(InputStaticAssetsStyles)" Set="Styles" />
