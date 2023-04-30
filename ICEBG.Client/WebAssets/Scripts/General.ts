@@ -1,8 +1,6 @@
 ﻿import { MDCRipple } from '@material/ripple';
 import { MDCDialog } from '@material/dialog';
 
-navigator.serviceWorker.register('service-worker.js');
-
 document.getElementById('reload-button')!.addEventListener("click", function () {
     (function () {
         location.reload();
