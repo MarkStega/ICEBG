@@ -6,7 +6,9 @@
     $background: #eee,
     $surface: #faf0e6);
 
-@use "_material-components-web";
+/*@use "_material-components-web";
+*/
+@use "./material-components-web";
 
 @use '_blazor.scss';
 

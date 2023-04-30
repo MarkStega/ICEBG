@@ -5,6 +5,27 @@
 <h1>Hello, world!</h1>
 
 
+<div class="dw-section-condensed dw-hero">
+    <div class="dw-max-width-content">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell--span-12">
+                    <div class="dw-panel-container dw-carousel-container">
+                        <MBCarousel Context="item"
+                                    Items="@CarouselImages"
+                                    RolloverInterval="4000">
+                            <Content>
+                                <img src="@item.Uri" alt="@item.Caption">
+                                <div><p class="mdc-typography--caption" style="text-align: center;">@item.Caption</p></div>
+                            </Content>
+                        </MBCarousel>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="dw-section-regular">
     <div class="dw-max-width-content">
         <div class="mdc-layout-grid">
