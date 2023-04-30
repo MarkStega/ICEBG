@@ -5,26 +5,7 @@
 @inherits ComponentBase
 
 
-<HeadAndMetaContent PageTitle="Dioptra"
-                    Description="Dioptra provides sophisticated, banking grade financial analytics to institutional real estate investors."
-                    OpenGraphImage=""
-                    TwitterImage="">
-    @foreach (var item in CarouselImages)
-    {
-        <link rel="prefetch" href="@item.Uri" as="image">
-    }
-
-    @foreach (var item in SkylineImages)
-    {
-        <link rel="prefetch" href="@item.Uri" as="image">
-    }
-
-    @foreach (var item in ProgrammerImages)
-    {
-        <link rel="prefetch" href="@item.Uri" as="image">
-    }
-</HeadAndMetaContent>
-
+@*
 <div class="dw-section-condensed dw-hero">
     <div class="dw-max-width-content">
         <div class="mdc-layout-grid">
@@ -45,6 +26,7 @@
         </div>
     </div>
 </div>
+*@
 
 <div class="dw-section-condensed">
     <div class="dw-max-width-content">
