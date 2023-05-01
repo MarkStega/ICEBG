@@ -7,10 +7,6 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject IHttpSecurityService HttpSecurityService
 
-@{
-    RenderMode RenderMode = PlatformDetermination.kIsBlazorServer ? RenderMode.ServerPrerendered : RenderMode.WebAssemblyPrerendered;
-}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +28,7 @@
 
     @if (PlatformDetermination.kIsBlazorServer)
     {
-        <component type="typeof(HeadOutlet)" render-mode="@RenderMode" />
+        <component type="typeof(HeadOutlet)" render-mode="Server" />
     }
     else
     {
@@ -98,9 +94,8 @@
     else
     {
         <script src="_framework/blazor.webassembly.js" integrity="@HttpSecurityService.GetFileHashString("blazor.webassembly.js")"></script>
-        @*
+        
         <script>navigator.serviceWorker.register('service-worker.js');</script>
-        *@    
     }
 
 </body>
