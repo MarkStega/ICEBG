@@ -35,7 +35,9 @@ $blue-on-secondary: $color-dark;
     $on-surface: $color-dark,
 );
 
-@use "Main";
+@use "_site";
+@use "_loadingprogress";
+
 @use "@material/top-app-bar";
 @use "@material/elevation/mixins" as elevation-mixins;
 

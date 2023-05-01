@@ -2,8 +2,8 @@
   "name": "icebg",
   "version": "1.0.0",
   "scripts": {
-    "build-css": "sass --no-color --unicode --load-path=node_modules --no-source-map Styles/icebg.scss wwwroot/css/icebg.css",
-    "build-min-css": "sass --no-color --unicode --style=compressed --load-path=node_modules --no-source-map Styles/icebg.scss wwwroot/css/icebg.min.css",
+    "build-css": "sass --no-color --unicode --load-path=node_modules --no-source-map WebAssets/Styles/icebg.scss wwwroot/css/icebg.css",
+    "build-min-css": "sass --no-color --unicode --style=compressed --load-path=node_modules --no-source-map WebAssets/Styles/icebg.scss wwwroot/css/icebg.min.css",
     "build-js": "terser wwwroot/js/temp.js --beautify --output wwwroot/js/icebg.js",
     "build-min-js": "terser wwwroot/js/temp.js --compress --mangle --ecma 2016 --output wwwroot/js/icebg.min.js",
     "build-scripts": "webpack --config webpack.config.js"

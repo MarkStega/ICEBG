@@ -55,7 +55,7 @@
 	</ItemGroup>-->
 
 	<ItemGroup>
-		<InputStaticAssetsScripts Include="$(ProjectDir)WebAssets\**\*.ts" />
+		<InputStaticAssetsScripts Include="$(ProjectDir)WebAssets\Scripts\*.ts" />
 		<OutputStaticAssetsScripts Include="$(ProjectDir)wwwroot\js\icebg.js;wwwroot\js\icebg.min.js" />
 
 		<Content Remove="@(OutputStaticAssetsScripts)" />
@@ -63,7 +63,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<InputStaticAssetsStyles Include="$(ProjectDir)WebAssets\**\*.scss;" />
+		<InputStaticAssetsStyles Include="$(ProjectDir)WebAssets\Styles\*.scss;" />
 		<OutputStaticAssetsStyles Include="$(ProjectDir)wwwroot\css\icebg.css;wwwroot\css\icebg.min.css" />
 
 		<Content Remove="@(OutputStaticAssetsStyles)" />

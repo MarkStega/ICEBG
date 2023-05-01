@@ -8,6 +8,8 @@
 		<SdkContainerSupportPackageVersion>0.4.*</SdkContainerSupportPackageVersion>
 		<SelfContained>false</SelfContained>
 		<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-preview</ContainerBaseImage>
+
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
