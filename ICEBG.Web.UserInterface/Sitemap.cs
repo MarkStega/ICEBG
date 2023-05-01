@@ -34,8 +34,8 @@ public class Sitemap
                     await context.Response.WriteAsync($@"  <url>
     <loc>https://{context.Request.Host}{routeAttribute.Template}</loc>
     <lastmod>{buildDate}</lastmod>
-    <changefreq>{siteAttribute.changeFreq.ToString().ToLower()}</changefreq>
-    <priority>{siteAttribute.priority:N1}</priority>
+    <changefreq>{siteAttribute.ChangeFreq.ToString().ToLower()}</changefreq>
+    <priority>{siteAttribute.Priority:N1}</priority>
   </url>{"\n"}");
                 }
                 else
