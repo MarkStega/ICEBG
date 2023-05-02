@@ -24,7 +24,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Properties\" />
 		<Folder Include="wwwroot\css\" />
 		<Folder Include="wwwroot\js\" />
 	</ItemGroup>
@@ -33,14 +32,6 @@
 		<ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
 		<ProjectReference Include="..\DataTier\DataTier.csproj" />
 		<ProjectReference Include="..\SharedUtilities\SharedUtilities.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="Pages\About.razor" />
-		<None Include="Pages\Configuration.razor" />
-		<None Include="Pages\Index.razor" />
-		<None Include="Pages\Weather.razor" />
-		<None Include="Shared\MainLayout.razor" />
 	</ItemGroup>
 
 	<!--<ItemGroup>
@@ -70,7 +61,7 @@
 	</ItemGroup>-->
 
 	<ItemGroup>
-		<InputStaticAssetsScripts Include="$(ProjectDir)WebAssets\**\*.ts" />
+		<InputStaticAssetsScripts Include="$(ProjectDir)WebAssets\Scripts\*.ts" />
 		<OutputStaticAssetsScripts Include="$(ProjectDir)wwwroot\js\icebg.js;wwwroot\js\icebg.min.js" />
 
 		<Content Remove="@(OutputStaticAssetsScripts)" />
@@ -78,7 +69,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<InputStaticAssetsStyles Include="$(ProjectDir)WebAssets\**\*.scss;" />
+		<InputStaticAssetsStyles Include="$(ProjectDir)WebAssets\Styles\*.scss;" />
 		<OutputStaticAssetsStyles Include="$(ProjectDir)wwwroot\css\icebg.css;wwwroot\css\icebg.min.css" />
 
 		<Content Remove="@(OutputStaticAssetsStyles)" />
