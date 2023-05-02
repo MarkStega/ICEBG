@@ -8,8 +8,6 @@
 		<SdkContainerSupportPackageVersion>0.4.*</SdkContainerSupportPackageVersion>
 		<SelfContained>false</SelfContained>
 		<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-preview</ContainerBaseImage>
-
-		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -29,14 +27,6 @@
 	  <ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
 	  <ProjectReference Include="..\DataTier\DataTier.csproj" />
 	  <ProjectReference Include="..\ICEBG.Client\ICEBG.Client.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Update="nlog.DevWebAssembly.config">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
 	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">

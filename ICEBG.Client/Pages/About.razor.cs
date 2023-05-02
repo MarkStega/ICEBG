@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 using Microsoft.AspNetCore.Components;
 
-namespace ICEBG.Client.Pages;
+namespace ICEBG.Client;
 
 [Sitemap(SitemapAttribute.eChangeFreqType.Weekly, 0.8)]
 public partial class About : ComponentBase
@@ -17,9 +17,6 @@ public partial class About : ComponentBase
 #endif
 #if DEVELOP && BLAZOR_WEBASSEMBLY
     private string pBuildMode { get; set; } = "Develop_WebAssembly";
-#endif
-#if RELEASE && BLAZOR_WEBASSEMBLY
-    private string pBuildMode { get; set; } = "Release_WebAssembly";
 #endif
 
     private string pOSArchitecture { get; set; }
