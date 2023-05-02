@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<PropertyGroup>
+		<RootNamespace>ICEBG.DataTier</RootNamespace>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<None Remove="gRPCClient\configurationProto.proto" />
 	</ItemGroup>

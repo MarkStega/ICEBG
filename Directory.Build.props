@@ -1,8 +1,7 @@
 <Project>
-  <!-- See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build -->
-  <PropertyGroup>
-	  <UseArtifactsOutput>true</UseArtifactsOutput>
-  </PropertyGroup>
+	<PropertyGroup>
+		<UseArtifactsOutput>true</UseArtifactsOutput>
+	</PropertyGroup>
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
