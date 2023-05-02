@@ -2,14 +2,12 @@
 
 	<PropertyGroup>
 		<UserSecretsId>ICEBG.UI.Server-9042ECD1-A92B-4B48-B0EA-E54F5A5A6F9A</UserSecretsId>
-		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<EnableSdkContainerSupport>true</EnableSdkContainerSupport>
 		<SdkContainerSupportPackageVersion>0.4.*</SdkContainerSupportPackageVersion>
 		<SelfContained>false</SelfContained>
 		<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-preview</ContainerBaseImage>
-
-		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
