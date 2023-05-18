@@ -20,7 +20,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.16" />
+		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.18" />
 	</ItemGroup>
 
 	<ItemGroup>
