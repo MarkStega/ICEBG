@@ -7,6 +7,7 @@ using PhoneNumbers;
 
 namespace ICEBG.Client;
 
+#nullable enable
 
 /// <summary>
 /// Validates correct email address formation.
