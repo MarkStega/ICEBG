@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <PackageReference Include="Material.Blazor" Version="4.0.0-preview.17" />
+    <PackageReference Include="Material.Blazor" Version="4.0.0-preview.18" />
   </ItemGroup>
 
 </Project>
