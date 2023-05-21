@@ -9,6 +9,8 @@ public partial class Weather : ComponentBase
 {
     [Inject] WeatherForecastService pForecastService { get; set; }
 
+#nullable enable
+
     private WeatherForecast[]? forecasts;
     protected override async Task OnInitializedAsync()
     {

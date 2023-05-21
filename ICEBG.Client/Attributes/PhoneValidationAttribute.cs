@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ICEBG.Client;
 
+#nullable enable
+
 /// <summary>
 /// Validates correct phone number formatting, given a UK region code.
 /// </summary>

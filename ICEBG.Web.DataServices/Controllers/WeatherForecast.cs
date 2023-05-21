@@ -2,6 +2,7 @@ using System;
 
 namespace ICEBG.Web.DataServices.Controllers
 {
+#nullable enable
     public class WeatherForecast
     {
         public DateTime Date { get; set; }
