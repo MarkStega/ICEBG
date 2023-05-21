@@ -149,10 +149,10 @@
 	</Target>
 
 	<!--Compression directives (Note that the patterns are relative to wwwroot)-->
-	<PropertyGroup>
+	<!--<PropertyGroup>
 		<CompressionIncludePatterns>$(CompressionIncludePatterns);**/*.css;**/*.js</CompressionIncludePatterns>
 		<BuildCompressionFormats>gzip;brotli</BuildCompressionFormats>
 		<PublishCompressionFormats>gzip;brotli</PublishCompressionFormats>
-	</PropertyGroup>
+	</PropertyGroup>-->
 
 </Project>
