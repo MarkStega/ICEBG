@@ -12,6 +12,8 @@ on:
 env:
   appNameDS: 'icebg.web.ds.wip'
   appNameUI: 'icebg.web.ui.wip'
+  blazorServerDockerFile: './ICEBG.Web.UserInterface/Dockerfile-Server'
+  blazorWebAssemblyDockerFile: './ICEBG.Web.UserInterface/Dockerfile-WebAssembly'
 
 jobs:
 
@@ -91,6 +93,7 @@ jobs:
         dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }} -p:ContainerImageName=${{env.appNameDS}}
         docker tag ${{env.appNameDS}}:${{ env.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.suffix }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.suffix }}
+        docker images
 
 ############################################################################################################
 # Build and deploy blazor UI image
@@ -128,6 +131,11 @@ jobs:
         dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }} -p:ContainerImageName=${{env.appNameUI}} --sc
         docker tag ${{env.appNameUI}}:${{ env.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.suffix }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.suffix }}
+        docker images
+  
+      # run: |
+      #   docker build . --file ${{ env.blazorServerDockerFile }} --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.appNameUI }}:${{ env.suffix }} --build-arg version=${{ env.suffix }}
+      #   docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.appNameUI }}:${{ env.suffix }}
 
 ############################################################################################################
 # Build blazor DS image
