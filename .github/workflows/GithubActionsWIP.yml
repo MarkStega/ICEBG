@@ -12,8 +12,8 @@ on:
 env:
   appNameDS: 'icebg.web.ds.wip'
   appNameUI: 'icebg.web.ui.wip'
-  blazorServerDockerFile: './icebg.web.userinterface/Dockerfile-Server'
-  blazorWebAssemblyDockerFile: '././icebg.web.userinterface/Dockerfile-WebAssembly'
+  blazorServerDockerFile: './ICEBG.Web.UserInterface/Dockerfile-Server'
+  blazorWebAssemblyDockerFile: './ICEBG.Web.UserInterface/Dockerfile-WebAssembly'
 
 jobs:
 
