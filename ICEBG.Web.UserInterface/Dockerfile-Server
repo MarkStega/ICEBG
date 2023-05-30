@@ -40,4 +40,4 @@ RUN dotnet publish "ICEBG.Web.UserInterface.csproj" --no-restore -c Azure -o /ap
 FROM base AS final
 WORKDIR /app
 COPY --from=build /app/publish .
-ENTRYPOINT ["dotnet", "Website.Server.dll"]
+ENTRYPOINT ["dotnet", "ICEBG.Web.UserInterface.dll"]
