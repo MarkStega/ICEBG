@@ -127,14 +127,17 @@ jobs:
 
     - name: Publish, tag, and push UI image
       run: |
-        docker build . --file ${{ env.blazorServerDockerFile }} --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.appNameUI }}:${{ env.suffix }} --build-arg version=${{ env.suffix }}
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.appNameUI }}:${{ env.suffix }}
+         docker build . --file ${{ env.blazorServerDockerFile }} --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.appNameUI }}:${{ env.suffix }} --build-arg version=${{ env.suffix }}
+         docker images
+         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.appNameUI }}:${{ env.suffix }}
 
-      # run: |
-      #   dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }} -p:ContainerImageName=${{env.appNameUI}} --sc
-      #   docker tag ${{env.appNameUI}}:${{ env.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.suffix }}
-      #   docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.suffix }}
-        
+        # dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }} -p:ContainerImageName=${{env.appNameUI}} --sc
+        # docker tag ${{env.appNameUI}}:${{ env.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.suffix }}
+        # docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.suffix }}
+  
+      #   docker build . --file ${{ env.blazorServerDockerFile }} --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.appNameUI }}:${{ env.suffix }} --build-arg version=${{ env.suffix }}
+      #   docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.appNameUI }}:${{ env.suffix }}
+
 ############################################################################################################
 # Build blazor DS image
 ############################################################################################################

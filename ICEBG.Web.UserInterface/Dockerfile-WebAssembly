@@ -5,6 +5,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0-preview AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
+EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0-preview AS build
 RUN dotnet workload install wasm-tools
@@ -33,11 +34,11 @@ RUN npm --version
 WORKDIR /src
 
 COPY . .
-WORKDIR "/src/Website.Server"
-RUN dotnet restore --disable-parallel "Website.Server.csproj"
-RUN dotnet publish "Website.Server.csproj" --no-restore -c Release_WebAssembly -o /app/publish -p:Version=$version
+WORKDIR "/src/ICEBG.Web.UserInterface"
+RUN dotnet restore --disable-parallel "ICEBG.Web.UserInterface.csproj"
+RUN dotnet publish "ICEBG.Web.UserInterface.csproj" --no-restore -c Azure -o /app/publish -p:Version=$version
 
 FROM base AS final
 WORKDIR /app
 COPY --from=build /app/publish .
-ENTRYPOINT ["dotnet", "Website.Server.dll"]
+ENTRYPOINT ["dotnet", "ICEBG.Web.UserInterface.dll"]
