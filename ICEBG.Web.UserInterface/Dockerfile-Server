@@ -1,0 +1,43 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-preview AS base
+
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0-preview AS build
+RUN dotnet workload install wasm-tools
+RUN dotnet --info
+
+ARG version=2022-01-01--13-00-00--WIP
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NOWARNINGS="yes"
+RUN apt-get update
+RUN apt-get install --no-install-recommends --yes apt-utils python3 npm
+
+RUN node --version
+RUN npm --version
+ENV NODE_VERSION=20.1.0
+RUN apt install -y curl
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+ENV NVM_DIR=/root/.nvm
+RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
+ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+RUN node --version
+RUN npm --version
+
+WORKDIR /src
+
+COPY . .
+WORKDIR "/src/ICEBG.Web.UserInterface"
+RUN dotnet restore --disable-parallel "ICEBG.Web.UserInterface.csproj"
+RUN dotnet publish "ICEBG.Web.UserInterface.csproj" --no-restore -c Azure -o /app/publish -p:Version=$version
+
+FROM base AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "Website.Server.dll"]
