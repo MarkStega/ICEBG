@@ -57,7 +57,7 @@ jobs:
 
     steps:
     - id: setSuffix
-      run: echo "GlobalSuffix=$(date +'%Y-%m-%d--%H-%M-%S')--WIP" >> $GITHUB_OUTPUT
+      run: echo "GlobalSuffix=$(date +'%Y-%m-%d--%H-%M-%S')--WIP--13.5" >> $GITHUB_OUTPUT
       shell: bash
 
 ############################################################################################################
