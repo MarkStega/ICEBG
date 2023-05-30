@@ -140,7 +140,7 @@ jobs:
       #   docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.appNameUI }}:${{ env.suffix }}
 
     - name: Publish UI image for debug purposes
-      run: dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:Version=${{env.ciSuffix}} --output ${{env.outputUI}}
+      run: dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:Version=${{ env.suffix }} --output ${{env.outputUI}}
 
     - name: Display package output
       run: ls -lh ${{env.outputUI}}
