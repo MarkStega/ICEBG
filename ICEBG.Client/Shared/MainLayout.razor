@@ -10,6 +10,7 @@
 
     <nav class="mdc-list">
         <MBListItem LeadingIcon="home" Label="Home" @onclick="@(() => ListItemClickHandler(""))" />
+        <MBListItem LeadingIcon="error" Label="Consume resources" @onclick="@(() => ListItemClickHandler("consumeresources"))" />
         <MBListItem LeadingIcon="assignment" Label="GRPC configuration" @onclick="@(() => ListItemClickHandler("configuration"))" />
         <MBListItem LeadingIcon="table_chart" Label="REST weather" @onclick="@(() => ListItemClickHandler("weather"))" />
         <MBListItem LeadingIcon="info" Label="About" @onclick="@(() => ListItemClickHandler("about"))" />

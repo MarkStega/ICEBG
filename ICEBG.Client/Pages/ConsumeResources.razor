@@ -1,0 +1,21 @@
+﻿@page "/consumeresources"
+
+@namespace ICEBG.Client.Pages
+
+@using ICEBG.Client.Components
+@using ICEBG.DataTier.DataDefinitions
+@using ICEBG.DataTier.gRPCClient
+@using ICEBG.DataTier.HelperClasses
+@using ICEBG.DataTier.Interfaces
+@using ICEBG.SharedUtilities
+@using ICEBG.SystemFramework
+
+<PageTitle>Consume resources</PageTitle>
+
+@inject iConfigurationClient ConfigurationClient
+
+<h1>Consume resources</h1>
+
+<FlowLabeledText time="@time"
+                 configuration="@configuration" />
+
