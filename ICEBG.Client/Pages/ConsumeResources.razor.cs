@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -20,15 +21,20 @@ namespace ICEBG.Client.Pages
     {
         private static System.Timers.Timer pTimer { get; set; }
 
+        private string count { get; set; } = "'Not yet initialized'";
         private string time { get; set; } = "'Not yet initialized'";
         private ServiceResult<Configuration_DD> configuration { get; set; }
+
+        private int internalCount = 0;
 
         #region LoadReportCollectionAsync
         private async Task LoadReportCollectionAsync()
         {
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10; i++)
             {
                 configuration = await ConfigurationClient.SelectAsync(ApplicationConfiguration.pConfigurationIdentifier);
+                internalCount += 1;
+                count = internalCount.ToString();
             }
             time = DateTime.Now.ToString();
             StateHasChanged();
