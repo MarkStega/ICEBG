@@ -26,14 +26,14 @@ namespace ICEBG.Client.Pages
         #region LoadReportCollectionAsync
         private async Task LoadReportCollectionAsync()
         {
-            for (int i = 0; i < 500; i++)
+            for (int i = 0; i < 100; i++)
             {
                 configuration = await ConfigurationClient.SelectAsync(ApplicationConfiguration.pConfigurationIdentifier);
             }
             time = DateTime.Now.ToString();
             StateHasChanged();
             pTimer.Dispose();
-            pTimer = new System.Timers.Timer(1000);
+            pTimer = new System.Timers.Timer(100);
             pTimer.Elapsed += RefreshTimerTick;
             pTimer.Enabled = true;
         }
@@ -42,7 +42,7 @@ namespace ICEBG.Client.Pages
 
         protected override void OnInitialized()
         {
-            pTimer = new System.Timers.Timer(1000);
+            pTimer = new System.Timers.Timer(100);
             pTimer.Elapsed += RefreshTimerTick;
             pTimer.Enabled = true;
         }
