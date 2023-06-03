@@ -22,10 +22,12 @@ namespace ICEBG.Client.Pages
         private static System.Timers.Timer pTimer { get; set; }
 
         private string count { get; set; } = "'Not yet initialized'";
+        private string count2 { get; set; } = "'Not yet initialized'";
         private string time { get; set; } = "'Not yet initialized'";
         private ServiceResult<Configuration_DD> configuration { get; set; }
 
         private int internalCount = 0;
+        private int internalCount2 = 0;
 
         #region LoadReportCollectionAsync
         private async Task LoadReportCollectionAsync()
@@ -37,6 +39,12 @@ namespace ICEBG.Client.Pages
                 count = internalCount.ToString();
             }
             time = DateTime.Now.ToString();
+            if (internalCount >=32000)
+            {
+                internalCount = 0;
+                internalCount2 += 1;
+                count2 = internalCount2.ToString();
+            }
             StateHasChanged();
             pTimer.Dispose();
             pTimer = new System.Timers.Timer(100);
