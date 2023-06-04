@@ -6,7 +6,7 @@ using ICEBG.DataTier.HelperClasses;
 
 using Microsoft.AspNetCore.Components;
 
-namespace ICEBG.Client.Pages;
+namespace ICEBG.Client;
 
 [Sitemap(SitemapAttribute.eChangeFreqType.Weekly, 0.8)]
 public partial class Configuration : ComponentBase

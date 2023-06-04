@@ -11,6 +11,7 @@ using GoogleAnalytics.Blazor;
 using HttpSecurity.AspNet;
 
 using ICEBG.AppConfig;
+using ICEBG.Client;
 using ICEBG.Client.Infrastructure.ClientServices;
 using ICEBG.Web.UserInterface;
 
@@ -151,6 +152,9 @@ try
 
     logger.Debug("Adding razor pages");
     builder.Services.AddRazorPages();
+
+    // Needed for prerendering on WebAssembly as well as general use
+    builder.Services.AddTransient<INotification, ServerNotificationService>();
 
 #if BLAZOR_SERVER
     logger.Debug("AddMvc");
