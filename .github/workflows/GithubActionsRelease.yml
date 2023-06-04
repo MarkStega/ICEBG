@@ -46,18 +46,18 @@ jobs:
       run: echo ""
 
 ############################################################################################################
-# Set unified suffix for the two deployed applications
+# Set unified version for the two deployed applications
 ############################################################################################################
-  set-suffix:
-    name: Create the date based suffix
+  set-unified-version:
+    name: Create the date based unifiedVersion
     needs: [perform-deployment]
     runs-on: ubuntu-latest
     outputs:
-      outputSuffix: ${{ steps.setSuffix.outputs.GlobalSuffix }}
+      unifiedVersion: ${{ steps.setUnifiedVersion.outputs.LocalUnifiedVersion }}
 
     steps:
-    - id: setSuffix
-      run: echo "GlobalSuffix=$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
+    - id: setUnifiedVersion
+      run: echo "LocalUnifiedVersion=$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
       shell: bash
 
 ############################################################################################################
@@ -65,12 +65,12 @@ jobs:
 ############################################################################################################
   build-deploy-ds:
     name: Build and deploy ICEBG DS
-    needs: [set-suffix]
+    needs: [set-unified-version]
     runs-on: ubuntu-latest
 
     steps:
-    - name: Retrieve the global suffix
-      run: echo "suffix=${{needs.set-suffix.outputs.outputSuffix}}" >> $GITHUB_ENV
+    - name: Retrieve the global unifiedVersion
+      run: echo "unifiedVersion=${{needs.set-unified-version.outputs.unifiedVersion}}" >> $GITHUB_ENV
       shell: bash
 
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
@@ -93,21 +93,21 @@ jobs:
 
     - name: Publish, tag, and push DS image
       run: |
-        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }} -p:ContainerImageName=${{env.appNameDS}}
-        docker tag ${{env.appNameDS}}:${{ env.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.suffix }}
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.suffix }}
+        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerImageName=${{env.appNameDS}}
+        docker tag ${{env.appNameDS}}:${{ env.unifiedVersion }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.unifiedVersion }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.unifiedVersion }}
 
 ############################################################################################################
 # Build and deploy blazor UI image
 ############################################################################################################
   build-deploy-ui:
     name: Build and deploy ICEBG UI
-    needs: [set-suffix]
+    needs: [set-unified-version]
     runs-on: ubuntu-latest
 
     steps:
-    - name: Retrieve the global suffix
-      run: echo "suffix=${{needs.set-suffix.outputs.outputSuffix}}" >> $GITHUB_ENV
+    - name: Retrieve the global unifiedVersion
+      run: echo "unifiedVersion=${{needs.set-unified-version.outputs.unifiedVersion}}" >> $GITHUB_ENV
       shell: bash
 
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
@@ -130,9 +130,9 @@ jobs:
 
     - name: Publish, tag, and push UI image
       run: |
-        dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }} -p:ContainerImageName=${{env.appNameUI}} --sc
-        docker tag ${{env.appNameUI}}:${{ env.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.suffix }}
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.suffix }}
+        dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerImageName=${{env.appNameUI}} --sc
+        docker tag ${{env.appNameUI}}:${{ env.unifiedVersion }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.unifiedVersion }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.unifiedVersion }}
 
 ############################################################################################################
 # Build blazor DS image
@@ -143,8 +143,8 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Set suffix as env variable
-      run: echo "suffix=$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+    - name: Set unifiedVersion as env variable
+      run: echo "unifiedVersion=$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
       shell: bash
 
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
@@ -160,7 +160,7 @@ jobs:
 
     - name: Build DS image
       run: |
-        dotnet build ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:Version=${{ env.suffix }}
+        dotnet build ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:Version=${{ env.unifiedVersion }}
 
 ############################################################################################################
 # Build blazor UI image
@@ -171,8 +171,8 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Set suffix as env variable
-      run: echo "suffix=$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+    - name: Set unifiedVersion as env variable
+      run: echo "unifiedVersion=$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
       shell: bash
 
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
@@ -188,4 +188,4 @@ jobs:
 
     - name: Build UI image
       run: |
-        dotnet build ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:Version=${{ env.suffix }}
+        dotnet build ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:Version=${{ env.unifiedVersion }}

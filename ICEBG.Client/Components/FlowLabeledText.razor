@@ -1,0 +1,48 @@
+﻿@namespace ICEBG.Client.Components
+
+<h2>Time is @time</h2>
+<h3>Count is @count</h3>
+<h3>Count2 is @count2</h3>
+@if (configuration == null)
+{
+    <h2>Loading...</h2>
+}
+else
+{
+    @if (configuration.pSuccess)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Success</th>
+                    <th>Key</th>
+                    <th>pResult</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>true</td>
+                    <td>@configuration.pResult.Id</td>
+                    <td>@configuration.pResult.Configuration</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Success</th>
+                    <th>pError</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>false</td>
+                    <td>@configuration.pError</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+}
