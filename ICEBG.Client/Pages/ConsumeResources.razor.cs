@@ -22,7 +22,7 @@ namespace ICEBG.Client.Pages
         private static System.Timers.Timer pTimer { get; set; }
 
         private string count { get; set; } = "'Not yet initialized'";
-        private string count2 { get; set; } = "'Not yet initialized'";
+        private string count2 { get; set; } = "0";
         private string time { get; set; } = "'Not yet initialized'";
         private ServiceResult<Configuration_DD> configuration { get; set; }
 
@@ -39,7 +39,7 @@ namespace ICEBG.Client.Pages
                 count = internalCount.ToString();
             }
             time = DateTime.Now.ToString();
-            if (internalCount >=32000)
+            if (internalCount >= (int.MaxValue - 100))
             {
                 internalCount = 0;
                 internalCount2 += 1;
