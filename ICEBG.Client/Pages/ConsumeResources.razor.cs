@@ -19,7 +19,7 @@ namespace ICEBG.Client.Pages
 {
     public partial class ConsumeResources : ComponentBase
     {
-        private static System.Timers.Timer pTimer { get; set; }
+        private System.Timers.Timer pTimer { get; set; }
 
         private string count { get; set; } = "'Not yet initialized'";
         private string count2 { get; set; } = "0";
@@ -68,5 +68,12 @@ namespace ICEBG.Client.Pages
         }
         #endregion
 
+        #region IDispose
+        void IDisposable.Dispose()
+        {
+            pTimer?.Dispose();
+        }
+
+        #endregion
     }
 }

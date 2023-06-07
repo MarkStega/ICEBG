@@ -6,29 +6,31 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 using Blazor.Extensions.Logging;
 
+using Blazored.LocalStorage;
+
+using GoogleAnalytics.Blazor;
+
+using ICEBG.AppConfig;
+using ICEBG.Client;
+using ICEBG.Client.Infrastructure.ClientServices;
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.AspNetCore.CookiePolicy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-using ICEBG.Client.Infrastructure.ClientServices;
-using ICEBG.AppConfig;
-using ICEBG.Client;
-using Microsoft.AspNetCore.Components.Web;
-using Blazored.LocalStorage;
-using GoogleAnalytics.Blazor;
-using Material.Blazor;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.CookiePolicy;
 using Serilog;
 using Serilog.Events;
 using Serilog.Extensions.Logging;
-using System.Collections.Generic;
 
 namespace ICEBG.Blazor;
 public class Program
