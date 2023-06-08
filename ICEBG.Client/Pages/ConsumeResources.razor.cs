@@ -21,7 +21,7 @@ namespace ICEBG.Client.Pages
     {
         private System.Timers.Timer pTimer { get; set; }
 
-        private string count { get; set; } = "'Not yet initialized'";
+        private string count1 { get; set; } = "'Not yet initialized'";
         private string count2 { get; set; } = "0";
         private string time { get; set; } = "'Not yet initialized'";
         private ServiceResult<Configuration_DD> configuration { get; set; }
@@ -32,12 +32,10 @@ namespace ICEBG.Client.Pages
         #region LoadReportCollectionAsync
         private async Task LoadReportCollectionAsync()
         {
-            for (int i = 0; i < 10; i++)
-            {
-                configuration = await ConfigurationClient.SelectAsync(ApplicationConfiguration.pConfigurationIdentifier);
-                internalCount += 1;
-                count = internalCount.ToString();
-            }
+            configuration = await ConfigurationClient.SelectAsync(ApplicationConfiguration.pConfigurationIdentifier);
+            internalCount += 1;
+            count1 = internalCount.ToString();
+
             time = DateTime.Now.ToString();
             if (internalCount >= (int.MaxValue - 100))
             {
@@ -47,7 +45,7 @@ namespace ICEBG.Client.Pages
             }
             StateHasChanged();
             pTimer.Dispose();
-            pTimer = new System.Timers.Timer(100);
+            pTimer = new System.Timers.Timer(1);
             pTimer.Elapsed += RefreshTimerTick;
             pTimer.Enabled = true;
         }
@@ -56,7 +54,7 @@ namespace ICEBG.Client.Pages
 
         protected override void OnInitialized()
         {
-            pTimer = new System.Timers.Timer(100);
+            pTimer = new System.Timers.Timer(1);
             pTimer.Elapsed += RefreshTimerTick;
             pTimer.Enabled = true;
         }

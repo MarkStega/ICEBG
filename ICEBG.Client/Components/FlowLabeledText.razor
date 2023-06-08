@@ -1,7 +1,7 @@
 ﻿@namespace ICEBG.Client.Components
 
 <h2>Time is @time</h2>
-<h3>Count is @count</h3>
+<h3>Count1 is @count</h3>
 <h3>Count2 is @count2</h3>
 @if (configuration == null)
 {
@@ -12,17 +12,17 @@ else
     @if (configuration.pSuccess)
     {
         <table class="table">
-            <thead>
-                <tr>
-                    <th>Success</th>
-                    <th>Key</th>
-                    <th>pResult</th>
-                </tr>
-            </thead>
             <tbody>
                 <tr>
+                    <td><b>Success</b></td>
                     <td>true</td>
+                </tr>
+                <tr>
+                    <td><b>Key</b></td>
                     <td>@configuration.pResult.Id</td>
+                </tr>
+                <tr>
+                    <td><b>pResult</b></td>
                     <td>@configuration.pResult.Configuration</td>
                 </tr>
             </tbody>
@@ -31,15 +31,13 @@ else
     else
     {
         <table class="table">
-            <thead>
-                <tr>
-                    <th>Success</th>
-                    <th>pError</th>
-                </tr>
-            </thead>
             <tbody>
                 <tr>
+                    <td><b>Success</b></td>
                     <td>false</td>
+                </tr>
+                <tr>
+                    <td><b>pError</b></td>
                     <td>@configuration.pError</td>
                 </tr>
             </tbody>
