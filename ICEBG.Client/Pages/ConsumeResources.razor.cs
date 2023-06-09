@@ -34,14 +34,14 @@ namespace ICEBG.Client.Pages
         {
             configuration = await ConfigurationClient.SelectAsync(ApplicationConfiguration.pConfigurationIdentifier);
             internalCount += 1;
-            count1 = internalCount.ToString();
+            count1 = internalCount.ToString("N0");
 
             time = DateTime.Now.ToString();
             if (internalCount >= (int.MaxValue - 100))
             {
                 internalCount = 0;
                 internalCount2 += 1;
-                count2 = internalCount2.ToString();
+                count2 = internalCount2.ToString("N0");
             }
             StateHasChanged();
             pTimer.Dispose();

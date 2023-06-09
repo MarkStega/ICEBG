@@ -20,11 +20,8 @@ using ICEBG.Blazor;
 using ICEBG.Client;
 using ICEBG.Client.Infrastructure.ClientServices;
 
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.AspNetCore.CookiePolicy;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -54,15 +51,6 @@ builder.Services.AddLogging(
 builder.Services.AddOptions();
 
 ClientServices.Inject(ApplicationConfiguration.pDataServicesEndpointPrefix, builder.Services);
-
-builder.Services.Configure<CookiePolicyOptions>(options =>
-{
-    // Has Pentest fixes
-    options.CheckConsentNeeded = context => true;
-    options.HttpOnly = HttpOnlyPolicy.Always;
-    options.MinimumSameSitePolicy = SameSiteMode.Strict;
-    options.Secure = CookieSecurePolicy.Always;
-});
 
 builder.Services.AddBlazoredLocalStorage();
 
