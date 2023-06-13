@@ -28,12 +28,12 @@ using NLog;
 using NLog.Web;
 
 // NLog: setup the logger first to catch all errors
-Logger logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
-//
+//Logger logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+
 try
 {
-    logger.Debug("______________________________________________________________________");
-    logger.Debug("Building and Starting Host in Main() for ICEBG.Web.UserInterface");
+    //logger.Debug("______________________________________________________________________");
+    //logger.Debug("Building and Starting Host in Main() for ICEBG.Web.UserInterface");
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Logging.ClearProviders();
@@ -279,11 +279,11 @@ try
 }
 catch (Exception ex)
 {
-    logger.Fatal(ex, "Unhandled exception");
+    //logger.Fatal(ex, "Unhandled exception");
 }
 finally
 {
     // Ensure message flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
-    logger.Debug("Shutting down NLOG");
+    //logger.Debug("Shutting down NLOG");
     LogManager.Shutdown();
 }
