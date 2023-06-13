@@ -23,6 +23,8 @@ namespace ICEBG.Client.Pages
 
         private string count1 { get; set; } = "'Not yet initialized'";
         private string count2 { get; set; } = "0";
+        private string duration { get; set; } = "'Not yet initialized'";
+        private DateTime startTime { get; set; } = DateTime.MinValue;
         private string time { get; set; } = "'Not yet initialized'";
         private ServiceResult<Configuration_DD> configuration { get; set; }
 
@@ -36,7 +38,15 @@ namespace ICEBG.Client.Pages
             internalCount += 1;
             count1 = internalCount.ToString("N0");
 
-            time = DateTime.Now.ToString();
+            var currentTime = DateTime.Now;
+            if (startTime == DateTime.MinValue)
+            {
+                startTime = currentTime;
+            }
+
+            duration = (currentTime - startTime).ToString(@"d\.hh\:mm\:ss");
+
+            time = currentTime.ToString();
             if (internalCount >= (int.MaxValue - 100))
             {
                 internalCount = 0;
@@ -44,7 +54,7 @@ namespace ICEBG.Client.Pages
                 count2 = internalCount2.ToString("N0");
             }
             StateHasChanged();
-            pTimer.Dispose();
+            pTimer?.Dispose();
             pTimer = new System.Timers.Timer(1);
             pTimer.Elapsed += RefreshTimerTick;
             pTimer.Enabled = true;
@@ -52,11 +62,12 @@ namespace ICEBG.Client.Pages
 
         #endregion
 
-        protected override void OnInitialized()
+        protected override void OnAfterRender(bool isFirstRender)
         {
-            pTimer = new System.Timers.Timer(1);
-            pTimer.Elapsed += RefreshTimerTick;
-            pTimer.Enabled = true;
+            if (isFirstRender)
+            {
+                RefreshTimerTick(null, null);
+            }
         }
 
         #region RefreshTimerTick
