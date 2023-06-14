@@ -9,20 +9,20 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+using NLog;
 using NLog.Web;
 
-
 // NLog: setup the logger first to catch all errors
-NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+Logger logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
 try
 {
     logger.Debug("______________________________________________________________________");
-    logger.Debug("Building and Starting Host in Main()");
+    logger.Debug("Building and Starting Host in Main() for ICEBG.Web.DataServices");
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Logging.ClearProviders();
-    builder.Logging.SetMinimumLevel(LogLevel.Trace);
+    builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
     builder.Host.UseNLog();
 
     logger.Debug("");
@@ -114,5 +114,5 @@ finally
 {
     // Ensure message flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
     logger.Debug("Shutting down NLOG");
-    NLog.LogManager.Shutdown();
+    LogManager.Shutdown();
 }

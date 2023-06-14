@@ -29,7 +29,7 @@ public partial class About : ComponentBase
         pOSArchitecture = RuntimeInformation.OSArchitecture.ToString();
         pOSDescription = RuntimeInformation.OSDescription.ToString();
         pRuntime = RuntimeInformation.FrameworkDescription.ToString();
-        pVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+        pVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split('+')[0];
     }
 
 }

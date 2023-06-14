@@ -19,26 +19,27 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+using NLog;
 using NLog.Web;
 
-
 // NLog: setup the logger first to catch all errors
-NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+Logger logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
 try
 {
     logger.Debug("______________________________________________________________________");
-    logger.Debug("Building and Starting Host in Main()");
+    logger.Debug("Building and Starting Host in Main() for ICEBG.Web.UserInterface");
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Logging.ClearProviders();
-    builder.Logging.SetMinimumLevel(LogLevel.Trace);
-    builder.Host.UseNLog();
+    builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+    //builder.Host.UseNLog();
 
     logger.Debug("");
 
@@ -106,7 +107,6 @@ try
                         .AddSchemeSource(SchemeSource.Data, "w3.org/svg/2000"))
                     .AddManifestSrc(o => o.AddSelf())
                     .AddMediaSrc(o => o.AddSelf())
-                    .AddPrefetchSrc(o => o.AddSelf())
                     .AddObjectSrc(o => o.AddNone())
                     .AddReportUri(o => o.AddUri((baseUri, baseDomain) => $"https://{baseUri}/api/CspReporting/UriReport"))
                     // The sha-256 hash relates to an inline script added by blazor's javascript
@@ -213,6 +213,16 @@ try
         options.MaxSendMessageSize = null;
     });
 
+    builder.Services.AddRateLimiter(_ => _
+        .AddFixedWindowLimiter(policyName: "fixed", options =>
+        {
+            options.PermitLimit = 1;
+            options.Window = TimeSpan.FromSeconds(1);
+            options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+            options.QueueLimit = 10;
+        }
+        ));
+
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -250,21 +260,7 @@ try
     app.UseRouting();
 
     // Limit api calls to 10 in a second to prevent external denial of service.
-    app.UseRateLimiter(new()
-    {
-        GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
-        {
-            return RateLimitPartition.GetFixedWindowLimiter("GeneralLimit",
-                _ => new FixedWindowRateLimiterOptions()
-                {
-                    Window = TimeSpan.FromSeconds(1),
-                    PermitLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 10,
-                });
-        }),
-        RejectionStatusCode = 429,
-    });
+    app.UseRateLimiter();
 
     app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
 
@@ -286,5 +282,5 @@ finally
 {
     // Ensure message flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
     logger.Debug("Shutting down NLOG");
-    //NLog.LogManager.Shutdown();
+    LogManager.Shutdown();
 }

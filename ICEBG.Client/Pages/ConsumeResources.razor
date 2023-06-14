@@ -14,10 +14,13 @@
 
 @inject iConfigurationClient ConfigurationClient
 
+@implements IDisposable
+
 <h1>Consume resources</h1>
 
 <FlowLabeledText time="@time"
+                 duration="@duration"
                  configuration="@configuration"
-                 count="@count"
+                 count="@count1"
                  count2="@count2"/>
 
