@@ -62,8 +62,7 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
             }
             else
             {
-                pLogger.LogInformation(
-                    "   pConfigurationBL.Select succeeded");
+                pLogger.LogInformation("   pConfigurationBL.Select succeeded");
 
                 var reply = new ConfigurationSelectReply();
 
