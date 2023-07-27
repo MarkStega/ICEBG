@@ -39,7 +39,7 @@ try
 
     builder.Logging.ClearProviders();
     builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-    //builder.Host.UseNLog();
+    builder.Host.UseNLog();
 
     logger.Debug("");
 
