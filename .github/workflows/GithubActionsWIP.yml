@@ -92,7 +92,7 @@ jobs:
         dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerImageTag=${{ env.unifiedVersion }} --no-self-contained
         echo "*** show images"
         docker images
-        podman images
+        podman images -all
         # echo "*** docker tag"
         # docker tag ${{env.appNameDS}}:${{ env.unifiedVersion }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.unifiedVersion }}
         # echo "*** docker push"
