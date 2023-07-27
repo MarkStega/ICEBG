@@ -89,8 +89,7 @@ jobs:
 
     - name: Publish, tag, and push DS image
       run: |
-        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerImageTag=${{ env.unifiedVersion }} --no-self-contained
-        podman image list -all
+        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerImageTag=${{ env.unifiedVersion }} --no-self-contained
         echo "*** show images"
         docker images
         podman image list -all
