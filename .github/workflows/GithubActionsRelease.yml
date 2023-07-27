@@ -93,7 +93,7 @@ jobs:
 
     - name: Publish, tag, and push DS image
       run: |
-        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerImageName=${{env.appNameDS}}
+        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerImageName=${{env.appNameDS}} -p:ContainerImageTag=${{ env.unifiedVersion }} --no-self-contained
         docker tag ${{env.appNameDS}}:${{ env.unifiedVersion }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.unifiedVersion }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.unifiedVersion }}
 
@@ -130,7 +130,7 @@ jobs:
 
     - name: Publish, tag, and push UI image
       run: |
-        dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerImageName=${{env.appNameUI}} --sc
+        dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerImageName=${{env.appNameUI}} -p:ContainerImageTag=${{ env.unifiedVersion }} --self-contained
         docker tag ${{env.appNameUI}}:${{ env.unifiedVersion }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.unifiedVersion }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.unifiedVersion }}
 

@@ -4,7 +4,6 @@
 		<UserSecretsId>ICEBG.Data.Server-9042ECD1-A92B-4B48-B0EA-E54F5A5A6F9A</UserSecretsId>
 		<WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
 
-		<!--<SdkContainerSupportPackageVersion>0.4.*</SdkContainerSupportPackageVersion>-->
 		<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-preview</ContainerBaseImage>
 	</PropertyGroup>
 
