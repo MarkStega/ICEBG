@@ -89,9 +89,7 @@ jobs:
 
     - name: Publish tagged DS image
       run: |
-        # dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerRepository=${{env.appNameUI}} -p:ContainerImageTag=${{ env.unifiedVersion }} --no-self-contained
-        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} --no-self-contained
-        docker images
+        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerRepository=${{env.appNameUI}} -p:ContainerImageTag=${{ env.unifiedVersion }} --no-self-contained
 
 ############################################################################################################
 # Build and deploy blazor UI image
