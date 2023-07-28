@@ -87,18 +87,11 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    - name: Publish, tag, and push DS image
+    - name: Publish tagged DS image
       run: |
-        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerImageTag=${{ env.unifiedVersion }} --no-self-contained
-        echo "*** show images"
+        # dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerRepository=${{env.appNameUI}} -p:ContainerImageTag=${{ env.unifiedVersion }} --no-self-contained
+        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} --no-self-contained
         docker images
-        podman image list --all
-        # echo "*** docker tag"
-        # docker tag ${{env.appNameDS}}:${{ env.unifiedVersion }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.unifiedVersion }}
-        # echo "*** docker push"
-        # docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.unifiedVersion }}
-        # echo "*** show images"
-        # docker images
 
 ############################################################################################################
 # Build and deploy blazor UI image
@@ -131,17 +124,9 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    - name: Publish, tag, and push UI image
+    - name: Publish tagged UI image
       run: |
         dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerRepository=${{env.appNameUI}} -p:ContainerImageTag=${{ env.unifiedVersion }} --self-contained
-        # echo "*** docker images"
-        # docker images
-        # echo "*** docker tag"
-        # docker tag ${{env.appNameUI}}:${{ env.unifiedVersion }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.unifiedVersion }}
-        # echo "*** docker push"
-        # docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.unifiedVersion }}
-        # echo "*** docker images"
-        # docker images
 
 ############################################################################################################
 # Build blazor DS image
