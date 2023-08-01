@@ -12,6 +12,7 @@ using ICEBG.DataTier.DataDefinitions;
 using ICEBG.DataTier.gRPCClient;
 using ICEBG.SystemFramework;
 using ICEBG.AppConfig;
+using System.Reflection;
 
 //
 //  2022-05-24  Mark Stega
@@ -68,6 +69,7 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
 
                 reply.SuccessIndicator = true;
                 reply.ErrorMessage = "";
+                reply.ServerVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split('+')[0];
 
                 var ConfigurationDD = new ConfigurationDD
                 {
@@ -122,6 +124,7 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
                 var reply = new ConfigurationSelectAllReply();
 
                 reply.SuccessIndicator = true;
+                reply.ServerVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split('+')[0];
                 reply.ErrorMessage = "";
 
                 foreach (var Configuration in Configurations)
@@ -163,12 +166,14 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
 
             var Configuration = new Configuration_DD(
                 request.Configuration.Id,
+                "",
                 request.Configuration.Configuration);
             pConfigurationBL.Upsert(Configuration);
             pLogger.LogInformation("   pConfigurationBL.Upsert succeeded");
 
             var goodReply = new ConfigurationUpsertReply
             {
+                ServerVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split('+')[0],
                 SuccessIndicator = true
             };
             return Task.FromResult(goodReply);

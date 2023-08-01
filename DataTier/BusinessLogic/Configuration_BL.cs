@@ -1,6 +1,6 @@
 
 /******************************************************************************
-Generated file - Created on 7/1/2022; Do not edit!
+Generated file - Created on 8/1/2023; Do not edit!
 ******************************************************************************/
 
 using System;
@@ -44,6 +44,7 @@ namespace ICEBG.DataTier.BusinessLogic
 			SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@Id", configuration.Id),
+				new SqlParameter("@ServerVersion", configuration.ServerVersion),
 				new SqlParameter("@Configuration", configuration.Configuration)
 			};
 
@@ -60,6 +61,7 @@ namespace ICEBG.DataTier.BusinessLogic
 			SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@Id", configuration.Id),
+				new SqlParameter("@ServerVersion", configuration.ServerVersion),
 				new SqlParameter("@Configuration", configuration.Configuration)
 			};
 
@@ -76,6 +78,7 @@ namespace ICEBG.DataTier.BusinessLogic
 			SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@Id", configuration.Id),
+				new SqlParameter("@ServerVersion", configuration.ServerVersion),
 				new SqlParameter("@Configuration", configuration.Configuration)
 			};
 
@@ -143,6 +146,7 @@ namespace ICEBG.DataTier.BusinessLogic
 		{
 			Configuration_DD configuration = new Configuration_DD();
 			configuration.Id = SqlClientUtility.GetString(dataReader, "Id", String.Empty);
+			configuration.ServerVersion = SqlClientUtility.GetString(dataReader, "ServerVersion", String.Empty);
 			configuration.Configuration = SqlClientUtility.GetString(dataReader, "Configuration", String.Empty);
 
 			return configuration;

@@ -37,6 +37,8 @@ namespace ICEBG.DataTier.gRPCClient
         {
             try
             {
+                pLogger.LogDebug("SelectAsync initiated");
+
                 var request = new ConfigurationSelectRequest
                 {
                     Id = requestedId
@@ -47,6 +49,7 @@ namespace ICEBG.DataTier.gRPCClient
                 {
                     var configuration = new Configuration_DD(
                         reply.ReturnedConfiguration.Id,
+                        reply.ServerVersion,
                         reply.ReturnedConfiguration.Configuration);
 
                     return new ServiceResult<Configuration_DD>
@@ -76,6 +79,8 @@ namespace ICEBG.DataTier.gRPCClient
         {
             try
             {
+                pLogger.LogDebug("SelectAllAsync initiated");
+
                 var request = new ConfigurationSelectAllRequest { };
                 var reply = await pConfigurationProtoClient.SelectAllAsync(request, header);
 
@@ -86,6 +91,7 @@ namespace ICEBG.DataTier.gRPCClient
                     {
                         var Configuration = new Configuration_DD(
                             ConfigurationDD.Id,
+                            reply.ServerVersion,
                             ConfigurationDD.Configuration);
 
                         ConfigurationList.Add(Configuration);
@@ -118,6 +124,8 @@ namespace ICEBG.DataTier.gRPCClient
         {
             try
             {
+                pLogger.LogDebug("UpsertAsync initiated");
+
                 var ConfigurationDD = new ConfigurationDD
                 {
                     Id = Configuration.Id,

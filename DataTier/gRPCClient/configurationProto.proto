@@ -20,7 +20,8 @@ message ConfigurationSelectRequest {
 message ConfigurationSelectReply{
 	bool successIndicator = 1;
 	string errorMessage = 2;
-	ConfigurationDD returnedConfiguration = 3;
+	string serverVersion = 3;
+	ConfigurationDD returnedConfiguration = 4;
 }
 
 message ConfigurationSelectAllRequest {
@@ -29,7 +30,8 @@ message ConfigurationSelectAllRequest {
 message ConfigurationSelectAllReply{
 	bool successIndicator = 1;
 	string errorMessage = 2;
-	repeated ConfigurationDD ConfigurationList = 3;
+	string serverVersion = 3;
+	repeated ConfigurationDD ConfigurationList = 4;
 }
 
 message ConfigurationUpsertRequest{
@@ -39,4 +41,5 @@ message ConfigurationUpsertRequest{
 message ConfigurationUpsertReply {
 	bool successIndicator = 1;
 	string errorMessage = 2;
+	string serverVersion = 3;
 }
