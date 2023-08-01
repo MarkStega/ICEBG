@@ -26,17 +26,21 @@ else
     @if (configuration.pSuccess)
     {
         <table class="table">
-            <thead>
-                <tr>
-                    <th>Success</th>
-                    <th>Key</th>
-                    <th>pResult</th>
-                </tr>
-            </thead>
             <tbody>
                 <tr>
+                    <td><b>Success</b></td>
                     <td>true</td>
+                </tr>
+                <tr>
+                    <td><b>Key</b></td>
                     <td>@configuration.pResult.Id</td>
+                </tr>
+                <tr>
+                    <td><b>Server version</b></td>
+                    <td>@configuration.pResult.ServerVersion</td>
+                </tr>
+                <tr>
+                    <td><b>pResult</b></td>
                     <td>@configuration.pResult.Configuration</td>
                 </tr>
             </tbody>

@@ -4,23 +4,20 @@
 		<UserSecretsId>ICEBG.Data.Server-9042ECD1-A92B-4B48-B0EA-E54F5A5A6F9A</UserSecretsId>
 		<WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
 
-		<EnableSdkContainerSupport>true</EnableSdkContainerSupport>
-		<SdkContainerSupportPackageVersion>0.4.*</SdkContainerSupportPackageVersion>
-		<SelfContained>false</SelfContained>
 		<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-preview</ContainerBaseImage>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ContainerPort Include="80" Type="tcp" />
+		<ContainerPort Include="8080" Type="tcp" />
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Grpc.AspNetCore" Version="2.53.0" />
-		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.53.0" />
-		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.53.0" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.55.0" />
+		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.55.0" />
+		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.55.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
 		<PackageReference Include="NLog.Extensions.AzureBlobStorage" Version="4.2.0" />
-		<PackageReference Include="NLog.Web.AspNetCore" Version="5.3.0" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.3.2" />
 	</ItemGroup>
 
 	<ItemGroup>

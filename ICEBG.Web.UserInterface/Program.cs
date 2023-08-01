@@ -29,7 +29,7 @@ using NLog;
 using NLog.Web;
 
 // NLog: setup the logger first to catch all errors
-Logger logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+Logger logger = LogManager.Setup().LoadConfigurationFromFile("nlog.config").GetCurrentClassLogger();
 
 try
 {
@@ -39,7 +39,7 @@ try
 
     builder.Logging.ClearProviders();
     builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-    //builder.Host.UseNLog();
+    builder.Host.UseNLog();
 
     logger.Debug("");
 

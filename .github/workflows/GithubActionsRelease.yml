@@ -15,22 +15,23 @@ on:
 env:
   appNameDS: 'icebg.web.ds'
   appNameUI: 'icebg.web.ui'
+  containerRegistry: 'cricebg.azurecr.io'
  
 jobs:
 
 ############################################################################################################
 # These jobs are used to gate actions. By creating these jobs we don't need to proliferate the repo checks
 ############################################################################################################
-  perform-deployment:
-    name: Perform deployment
+  deployment-allowed:
+    name: Deployment allowed
     runs-on: ubuntu-latest
-    if: github.repository == 'MarkStega/ICEBG' && github.actor != 'dependabot[bot]'
+    if: github.repository == 'MarkStega/ICEBG'
     steps:
     - name: Nothing to see here
       run: echo ""
 
-  skip-deployment:
-    name: Skip deployment
+  deployment-not-allowed:
+    name: Deployment not allowed
     runs-on: ubuntu-latest
     if: github.repository != 'MarkStega/ICEBG'
     steps:
@@ -50,7 +51,7 @@ jobs:
 ############################################################################################################
   set-unified-version:
     name: Create the date based unifiedVersion
-    needs: [perform-deployment]
+    needs: [deployment-allowed,build-allowed]
     runs-on: ubuntu-latest
     outputs:
       unifiedVersion: ${{ steps.setUnifiedVersion.outputs.LocalUnifiedVersion }}
@@ -91,11 +92,9 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    - name: Publish, tag, and push DS image
+    - name: Publish tagged DS image
       run: |
-        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerImageName=${{env.appNameDS}}
-        docker tag ${{env.appNameDS}}:${{ env.unifiedVersion }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.unifiedVersion }}
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameDS}}:${{ env.unifiedVersion }}
+        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerRepository=${{env.appNameUI}} -p:ContainerImageName=${{env.appNameDS}} -p:ContainerImageTag=${{ env.unifiedVersion }} --no-self-contained
 
 ############################################################################################################
 # Build and deploy blazor UI image
@@ -128,18 +127,16 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    - name: Publish, tag, and push UI image
+    - name: Publish tagged UI image
       run: |
-        dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerImageName=${{env.appNameUI}} --sc
-        docker tag ${{env.appNameUI}}:${{ env.unifiedVersion }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.unifiedVersion }}
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.appNameUI}}:${{ env.unifiedVersion }}
+        dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerRepository=${{env.appNameUI}} -p:ContainerImageName=${{env.appNameUI}} -p:ContainerImageTag=${{ env.unifiedVersion }} --self-contained
 
 ############################################################################################################
 # Build blazor DS image
 ############################################################################################################
   build-ds:
     name: Build ICEBG DS
-    needs: [skip-deployment, build-allowed]
+    needs: [deployment-not-allowed, build-allowed]
     runs-on: windows-latest
 
     steps:
@@ -167,7 +164,7 @@ jobs:
 ############################################################################################################
   build-ui:
     name: Build ICEBG UI
-    needs: [skip-deployment, build-allowed]
+    needs: [deployment-not-allowed, build-allowed]
     runs-on: windows-latest
 
     steps:

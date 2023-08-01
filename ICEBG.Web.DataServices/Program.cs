@@ -13,7 +13,7 @@ using NLog;
 using NLog.Web;
 
 // NLog: setup the logger first to catch all errors
-Logger logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+Logger logger = LogManager.Setup().LoadConfigurationFromFile("nlog.config").GetCurrentClassLogger();
 
 try
 {

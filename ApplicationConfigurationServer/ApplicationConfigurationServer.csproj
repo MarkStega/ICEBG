@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<ItemGroup>
-		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.19" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-preview.5.23302.2" />
+		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.20" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-preview.6.23329.11" />
 	</ItemGroup>
 
 	<ItemGroup>
