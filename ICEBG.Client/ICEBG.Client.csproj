@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
@@ -19,7 +19,7 @@
 		<PackageReference Include="libphonenumber-csharp" Version="8.13.17" />
 		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.20" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0-preview.6.23329.11" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0-preview.6.23329.11" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0-preview.7.23375.9" />
 	</ItemGroup>
 
 	<ItemGroup>
