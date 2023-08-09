@@ -21,16 +21,16 @@
 		<PackageReference Include="Grpc.AspNetCore" Version="2.55.0" />
 		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.55.0" />
 		<PackageReference Include="HttpSecurity.AspNet" Version="1.1.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-preview.6.23329.11" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-preview.7.23375.9" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
 		<PackageReference Include="NLog.Extensions.AzureBlobStorage" Version="4.2.0" />
-		<PackageReference Include="NLog.Web.AspNetCore" Version="5.3.2" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.3.3" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationConfigurationServer\ApplicationConfigurationServer.csproj" />
 		<ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
-		<ProjectReference Include="..\ICEBG.Blazor\ICEBG.Blazor.csproj" />
+		<!--<ProjectReference Include="..\ICEBG.Blazor\ICEBG.Blazor.csproj" />-->
 		<ProjectReference Include="..\ICEBG.Client\ICEBG.Client.csproj" />
 	</ItemGroup>
 
@@ -38,5 +38,12 @@
 		<Copy SourceFiles="$(ProjectDir)appsettings.$(ConfigurationName).json" DestinationFiles="$(ProjectDir)appsettings.json" />
 		<Copy SourceFiles="$(ProjectDir)nlog.$(ConfigurationName).config" DestinationFiles="$(ProjectDir)nlog.config" />
 	</Target>
+
+	<!--Compression directives (Note that the patterns are relative to wwwroot)-->
+	<PropertyGroup>
+		<CompressionIncludePatterns>$(CompressionIncludePatterns);**/*.css;**/*.js</CompressionIncludePatterns>
+		<BuildCompressionFormats>gzip;brotli</BuildCompressionFormats>
+		<PublishCompressionFormats>gzip;brotli</PublishCompressionFormats>
+	</PropertyGroup>
 
 </Project>

@@ -91,6 +91,9 @@ jobs:
       run: |
         dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerRepository=${{env.appNameDS}} -p:ContainerImageTag=${{ env.unifiedVersion }} --no-self-contained
 
+    # - name: Display package output for brotli & gzip compressed files
+    #   run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
+
 ############################################################################################################
 # Build and deploy blazor UI image
 ############################################################################################################
