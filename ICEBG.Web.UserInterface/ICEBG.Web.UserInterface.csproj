@@ -21,7 +21,7 @@
 		<PackageReference Include="Grpc.AspNetCore" Version="2.55.0" />
 		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.55.0" />
 		<PackageReference Include="HttpSecurity.AspNet" Version="1.1.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-preview.6.23329.11" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-preview.7.23375.9" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
 		<PackageReference Include="NLog.Extensions.AzureBlobStorage" Version="4.2.0" />
 		<PackageReference Include="NLog.Web.AspNetCore" Version="5.3.3" />

@@ -127,7 +127,7 @@ jobs:
 
     - name: Publish tagged UI image
       run: |
-        dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerRepository=${{env.appNameUI}} -p:ContainerImageTag=${{ env.unifiedVersion }} --self-contained
+        dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerRepository=${{env.appNameDS}} -p:ContainerImageTag=${{ env.unifiedVersion }} --self-contained
 
 ############################################################################################################
 # Build blazor DS image
