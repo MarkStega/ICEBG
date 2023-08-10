@@ -32,4 +32,11 @@
 		<Copy SourceFiles="$(ProjectDir)nlog.$(ConfigurationName).config" DestinationFiles="$(ProjectDir)nlog.config" />
 	</Target>
 
-	</Project>
+	<!--Compression directives (Note that the patterns are relative to wwwroot)-->
+	<PropertyGroup>
+		<CompressionIncludePatterns>$(CompressionIncludePatterns);**/*.css;**/*.js</CompressionIncludePatterns>
+		<BuildCompressionFormats>gzip;brotli</BuildCompressionFormats>
+		<PublishCompressionFormats>gzip;brotli</PublishCompressionFormats>
+	</PropertyGroup>
+
+</Project>

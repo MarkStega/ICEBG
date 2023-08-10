@@ -94,10 +94,10 @@ jobs:
       run: find ${{ github.workspace }} -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
 
     - name: Display package output for brotli & gzip compressed files
-      run: find /home/runner/work/ICEBG/ICEBG -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
+      run: find /home/runner/work/ICEBG/ICEBG -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
 
     - name: Display package output for brotli & gzip compressed files
-      run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
+      run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
 
 ############################################################################################################
 # Build and deploy blazor UI image
