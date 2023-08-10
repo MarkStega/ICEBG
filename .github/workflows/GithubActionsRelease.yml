@@ -95,9 +95,6 @@ jobs:
     - name: Display package output for brotli & gzip compressed files
       run: find ${{ github.workspace }} -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
 
-    - name: Display package output for brotli & gzip compressed files
-      run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \)
-
 ############################################################################################################
 # Build and deploy blazor UI image
 ############################################################################################################
