@@ -93,6 +93,9 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - name: Display package output for brotli & gzip compressed files
+      run: find ${{ github.workspace }} -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
+
+    - name: Display package output for brotli & gzip compressed files
       run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \)
 
 ############################################################################################################
@@ -131,7 +134,7 @@ jobs:
         dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerRepository=${{env.appNameUI}} -p:ContainerImageName=${{env.appNameUI}} -p:ContainerImageTag=${{ env.unifiedVersion }} --self-contained
 
     - name: Display package output for brotli & gzip compressed files
-      run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \)
+      run: find ${{ github.workspace }} -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
 
 ############################################################################################################
 # Build blazor DS image
