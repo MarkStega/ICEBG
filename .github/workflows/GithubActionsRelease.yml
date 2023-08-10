@@ -92,9 +92,9 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    - name: Publish tagged DS image
-      run: |
-        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerRepository=${{env.appNameDS}} -p:ContainerImageName=${{env.appNameDS}} -p:ContainerImageTag=${{ env.unifiedVersion }} --no-self-contained
+    - name: Display package output for brotli & gzip compressed files
+      run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
+      shell: bash
 
 ############################################################################################################
 # Build and deploy blazor UI image
@@ -131,13 +131,17 @@ jobs:
       run: |
         dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerRepository=${{env.appNameUI}} -p:ContainerImageName=${{env.appNameUI}} -p:ContainerImageTag=${{ env.unifiedVersion }} --self-contained
 
+    - name: Display package output for brotli & gzip compressed files
+      run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
+      shell: bash
+
 ############################################################################################################
 # Build blazor DS image
 ############################################################################################################
   build-ds:
     name: Build ICEBG DS
     needs: [deployment-not-allowed, build-allowed]
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Set unifiedVersion as env variable
@@ -159,13 +163,17 @@ jobs:
       run: |
         dotnet build ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:Version=${{ env.unifiedVersion }}
 
+    - name: Display package output for brotli & gzip compressed files
+      run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \)
+      shell: bash
+
 ############################################################################################################
 # Build blazor UI image
 ############################################################################################################
   build-ui:
     name: Build ICEBG UI
     needs: [deployment-not-allowed, build-allowed]
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Set unifiedVersion as env variable
@@ -186,3 +194,7 @@ jobs:
     - name: Build UI image
       run: |
         dotnet build ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:Version=${{ env.unifiedVersion }}
+
+    - name: Display package output for brotli & gzip compressed files
+      run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \)
+      shell: bash
