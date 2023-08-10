@@ -93,8 +93,7 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - name: Display package output for brotli & gzip compressed files
-      run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
-      shell: bash
+      run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \)
 
 ############################################################################################################
 # Build and deploy blazor UI image
@@ -132,8 +131,7 @@ jobs:
         dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerRepository=${{env.appNameUI}} -p:ContainerImageName=${{env.appNameUI}} -p:ContainerImageTag=${{ env.unifiedVersion }} --self-contained
 
     - name: Display package output for brotli & gzip compressed files
-      run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
-      shell: bash
+      run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \)
 
 ############################################################################################################
 # Build blazor DS image
@@ -163,10 +161,6 @@ jobs:
       run: |
         dotnet build ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:Version=${{ env.unifiedVersion }}
 
-    - name: Display package output for brotli & gzip compressed files
-      run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \)
-      shell: bash
-
 ############################################################################################################
 # Build blazor UI image
 ############################################################################################################
@@ -194,7 +188,3 @@ jobs:
     - name: Build UI image
       run: |
         dotnet build ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:Version=${{ env.unifiedVersion }}
-
-    - name: Display package output for brotli & gzip compressed files
-      run: find /home/runner/work -type f \( -iname "*.br" -o -iname "*.gz" \)
-      shell: bash
