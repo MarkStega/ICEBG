@@ -230,19 +230,12 @@ jobs:
 
     steps:
 
-    # - name: Login to Azure ACR
-    #   uses: azure/login@v1
-    #   with:
-    #     creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
-    - name: 'Docker login'
-      uses: azure/docker-login@v1
+    - name: Login to Azure ACR
+      uses: azure/login@v1
       with:
-        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-
-    - name: Azure CLI Script to Purge Matured DS & UI WIP Container Images
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - name: Azure CLI script to purge old DS & UI WIP container images
       uses: azure/CLI@v1
       with:
         inlineScript: >
