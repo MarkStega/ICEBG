@@ -16,14 +16,24 @@ env:
   appNameDS: 'icebg.web.ds'
   appNameUI: 'icebg.web.ui'
   containerRegistry: 'cricebg.azurecr.io'
- 
+  images-to-keep: '10'
+
 jobs:
 
 ############################################################################################################
 # These jobs are used to gate actions. By creating these jobs we don't need to proliferate the repo checks
 ############################################################################################################
+  build-allowed:
+    name: Build allowed
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
+    steps:
+    - name: Nothing to see here
+      run: echo ""
+
   deployment-allowed:
     name: Deployment allowed
+    needs: [build-allowed]
     runs-on: ubuntu-latest
     if: github.repository == 'MarkStega/ICEBG'
     steps:
@@ -32,16 +42,9 @@ jobs:
 
   deployment-not-allowed:
     name: Deployment not allowed
+    needs: [build-allowed]
     runs-on: ubuntu-latest
     if: github.repository != 'MarkStega/ICEBG'
-    steps:
-    - name: Nothing to see here
-      run: echo ""
-
-  build-allowed:
-    name: Build allowed
-    runs-on: ubuntu-latest
-    if: github.actor != 'dependabot[bot]'
     steps:
     - name: Nothing to see here
       run: echo ""
@@ -51,7 +54,7 @@ jobs:
 ############################################################################################################
   set-unified-version:
     name: Create the date based unifiedVersion
-    needs: [deployment-allowed,build-allowed]
+    needs: [deployment-allowed]
     runs-on: ubuntu-latest
     outputs:
       unifiedVersion: ${{ steps.setUnifiedVersion.outputs.LocalUnifiedVersion }}
@@ -92,6 +95,20 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
+    - name: Publish tagged DS image
+      run: >
+        dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj
+        --os linux
+        --arch x64
+        --configuration Azure
+        --no-self-contained
+        -p:ContainerImageName=${{env.appNameDS}}
+        -p:ContainerImageTag=${{ env.unifiedVersion }}
+        -p:ContainerRegistry=${{env.containerRegistry}}
+        -p:ContainerRepository=${{env.appNameDS}}
+        -p:PublishProfile=DefaultContainer
+        -p:Version=${{ env.unifiedVersion }}
+
     - name: Display package output for brotli & gzip compressed files
       run: find ${{ github.workspace }} -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
 
@@ -127,8 +144,18 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - name: Publish tagged UI image
-      run: |
-        dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:PublishProfile=DefaultContainer -p:Version=${{ env.unifiedVersion }} -p:ContainerRegistry=${{env.containerRegistry}} -p:ContainerRepository=${{env.appNameUI}} -p:ContainerImageName=${{env.appNameUI}} -p:ContainerImageTag=${{ env.unifiedVersion }} --self-contained
+      run: >
+        dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj
+        --os linux
+        --arch x64
+        --configuration Azure
+        --no-self-contained
+        -p:ContainerImageName=${{env.appNameUI}}
+        -p:ContainerImageTag=${{ env.unifiedVersion }}
+        -p:ContainerRegistry=${{env.containerRegistry}}
+        -p:ContainerRepository=${{env.appNameUI}}
+        -p:PublishProfile=DefaultContainer
+        -p:Version=${{ env.unifiedVersion }}
 
     - name: Display package output for brotli & gzip compressed files
       run: find ${{ github.workspace }} -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
@@ -138,7 +165,7 @@ jobs:
 ############################################################################################################
   build-ds:
     name: Build ICEBG DS
-    needs: [deployment-not-allowed, build-allowed]
+    needs: [deployment-not-allowed]
     runs-on: ubuntu-latest
 
     steps:
@@ -158,15 +185,19 @@ jobs:
         dotnet-quality: 'preview'
 
     - name: Build DS image
-      run: |
-        dotnet build ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj --os linux --arch x64 --configuration Azure -p:Version=${{ env.unifiedVersion }}
+      run: >
+        dotnet build ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj
+        --os linux
+        --arch x64
+        --configuration Azure
+        -p:Version=${{ env.unifiedVersion }}
 
 ############################################################################################################
 # Build blazor UI image
 ############################################################################################################
   build-ui:
     name: Build ICEBG UI
-    needs: [deployment-not-allowed, build-allowed]
+    needs: [deployment-not-allowed]
     runs-on: ubuntu-latest
 
     steps:
@@ -186,5 +217,33 @@ jobs:
         dotnet-quality: 'preview'
 
     - name: Build UI image
-      run: |
-        dotnet build ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj --os linux --arch x64 --configuration Azure -p:Version=${{ env.unifiedVersion }}
+      run: >
+        dotnet build ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj
+        --os linux
+        --arch x64
+        --configuration Azure
+        -p:Version=${{ env.unifiedVersion }}
+
+#############################################################################################################
+## Clean up after building docker containers
+#############################################################################################################
+  cleanup-docker-containers:
+    name: Clean up after building docker containers
+    needs: [build-deploy-ds,build-deploy-ui]
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - name: Azure CLI script to purge old DS & UI WIP container images
+      uses: azure/CLI@v1
+      with:
+        inlineScript: >
+          az acr run
+          --cmd "acr purge --ago 0d --keep ${{ env.images-to-keep }} --filter '${{ env.appNameDS }}:.*' --filter '${{ env.appNameUI }}:.*'"
+          --registry ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          /dev/null
