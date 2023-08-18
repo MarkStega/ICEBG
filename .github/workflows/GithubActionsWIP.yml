@@ -242,11 +242,11 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    - name: Azure CLI Script to Purge Matured Server & Client WIP Container Images
+    - name: Azure CLI Script to Purge Matured DS & UI WIP Container Images
       uses: azure/CLI@v1
       with:
         inlineScript: >
           az acr run
           --cmd "acr purge --ago 0d --keep ${{ env.images-to-keep }} --filter '${{ env.appNameDS }}:.*' --filter '${{ env.appNameUI }}:.*'"
-          --registry ${{ secrets.AZURE_DOCKER_REGISTRY_LOGIN_SERVER }}
+          --registry ${{ secrets.REGISTRY_LOGIN_SERVER }}
           /dev/null
