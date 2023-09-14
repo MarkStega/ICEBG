@@ -101,7 +101,7 @@ jobs:
         --os linux
         --arch x64
         --configuration Azure
-        --no-self-contained
+        --self-contained
         -p:ContainerImageName=${{env.appNameDS}}
         -p:ContainerImageTag=${{ env.unifiedVersion }}
         -p:ContainerRegistry=${{env.containerRegistry}}
@@ -149,7 +149,7 @@ jobs:
         --os linux
         --arch x64
         --configuration Azure
-        --no-self-contained
+        --self-contained
         -p:ContainerImageName=${{env.appNameUI}}
         -p:ContainerImageTag=${{ env.unifiedVersion }}
         -p:ContainerRegistry=${{env.containerRegistry}}
