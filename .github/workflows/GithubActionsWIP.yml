@@ -81,7 +81,6 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.x'
-        dotnet-quality: 'preview'
 
     - name: Docker login
       uses: azure/docker-login@v1
@@ -96,7 +95,7 @@ jobs:
         --arch x64
         --os linux
         --configuration Azure
-        --self-contained
+        --no-self-contained
         -p:ContainerImageTag=${{ env.unifiedVersion }}
         -p:ContainerRegistry=${{env.containerRegistry}}
         -p:ContainerRepository=${{env.appNameDS}}
@@ -128,7 +127,6 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.x'
-        dotnet-quality: 'preview'
 
     - name: 'Docker login'
       uses: azure/docker-login@v1
@@ -143,7 +141,7 @@ jobs:
         --arch x64
         --os linux
         --configuration Azure
-        --self-contained
+        --no-self-contained
         -p:ContainerImageTag=${{ env.unifiedVersion }}
         -p:ContainerRegistry=${{env.containerRegistry}}
         -p:ContainerRepository=${{env.appNameUI}}
@@ -175,7 +173,6 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.x'
-        dotnet-quality: 'preview'
 
     - name: Build DS image
       run: >
@@ -207,7 +204,6 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.x'
-        dotnet-quality: 'preview'
 
     - name: Build UI image
       run: >
