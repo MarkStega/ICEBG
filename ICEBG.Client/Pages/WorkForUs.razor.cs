@@ -24,7 +24,7 @@ public partial class WorkForUs : ComponentBase
     [Inject] private IGBAnalyticsManager AnalyticsManager { get; set; } = default!;
 
 
-    private MBDialog RecruitmentEnquiryDialog { get; set; } = new();
+    private Material.Blazor.MD2.MBDialog RecruitmentEnquiryDialog { get; set; } = new();
     private RecruitmentEnquiry RecruitmentEnquiry { get; set; } = new();
     private List<MBSelectElement<RecruitmentEnquiry.RoleType>> SelectElements { get; set; } = default!;
     private string HiringDialogTitle { get; set; } = "";
@@ -35,7 +35,7 @@ public partial class WorkForUs : ComponentBase
     {
         base.OnInitialized();
 
-        SelectElements = Enum.GetValues<RecruitmentEnquiry.RoleType>().Select(x => new MBSelectElement<RecruitmentEnquiry.RoleType>() { SelectedValue = x, Label = x.ToString() }).ToList();
+        SelectElements = Enum.GetValues<RecruitmentEnquiry.RoleType>().Select(x => new MBSelectElement<RecruitmentEnquiry.RoleType>() { SelectedValue = x, LeadingLabel = x.ToString() }).ToList();
     }
 
 

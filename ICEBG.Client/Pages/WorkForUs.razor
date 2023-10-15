@@ -1,5 +1,7 @@
 ﻿@page "/work-for-us"
 
+@using Material.Blazor
+
 @namespace ICEBG.Client
 
 @inherits ComponentBase
@@ -21,7 +23,7 @@
                     <p class="mdc-typography--body1">
                         Dioptra will soon build a team to expand its SaaS real estate analytics product offering. We need
                         talented technologists and real estate/banking analysts. We are far more interested in the diverse skills that you can bring
-                        rather than focussing on specific prior experience. We like to mentor great candidates; it's all about
+                        rather than focusing on specific prior experience. We like to mentor great candidates; it's all about
                         your potential. Please get in touch if you want to know more.
                     </p>
                 </div>
@@ -51,7 +53,11 @@
                         and stochastic mathematics used in derivatives trading. This already gives our clients resolution on portfolio risks and opportunities
                         far beyond other real estate financial analytics systems' capability.
                     </p>
-                    <p style="text-align: right"><MBButton Label="Find out More" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenDialogAsync(RecruitmentEnquiry.RoleType.Analyst))" /></p>
+                    <p style="text-align: right">
+                        <MBButton Label="Find out More"
+                                  ButtonStyle="@MBButtonStyle.Outlined"
+                                  @onclick="@(() => OpenDialogAsync(RecruitmentEnquiry.RoleType.Analyst))" />
+                    </p>
                 </div>
             </div>
         </div>
@@ -66,7 +72,7 @@
                     <h2 class="mb-card__title mdc-typography--headline1">Technologists</h2>
                     <p class="mdc-typography--body1">
                         We will hire <strong>programmers</strong>, <strong>data engineers</strong> and <strong>designers</strong> with a range of skills. Our stack is
-                        centred around ASP.NET and is hosted on Azure. We seek a broad range of skills among our technologists so you don't necessarily need previous
+                        centered around ASP.NET and is hosted on Azure. We seek a broad range of skills among our technologists so you don't necessarily need previous
                         experience in these two areas.
                     </p>
                     <p class="mdc-typography--body1">
@@ -83,76 +89,80 @@
                     <p class="mdc-typography--body1">
                         Dioptra is committed to great design and you can see screen shots of our first product Vectis on the main page. We are one of the co-sponsors of
                         <a href="https://material-blazor.com" target="_blank">Material.Blazor</a>, an open source library integrating Google's Material Design web implementation with ASP.NET Blazor.
-                        This was featured by Microsoft in an <a href="https://www.youtube.com/watch?v=yzLDvQ-bOw8" target="_blank">ASP.NET Community Standup</a> video stream in late 2020. 
+                        This was featured by Microsoft in an <a href="https://www.youtube.com/watch?v=yzLDvQ-bOw8" target="_blank">ASP.NET Community Standup</a> video stream in late 2020.
                         As a designer you will deliver best in class desgin to make Dioptra's UX as intuitive and fluid as possible.
                     </p>
-                    <p style="text-align: right"><MBButton Label="Find out More" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenDialogAsync(RecruitmentEnquiry.RoleType.Technologist))" /></p>
+                    <p style="text-align: right">
+                        <MBButton Label="Find out More"
+                                  ButtonStyle="@MBButtonStyle.Outlined"
+                                  @onclick="@(() => OpenDialogAsync(RecruitmentEnquiry.RoleType.Technologist))" />
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<MBDialog class="dw-dialog"
-            EscapeKeyAction=""
-            @ref="@RecruitmentEnquiryDialog"
-            ScrimClickAction=""
-            Title="@HiringDialogTitle">
+<Material.Blazor.MD2.MBDialog class="dw-dialog"
+                              EscapeKeyAction=""
+                              @ref="@RecruitmentEnquiryDialog"
+                              ScrimClickAction=""
+                              Title="@HiringDialogTitle">
     <Body>
         <EditForm Model="@RecruitmentEnquiry"
-                    OnValidSubmit="@DialogSubmittedAsync">
+                  OnValidSubmit="@DialogSubmittedAsync">
 
             <DataAnnotationsValidator />
 
             <MBTextField @bind-Value="@RecruitmentEnquiry.Name"
-                            Label="Name"
-                            style="width: 100%; margin-top: 6px;"
-                            TextInputStyle="@MBTextInputStyle.Outlined"
-                            ValidationMessageFor="@(() => RecruitmentEnquiry.Name)" />
+                         Label="Name"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RecruitmentEnquiry.Name)" />
 
 
             <MBTextField @bind-Value="@RecruitmentEnquiry.Email"
-                            Label="Email"
-                            style="width: 100%; margin-top: 6px;"
-                            TextInputStyle="@MBTextInputStyle.Outlined"
-                            ValidationMessageFor="@(() => RecruitmentEnquiry.Email)" />
+                         Label="Email"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RecruitmentEnquiry.Email)" />
 
             <MBTextField @bind-Value="@RecruitmentEnquiry.Phone"
-                            Label="Phone Number"
-                            style="width: 100%; margin-top: 6px;"
-                            TextInputStyle="@MBTextInputStyle.Outlined"
-                            ValidationMessageFor="@(() => RecruitmentEnquiry.Phone)" />
+                         Label="Phone Number"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RecruitmentEnquiry.Phone)" />
 
             @if (ShowProspectiveRole)
             {
-                <MBSelect @bind-Value="@RecruitmentEnquiry.ProspectiveRole"
-                            Items="@SelectElements"
-                            ItemValidation="@MBItemValidation.NoSelection"
-                            SelectInputStyle="@MBSelectInputStyle.Outlined"
-                            Label="Your Prospective Role"
-                            style="width: 100%; margin-bottom: 16px;" />
+                <Material.Blazor.MD2.MBSelect @bind-Value="@RecruitmentEnquiry.ProspectiveRole"
+                                              Items="@SelectElements"
+                                              ItemValidation="@MBItemValidation.NoSelection"
+                                              SelectInputStyle="@MBSelectInputStyleMD2.Outlined"
+                                              Label="Your Prospective Role"
+                                              style="width: 100%; margin-bottom: 16px;" />
             }
 
-            <MBTextArea @bind-Value="@RecruitmentEnquiry.AboutMe"
-                        Label="About Me"
-                        Rows="5"
-                        style="width: 100%; margin-top: 6px;"
-                        TextInputStyle="@MBTextInputStyle.Outlined"
-                        ValidationMessageFor="@(() => RecruitmentEnquiry.AboutMe)" />
+            <MBTextField @bind-Value="@RecruitmentEnquiry.AboutMe"
+                         Label="About Me"
+                         Rows="5"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RecruitmentEnquiry.AboutMe)" />
 
             <div class="mdc-layout-grid__cell--span-12" style="text-align: right;">
                 <MBButton Label="Send"
-                            ButtonStyle="@MBButtonStyle.ContainedUnelevated"
-                            style="margin: 0.75em 0.25em 0.25em 0.25em;"
-                            type="submit" />
+                          ButtonStyle="@MBButtonStyle.Outlined"
+                          style="margin: 0.75em 0.25em 0.25em 0.25em;"
+                          type="submit" />
 
                 <MBButton Label="Cancel"
-                            ButtonStyle="@MBButtonStyle.Outlined"
-                            @onclick="@ClosegDialogAsync"
-                            style="margin: 0.75em 0.25em 0.25em 0.25em;"
-                            type="button" />
+                          ButtonStyle="@MBButtonStyle.Outlined"
+                          @onclick="@ClosegDialogAsync"
+                          style="margin: 0.75em 0.25em 0.25em 0.25em;"
+                          type="button" />
             </div>
 
         </EditForm>
     </Body>
-</MBDialog>
+</Material.Blazor.MD2.MBDialog>

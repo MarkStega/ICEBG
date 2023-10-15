@@ -9,11 +9,6 @@
                     Description="Dioptra provides sophisticated, banking grade financial analytics to institutional real estate investors."
                     OpenGraphImage=""
                     TwitterImage="">
-    @foreach (var item in CarouselImages)
-    {
-        <link rel="prefetch" href="@item.Uri" as="image">
-    }
-
     @foreach (var item in SkylineImages)
     {
         <link rel="prefetch" href="@item.Uri" as="image">
@@ -24,27 +19,6 @@
         <link rel="prefetch" href="@item.Uri" as="image">
     }
 </HeadAndMetaContent>
-
-<div class="dw-section-condensed dw-hero">
-    <div class="dw-max-width-content">
-        <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell--span-12">
-                    <div class="dw-panel-container dw-carousel-container">
-                        <MBCarousel Context="item"
-                                    Items="@CarouselImages"
-                                    RolloverInterval="4000">
-                            <Content>
-                                <img src="@item.Uri" alt="@item.Caption">
-                                <div><p class="mdc-typography--caption" style="text-align: center;">@item.Caption</p></div>
-                            </Content>
-                        </MBCarousel>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="dw-section-condensed">
     <div class="dw-max-width-content">
@@ -60,7 +34,9 @@
 
                     <div class="dw-picture-left">
                         <p class="mdc-typography--headline4">Forward looking investment analytics for institutional real estate investors</p>
-                        <MBButton ButtonStyle="@MBButtonStyle.ContainedUnelevated" Label="Join the Waitlist" @onclick="@OpenDialogAsync" />
+                        <MBButton ButtonStyle="@MBButtonStyle.Outlined"
+                                  Label="Join the Waitlist"
+                                  @onclick="@OpenDialogAsync" />
                     </div>
                 </div>
             </div>
@@ -154,7 +130,9 @@
                             We will soon be hiring technologists and financial analysts to dramatcally
                             enhance our PropTech/FinTech enterprise SaaS product offering.
                         </p>
-                        <MBButton ButtonStyle="@MBButtonStyle.ContainedUnelevated" Label="Find out More" @onclick="@WorkForUsClick" />
+                        <MBButton ButtonStyle="@MBButtonStyle.Outlined"
+                                  Label="Find out More"
+                                  @onclick="@WorkForUsClick" />
                     </div>
 
                     <picture>
@@ -193,11 +171,11 @@
     </div>
 </div>
 
-<MBDialog class="dw-dialog"
-          EscapeKeyAction=""
-          @ref="@Dialog"
-          ScrimClickAction=""
-          Title="Join the Client Waitlist">
+<Material.Blazor.MD2.MBDialog class="dw-dialog"
+                              EscapeKeyAction=""
+                              @ref="@Dialog"
+                              ScrimClickAction=""
+                              Title="Join the Client Waitlist">
     <Body>
         <EditForm Model="@RealEstateInvestorEnquiry"
                   OnValidSubmit="@DialogSubmittedAsync">
@@ -235,16 +213,16 @@
                          TextInputStyle="@MBTextInputStyle.Outlined"
                          ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Website)" />
 
-            <MBTextArea @bind-Value="@RealEstateInvestorEnquiry.HowCanWeHelp"
-                        Label="How can we help you?"
-                        Rows="5"
-                        style="width: 100%; margin-top: 6px;"
-                        TextInputStyle="@MBTextInputStyle.Outlined"
-                        ValidationMessageFor="@(() => RealEstateInvestorEnquiry.HowCanWeHelp)" />
+            <MBTextField @bind-Value="@RealEstateInvestorEnquiry.HowCanWeHelp"
+                         Label="How can we help you?"
+                         Rows="5"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RealEstateInvestorEnquiry.HowCanWeHelp)" />
 
             <div class="mdc-layout-grid__cell--span-12" style="text-align: right;">
                 <MBButton Label="Send"
-                          ButtonStyle="@MBButtonStyle.ContainedUnelevated"
+                          ButtonStyle="@MBButtonStyle.Outlined"
                           style="margin: 0.75em 0.25em 0.25em 0.25em;"
                           type="submit" />
 
@@ -256,4 +234,4 @@
             </div>
         </EditForm>
     </Body>
-</MBDialog>
+</Material.Blazor.MD2.MBDialog>

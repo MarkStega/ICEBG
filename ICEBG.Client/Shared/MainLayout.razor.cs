@@ -20,11 +20,11 @@ public partial class MainLayout : LayoutComponentBase
     [Inject] private IGBAnalyticsManager AnalyticsManager { get; set; } = default!;
 
 
-    private MBDialog ContactDialog { get; set; } = new();
+    private Material.Blazor.MD2.MBDialog ContactDialog { get; set; } = new();
     private bool HomeButtonExited { get; set; } = true;
     private ContactMessage ContactMessage { get; set; } = new();
 
-    private MBDrawer Drawer { get; set; }
+    private Material.Blazor.MD2.MBDrawer Drawer { get; set; }
 
 
     private void ListItemClickHandler(string NavigationReference)

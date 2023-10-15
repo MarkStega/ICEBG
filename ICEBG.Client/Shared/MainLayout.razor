@@ -2,29 +2,31 @@
 
 @inherits LayoutComponentBase
 
+@using Material.Blazor
+
 @inject NavigationManager NavigationService
 @inject IJSRuntime JsRuntime
 
-<MBDrawer @ref="@Drawer"
-          IsDismissible="true">
+<Material.Blazor.MD2.MBDrawer @ref="@Drawer"
+                              IsDismissible="true">
 
     <nav class="mdc-list">
-        <MBListItem LeadingIcon="home" Label="Home" @onclick="@(() => ListItemClickHandler(""))" />
-        <MBListItem LeadingIcon="error" Label="Consume resources" @onclick="@(() => ListItemClickHandler("consumeresources"))" />
-        <MBListItem LeadingIcon="assignment" Label="GRPC configuration" @onclick="@(() => ListItemClickHandler("configuration"))" />
-        <MBListItem LeadingIcon="table_chart" Label="REST weather" @onclick="@(() => ListItemClickHandler("weather"))" />
-        <MBListItem LeadingIcon="info" Label="About" @onclick="@(() => ListItemClickHandler("about"))" />
+        <Material.Blazor.MD2.MBListItem LeadingIcon="home" Label="Home" @onclick="@(() => ListItemClickHandler(""))" />
+        <Material.Blazor.MD2.MBListItem LeadingIcon="error" Label="Consume resources" @onclick="@(() => ListItemClickHandler("consumeresources"))" />
+        <Material.Blazor.MD2.MBListItem LeadingIcon="assignment" Label="GRPC configuration" @onclick="@(() => ListItemClickHandler("configuration"))" />
+        <Material.Blazor.MD2.MBListItem LeadingIcon="table_chart" Label="REST weather" @onclick="@(() => ListItemClickHandler("weather"))" />
+        <Material.Blazor.MD2.MBListItem LeadingIcon="info" Label="About" @onclick="@(() => ListItemClickHandler("about"))" />
     </nav>
-</MBDrawer>
+</Material.Blazor.MD2.MBDrawer>
 
 <div class="mdc-drawer-app-content">
-    <MBTopAppBar Title="ICEBG"
-    @onclick="@SideBarToggle"
-                 NavIcon="menu"
-                 ScrollTarget="#main-content"
-                 TopAppBarType="@MBTopAppBarType.Dense"
-                 class="app-bar mdc-top-app-bar--short-has-action-item mdc-elevation--z5">
-    </MBTopAppBar>
+    <Material.Blazor.MD2.MBTopAppBar Title="ICEBG"
+                                     @onclick="@SideBarToggle"
+                                     NavIcon="menu"
+                                     ScrollTarget="#main-content"
+                                     TopAppBarType="@MBTopAppBarTypeMD2.Dense"
+                                     class="app-bar mdc-top-app-bar--short-has-action-item mdc-elevation--z5">
+    </Material.Blazor.MD2.MBTopAppBar>
 </div>
 
 <CascadingValue Value="@this" IsFixed="true">
@@ -73,7 +75,8 @@
                             </div>
 
                             <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-3-phone dw-footer-element dw-footer-contact">
-                                <MBFloatingActionButton Type="@MBFloatingActionButtonType.ExtendedLeadingIcon" Icon="send" Label="Contact" @onclick="@OpenContactDialogAsync" />
+                                <Material.Blazor.MD2.MBButton Label="Contact"
+                                                              @onclick="@OpenContactDialogAsync" />
                                 <p class="mdc-typography--body2"><a href="/terms-and-conditions" rel=" noopener">Terms and Conditions</a></p>
                             </div>
 
@@ -99,11 +102,11 @@
 
 <CookieConsentBanner ColorClass="dw-yellow" />
 
-<MBDialog class="dw-dialog"
-          EscapeKeyAction=""
-          @ref="@ContactDialog"
-          ScrimClickAction=""
-          Title="Contact Dioptra">
+<Material.Blazor.MD2.MBDialog class="dw-dialog"
+                              EscapeKeyAction=""
+                              @ref="@ContactDialog"
+                              ScrimClickAction=""
+                              Title="Contact Dioptra">
     <Body>
         <EditForm Model="@ContactMessage"
                   OnValidSubmit="@ContactDialogSubmittedAsync">
@@ -128,16 +131,16 @@
                          TextInputStyle="@MBTextInputStyle.Outlined"
                          ValidationMessageFor="@(() => ContactMessage.Phone)" />
 
-            <MBTextArea @bind-Value="@ContactMessage.Message"
-                        Label="Message"
-                        Rows="5"
-                        style="width: 100%; margin-top: 6px;"
-                        TextInputStyle="@MBTextInputStyle.Outlined"
-                        ValidationMessageFor="@(() => ContactMessage.Message)" />
+            <MBTextField @bind-Value="@ContactMessage.Message"
+                         Label="Message"
+                         Rows="5"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => ContactMessage.Message)" />
 
             <div class="mdc-layout-grid__cell--span-12" style="text-align: right;">
                 <MBButton Label="Send"
-                          ButtonStyle="@MBButtonStyle.ContainedUnelevated"
+                          ButtonStyle="@MBButtonStyle.Outlined"
                           style="margin: 0.75em 0.25em 0.25em 0.25em;"
                           type="submit" />
 
@@ -150,4 +153,4 @@
 
         </EditForm>
     </Body>
-</MBDialog>
+</Material.Blazor.MD2.MBDialog>
