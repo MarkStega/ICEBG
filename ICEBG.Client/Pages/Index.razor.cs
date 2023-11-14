@@ -31,9 +31,6 @@ public partial class Index : ComponentBase
 
 
 
-    private Material.Blazor.MD2.MBDialog Dialog { get; set; } = default!;
-    private RealEstateInvestorEnquiry RealEstateInvestorEnquiry { get; set; } = new();
-
 
 
     private static readonly ImageData[] SkylineImages = new ImageData[]
@@ -52,39 +49,5 @@ public partial class Index : ComponentBase
     };
 
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (firstRender)
-        {
-            MainLayout.ShowHomeButton(false);
-        }
-    }
-
-
-    private void WorkForUsClick()
-    {
-        NavigationManager.NavigateTo("/work-for-us");
-    }
-
-
-    private async Task OpenDialogAsync()
-    {
-        RealEstateInvestorEnquiry = new();
-
-        await Dialog.ShowAsync();
-    }
-
-
-    private async Task CloseDialogAsync()
-    {
-        await Dialog.HideAsync();
-    }
-
-
-    private async Task DialogSubmittedAsync()
-    {
-        await Dialog.HideAsync();
-        await Notifier.Send(RealEstateInvestorEnquiry);
-    }
 }
 

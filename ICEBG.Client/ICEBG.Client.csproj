@@ -48,6 +48,8 @@
 		<OutputStaticAssetsStyles Include="$(ProjectDir)wwwroot\css\icebg.css;wwwroot\css\icebg.min.css" />
 
 		<Content Remove="@(OutputStaticAssetsStyles)" />
+
+		<InputStaticAssetsStyles Remove="WebAssets\Styles\_material-components-web.scss" />
 		<Content Include="@(OutputStaticAssetsStyles)" />
 	</ItemGroup>
 
