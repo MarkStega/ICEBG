@@ -26,7 +26,7 @@ public partial class WorkForUs : ComponentBase
 
     private Material.Blazor.MD2.MBDialog RecruitmentEnquiryDialog { get; set; } = new();
     private RecruitmentEnquiry RecruitmentEnquiry { get; set; } = new();
-    private List<MBSelectElement<RecruitmentEnquiry.RoleType>> SelectElements { get; set; } = default!;
+    private List<MBSingleSelectElement<RecruitmentEnquiry.RoleType>> SelectElements { get; set; } = default!;
     private string HiringDialogTitle { get; set; } = "";
     private bool ShowProspectiveRole { get; set; } = false;
 
@@ -35,7 +35,7 @@ public partial class WorkForUs : ComponentBase
     {
         base.OnInitialized();
 
-        SelectElements = Enum.GetValues<RecruitmentEnquiry.RoleType>().Select(x => new MBSelectElement<RecruitmentEnquiry.RoleType>() { SelectedValue = x, LeadingLabel = x.ToString() }).ToList();
+        SelectElements = Enum.GetValues<RecruitmentEnquiry.RoleType>().Select(x => new MBSingleSelectElement<RecruitmentEnquiry.RoleType>() { SelectedValue = x, LeadingLabel = x.ToString() }).ToList();
     }
 
 

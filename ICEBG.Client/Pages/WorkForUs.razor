@@ -135,12 +135,12 @@
 
             @if (ShowProspectiveRole)
             {
-                <Material.Blazor.MD2.MBSelect @bind-Value="@RecruitmentEnquiry.ProspectiveRole"
-                                              Items="@SelectElements"
-                                              ItemValidation="@MBItemValidation.NoSelection"
-                                              SelectInputStyle="@MBSelectInputStyleMD2.Outlined"
-                                              Label="Your Prospective Role"
-                                              style="width: 100%; margin-bottom: 16px;" />
+                <Material.Blazor.MBSelect @bind-Value="@RecruitmentEnquiry.ProspectiveRole"
+                                          Items="@SelectElements"
+                                          ItemValidation="@MBItemValidation.NoSelection"
+                                          SelectInputStyle="@MBSelectInputStyle.Outlined"
+                                          Label="Your Prospective Role"
+                                          style="width: 100%; margin-bottom: 16px;" />
             }
 
             <MBTextField @bind-Value="@RecruitmentEnquiry.AboutMe"

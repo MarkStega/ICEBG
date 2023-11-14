@@ -55,7 +55,7 @@ namespace ICEBG.Client.Pages
             }
             StateHasChanged();
             pTimer?.Dispose();
-            pTimer = new System.Timers.Timer(1000 * 60 * 60);
+            pTimer = new System.Timers.Timer(1000 * 60 * 5);
             pTimer.Elapsed += RefreshTimerTick;
             pTimer.Enabled = true;
         }

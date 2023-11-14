@@ -4,8 +4,6 @@ using System.Threading.RateLimiting;
 
 using Blazored.LocalStorage;
 
-using CompressedStaticFiles.AspNet;
-
 using GoogleAnalytics.Blazor;
 
 using HttpSecurity.AspNet;
@@ -51,26 +49,26 @@ try
     ClientServices.Inject(ApplicationConfiguration.pDataServicesEndpointPrefix, builder.Services);
 
     //  Response compression
-    builder.Services.AddResponseCompression(options =>
-    {
-        options.EnableForHttps = true;
-        options.Providers.Add<BrotliCompressionProvider>();
-        options.Providers.Add<GzipCompressionProvider>();
-    });
+    //builder.Services.AddResponseCompression(options =>
+    //{
+    //    options.EnableForHttps = true;
+    //    options.Providers.Add<BrotliCompressionProvider>();
+    //    options.Providers.Add<GzipCompressionProvider>();
+    //});
 
     // Performance test (performed in debug mode locally):
     // NoCompression - material.blazor.min.css takes circa 10 to 20 ms to download, 270 Kb - page load 95 to 210 ms - 3.2 MB transfered
     // Fastest - material.blazor.min.css takes circa 12 to 28 ms to download, 34.7 Kb - page load 250 to 270 ms - 2.2 MB transfered
     // SmallestSize & Optimal - material.blazor.min.css takes circa 500 to 800 ms to download, 16.2 Kb - page load 900 to 1100 ms (unacceptably slow) - 2.1 MB transfered
-    builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
-    {
-        options.Level = CompressionLevel.Fastest;
-    });
+    //builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+    //{
+    //    options.Level = CompressionLevel.Fastest;
+    //});
 
-    builder.Services.Configure<GzipCompressionProviderOptions>(options =>
-    {
-        options.Level = CompressionLevel.SmallestSize;
-    });
+    //builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+    //{
+    //    options.Level = CompressionLevel.SmallestSize;
+    //});
 
     builder.Services.AddHttpsSecurityHeaders(options =>
     {
@@ -203,8 +201,6 @@ try
         serverOptions.AddServerHeader = false;
     });
 
-    builder.Services.AddCompressedStaticFiles();
-
     logger.Debug("Add Grpc");
     builder.Services.AddGrpc(options =>
     {
@@ -241,7 +237,7 @@ try
         app.UseHsts();
     }
 
-    app.UseResponseCompression();
+    //app.UseResponseCompression();
 
     app.UseCookiePolicy();
 
@@ -254,8 +250,6 @@ try
 #else
     app.UseBlazorFrameworkFiles();
 #endif
-
-    app.UseCompressedStaticFiles();
 
     app.UseRouting();
 
