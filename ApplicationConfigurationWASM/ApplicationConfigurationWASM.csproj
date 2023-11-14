@@ -1,10 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<ItemGroup>
-		<PackageReference Include="Material.Blazor" Version="4.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
 	</ItemGroup>
 

@@ -4,7 +4,7 @@
 		<UserSecretsId>ICEBG.Data.Server-9042ECD1-A92B-4B48-B0EA-E54F5A5A6F9A</UserSecretsId>
 		<WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
 
-		<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-preview</ContainerBaseImage>
+		<!--<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-rc1</ContainerBaseImage>-->
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -12,12 +12,12 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Grpc.AspNetCore" Version="2.57.0" />
-		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.57.0" />
-		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.57.0" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.59.0" />
+		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.59.0" />
+		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.59.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
-		<PackageReference Include="NLog.Extensions.AzureBlobStorage" Version="4.2.0" />
-		<PackageReference Include="NLog.Web.AspNetCore" Version="5.3.4" />
+		<PackageReference Include="NLog.Extensions.AzureBlobStorage" Version="4.3.1" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.3.5" />
 	</ItemGroup>
 
 	<ItemGroup>

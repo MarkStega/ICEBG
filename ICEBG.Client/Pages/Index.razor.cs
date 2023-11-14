@@ -31,23 +31,6 @@ public partial class Index : ComponentBase
 
 
 
-    private MBDialog Dialog { get; set; } = default!;
-    private RealEstateInvestorEnquiry RealEstateInvestorEnquiry { get; set; } = new();
-
-
-
-    private static readonly ImageData[] CarouselImages = new ImageData[]
-    {
-        new() { Uri = "_content/ICEBG.Client/images/01-main-screen.webp", Caption = "Dioptra's main screen layout", Preload = true },
-        new() { Uri = "_content/ICEBG.Client/images/02-main-screen-search.webp", Caption = "Scheme search" },
-        new() { Uri = "_content/ICEBG.Client/images/03-march-costs-chart.webp", Caption = "Budget, actual and forecast development costs" },
-        new() { Uri = "_content/ICEBG.Client/images/04-march-accruals.webp", Caption = "Loan interest accrual details" },
-        new() { Uri = "_content/ICEBG.Client/images/05-march-cost-summary.webp", Caption = "Project cost summary" },
-        new() { Uri = "_content/ICEBG.Client/images/06-march-capital-flows.webp", Caption = "Actual/forecast capital structure" },
-        new() { Uri = "_content/ICEBG.Client/images/07-march-land-reg.webp", Caption = "UK Land Registry sold unit prices" },
-        new() { Uri = "_content/ICEBG.Client/images/08-march-version-graph.webp", Caption = "Scheme data versioning/audit" },
-        new() { Uri = "_content/ICEBG.Client/images/09-march-edit-budget-schedule.webp", Caption = "Editting cost budget schedules" },
-    };
 
 
     private static readonly ImageData[] SkylineImages = new ImageData[]
@@ -66,39 +49,5 @@ public partial class Index : ComponentBase
     };
 
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (firstRender)
-        {
-            MainLayout.ShowHomeButton(false);
-        }
-    }
-
-
-    private void WorkForUsClick()
-    {
-        NavigationManager.NavigateTo("/work-for-us");
-    }
-
-
-    private async Task OpenDialogAsync()
-    {
-        RealEstateInvestorEnquiry = new();
-
-        await Dialog.ShowAsync();
-    }
-
-
-    private async Task CloseDialogAsync()
-    {
-        await Dialog.HideAsync();
-    }
-
-
-    private async Task DialogSubmittedAsync()
-    {
-        await Dialog.HideAsync();
-        await Notifier.Send(RealEstateInvestorEnquiry);
-    }
 }
 

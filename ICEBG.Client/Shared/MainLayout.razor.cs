@@ -20,11 +20,10 @@ public partial class MainLayout : LayoutComponentBase
     [Inject] private IGBAnalyticsManager AnalyticsManager { get; set; } = default!;
 
 
-    private MBDialog ContactDialog { get; set; } = new();
     private bool HomeButtonExited { get; set; } = true;
     private ContactMessage ContactMessage { get; set; } = new();
 
-    private MBDrawer Drawer { get; set; }
+    private Material.Blazor.MD2.MBDrawer Drawer { get; set; }
 
 
     private void ListItemClickHandler(string NavigationReference)
@@ -45,45 +44,5 @@ public partial class MainLayout : LayoutComponentBase
         {
             await JSRuntime.InvokeVoidAsync("ICEBG.General.instantiateErrorDialog");
         }
-    }
-
-    private async Task OpenContactDialogAsync()
-    {
-        ContactMessage = new();
-
-        await AnalyticsManager.TrackEvent("Open Contact Dialog");
-
-        await ContactDialog.ShowAsync();
-    }
-
-
-    private async Task CloseContactDialogAsync()
-    {
-        await AnalyticsManager.TrackEvent("Close Contact Dialog");
-
-        await ContactDialog.HideAsync();
-    }
-
-
-    private async Task ContactDialogSubmittedAsync()
-    {
-        await CloseContactDialogAsync();
-        await Notifier.Send(ContactMessage);
-    }
-
-
-    private async Task HomeClick()
-    {
-        NavigationManager.NavigateTo("/");
-        await JSRuntime.InvokeVoidAsync("ICEBG.General.scrollToTop").ConfigureAwait(false);
-        HomeButtonExited = true;
-        await InvokeAsync(StateHasChanged).ConfigureAwait(false);
-    }
-
-
-    public void ShowHomeButton(bool show)
-    {
-        HomeButtonExited = !show;
-        _ = InvokeAsync(StateHasChanged);
     }
 }

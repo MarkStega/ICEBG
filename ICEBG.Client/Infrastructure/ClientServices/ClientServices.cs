@@ -1,5 +1,6 @@
 ﻿//#if gRPC
 using System.Net.Http;
+using System.Security.Cryptography;
 
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
@@ -25,24 +26,28 @@ public static class ClientServices
         // Third party library services
         //
         pLogger?.LogInformation("Adding MBServices...");
-        serviceCollection.AddMBServices(options =>
-        {
-            options.LoggingServiceConfiguration = new MBLoggingServiceConfiguration()
-            {
-                LoggingLevel = MBLoggingLevel.Debug
-            };
-            options.ToastServiceConfiguration = new MBToastServiceConfiguration()
-            {
-                InfoDefaultHeading = "Info",
-                SuccessDefaultHeading = "Success",
-                WarningDefaultHeading = "Warning",
-                ErrorDefaultHeading = "Error",
-                Timeout = 3000,
-                MaxToastsShowing = 3,
-                CloseMethod = MBNotifierCloseMethod.TimeoutAndDismissButton,
-                Position = MBToastPosition.CenterLeft
-            };
-        });
+        //serviceCollection.AddMBServices(options =>
+        //{
+        //    options.LoggingServiceConfiguration = new MBLoggingServiceConfiguration()
+        //    {
+        //        LoggingLevel = MBLoggingLevel.Debug
+        //    };
+        //    options.ToastServiceConfiguration = new MBToastServiceConfiguration()
+        //    {
+        //        InfoDefaultHeading = "Info",
+        //        SuccessDefaultHeading = "Success",
+        //        WarningDefaultHeading = "Warning",
+        //        ErrorDefaultHeading = "Error",
+        //        Timeout = 3000,
+        //        MaxToastsShowing = 3,
+        //        CloseMethod = MBNotifierCloseMethod.TimeoutAndDismissButton,
+        //        Position = MBToastPosition.CenterLeft
+        //    };
+        //});
+
+        // Work-around for missing service
+        serviceCollection.AddMBServices();
+
 
         //
         // Data access services
