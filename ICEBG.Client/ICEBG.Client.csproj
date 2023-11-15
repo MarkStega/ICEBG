@@ -49,7 +49,15 @@
 
 		<Content Remove="@(OutputStaticAssetsStyles)" />
 
+		<InputStaticAssetsStyles Remove="WebAssets\Styles\_blazor.scss" />
+
 		<InputStaticAssetsStyles Remove="WebAssets\Styles\_material-components-web.scss" />
+
+		<InputStaticAssetsStyles Remove="WebAssets\Styles\_site.scss" />
+
+		<InputStaticAssetsStyles Remove="WebAssets\Styles\_siteDWMain.scss" />
+
+		<InputStaticAssetsStyles Remove="WebAssets\Styles\_siteDWTheme.scss" />
 		<Content Include="@(OutputStaticAssetsStyles)" />
 	</ItemGroup>
 
