@@ -20,78 +20,22 @@ public partial class MainLayout2 : LayoutComponentBase
     [Inject] private IGBAnalyticsManager AnalyticsManager { get; set; } = default!;
 
 
-    private MBMenuItem[] menuItems = new MBMenuItem[]
+    private bool HomeButtonExited { get; set; } = true;
+    private ContactMessage ContactMessage { get; set; } = new();
+
+    private Material.Blazor.MD2.MBDrawer Drawer { get; set; }
+
+
+    private void ListItemClickHandler(string NavigationReference)
     {
-            new MBMenuItem {
-                Headline="One",
-                HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular },
-            new MBMenuItem {
-                Headline="Two",
-                HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular },
-            new MBMenuItem {
-                Headline="Three",
-                HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular },
-            new MBMenuItem
-            {
-                MenuItemType=MBMenuItemType.Divider
-            },
-            new MBMenuItem {
-                Headline="Four",
-                HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular,
-                LeadingIcon=MBIcon.IconDescriptorConstructor(
-                                    name: "home",
-                                    color: "darkblue")},
-            new MBMenuItem {
-                Headline="Five",
-                HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular,
-                TrailingIcon=MBIcon.IconDescriptorConstructor(
-                                    name: "alarm",
-                                    color: "darkblue")},
-            new MBMenuItem {
-                Headline="Six",
-                HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular,
-                LeadingIcon=MBIcon.IconDescriptorConstructor(
-                                    name: "home",
-                                    color: "darkblue"),
-                TrailingIcon=MBIcon.IconDescriptorConstructor(
-                                    name: "alarm",
-                                    color: "darkblue")},
-            new MBMenuItem
-            {
-                MenuItemType=MBMenuItemType.Divider
-            },
-            new MBMenuItem {
-                Headline="Seven",
-                HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular,
-                LeadingIcon=MBIcon.IconDescriptorConstructor(
-                                    name: "done",
-                                    color: "darkgreen"),
-                SuppressLeadingIcon=true },
-            new MBMenuItem {
-                Headline="Eight",
-                HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular,
-                LeadingIcon=MBIcon.IconDescriptorConstructor(
-                                    name: "done",
-                                    color: "darkgreen"),
-                SuppressLeadingIcon=true },
-            new MBMenuItem
-            {
-                MenuItemType=MBMenuItemType.Divider
-            },
-            new MBMenuItem {
-                Headline="Nine (disabled)",
-                HeadlineColor="darkblue",
-                IsDisabled=true,
-                MenuItemType=MBMenuItemType.Regular },
-    };
+        Drawer.NotifyNavigation();
+        NavigationService.NavigateTo(NavigationReference);
+    }
+
+    private void SideBarToggle()
+    {
+        Drawer.Toggle();
+    }
 
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

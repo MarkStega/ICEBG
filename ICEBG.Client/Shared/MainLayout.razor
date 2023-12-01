@@ -3,43 +3,32 @@
 @inherits LayoutComponentBase
 
 @using Material.Blazor
+@using Material.Blazor.MenuClose
 
 @inject NavigationManager NavigationService
 @inject IJSRuntime JsRuntime
 
-<Material.Blazor.MD2.MBDrawer @ref="@Drawer"
-                              IsDismissible="true">
+<div class="opti-main">
 
-    <nav class="mdc-list">
-        <Material.Blazor.MD2.MBListItem LeadingIcon="home" Label="Home" @onclick="@(() => ListItemClickHandler(""))" />
-        <Material.Blazor.MD2.MBListItem LeadingIcon="error" Label="Consume resources" @onclick="@(() => ListItemClickHandler("consumeresources"))" />
-        <Material.Blazor.MD2.MBListItem LeadingIcon="assignment" Label="GRPC configuration" @onclick="@(() => ListItemClickHandler("configuration"))" />
-        <Material.Blazor.MD2.MBListItem LeadingIcon="table_chart" Label="REST weather" @onclick="@(() => ListItemClickHandler("weather"))" />
-        <Material.Blazor.MD2.MBListItem LeadingIcon="info" Label="About" @onclick="@(() => ListItemClickHandler("about"))" />
-    </nav>
-</Material.Blazor.MD2.MBDrawer>
-
-<div class="mdc-drawer-app-content">
-    <Material.Blazor.MD2.MBTopAppBar Title="ICEBG"
-                                     @onclick="@SideBarToggle"
-                                     NavIcon="menu"
-                                     NavIconColor="white"
-                                     ScrollTarget="#main-content"
-                                     TopAppBarType="@MBTopAppBarTypeMD2.Dense"
-                                     class="app-bar mdc-top-app-bar--short-has-action-item mdc-elevation--z5">
-    </Material.Blazor.MD2.MBTopAppBar>
-</div>
-
-<CascadingValue Value="@this" IsFixed="true">
-    <div id="dw-main-top" class="mdc-drawer-app-content dw-main-content dw-yellow">
-        <div class="dw-content">
-
-            <main style="margin:25px;">
-                @Body
-            </main>
-        </div>
-
+    <div class="opti-main-appbar">
+        <MBMenu ButtonIconDescriptor="@MBIcon.IconDescriptorConstructor(
+                                    name: "menu",
+                                    color: "darkblue")"
+                ButtonIconIsTrailing="false"
+                ButtonStyle="@MBButtonStyle.Filled"
+                MenuItems="@menuItems"
+                MenuPositioning="@MBMenuPositioning.Fixed" 
+                @onmenuclose="@MW3MenuClose" />
     </div>
-</CascadingValue>
+
+    <div class="opti-main-body">
+        @*         <CascadingValue IsFixed="true"
+        Value="@pOptimiserDefaults">
+        *@
+    </div>
+    @Body
+    @*         </CascadingValue>
+    *@
+</div>
 
 <CookieConsentBanner ColorClass="dw-yellow" />

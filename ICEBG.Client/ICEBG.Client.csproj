@@ -18,8 +18,8 @@
 	<ItemGroup>
 		<PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
 		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.3" />
-		<PackageReference Include="libphonenumber-csharp" Version="8.13.24" />
-		<PackageReference Include="Material.Blazor.MD3" Version="5.0.0" />
+		<PackageReference Include="libphonenumber-csharp" Version="8.13.26" />
+		<PackageReference Include="Material.Blazor.MD3" Version="5.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
 	</ItemGroup>
@@ -48,16 +48,6 @@
 		<OutputStaticAssetsStyles Include="$(ProjectDir)wwwroot\css\icebg.css;wwwroot\css\icebg.min.css" />
 
 		<Content Remove="@(OutputStaticAssetsStyles)" />
-
-		<InputStaticAssetsStyles Remove="WebAssets\Styles\_blazor.scss" />
-
-		<InputStaticAssetsStyles Remove="WebAssets\Styles\_material-components-web.scss" />
-
-		<InputStaticAssetsStyles Remove="WebAssets\Styles\_site.scss" />
-
-		<InputStaticAssetsStyles Remove="WebAssets\Styles\_siteDWMain.scss" />
-
-		<InputStaticAssetsStyles Remove="WebAssets\Styles\_siteDWTheme.scss" />
 		<Content Include="@(OutputStaticAssetsStyles)" />
 	</ItemGroup>
 

@@ -7,31 +7,6 @@
 @inject NavigationManager NavigationService
 @inject IJSRuntime JsRuntime
 
-<div class="opti-main">
-
-    <div class="opti-main-appbar">
-        <MBMenu ButtonIconDescriptor="@MBIcon.IconDescriptorConstructor(
-                                    name: "menu",
-                                    color: "white")"
-                ButtonIconIsTrailing="false"
-                ButtonLabel="ICEBG"
-                ButtonLabelColor="white"
-                ButtonStyle="@MBButtonStyle.Outlined"
-                MenuItems="@menuItems" />
-    </div>
-
-    <div class="opti-main-body">
-        @*         <CascadingValue IsFixed="true"
-        Value="@pOptimiserDefaults">
-        *@
-    </div>
-    @Body
-    @*         </CascadingValue>
-    *@
-</div>
-
-
-@* 
 <Material.Blazor.MD2.MBDrawer @ref="@Drawer"
                               IsDismissible="true">
 
@@ -43,6 +18,28 @@
         <Material.Blazor.MD2.MBListItem LeadingIcon="info" Label="About" @onclick="@(() => ListItemClickHandler("about"))" />
     </nav>
 </Material.Blazor.MD2.MBDrawer>
-*@
+
+<div class="mdc-drawer-app-content">
+    <Material.Blazor.MD2.MBTopAppBar Title="ICEBG"
+                                     @onclick="@SideBarToggle"
+                                     NavIcon="menu"
+                                     NavIconColor="white"
+                                     ScrollTarget="#main-content"
+                                     TopAppBarType="@MBTopAppBarTypeMD2.Dense"
+                                     class="app-bar mdc-top-app-bar--short-has-action-item mdc-elevation--z5">
+    </Material.Blazor.MD2.MBTopAppBar>
+</div>
+
+<CascadingValue Value="@this" IsFixed="true">
+    <div id="dw-main-top" class="mdc-drawer-app-content dw-main-content dw-yellow">
+        <div class="dw-content">
+
+            <main style="margin:25px;">
+                @Body
+            </main>
+        </div>
+
+    </div>
+</CascadingValue>
 
 <CookieConsentBanner ColorClass="dw-yellow" />
