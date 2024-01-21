@@ -3,32 +3,75 @@
 @inherits LayoutComponentBase
 
 @using Material.Blazor
-@using Material.Blazor.MenuClose
 
 @inject NavigationManager NavigationService
 @inject IJSRuntime JsRuntime
 
-<div class="opti-main">
+@* <div class="opti-main">
 
-    <div class="opti-main-appbar">
+    <div class="mdc-drawer-app-content">
         <MBMenu ButtonIconDescriptor="@MBIcon.IconDescriptorConstructor(
                                     name: "menu",
                                     color: "darkblue")"
                 ButtonIconIsTrailing="false"
                 ButtonStyle="@MBButtonStyle.Filled"
                 MenuItems="@menuItems"
-                MenuPositioning="@MBMenuPositioning.Fixed" 
-                @onmenuclose="@MW3MenuClose" />
+                MenuPositioning="MBMenuPositioning.Popover" />
     </div>
 
-    <div class="opti-main-body">
-        @*         <CascadingValue IsFixed="true"
-        Value="@pOptimiserDefaults">
-        *@
-    </div>
-    @Body
-    @*         </CascadingValue>
-    *@
+    <CascadingValue IsFixed="true"
+                    Value="@this">
+        <div class="opti-main-body">
+
+            @Body
+        </div>
+    </CascadingValue>
+
+
+ </div>
+*@
+
+<Material.Blazor.MD2.MBDrawer @ref="@Drawer"
+                              IsDismissible="true">
+
+    <nav class="mdc-list">
+        <Material.Blazor.MD2.MBListItem LeadingIcon="home" Label="Home" @onclick="@(() => ListItemClickHandler(""))" />
+        <Material.Blazor.MD2.MBListItem LeadingIcon="error" Label="Consume resources" @onclick="@(() => ListItemClickHandler("consumeresources"))" />
+        <Material.Blazor.MD2.MBListItem LeadingIcon="assignment" Label="GRPC configuration" @onclick="@(() => ListItemClickHandler("configuration"))" />
+        <Material.Blazor.MD2.MBListItem LeadingIcon="table_chart" Label="REST weather" @onclick="@(() => ListItemClickHandler("weather"))" />
+        <Material.Blazor.MD2.MBListItem LeadingIcon="info" Label="About" @onclick="@(() => ListItemClickHandler("about"))" />
+    </nav>
+</Material.Blazor.MD2.MBDrawer>
+
+<div class="mdc-drawer-app-content">
+    <Material.Blazor.MD2.MBTopAppBar Title="ICEBG"
+                                     @onclick="@SideBarToggle"
+                                     NavIcon="menu"
+                                     NavIconColor="white"
+                                     ScrollTarget="#main-content"
+                                     TopAppBarType="@MBTopAppBarTypeMD2.Dense"
+                                     class="app-bar mdc-top-app-bar--short-has-action-item mdc-elevation--z5">
+    </Material.Blazor.MD2.MBTopAppBar>
 </div>
+
+<CascadingValue Value="@this" IsFixed="true">
+    <div id="dw-main-top" class="mdc-drawer-app-content dw-main-content dw-yellow">
+        <div class="opti-main-appbar">
+
+            <main style="margin:50px;">
+                <MBMenu ButtonIconDescriptor="@MBIcon.IconDescriptorConstructor(
+                                    name: "menu",
+                                    color: "darkblue")"
+                        ButtonIconIsTrailing="false"
+                        ButtonStyle="@MBButtonStyle.Filled"
+                        MenuItems="@menuItems"
+                        MenuPositioning="MBMenuPositioning.Popover"
+                        @onmenuclose="@MW3MenuClose" />
+                @Body
+            </main>
+        </div>
+
+    </div>
+</CascadingValue>
 
 <CookieConsentBanner ColorClass="dw-yellow" />

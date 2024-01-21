@@ -18,13 +18,13 @@
 		<PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
 		<PackageReference Include="CompressedStaticFiles.AspNet" Version="2.0.0" />
 		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.3" />
-		<PackageReference Include="Grpc.AspNetCore" Version="2.59.0" />
-		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.59.0" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.60.0" />
+		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.60.0" />
 		<PackageReference Include="HttpSecurity.AspNet" Version="1.1.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
 		<PackageReference Include="NLog.Extensions.AzureBlobStorage" Version="4.3.1" />
-		<PackageReference Include="NLog.Web.AspNetCore" Version="5.3.5" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.3.8" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -3,6 +3,7 @@
 using GoogleAnalytics.Blazor;
 
 using Material.Blazor;
+using Material.Blazor.MD2;
 using Material.Blazor.MenuClose;
 
 using Microsoft.AspNetCore.Components;
@@ -93,6 +94,20 @@ public partial class MainLayout : LayoutComponentBase
                 IsDisabled=true,
                 MenuItemType=MBMenuItemType.Regular },
     };
+
+    private Material.Blazor.MD2.MBDrawer Drawer { get; set; }
+
+
+    private void ListItemClickHandler(string NavigationReference)
+    {
+        Drawer.NotifyNavigation();
+        NavigationManager.NavigateTo(NavigationReference);
+    }
+
+    private void SideBarToggle()
+    {
+        Drawer.Toggle();
+    }
 
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

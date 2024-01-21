@@ -16,7 +16,7 @@
 
     <base href="~/" />
 
-    <link href="_content/Material.Blazor.MD3/material.blazor.min.css" integrity="@HttpSecurityService.GetFileHashString("material.blazor.min.css")" rel="stylesheet" />
+    <link href="_content/Material.Blazor.MD3/material.blazor.css" integrity="@HttpSecurityService.GetFileHashString("material.blazor.css")" rel="stylesheet" />
     <link href="_content/ICEBG.Client/css/icebg.min.css" integrity="@HttpSecurityService.GetFileHashString("icebg.min.css")" rel="stylesheet" />
 
     <link rel="icon" type="image/png" href="_content/ICEBG.Client/pwa/favicon-16x16.png" sizes="16x16">
@@ -94,9 +94,10 @@
     }
     else
     {
-        <script src="_framework/blazor.webassembly.js" integrity="@HttpSecurityService.GetFileHashString("blazor.webassembly.js")"></script>
-        
-        <script>navigator.serviceWorker.register('service-worker.js');</script>
+        <script src="_framework/blazor.webassembly.js" integrity="@HttpSecurityService.GetNonce()"></script>
+@*         <script src="_framework/blazor.webassembly.js" integrity="@HttpSecurityService.GetFileHashString("blazor.webassembly.js")"></script> *@
+
+        @* <script>navigator.serviceWorker.register('service-worker.js');</script> *@
     }
 
 </body>
