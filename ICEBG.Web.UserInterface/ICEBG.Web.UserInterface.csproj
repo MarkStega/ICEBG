@@ -41,10 +41,11 @@
 		<ProjectReference Include="..\ICEBG.Client\ICEBG.Client.csproj" />
 	</ItemGroup>
 
-	<ItemGroup Condition="$(DefineConstants.Contains('BLAZOR_WEBASSEMBLY'))">
+	<ItemGroup Condition="'$(Configuration)'=='DevWebAssembly'">
 		<ProjectReference Include="..\ICEBG.Blazor\ICEBG.Blazor.csproj" />
 	</ItemGroup>
-	
+
+
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
 		<Copy SourceFiles="$(ProjectDir)appsettings.$(ConfigurationName).json" DestinationFiles="$(ProjectDir)appsettings.json" />
 		<Copy SourceFiles="$(ProjectDir)nlog.$(ConfigurationName).config" DestinationFiles="$(ProjectDir)nlog.config" />
