@@ -43,7 +43,7 @@
     </nav>
 </Material.Blazor.MD2.MBDrawer>
 
-<div class="mdc-drawer-app-content">
+<div class="opti-main-appbar">
     <Material.Blazor.MD2.MBTopAppBar Title="ICEBG"
                                      @onclick="@SideBarToggle"
                                      NavIcon="menu"
@@ -55,22 +55,15 @@
 </div>
 
 <CascadingValue Value="@this" IsFixed="true">
-    <div id="dw-main-top" class="mdc-drawer-app-content dw-main-content dw-yellow">
-        <div class="opti-main-appbar">
-
-            <main style="margin:50px;">
-                <MBMenu ButtonIconDescriptor="@MBIcon.IconDescriptorConstructor(
+    <div class="opti-main-body" style="margin:50px;">
+        <MBMenu ButtonIconDescriptor="@MBIcon.IconDescriptorConstructor(
                                     name: "menu",
-                                    color: "darkblue")"
-                        ButtonIconIsTrailing="false"
-                        ButtonStyle="@MBButtonStyle.Filled"
-                        MenuItems="@menuItems"
-                        MenuPositioning="MBMenuPositioning.Popover"
-                        @onmenuclose="@MW3MenuClose" />
-                @Body
-            </main>
-        </div>
-
+                                    color: "white")"
+                ButtonIconIsTrailing="false"
+                ButtonStyle="@MBButtonStyle.Filled"
+                MenuItems="@menuItems"
+                MenuPositioning="MBMenuPositioning.Popover" />
+        @Body
     </div>
 </CascadingValue>
 

@@ -7,10 +7,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Program - SansSecurity.cs" />
+	  <Compile Remove="Program - WithIntegrity.cs" />
+	  <Compile Remove="Program - WithSecurity.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ContainerPort Include="8080" Type="tcp" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Include="Program - SansSecurity.cs" />
+		<None Include="Program - WithSecurity.cs" />
 		<None Include="Properties\PublishProfiles\FolderProfile.pubxml.user" />
 	</ItemGroup>
 
@@ -30,6 +38,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationConfigurationServer\ApplicationConfigurationServer.csproj" />
 		<ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
+		<ProjectReference Include="..\ICEBG.Blazor\ICEBG.Blazor.csproj" />
 		<!--<ProjectReference Include="..\ICEBG.Blazor\ICEBG.Blazor.csproj" />-->
 		<ProjectReference Include="..\ICEBG.Client\ICEBG.Client.csproj" />
 	</ItemGroup>

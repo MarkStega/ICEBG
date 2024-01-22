@@ -19,10 +19,6 @@
     <link href="_content/Material.Blazor.MD3/material.blazor.css" integrity="@HttpSecurityService.GetFileHashString("material.blazor.css")" rel="stylesheet" />
     <link href="_content/ICEBG.Client/css/icebg.min.css" integrity="@HttpSecurityService.GetFileHashString("icebg.min.css")" rel="stylesheet" />
 
-    <link rel="icon" type="image/png" href="_content/ICEBG.Client/pwa/favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="_content/ICEBG.Client/pwa/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="_content/ICEBG.Client/pwa/favicon-96x96.png" sizes="96x96">
-
     <link rel="apple-touch-icon" sizes="512x512" href="_content/ICEBG.Client/ios-images/512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="_content/ICEBG.Client/ios-images/192.png" />
 
@@ -30,11 +26,6 @@
     {
         <component type="typeof(HeadOutlet)" render-mode="Server" />
     }
-@*     else
-    {
-        <link rel="manifest" href="_content/ICEBG.Client/pwa/manifest.json" />
-    }
- *@
 </head>
 
 <body>
@@ -94,10 +85,7 @@
     }
     else
     {
-        <script src="_framework/blazor.webassembly.js" integrity="@HttpSecurityService.GetNonce()"></script>
-@*         <script src="_framework/blazor.webassembly.js" integrity="@HttpSecurityService.GetFileHashString("blazor.webassembly.js")"></script> *@
-
-        @* <script>navigator.serviceWorker.register('service-worker.js');</script> *@
+        <script src="_framework/blazor.webassembly.js" integrity="@HttpSecurityService.GetFileHashString("blazor.webassembly.js")"></script>
     }
 
 </body>
