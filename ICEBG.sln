@@ -32,7 +32,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solutio
 		appsettings.DevServer.json = appsettings.DevServer.json
 		appsettings.DevWebAssembly.json = appsettings.DevWebAssembly.json
 		Azure-AD-B2C-Quickstart-VS.pdf = Azure-AD-B2C-Quickstart-VS.pdf
-		.github\ISSUE_TEMPLATE\bug_report.md = .github\ISSUE_TEMPLATE\bug_report.md
 		.github\dependabot.yml = .github\dependabot.yml
 		Directory.Build.props = Directory.Build.props
 		.github\workflows\GithubActionsRelease.yml = .github\workflows\GithubActionsRelease.yml
@@ -41,6 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solutio
 		npmUpdate.cmd = npmUpdate.cmd
 		NuGet.Config = NuGet.Config
 		SuperClean.cmd = SuperClean.cmd
+		.github\ISSUE_TEMPLATE\ReadMe.md = .github\ISSUE_TEMPLATE\ReadMe.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICEBG.Blazor", "ICEBG.Blazor\ICEBG.Blazor.csproj", "{E07619FC-A0FC-4C85-9992-BBF3256598EA}"
