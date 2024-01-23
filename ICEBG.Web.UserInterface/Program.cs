@@ -90,6 +90,7 @@ try
                     // The sha-256 hash relates to an inline script added by blazor's javascript
                     .AddScriptSrc(o => o
                         .AddHashValue(HashAlgorithm.SHA256, "v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=")
+                        .AddHashValue(HashAlgorithm.SHA512, "504a5c631a5828713059591d2b913b63dd3c25b37578fd477f3ddea438e5b215debdc99e38a3e64f14f2049d39e170f80920a0b521068f2e9259e3c7e49e08e0")
                         .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
                         .AddSelfIf(() => builder.Environment.IsDevelopment() || PlatformDetermination.kIsBlazorWebAssembly)
                         //.AddStrictDynamicIf(() => !builder.Environment.IsDevelopment() && PlatformDetermination.IsBlazorWebAssembly) // this works on Chromium browswers but fails for both Firefox and Safari
