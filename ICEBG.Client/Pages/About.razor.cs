@@ -12,10 +12,10 @@ public partial class About : ComponentBase
 #if AZURE
     private string pBuildMode { get; set; } = "Azure";
 #endif
-#if DEVELOP && BLAZOR_SERVER
+#if DEVSERVER
     private string pBuildMode { get; set; } = "Develop_Server";
 #endif
-#if DEVELOP && BLAZOR_WEBASSEMBLY
+#if DEVWEBASSEMBLY
     private string pBuildMode { get; set; } = "Develop_WebAssembly";
 #endif
 

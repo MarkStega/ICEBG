@@ -94,7 +94,7 @@ try
                         .AddHashValue(HashAlgorithm.SHA256, "D3eUfxVDJsvQ4e7E3LQLh/d/B1BumEUYYuuYq3QCjW4=")
                         .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
                         //.AddSelfIf(() => builder.Environment.IsDevelopment() || PlatformDetermination.kIsBlazorWebAssembly)
-                        .AddSelf()
+                        //.AddSelf()
                         //.AddStrictDynamicIf(() => !builder.Environment.IsDevelopment() && PlatformDetermination.IsBlazorWebAssembly) // this works on Chromium browswers but fails for both Firefox and Safari
                         .AddUnsafeInlineIf(() => PlatformDetermination.kIsBlazorWebAssembly)
                         .AddReportSample()

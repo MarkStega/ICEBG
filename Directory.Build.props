@@ -15,11 +15,11 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='DevServer'">
-		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
+		<DefineConstants>DEVSERVER;BLAZOR_SERVER</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='DevWebAssembly'">
-		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
+		<DefineConstants>DEVWEBASSEMBLY;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
 </Project>

@@ -23,7 +23,7 @@ public static class ApplicationConfigurationWASM
         #endregion
 
         #region DEVELOP
-#if DEVELOP
+#if DEVSERVER || DEVWEBASSEMBLY
         ApplicationConfiguration.pConfigurationIdentifier = "ICEBG";
         ApplicationConfiguration.pDataServicesEndpointPrefix = "https://localhost:7173/";
         ApplicationConfiguration.pSqlConnectionString = "n/a";
