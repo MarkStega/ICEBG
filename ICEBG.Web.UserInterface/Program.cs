@@ -91,7 +91,7 @@ try
                     // The second sha-256 hash relates to material.blazor.md3.lib.module.js
                     .AddScriptSrc(o => o
                         .AddHashValue(HashAlgorithm.SHA256, "v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=")
-                        .AddHashValue(HashAlgorithm.SHA256, "0f77947f154326cbd0e1eec4dcb40b87f77f07506e98451862eb98ab74028d6e")
+                        .AddHashValue(HashAlgorithm.SHA256, "D3eUfxVDJsvQ4e7E3LQLh/d/B1BumEUYYuuYq3QCjW4=")
                         .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
                         .AddSelfIf(() => builder.Environment.IsDevelopment() || PlatformDetermination.kIsBlazorWebAssembly)
                         //.AddStrictDynamicIf(() => !builder.Environment.IsDevelopment() && PlatformDetermination.IsBlazorWebAssembly) // this works on Chromium browswers but fails for both Firefox and Safari
