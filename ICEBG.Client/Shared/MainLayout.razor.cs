@@ -16,7 +16,6 @@ namespace ICEBG.Client;
 /// </summary>
 public partial class MainLayout : LayoutComponentBase
 {
-    [Inject] private INotification Notifier { get; set; } = default!;
     [Inject] private NavigationManager NavigationManager { get; set; } = default!;
     [Inject] private IJSRuntime JSRuntime { get; set; } = default!;
     [Inject] private IGBAnalyticsManager AnalyticsManager { get; set; } = default!;

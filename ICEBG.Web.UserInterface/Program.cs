@@ -57,7 +57,9 @@ try
             {
                 cspOptions
                     .AddBaseUri(o => o.AddSelf())
+
                     .AddBlockAllMixedContent()
+
                     .AddChildSrc(o => o.AddSelf())
 
                     .AddConnectSrc(o => o
@@ -76,41 +78,58 @@ try
                     .AddFontSrc(o => o
                         .AddUri("https://fonts.googleapis.com")
                         .AddUri("https://fonts.gstatic.com"))
+
                     .AddFrameAncestors(o => o.AddNone())
+
                     .AddFrameSrc(o => o.AddSelf())
+
                     .AddFormAction(o => o.AddNone())
+
                     .AddImgSrc(o => o
                         .AddSelf()
                         .AddUri("www.google-analytics.com")
                         .AddSchemeSource(SchemeSource.Data, "w3.org/svg/2000"))
+
                     .AddManifestSrc(o => o.AddSelf())
+
                     .AddMediaSrc(o => o.AddSelf())
+
                     .AddObjectSrc(o => o.AddNone())
+
                     .AddReportUri(o => o.AddUri((baseUri, baseDomain) => $"https://{baseUri}/api/CspReporting/UriReport"))
+
                     // The first sha-256 hash relates to an inline script added by blazor's javascript
                     // The second sha-256 hash relates to material.blazor.md3.lib.module.js
                     .AddScriptSrc(o => o
-                        .AddHashValue(HashAlgorithm.SHA256, "v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=")
-                        .AddHashValue(HashAlgorithm.SHA256, "D3eUfxVDJsvQ4e7E3LQLh/d/B1BumEUYYuuYq3QCjW4=")
+                        //.AddHashValue(HashAlgorithm.SHA256, "v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=")
+                        //.AddHashValue(HashAlgorithm.SHA256, "D3eUfxVDJsvQ4e7E3LQLh/d/B1BumEUYYuuYq3QCjW4=")
                         .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
+                        // TEMPORARY until we can get the hash from M.B.MD3 working
                         //.AddSelfIf(() => builder.Environment.IsDevelopment() || PlatformDetermination.kIsBlazorWebAssembly)
                         //.AddSelf()
-                        //.AddStrictDynamicIf(() => !builder.Environment.IsDevelopment() && PlatformDetermination.IsBlazorWebAssembly) // this works on Chromium browswers but fails for both Firefox and Safari
+                        .AddUnsafeInlineIf(() => PlatformDetermination.kIsBlazorWebAssembly)
+                        // StrictDynamic works on Chromium browsers but fails for both Firefox and Safari
+                        //.AddStrictDynamicIf(() => !builder.Environment.IsDevelopment() && PlatformDetermination.IsBlazorWebAssembly)
                         .AddUnsafeInlineIf(() => PlatformDetermination.kIsBlazorWebAssembly)
                         .AddReportSample()
                         .AddUnsafeEvalIf(() => PlatformDetermination.kIsBlazorWebAssembly)
                         .AddUri("https://www.googletagmanager.com/gtag/js")
                         .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js") // Required to work on Safari
-                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor/material.blazor.min.js") // Required to work on Safari
+                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor.MD3/material.blazor.min.js") // Required to work on Safari
+                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor.MD3/material.blazor.md3.lib.module.js") // Required to work on Safari
+                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/ICEBG.Client/js/icebg.min.js") // Required to work on Safari
                         .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.server.js", () => PlatformDetermination.kIsBlazorServer) // Required to work on Safari
                         .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.webassembly.js", () => PlatformDetermination.kIsBlazorWebAssembly) // Required to work on Safari
                         .AddGeneratedHashValues(StaticFileExtension.JS))
+
                     .AddStyleSrc(o => o
                         .AddSelf()
                         .AddUnsafeInline()
                         .AddUnsafeHashes()
                         .AddReportSample())
+
                     .AddUpgradeInsecureRequests()
+
                     .AddWorkerSrc(o => o.AddSelf());
             })
             .AddReferrerPolicy(ReferrerPolicyDirective.NoReferrer)
@@ -133,9 +152,6 @@ try
 
     logger.Debug("Adding razor pages");
     builder.Services.AddRazorPages();
-
-    // Needed for prerendering on WebAssembly as well as general use
-    builder.Services.AddTransient<INotification, ServerNotificationService>();
 
 #if BLAZOR_SERVER
     logger.Debug("AddMvc");
