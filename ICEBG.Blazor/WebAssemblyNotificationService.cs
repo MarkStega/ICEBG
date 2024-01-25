@@ -25,29 +25,6 @@ public class WebAssemblyNotificationService : INotification
     }
 
 
-    public async Task Send(ContactMessage message)
-    {
-        NotifyError(await httpClient.PostAsJsonAsync("api/Notification/PostContactMessage", message).ConfigureAwait(false));
-    }
-
-
-    public async Task Send(RecruitmentEnquiry message)
-    {
-        NotifyError(await httpClient.PostAsJsonAsync("api/Notification/PostRecruitmentEnquiry", message).ConfigureAwait(false));
-    }
-
-
-    public async Task Send(RealEstateInvestorEnquiry message)
-    {
-        NotifyError(await httpClient.PostAsJsonAsync("api/Notification/PostRealEstateInvestorEnquiry", message).ConfigureAwait(false));
-    }
-
-
-    public async Task Send(VentureCapitalEnquiry message)
-    {
-        NotifyError(await httpClient.PostAsJsonAsync("api/Notification/PostVentureCapitalEnquiry", message).ConfigureAwait(false));
-    }
-
 
     private void NotifyError(HttpResponseMessage response)
     {

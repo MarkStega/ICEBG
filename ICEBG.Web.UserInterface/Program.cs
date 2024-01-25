@@ -105,12 +105,12 @@ try
                         //.AddHashValue(HashAlgorithm.SHA256, "D3eUfxVDJsvQ4e7E3LQLh/d/B1BumEUYYuuYq3QCjW4=")
                         .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
                         // TEMPORARY until we can get the hash from M.B.MD3 working
-                        //.AddSelfIf(() => builder.Environment.IsDevelopment() || PlatformDetermination.kIsBlazorWebAssembly)
+                        .AddSelfIf(() => PlatformDetermination.kIsBlazorWebAssembly)
                         //.AddSelf()
                         .AddUnsafeInlineIf(() => PlatformDetermination.kIsBlazorWebAssembly)
                         // StrictDynamic works on Chromium browsers but fails for both Firefox and Safari
                         //.AddStrictDynamicIf(() => !builder.Environment.IsDevelopment() && PlatformDetermination.IsBlazorWebAssembly)
-                        .AddUnsafeInlineIf(() => PlatformDetermination.kIsBlazorWebAssembly)
+                        //.AddUnsafeInlineIf(() => PlatformDetermination.kIsBlazorWebAssembly)
                         .AddReportSample()
                         .AddUnsafeEvalIf(() => PlatformDetermination.kIsBlazorWebAssembly)
                         .AddUri("https://www.googletagmanager.com/gtag/js")
@@ -120,6 +120,7 @@ try
                         .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/ICEBG.Client/js/icebg.min.js") // Required to work on Safari
                         .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.server.js", () => PlatformDetermination.kIsBlazorServer) // Required to work on Safari
                         .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.webassembly.js", () => PlatformDetermination.kIsBlazorWebAssembly) // Required to work on Safari
+                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/dotnet.js", () => PlatformDetermination.kIsBlazorWebAssembly) // Required to work on Safari
                         .AddGeneratedHashValues(StaticFileExtension.JS))
 
                     .AddStyleSrc(o => o
@@ -152,6 +153,9 @@ try
 
     logger.Debug("Adding razor pages");
     builder.Services.AddRazorPages();
+
+    // Needed for prerendering on WebAssembly as well as general use
+    builder.Services.AddTransient<INotification, ServerNotificationService>();
 
 #if BLAZOR_SERVER
     logger.Debug("AddMvc");
