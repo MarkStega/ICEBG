@@ -98,12 +98,9 @@ try
 
                     .AddReportUri(o => o.AddUri((baseUri, baseDomain) => $"https://{baseUri}/api/CspReporting/UriReport"))
 
-                    // The first sha-256 hash relates to an inline script added by blazor's javascript
-                    // The second sha-256 hash relates to material.blazor.md3.lib.module.js
+                    // The sha-256 hash relates to material.blazor.md3.lib.module.js
                     .AddScriptSrc(o => o
-                        //.AddHashValue(HashAlgorithm.SHA256, "v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=")
                         //.AddHashValue(HashAlgorithm.SHA256, "D3eUfxVDJsvQ4e7E3LQLh/d/B1BumEUYYuuYq3QCjW4=")
-                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
                         // TEMPORARY until we can get the hash from M.B.MD3 working
                         .AddSelfIf(() => PlatformDetermination.kIsBlazorWebAssembly)
                         //.AddSelf()
@@ -114,13 +111,14 @@ try
                         .AddReportSample()
                         .AddUnsafeEvalIf(() => PlatformDetermination.kIsBlazorWebAssembly)
                         .AddUri("https://www.googletagmanager.com/gtag/js")
-                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js") // Required to work on Safari
-                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor.MD3/material.blazor.min.js") // Required to work on Safari
-                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor.MD3/material.blazor.md3.lib.module.js") // Required to work on Safari
-                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/ICEBG.Client/js/icebg.min.js") // Required to work on Safari
-                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.server.js", () => PlatformDetermination.kIsBlazorServer) // Required to work on Safari
-                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.webassembly.js", () => PlatformDetermination.kIsBlazorWebAssembly) // Required to work on Safari
-                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/dotnet.js", () => PlatformDetermination.kIsBlazorWebAssembly) // Required to work on Safari
+                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js")
+                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor.MD3/material.blazor.min.js")
+                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor.MD3/material.blazor.md3.lib.module.js")
+                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/ICEBG.Client/js/icebg.min.js")
+                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
+                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.server.js", () => PlatformDetermination.kIsBlazorServer)
+                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.webassembly.js", () => PlatformDetermination.kIsBlazorWebAssembly)
+                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/dotnet.js", () => PlatformDetermination.kIsBlazorWebAssembly)
                         .AddGeneratedHashValues(StaticFileExtension.JS))
 
                     .AddStyleSrc(o => o
