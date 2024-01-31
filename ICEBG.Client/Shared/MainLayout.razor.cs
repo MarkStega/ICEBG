@@ -2,11 +2,14 @@
 
 using GoogleAnalytics.Blazor;
 
+using ICEBG.Client.Pages;
+
 using Material.Blazor;
 using Material.Blazor.MD2;
 using Material.Blazor.MenuClose;
 
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Http.Authentication.Internal;
 using Microsoft.JSInterop;
 
 namespace ICEBG.Client;
@@ -18,96 +21,45 @@ public partial class MainLayout : LayoutComponentBase
 {
     [Inject] private NavigationManager NavigationManager { get; set; } = default!;
     [Inject] private IJSRuntime JSRuntime { get; set; } = default!;
-    [Inject] private IGBAnalyticsManager AnalyticsManager { get; set; } = default!;
-
 
     private readonly MBMenuItem[] menuItems = new MBMenuItem[]
     {
             new MBMenuItem {
-                Headline="One",
+                Headline="Home",
                 HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular },
-            new MBMenuItem {
-                Headline="Two",
-                HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular },
-            new MBMenuItem {
-                Headline="Three",
-                HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular },
-            new MBMenuItem
-            {
-                MenuItemType=MBMenuItemType.Divider
-            },
-            new MBMenuItem {
-                Headline="Four",
-                HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular,
-                LeadingIcon=MBIcon.IconDescriptorConstructor(
-                                    name: "home",
-                                    color: "darkblue")},
-            new MBMenuItem {
-                Headline="Five",
-                HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular,
-                TrailingIcon=MBIcon.IconDescriptorConstructor(
-                                    name: "alarm",
-                                    color: "darkblue")},
-            new MBMenuItem {
-                Headline="Six",
-                HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular,
                 LeadingIcon=MBIcon.IconDescriptorConstructor(
                                     name: "home",
                                     color: "darkblue"),
-                TrailingIcon=MBIcon.IconDescriptorConstructor(
-                                    name: "alarm",
-                                    color: "darkblue")},
-            new MBMenuItem
-            {
-                MenuItemType=MBMenuItemType.Divider
-            },
+                MenuItemType=MBMenuItemType.Regular },
             new MBMenuItem {
-                Headline="Seven",
+                Headline="Consume resources",
                 HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular,
                 LeadingIcon=MBIcon.IconDescriptorConstructor(
-                                    name: "done",
-                                    color: "darkgreen"),
-                SuppressLeadingIcon=true },
+                                    name: "error",
+                                    color: "darkblue"),
+                MenuItemType=MBMenuItemType.Regular },
             new MBMenuItem {
-                Headline="Eight",
+                Headline="GRPC configuration",
                 HeadlineColor="darkblue",
-                MenuItemType=MBMenuItemType.Regular,
                 LeadingIcon=MBIcon.IconDescriptorConstructor(
-                                    name: "done",
-                                    color: "darkgreen"),
-                SuppressLeadingIcon=true },
-            new MBMenuItem
-            {
-                MenuItemType=MBMenuItemType.Divider
-            },
+                                    name: "assignment",
+                                    color: "darkblue"),
+                MenuItemType=MBMenuItemType.Regular },
             new MBMenuItem {
-                Headline="Nine (disabled)",
+                Headline="REST weather",
                 HeadlineColor="darkblue",
-                IsDisabled=true,
+                LeadingIcon=MBIcon.IconDescriptorConstructor(
+                                    name: "table_chart",
+                                    color: "darkblue"),
+                MenuItemType=MBMenuItemType.Regular },
+            new MBMenuItem {
+                Headline="About",
+                HeadlineColor="darkblue",
+                LeadingIcon=MBIcon.IconDescriptorConstructor(
+                                    name: "info",
+                                    color: "darkblue"),
                 MenuItemType=MBMenuItemType.Regular },
     };
-
-    private Material.Blazor.MD2.MBDrawer Drawer { get; set; }
-
-
-    private void ListItemClickHandler(string NavigationReference)
-    {
-        Drawer.NotifyNavigation();
-        NavigationManager.NavigateTo(NavigationReference);
-    }
-
-    private void SideBarToggle()
-    {
-        Drawer.Toggle();
-    }
-
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -117,8 +69,16 @@ public partial class MainLayout : LayoutComponentBase
         }
     }
 
-    protected void MW3MenuClose(MenuCloseEventArgs args)
+    protected void MenuSelectionReportHandler(MenuSelectionReportEventArgs args)
     {
-
+        var destination = args.menuHeadline.ToLower() switch
+        {
+            "consume resources" => "consumeresources",
+            "grpc configuration" => "configuration",
+            "rest weather" => "weather",
+            "about" => "about",
+            _ => "",
+        };
+        NavigationManager.NavigateTo(destination);
     }
 }

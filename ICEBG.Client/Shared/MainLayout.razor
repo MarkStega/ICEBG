@@ -3,66 +3,27 @@
 @inherits LayoutComponentBase
 
 @using Material.Blazor
-
-@inject NavigationManager NavigationService
-@inject IJSRuntime JsRuntime
-
-@* <div class="opti-main">
-
-    <div class="mdc-drawer-app-content">
-        <MBMenu ButtonIconDescriptor="@MBIcon.IconDescriptorConstructor(
-                                    name: "menu",
-                                    color: "darkblue")"
-                ButtonIconIsTrailing="false"
-                ButtonStyle="@MBButtonStyle.Filled"
-                MenuItems="@menuItems"
-                MenuPositioning="MBMenuPositioning.Popover" />
-    </div>
-
-    <CascadingValue IsFixed="true"
-                    Value="@this">
-        <div class="opti-main-body">
-
-            @Body
-        </div>
-    </CascadingValue>
-
-
- </div>
-*@
-
-<Material.Blazor.MD2.MBDrawer @ref="@Drawer"
-                              IsDismissible="true">
-
-    <nav class="mdc-list">
-        <Material.Blazor.MD2.MBListItem LeadingIcon="home" Label="Home" @onclick="@(() => ListItemClickHandler(""))" />
-        <Material.Blazor.MD2.MBListItem LeadingIcon="error" Label="Consume resources" @onclick="@(() => ListItemClickHandler("consumeresources"))" />
-        <Material.Blazor.MD2.MBListItem LeadingIcon="assignment" Label="GRPC configuration" @onclick="@(() => ListItemClickHandler("configuration"))" />
-        <Material.Blazor.MD2.MBListItem LeadingIcon="table_chart" Label="REST weather" @onclick="@(() => ListItemClickHandler("weather"))" />
-        <Material.Blazor.MD2.MBListItem LeadingIcon="info" Label="About" @onclick="@(() => ListItemClickHandler("about"))" />
-    </nav>
-</Material.Blazor.MD2.MBDrawer>
+@using Material.Blazor.MenuClose
 
 <div class="opti-main-appbar">
-    <Material.Blazor.MD2.MBTopAppBar Title="ICEBG"
-                                     @onclick="@SideBarToggle"
-                                     NavIcon="menu"
-                                     NavIconColor="white"
-                                     ScrollTarget="#main-content"
-                                     TopAppBarType="@MBTopAppBarTypeMD2.Dense"
-                                     class="app-bar mdc-top-app-bar--short-has-action-item mdc-elevation--z5">
-    </Material.Blazor.MD2.MBTopAppBar>
+    <MBMenu AnchorType="MBMenuAnchorType.Icon"
+            IconDescriptor="@MBIcon.IconDescriptorConstructor(
+                                    name: "menu",
+                                    color: "darkblue")"
+            MenuItems="@menuItems"
+            MenuPositioning="MBMenuPositioning.Popover"
+            @onmenuselectionreport="MenuSelectionReportHandler" />
+    <MBMenu AnchorType="MBMenuAnchorType.Icon"
+            IconDescriptor="@MBIcon.IconDescriptorConstructor(
+                                    name: "more_vert",
+                                    color: "darkblue")"
+            MenuItems="@menuItems"
+            MenuPositioning="MBMenuPositioning.Popover"
+            @onmenuselectionreport="MenuSelectionReportHandler" />
 </div>
 
 <CascadingValue Value="@this" IsFixed="true">
     <div class="opti-main-body" style="margin:50px;">
-        <MBMenu ButtonIconDescriptor="@MBIcon.IconDescriptorConstructor(
-                                    name: "menu",
-                                    color: "white")"
-                ButtonIconIsTrailing="false"
-                ButtonStyle="@MBButtonStyle.Filled"
-                MenuItems="@menuItems"
-                MenuPositioning="MBMenuPositioning.Popover" />
         @Body
     </div>
 </CascadingValue>

@@ -16,11 +16,8 @@
 
     <base href="~/" />
 
-    <link href="_content/Material.Blazor.MD3/material.blazor.css" integrity="@HttpSecurityService.GetFileHashString("material.blazor.css")" rel="stylesheet" />
-    <link href="_content/ICEBG.Client/css/icebg.min.css" integrity="@HttpSecurityService.GetFileHashString("icebg.min.css")" rel="stylesheet" />
-
-    <link rel="apple-touch-icon" sizes="512x512" href="_content/ICEBG.Client/ios-images/512.png" />
-    <link rel="apple-touch-icon" sizes="192x192" href="_content/ICEBG.Client/ios-images/192.png" />
+    <link href="_content/Material.Blazor.MD3/material.blazor.css" rel="stylesheet" />
+    <link href="_content/ICEBG.Client/css/icebg.min.css" rel="stylesheet" />
 
     @if (PlatformDetermination.kIsBlazorServer)
     {
@@ -75,17 +72,17 @@
         </div>
     </div>
 
-    <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js" integrity="@HttpSecurityService.GetFileHashString("googleanalytics.blazor.js")"></script>
-    <script src="_content/Material.Blazor.MD3/material.blazor.min.js" integrity="@HttpSecurityService.GetFileHashString("material.blazor.min.js")"></script>
-    <script src="_content/ICEBG.Client/js/icebg.min.js" integrity="@HttpSecurityService.GetFileHashString("icebg.min.js")"></script>
+    <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js"></script>
+    <script src="_content/Material.Blazor.MD3/material.blazor.min.js"></script>
+    <script src="_content/ICEBG.Client/js/icebg.min.js"></script>
 
     @if (PlatformDetermination.kIsBlazorServer)
     {
-        <script src="_framework/blazor.server.js" integrity="@HttpSecurityService.GetFileHashString("blazor.server.js")"></script>
+        <script src="_framework/blazor.server.js"></script>
     }
     else
     {
-        <script src="_framework/blazor.webassembly.js" integrity="@HttpSecurityService.GetFileHashString("blazor.webassembly.js")"></script>
+        <script src="_framework/blazor.webassembly.js"></script>
     }
 
 </body>

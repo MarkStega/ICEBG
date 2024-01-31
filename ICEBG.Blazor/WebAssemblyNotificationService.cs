@@ -28,10 +28,6 @@ public class WebAssemblyNotificationService : INotification
 
     private void NotifyError(HttpResponseMessage response)
     {
-#warning need to find out why the IMBToastService throws an exception unable to find the OnAdd method.
-        //if (response.IsSuccessStatusCode)
-        //{
-        //    _mBToastService.ShowToast(MBToastLevel.Error, "Message failed to send, try again in a few seconds.");
-        //}
+        mBToastService.ShowToast(MBToastLevel.Error, "CSP violation: " + response.RequestMessage);
     }
 }
