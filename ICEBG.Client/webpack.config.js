@@ -15,7 +15,7 @@ module.exports = {
     },
 
     output: {
-        filename: "temp.js",
+        filename: "icebg.js",
         path: path.resolve(__dirname, 'wwwroot/js'),
     },
 

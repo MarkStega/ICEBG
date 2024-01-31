@@ -27,10 +27,6 @@ public partial class Index : ComponentBase
 
 
     [Inject] private NavigationManager NavigationManager { get; set; } = default!;
-    [Inject] private INotification Notifier { get; set; } = default!;
-
-
-
 
 
     private static readonly ImageData[] SkylineImages = new ImageData[]

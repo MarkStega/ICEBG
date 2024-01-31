@@ -18,10 +18,10 @@
 	<ItemGroup>
 		<PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
 		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.3" />
-		<PackageReference Include="libphonenumber-csharp" Version="8.13.24" />
-		<PackageReference Include="Material.Blazor.MD3" Version="5.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
+		<PackageReference Include="libphonenumber-csharp" Version="8.13.29" />
+		<PackageReference Include="Material.Blazor.MD3" Version="5.0.103" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -48,8 +48,6 @@
 		<OutputStaticAssetsStyles Include="$(ProjectDir)wwwroot\css\icebg.css;wwwroot\css\icebg.min.css" />
 
 		<Content Remove="@(OutputStaticAssetsStyles)" />
-
-		<InputStaticAssetsStyles Remove="WebAssets\Styles\_material-components-web.scss" />
 		<Content Include="@(OutputStaticAssetsStyles)" />
 	</ItemGroup>
 
@@ -60,13 +58,13 @@
 		<UpToDateCheckOutput Include="@(OutputStaticAssetsStyles)" Set="Styles" />
 	</ItemGroup>
 
-	<!--Add Importance="high" to see this step logged in the VS build-->
-	<Target Name="CheckIfNpmExists" BeforeTargets="PreBuildEvent" AfterTargets="WWWRootFileCopy">
-		<Message Text="***** npm install (test)" />
-		<Exec Command="npm install" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
+	<!--Change Importance="low" to Importance="high" to see this step logged in the VS build-->
+	<Target Name="CheckIfNpmExists" BeforeTargets="PreBuildEvent">
+		<Message Text="***** npm --version (test)" Importance="low" />
+		<Exec Command="npm --version" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
 			<Output TaskParameter="ExitCode" PropertyName="NpmReturnCode" />
 		</Exec>
-		<Message Text="***** 'npm install' return code was $(NpmReturnCode) (0 indicates npm is available)" />
+		<Message Text="***** 'npm --version' return code was $(NpmReturnCode) (0 indicates npm is available)" Importance="low" />
 	</Target>
 
 	<Target Name="ErrorOutput" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' != '0' ">
@@ -86,20 +84,11 @@
 		<Message Importance="high" Text="***** npm install (scripts)" />
 		<Exec Command="npm install" />
 
-		<Message Importance="high" Text="***** npm run build-scripts" />
-		<Exec Command="npm run build-scripts" />
-
 		<Message Importance="high" Text="***** npm run build-js" />
 		<Exec Command="npm run build-js" />
 
 		<Message Importance="high" Text="***** npm run build-min-js" />
 		<Exec Command="npm run build-min-js" />
-
-		<Message Importance="high" Text="***** delete *temp.js" />
-		<ItemGroup>
-			<FilesToDelete Include="wwwroot/js/*temp.js" />
-		</ItemGroup>
-		<Delete Files="@(FilesToDelete)" />
 	</Target>
 
 	<Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">

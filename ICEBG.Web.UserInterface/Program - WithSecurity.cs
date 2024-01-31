@@ -57,9 +57,7 @@ try
             {
                 cspOptions
                     .AddBaseUri(o => o.AddSelf())
-
                     .AddBlockAllMixedContent()
-
                     .AddChildSrc(o => o.AddSelf())
 
                     .AddConnectSrc(o => o
@@ -78,53 +76,38 @@ try
                     .AddFontSrc(o => o
                         .AddUri("https://fonts.googleapis.com")
                         .AddUri("https://fonts.gstatic.com"))
-
                     .AddFrameAncestors(o => o.AddNone())
-
                     .AddFrameSrc(o => o.AddSelf())
-
                     .AddFormAction(o => o.AddNone())
-
                     .AddImgSrc(o => o
                         .AddSelf()
                         .AddUri("www.google-analytics.com")
                         .AddSchemeSource(SchemeSource.Data, "w3.org/svg/2000"))
-
                     .AddManifestSrc(o => o.AddSelf())
-
                     .AddMediaSrc(o => o.AddSelf())
-
                     .AddObjectSrc(o => o.AddNone())
-
                     .AddReportUri(o => o.AddUri((baseUri, baseDomain) => $"https://{baseUri}/api/CspReporting/UriReport"))
-
-                    // The sha-256 hash relates to material.blazor.md3.lib.module.js
+                    // The sha-256 hash relates to an inline script added by blazor's javascript
                     .AddScriptSrc(o => o
-                        //.AddHashValue(HashAlgorithm.SHA256, "D3eUfxVDJsvQ4e7E3LQLh/d/B1BumEUYYuuYq3QCjW4=")
-                        .AddSelfIf(() => PlatformDetermination.kIsBlazorWebAssembly)
-                        // StrictDynamic works on Chromium browsers but fails for both Firefox and Safari
-                        //.AddStrictDynamicIf(() => !builder.Environment.IsDevelopment() && PlatformDetermination.IsBlazorWebAssembly)
+                        .AddHashValue(HashAlgorithm.SHA256, "v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=")
+                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
+                        .AddSelfIf(() => builder.Environment.IsDevelopment() || PlatformDetermination.kIsBlazorWebAssembly)
+                        //.AddStrictDynamicIf(() => !builder.Environment.IsDevelopment() && PlatformDetermination.IsBlazorWebAssembly) // this works on Chromium browswers but fails for both Firefox and Safari
+                        .AddUnsafeInlineIf(() => PlatformDetermination.kIsBlazorWebAssembly)
                         .AddReportSample()
                         .AddUnsafeEvalIf(() => PlatformDetermination.kIsBlazorWebAssembly)
                         .AddUri("https://www.googletagmanager.com/gtag/js")
                         .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js")
-                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor.MD3/material.blazor.min.js")
-                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor.MD3/Material.Blazor.MD3.lib.module.js")
-                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/ICEBG.Client/js/icebg.min.js")
-                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
+                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor/material.blazor.min.js")
                         .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.server.js", () => PlatformDetermination.kIsBlazorServer)
                         .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.webassembly.js", () => PlatformDetermination.kIsBlazorWebAssembly)
-                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/dotnet.js", () => PlatformDetermination.kIsBlazorWebAssembly)
                         .AddGeneratedHashValues(StaticFileExtension.JS))
-
                     .AddStyleSrc(o => o
                         .AddSelf()
                         .AddUnsafeInline()
                         .AddUnsafeHashes()
                         .AddReportSample())
-
                     .AddUpgradeInsecureRequests()
-
                     .AddWorkerSrc(o => o.AddSelf());
             })
             .AddReferrerPolicy(ReferrerPolicyDirective.NoReferrer)
