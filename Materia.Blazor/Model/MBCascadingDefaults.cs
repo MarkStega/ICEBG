@@ -68,6 +68,21 @@ public class MBCascadingDefaults
 
     #region COMMON ELEMENTS - COMPONENT ACCESSIBILITY, DISABLED, VERSION
 
+    private bool _disabled = false;
+    /// <summary>
+    /// The default disabled state.
+    /// </summary>
+    public bool Disabled { get => _disabled; set => SetParameter(ref _disabled, value); }
+
+    /// <summary>
+    /// The disabled state to apply.
+    /// </summary>
+    /// <param name="disabled">The required disabled state</param>
+    /// <returns>The <see cref="MBCardStyleMD2"/> to apply.</returns>
+    internal bool AppliedDisabled(bool? disabled = null) => disabled ?? Disabled;
+
+
+
     //private bool _TouchTarget = true;
     ///// <summary>
     ///// Determines whether to apply touch targets for accessibility. Defaults to true.

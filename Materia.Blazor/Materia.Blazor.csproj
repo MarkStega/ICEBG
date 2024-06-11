@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -7,12 +7,12 @@
 		<Authors>Simon Ziegler of Dioptra and Mark Stega of Optimium Health</Authors>
 		<Company>Materia</Company>
 		<Description>A lightweight Material Theme component library for Blazor. Intended to adhere rigorously to Material Theme guidelines in https://material.io. API and other documentation can be found at https://material-blazor.com/docs.</Description>
-		<RepositoryUrl>https://github.com/Materia-Technologies-Inc/Materia</RepositoryUrl>
+		<RepositoryUrl>https://github.com/Materia-Technologies-Inc/Materia.Blazor</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageReleaseNotes></PackageReleaseNotes>
 		<NeutralLanguage>en</NeutralLanguage>
-		<Copyright>Materia Technologies, Inc</Copyright>
+		<Copyright>Materia-Web, Inc</Copyright>
 		<PackageProjectUrl>https://material-blazor.com</PackageProjectUrl>
 		<Product>Materia Web Components</Product>
 		<UserSecretsId>d7509b6c-bc5c-4a56-a750-09c8ae4aeb85</UserSecretsId>
@@ -23,7 +23,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+		<EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -32,16 +32,23 @@
 
 	<ItemGroup>
 		<None Include="..\README.md" Pack="true" PackagePath="\" />
+		<None Include="docfx.json" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<WarningLevel>5</WarningLevel>
+	</PropertyGroup>
+
 	<ItemGroup>
-		<!--Keep these two Removes-->
+		<!--Keep these four Removes-->
+		<Content Remove="docfx.json" />
 		<Content Remove="package-lock.json" />
 		<Content Remove="package.json" />
+		<Content Remove="tsconfig.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -54,6 +61,16 @@
 	<ItemGroup>
 		<None Include="package-lock.json" />
 		<None Include="package.json" />
+		<None Include="tsconfig.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Scripts\Materia.Blazor.custom.events.ts">
+		  <SubType>Code</SubType>
+		</None>
+		<None Update="Scripts\Materia.Blazor.js">
+			<SubType>Code</SubType>
+		</None>
 	</ItemGroup>
 
 	<Target Name="CheckIfNpmExists" BeforeTargets="PreBuildEvent">
@@ -67,7 +84,7 @@
 		<Message Importance="high" Text="**********************************************************************************" />
 		<Message Importance="high" Text="**********************************************************************************" />
 		<Message Importance="high" Text="**********************************************************************************" />
-		<Message Importance="high" Text="***** 'npm install' return code was $(NpmReturnCode)" />
+		<Message Importance="high" Text="***** 'npm --version' return code was $(NpmReturnCode)" />
 		<Message Importance="high" Text="CSS and JS not built due to the lack of a proper development environment" />
 		<Message Importance="high" Text="See https://material-blazor.com/docs/articles/DevelopmentEnvironment.html" />
 		<Message Importance="high" Text="If the return code is 1, check package.json and package-lock.json" />
@@ -79,8 +96,8 @@
 	</Target>
 
 	<ItemGroup>
-		<InputStaticAssetsScripts Include="BlazorComponents\**\*.ts;BlazorComponents.MD2\**\*.ts;BlazorScripts\Materia.Blazor.*" />
-		<OutputStaticAssetsScripts Include="wwwroot\Materia.Blazor.js;wwwroot\Materia.Blazor.min.js;wwwroot\paint-worklets-rollup.js" />
+		<InputStaticAssetsScripts Include="Components\**\*.ts;Components.MD2\**\*.ts;Scripts\Materia.Blazor.*" />
+		<OutputStaticAssetsScripts Include="wwwroot\Materia.Blazor.js;wwwroot\Materia.Blazor.min.js" />
 		<!--Keep this Remove/Include pair-->
 		<Content Remove="@(OutputStaticAssetsScripts)" />
 		<Content Include="@(OutputStaticAssetsScripts)" />
@@ -100,6 +117,10 @@
 		<!--Keep this Remove/Include pair-->
 		<Content Remove="@(OutputStaticAssetsStyles)" />
 		<Content Include="@(OutputStaticAssetsStyles)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Scripts\Materia.Blazor.js" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -126,9 +147,6 @@
 
 		<Message Importance="high" Text="***** npm run build-js-minify (M.B Scripts)" />
 		<Exec Command="npm run build-js-rollup-minify" />
-
-		<Message Importance="high" Text="***** npm run copy-required-js (M.B Scripts)" />
-		<Exec Command="npm run copy-required-js" />
 
 	</Target>
 
@@ -164,9 +182,8 @@
 		<Exec Command="npm run build-acquire-font-MSO" />
 		<Exec Command="npm run build-acquire-font-MSR" />
 		<Exec Command="npm run build-acquire-font-MSS" />
-		<Exec Command="npm run build-acquire-fonts-general" />
 
-		<Message Importance="high" Text="***** npm run build-css (M.B.GoogleWC Styles)" />
+		<Message Importance="high" Text="***** npm run build-css (M.B Styles)" />
 		<Exec Command="npm run build-css" />
 
 		<Message Importance="high" Text="***** npm run build-min-css (M.B Styles)" />

@@ -309,8 +309,7 @@ public abstract class InputComponent<T> : ComponentFoundation
 
                 _componentValue = Value;
 
-                // TODO REVISIT THE QUEUE
-                // EnqueueJSInteropAction(SetComponentValueAsync);
+                EnqueueJSInteropAction(SetComponentValueAsync);
             }
         }
     }

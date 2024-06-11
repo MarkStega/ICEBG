@@ -19,7 +19,6 @@
 		<PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
 		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.3" />
 		<PackageReference Include="libphonenumber-csharp" Version="8.13.38" />
-		<PackageReference Include="Materia.Blazor" Version="1.0.0-preview-005" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.6" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.6" />
 	</ItemGroup>
@@ -32,6 +31,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
 		<ProjectReference Include="..\DataTier\DataTier.csproj" />
+		<ProjectReference Include="..\Materia.Blazor\Materia.Blazor.csproj" />
 		<ProjectReference Include="..\SharedUtilities\SharedUtilities.csproj" />
 	</ItemGroup>
 

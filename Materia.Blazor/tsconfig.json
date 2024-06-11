@@ -10,12 +10,15 @@
     "noEmitOnError": false,
     "noImplicitAny": false,
     "noUnusedParameters": true,
+    "paths": {
+      "@material/web/*": [ "../../materia.webcomponents/*" ]
+    },
     "removeComments": false,
     "skipLibCheck": true,
     "sourceMap": false,
     "strict": true
   },
-  "include": [ "BlazorComponents/**/*.ts", "BlazorComponents.MD2/**/*.ts", "BlazorScripts/*.ts" ],
+  "include": [ "Components/**/*.ts", "Components.MD2/**/*.ts", "Scripts/**/*.ts" ],
   "exclude": [
     "node_modules",
     "wwwroot"
