@@ -11,7 +11,7 @@ using ICEBG.DataTier.DataDefinitions;
 using ICEBG.DataTier.HelperClasses;
 using ICEBG.DataTier.Interfaces;
 
-using Material.Blazor;
+using Materia.Blazor;
 
 using Microsoft.AspNetCore.Components;
 
@@ -55,7 +55,7 @@ namespace ICEBG.Client.Pages
             }
             StateHasChanged();
             pTimer?.Dispose();
-            pTimer = new System.Timers.Timer(1000 * 60 * 5);
+            pTimer = new System.Timers.Timer(100);
             pTimer.Elapsed += RefreshTimerTick;
             pTimer.Enabled = true;
         }

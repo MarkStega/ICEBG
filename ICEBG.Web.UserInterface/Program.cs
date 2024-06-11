@@ -8,8 +8,6 @@ using CompressedStaticFiles.AspNet;
 
 using GoogleAnalytics.Blazor;
 
-using HttpSecurity.AspNet;
-
 using ICEBG.AppConfig;
 using ICEBG.Client;
 using ICEBG.Client.Infrastructure.ClientServices;
@@ -49,99 +47,6 @@ try
     // Add services to the container.
     logger.Debug("ClientServices.Inject");
     ClientServices.Inject(ApplicationConfiguration.pDataServicesEndpointPrefix, builder.Services);
-
-    builder.Services.AddHttpsSecurityHeaders(options =>
-    {
-        options
-            .AddContentSecurityOptions(cspOptions =>
-            {
-                cspOptions
-                    .AddBaseUri(o => o.AddSelf())
-
-                    .AddBlockAllMixedContent()
-
-                    .AddChildSrc(o => o.AddSelf())
-
-                    .AddConnectSrc(o => o
-                        .AddSelf()
-                        .AddUri((baseUri, baseDomain) => $"wss://{baseDomain}:*")
-                        .AddUri((baseUri, baseDomain) => ApplicationConfiguration.pDataServicesEndpointPrefix))
-
-                    // The generated hashes do nothing here, and we include it here only to show that generated hash values can be added to policies - script-src would generally be the policy where you use this technique.
-                    .AddDefaultSrc(o => o
-                        .AddSelf()
-                        .AddStrictDynamicIf(() => !builder.Environment.IsDevelopment())
-                        .AddUnsafeInline()
-                        .AddGeneratedHashValues(StaticFileExtension.CSS)
-                        .AddUri((baseUri, baseDomain) => ApplicationConfiguration.pDataServicesEndpointPrefix))
-
-                    .AddFontSrc(o => o
-                        .AddUri("https://fonts.googleapis.com")
-                        .AddUri("https://fonts.gstatic.com"))
-
-                    .AddFrameAncestors(o => o.AddNone())
-
-                    .AddFrameSrc(o => o.AddSelf())
-
-                    .AddFormAction(o => o.AddNone())
-
-                    .AddImgSrc(o => o
-                        .AddSelf()
-                        .AddUri("www.google-analytics.com")
-                        .AddSchemeSource(SchemeSource.Data, "w3.org/svg/2000"))
-
-                    .AddManifestSrc(o => o.AddSelf())
-
-                    .AddMediaSrc(o => o.AddSelf())
-
-                    .AddObjectSrc(o => o.AddNone())
-
-                    .AddReportUri(o => o.AddUri((baseUri, baseDomain) => $"https://{baseUri}/api/CspReporting/UriReport"))
-
-                    // The sha-256 hash relates to material.blazor.md3.lib.module.js
-                    .AddScriptSrc(o => o
-                        //.AddHashValue(HashAlgorithm.SHA256, "D3eUfxVDJsvQ4e7E3LQLh/d/B1BumEUYYuuYq3QCjW4=")
-                        .AddSelfIf(() => PlatformDetermination.kIsBlazorWebAssembly)
-                        // StrictDynamic works on Chromium browsers but fails for both Firefox and Safari
-                        //.AddStrictDynamicIf(() => !builder.Environment.IsDevelopment() && PlatformDetermination.IsBlazorWebAssembly)
-                        .AddReportSample()
-                        .AddUnsafeEvalIf(() => PlatformDetermination.kIsBlazorWebAssembly)
-                        .AddUri("https://www.googletagmanager.com/gtag/js")
-                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js")
-                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor.MD3/material.blazor.min.js")
-                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor.MD3/Material.Blazor.MD3.lib.module.js")
-                        .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/ICEBG.Client/js/icebg.min.js")
-                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
-                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.server.js", () => PlatformDetermination.kIsBlazorServer)
-                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.webassembly.js", () => PlatformDetermination.kIsBlazorWebAssembly)
-                        .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/dotnet.js", () => PlatformDetermination.kIsBlazorWebAssembly)
-                        .AddGeneratedHashValues(StaticFileExtension.JS))
-
-                    .AddStyleSrc(o => o
-                        .AddSelf()
-                        .AddUnsafeInline()
-                        .AddUnsafeHashes()
-                        .AddReportSample())
-
-                    .AddUpgradeInsecureRequests()
-
-                    .AddWorkerSrc(o => o.AddSelf());
-            })
-            .AddReferrerPolicy(ReferrerPolicyDirective.NoReferrer)
-            .AddPermissionsPolicy("accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()")
-            .AddStrictTransportSecurity(31536000, true)
-            .AddXClientId("ICEBG.Web.UserInterface")
-            .AddXContentTypeOptionsNoSniff()
-            .AddXFrameOptionsDirective(XFrameOptionsDirective.Deny)
-            .AddXXssProtectionDirective(XXssProtectionDirective.OneModeBlock)
-            .AddXPermittedCrossDomainPoliciesDirective(XPermittedCrossDomainPoliciesDirective.None);
-    },
-    onStartingOptions =>
-    {
-        onStartingOptions
-            .AddCacheControl("max-age=86400, no-cache, public")
-            .AddExpires("0");
-    });
 
     builder.Services.AddResponseCaching();
 
@@ -206,16 +111,6 @@ try
         options.MaxSendMessageSize = null;
     });
 
-    builder.Services.AddRateLimiter(_ => _
-        .AddFixedWindowLimiter(policyName: "fixed", options =>
-        {
-            options.PermitLimit = 1;
-            options.Window = TimeSpan.FromSeconds(1);
-            options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-            options.QueueLimit = 10;
-        }
-        ));
-
     // Add compressed static files service 
     builder.Services.AddCompressedStaticFiles();
 
@@ -239,11 +134,7 @@ try
 
     app.UseCompressedStaticFiles();
 
-    app.UseCookiePolicy();
-
     app.UseHttpsRedirection();
-
-    app.UseHttpSecurityHeaders();
 
 #if BLAZOR_SERVER
     app.MapBlazorHub();
@@ -253,16 +144,11 @@ try
 
     app.UseRouting();
 
-    // Limit api calls to 10 in a second to prevent external denial of service.
-    app.UseRateLimiter();
-
     app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
 
     app.MapControllers();
 
     app.MapFallbackToPage("/host");
-
-    app.MapGet("/sitemap.xml", async context => { await Sitemap.Generate(context); });
 
     logger.Debug("Completing startup, executing app.Run()...");
     logger.Debug(" ");

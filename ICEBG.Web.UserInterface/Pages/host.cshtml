@@ -1,11 +1,9 @@
 ﻿@page "/host"
 @namespace ICEBG.Web.UserInterface.Pages
-@using HttpSecurity.AspNet
 @using ICEBG.Client
 @using ICEBG.Web.UserInterface
 @using Microsoft.AspNetCore.Components.Web
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@inject IHttpSecurityService HttpSecurityService
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +14,7 @@
 
     <base href="~/" />
 
-    <link href="_content/Material.Blazor.MD3/material.blazor.css" rel="stylesheet" />
+    <link href="_content/Materia.Blazor/Materia.Blazor.min.css" rel="stylesheet" />
     <link href="_content/ICEBG.Client/css/icebg.min.css" rel="stylesheet" />
 
     @if (PlatformDetermination.kIsBlazorServer)
@@ -72,8 +70,7 @@
         </div>
     </div>
 
-    <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js"></script>
-    <script src="_content/Material.Blazor.MD3/material.blazor.min.js"></script>
+    <script src="_content/Materia.Blazor/Materia.Blazor.min.js" ></script>
     <script src="_content/ICEBG.Client/js/icebg.min.js"></script>
 
     @if (PlatformDetermination.kIsBlazorServer)
@@ -82,7 +79,7 @@
     }
     else
     {
-        <script src="_framework/blazor.webassembly.js"></script>
+        <script src="_framework/blazor.webassembly.js" ></script>
     }
 
 </body>

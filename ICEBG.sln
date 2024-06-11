@@ -39,8 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solutio
 		global.json.sav = global.json.sav
 		npmUpdate.cmd = npmUpdate.cmd
 		NuGet.Config = NuGet.Config
-		SuperClean.cmd = SuperClean.cmd
 		.github\ISSUE_TEMPLATE\ReadMe.md = .github\ISSUE_TEMPLATE\ReadMe.md
+		SuperClean.cmd = SuperClean.cmd
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICEBG.Blazor", "ICEBG.Blazor\ICEBG.Blazor.csproj", "{E07619FC-A0FC-4C85-9992-BBF3256598EA}"
@@ -50,6 +50,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationConfigurationServer", "ApplicationConfigurationServer\ApplicationConfigurationServer.csproj", "{437C4260-725A-4BE2-946E-A7AAB4A3F711}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationConfigurationWASM", "ApplicationConfigurationWASM\ApplicationConfigurationWASM.csproj", "{0734A003-51F8-4A6C-AC45-7962BB6CCE9E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICEBG.Web.UserInterface.B2C", "ICEBG.Web.UserInterface.B2C\ICEBG.Web.UserInterface.B2C.csproj", "{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -351,6 +353,30 @@ Global
 		{0734A003-51F8-4A6C-AC45-7962BB6CCE9E}.DevWebAssembly|x64.Build.0 = Develop_WebAssembly|Any CPU
 		{0734A003-51F8-4A6C-AC45-7962BB6CCE9E}.DevWebAssembly|x86.ActiveCfg = Develop_WebAssembly|Any CPU
 		{0734A003-51F8-4A6C-AC45-7962BB6CCE9E}.DevWebAssembly|x86.Build.0 = Develop_WebAssembly|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.Azure|Any CPU.ActiveCfg = Azure|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.Azure|Any CPU.Build.0 = Azure|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.Azure|arm64.ActiveCfg = Azure|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.Azure|arm64.Build.0 = Azure|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.Azure|x64.ActiveCfg = Azure|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.Azure|x64.Build.0 = Azure|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.Azure|x86.ActiveCfg = Azure|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.Azure|x86.Build.0 = Azure|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevServer|Any CPU.ActiveCfg = DevServer|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevServer|Any CPU.Build.0 = DevServer|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevServer|arm64.ActiveCfg = DevServer|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevServer|arm64.Build.0 = DevServer|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevServer|x64.ActiveCfg = DevServer|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevServer|x64.Build.0 = DevServer|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevServer|x86.ActiveCfg = DevServer|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevServer|x86.Build.0 = DevServer|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevWebAssembly|Any CPU.ActiveCfg = DevWebAssembly|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevWebAssembly|Any CPU.Build.0 = DevWebAssembly|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevWebAssembly|arm64.ActiveCfg = DevWebAssembly|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevWebAssembly|arm64.Build.0 = DevWebAssembly|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevWebAssembly|x64.ActiveCfg = DevWebAssembly|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevWebAssembly|x64.Build.0 = DevWebAssembly|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevWebAssembly|x86.ActiveCfg = DevWebAssembly|Any CPU
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817}.DevWebAssembly|x86.Build.0 = DevWebAssembly|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -368,6 +394,7 @@ Global
 		{D66E8FD0-0CD6-48F3-A4EF-FB480618A18E} = {3CD20226-A598-40E4-AA51-BAF056124CA9}
 		{437C4260-725A-4BE2-946E-A7AAB4A3F711} = {3CD20226-A598-40E4-AA51-BAF056124CA9}
 		{0734A003-51F8-4A6C-AC45-7962BB6CCE9E} = {3CD20226-A598-40E4-AA51-BAF056124CA9}
+		{BD285C58-80E9-4BE9-A0AE-526EE9DB2817} = {3CD20226-A598-40E4-AA51-BAF056124CA9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0E6360A2-10BB-41CA-97A0-F20A3A1CD7A8}

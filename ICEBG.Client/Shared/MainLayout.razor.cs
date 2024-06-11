@@ -4,9 +4,8 @@ using GoogleAnalytics.Blazor;
 
 using ICEBG.Client.Pages;
 
-using Material.Blazor;
-using Material.Blazor.MD2;
-using Material.Blazor.MenuClose;
+using Materia.Blazor;
+using Materia.Blazor.MD2;
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http.Authentication.Internal;
@@ -60,14 +59,6 @@ public partial class MainLayout : LayoutComponentBase
                                     color: "darkblue"),
                 MenuItemType=MBMenuItemType.Regular },
     };
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JSRuntime.InvokeVoidAsync("ICEBG.General.instantiateErrorDialog");
-        }
-    }
 
     protected void MenuSelectionReportHandler(MenuSelectionReportEventArgs args)
     {

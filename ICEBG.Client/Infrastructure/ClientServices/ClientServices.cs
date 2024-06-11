@@ -8,7 +8,7 @@ using Grpc.Net.Client.Web;
 using ICEBG.DataTier.gRPCClient;
 using ICEBG.DataTier.Interfaces;
 
-using Material.Blazor;
+using Materia.Blazor;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

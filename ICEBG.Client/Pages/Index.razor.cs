@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-using Material.Blazor;
+using Materia.Blazor;
 
 using Microsoft.AspNetCore.Components;
 

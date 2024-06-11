@@ -1,0 +1,88 @@
+﻿@page "/host"
+@namespace ICEBG.Web.UserInterface.Pages
+@using HttpSecurity.AspNet
+@using ICEBG.Client
+@using ICEBG.Web.UserInterface
+@using Microsoft.AspNetCore.Components.Web
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject IHttpSecurityService HttpSecurityService
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ICEBG (UserInterface)</title>
+
+    <base href="~/" />
+
+    <link href="_content/Materia.Blazor/Materia.Blazor.min.css" integrity="@HttpSecurityService.GetFileHashString("Materia.Blazor.min.css")" rel="stylesheet" />
+    <link href="_content/ICEBG.Client/css/icebg.min.css" integrity="@HttpSecurityService.GetFileHashString("icebg.min.css")" rel="stylesheet" />
+
+    @if (PlatformDetermination.kIsBlazorServer)
+    {
+        <component type="typeof(HeadOutlet)" render-mode="Server" />
+    }
+</head>
+
+<body>
+    @if (PlatformDetermination.kIsBlazorServer)
+    {
+        <component type="typeof(App)" render-mode="Server" />
+    }
+    else
+    {
+        <div id="app">
+            <svg class="loading-progress">
+                <circle r="40%" cx="50%" cy="50%" />
+                <circle r="40%" cx="50%" cy="50%" />
+            </svg>
+            <div class="loading-progress-text"></div>
+        </div>
+    }
+
+    <div id="blazor-error-ui">
+        <div id="reload-dialog" class="mdc-dialog">
+            <div id="reload-container" class="mdc-dialog__container">
+                <div class="mdc-dialog__surface"
+                     role="alertdialog"
+                     aria-modal="true"
+                     aria-labelledby="my-dialog-title"
+                     aria-describedby="my-dialog-content">
+                    <h2 class="mdc-dialog__title" id="my-dialog-title">
+                        <span class="material-icons-outlined">error</span> Website Error
+                    </h2>
+                    <div class="mdc-dialog__content" id="my-dialog-content">
+                        <environment include="Staging,Production">
+                            Click the button to reload the website.
+                        </environment>
+                        <environment include="Development">
+                            An unhandled exception has occurred. See browser dev tools for details.
+                        </environment>
+                    </div>
+                    <div class="mdc-dialog__actions" tabindex="1">
+                        <button id="reload-button" type="button" class="mdc-button mdc-dialog__button mdc-button--raised" data-mdc-dialog-action="discard">
+                            <div class="mdc-button__ripple"></div>
+                            <span class="mdc-button__label">Reload</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="reload-scrim" class="mdc-dialog__scrim"></div>
+        </div>
+    </div>
+
+    <script src="_content/Materia.Blazor/Materia.Blazor.min.js" integrity="@HttpSecurityService.GetFileHashString("Materia.Blazor.min.js")" ></script>
+    <script src="_content/ICEBG.Client/js/icebg.min.js" integrity="@HttpSecurityService.GetFileHashString("icebg.min.js")"></script>
+
+    @if (PlatformDetermination.kIsBlazorServer)
+    {
+        <script src="_framework/blazor.server.js" integrity="@HttpSecurityService.GetFileHashString("blazor.server.js")" ></script>
+    }
+    else
+    {
+        <script src="_framework/blazor.webassembly.js" integrity="@HttpSecurityService.GetFileHashString("blazor.webassembly.js")" ></script>
+    }
+
+</body>
+</html>

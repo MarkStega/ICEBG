@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 using ICEBG.Client;
 
-using Material.Blazor;
+using Materia.Blazor;
 
 namespace ICEBG.Blazor;
 
