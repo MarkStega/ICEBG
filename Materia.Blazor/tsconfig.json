@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "ES2021",
+    "module": "ES2015",
+    "moduleResolution": "Node",
+    "noFallthroughCasesInSwitch": true,
+    "noEmitOnError": false,
+    "noImplicitAny": false,
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "strict": true
+  },
+  "include": [ "BlazorComponents/**/*.ts", "BlazorComponents.MD2/**/*.ts", "BlazorScripts/*.ts" ],
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ],
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Recommended"
+}

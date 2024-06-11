@@ -1,0 +1,16 @@
+﻿@charset "UTF-8";
+
+@use '_general-fonts.scss';
+@use '_material-symbols-outlined.scss';
+@use '_material-symbols-rounded.scss';
+@use '_material-symbols-sharp.scss';
+
+@use "./material-components-web/index";
+
+@use '../BlazorComponents.MD2/Card/MBCard.scss';
+@use '../BlazorComponents.MD2/DataTable/MBDataTable.scss';
+@use '../BlazorComponents.MD2/TopAppBar/MBTopAppBar.scss';
+
+.mb-full-width {
+    width: 100%;
+}
