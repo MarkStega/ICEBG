@@ -2,6 +2,19 @@
 
 @namespace ICEBG.Client
 
+@using ICEBG.Client.Components
+@using ICEBG.DataTier.DataDefinitions
+@using ICEBG.DataTier.gRPCClient
+@using ICEBG.DataTier.HelperClasses
+@using ICEBG.DataTier.Interfaces
+@using ICEBG.SharedUtilities
+@using ICEBG.SystemFramework
+
+@inject iConfigurationClient ConfigurationClient
+
+@implements IDisposable
+
+
 @inherits ComponentBase
 
 
@@ -11,15 +24,22 @@
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell--span-12 dw-tagline">
                     <div class="dw-picture-right">
-                        <p class="mdc-typography--headline4">More work...</p>
+ @*                        <p class="mdc-typography--headline4">More work...</p>
                         <p class="mdc-typography--body1">
                             We need these shelves organized.
                         </p>
-                    </div>
+  *@                   </div>
 
-                    <br />
+    @*                 <br />
                     <img src="_content/ICEBG.Client/images/book-shelves.jpg" alt="book-shelves" width="640px" height="420px">
+                    <br />
+     *@                <h1>Consume resources</h1>
 
+                    <FlowLabeledText time="@time"
+                                     duration="@duration"
+                                     configuration="@configuration"
+                                     count="@count1"
+                                     count2="@count2" />
                 </div>
 
             </div>
