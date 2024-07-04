@@ -187,7 +187,12 @@ namespace ICEBG.DataTier.gRPCClient
                         reply.StatisticsReport.PiAverageSpan,
                         reply.StatisticsReport.PiHeartbeat,
                         reply.StatisticsReport.PiIterations,
-                        reply.StatisticsReport.PiStartTime);
+                        reply.StatisticsReport.PiStartTime,
+                        reply.StatisticsReport.SqlAverageSpan,
+                        reply.StatisticsReport.SqlHeartbeat,
+                        reply.StatisticsReport.SqlIterations,
+                        reply.StatisticsReport.SqlStartTime
+                        );
 
                     return new ServiceResult<StatisticsReport_DD>
                         (result: statisticsReport, success: true);

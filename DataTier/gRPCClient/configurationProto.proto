@@ -50,6 +50,10 @@ message StatisticsReportDD {
     string piStartTime = 2;
     string piHeartbeat = 3;
     string piIterations = 4;
+	string sqlAverageSpan = 5;
+    string sqlStartTime = 6;
+    string sqlHeartbeat = 7;
+    string sqlIterations = 8;
 }
 
 message StatisticsReportRequest{}

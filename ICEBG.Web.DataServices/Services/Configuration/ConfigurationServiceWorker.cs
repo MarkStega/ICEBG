@@ -30,6 +30,12 @@ public partial class ConfigurationServiceWorker : BackgroundService
     public DateTime pPiHeartbeat { get; set; }
     public int pPiIterations { get; set; } = 0;
 
+    // ManipulateSqlDataWorker stats
+    public TimeSpan pSqlAverageSpan { get; set; } = new TimeSpan(0);
+    public DateTime pSqlStartTime { get; set; }
+    public DateTime pSqlHeartbeat { get; set; }
+    public int pSqlIterations { get; set; } = 0;
+
     // Miscellaneous
     protected IConfiguration pConfiguration { get; private set; }
     protected Configuration_BL pConfigurationBL { get; private set; }
@@ -47,8 +53,6 @@ public partial class ConfigurationServiceWorker : BackgroundService
         pConfigurationBL = new Configuration_BL(ApplicationConfiguration.pSqlConnectionString);
         pLogger = logger;
         pLogger.LogInformation("ConfigurationServiceWorker ctor()");
-
-        pPiHeartbeat = DateTime.Now;
 
         WorkerServiceReference.pConfigurationWorkerServiceReference = this;
     }
@@ -68,6 +72,9 @@ public partial class ConfigurationServiceWorker : BackgroundService
 
                     pLogger.Log(Microsoft.Extensions.Logging.LogLevel.Debug, "ConfigurationServiceWorker.ExecuteAsync starting ComputePiWorker()");
                     ComputePiWorker();
+
+                    pLogger.Log(Microsoft.Extensions.Logging.LogLevel.Debug, "ConfigurationServiceWorker.ExecuteAsync starting ManipulateSqlDataWorker()");
+                    ManipulateSqlDataWorker();
 
                     pLogger.Log(Microsoft.Extensions.Logging.LogLevel.Debug, "ConfigurationServiceWorker.ExecuteAsync sleeping for 1 minute before allowing worker threads to start");
                     await Task.Delay(1000 * 60); // 1 minute

@@ -211,15 +211,19 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
             };
 
             var StatisticsReportDD = new StatisticsReportDD
-                {
-                    PiAverageSpan = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiAverageSpan.ToString(),
-                    PiHeartbeat = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiHeartbeat.ToString(),
-                    PiIterations = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiIterations.ToString(),
-                    PiStartTime = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiStartTime.ToString()
-                };
-                reply.StatisticsReport = StatisticsReportDD;
+            {
+                PiAverageSpan = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiAverageSpan.ToString(),
+                PiHeartbeat = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiHeartbeat.ToString(),
+                PiIterations = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiIterations.ToString(),
+                PiStartTime = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiStartTime.ToString(),
+                SqlAverageSpan = WorkerServiceReference.pConfigurationWorkerServiceReference.pSqlAverageSpan.ToString(),
+                SqlHeartbeat = WorkerServiceReference.pConfigurationWorkerServiceReference.pSqlHeartbeat.ToString(),
+                SqlIterations = WorkerServiceReference.pConfigurationWorkerServiceReference.pSqlIterations.ToString(),
+                SqlStartTime = WorkerServiceReference.pConfigurationWorkerServiceReference.pSqlStartTime.ToString()
+            };
+            reply.StatisticsReport = StatisticsReportDD;
 
-                return Task.FromResult(reply);
+            return Task.FromResult(reply);
         }
         catch (Exception ex)
         {
