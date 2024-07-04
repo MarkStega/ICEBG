@@ -1,0 +1,53 @@
+﻿@namespace ICEBG.Client.Components
+
+<h2>Time is @time</h2>
+<h2>Duration is @duration</h2>
+@if (statisticsReportResult == null)
+{
+    <h2>Loading...</h2>
+}
+else
+{
+    @if (statisticsReportResult.pSuccess)
+    {
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td><b>Success</b></td>
+                    <td>true</td>
+                </tr>
+                <tr>
+                    <td><b>Start time</b></td>
+                    <td>@statisticsReportResult.pResult.pPiStartTime</td>
+                </tr>
+                <tr>
+                    <td><b>Last heartbeat</b></td>
+                    <td>@statisticsReportResult.pResult.pPiHeartbeat</td>
+                </tr>
+                <tr>
+                    <td><b>Average execution time</b></td>
+                    <td>@statisticsReportResult.pResult.pPiAverageSpan</td>
+                </tr>
+                <tr>
+                    <td><b>Iterations</b></td>
+                    <td>@statisticsReportResult.pResult.pPiIterations</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td><b>Success</b></td>
+                    <td>false</td>
+                </tr>
+                <tr>
+                    <td><b>pError</b></td>
+                    <td>@statisticsReportResult.pError</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+}

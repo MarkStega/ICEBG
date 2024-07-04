@@ -55,7 +55,7 @@ public partial class Index : ComponentBase
     private string duration { get; set; } = "'Not yet initialized'";
     private DateTime startTime { get; set; } = DateTime.MinValue;
     private string time { get; set; } = "'Not yet initialized'";
-    private ServiceResult<Configuration_DD> configuration { get; set; }
+    private ServiceResult<StatisticsReport_DD> currentStatisticsReport { get; set; }
 
     private int internalCount = 0;
     private int internalCount2 = 0;
@@ -63,7 +63,7 @@ public partial class Index : ComponentBase
     #region LoadReportCollectionAsync
     private async Task LoadReportCollectionAsync()
     {
-        configuration = await ConfigurationClient.SelectAsync(ApplicationConfiguration.pConfigurationIdentifier);
+        currentStatisticsReport = await ConfigurationClient.StatisticsReportAsync();
         internalCount += 1;
         count1 = internalCount.ToString("N0");
 
@@ -76,15 +76,9 @@ public partial class Index : ComponentBase
         duration = (currentTime - startTime).ToString(@"d\.hh\:mm\:ss");
 
         time = currentTime.ToString();
-        if (internalCount >= 1000000)
-        {
-            internalCount = 0;
-            internalCount2 += 1;
-            count2 = internalCount2.ToString("N0");
-        }
         StateHasChanged();
         pTimer?.Dispose();
-        pTimer = new System.Timers.Timer(10);
+        pTimer = new System.Timers.Timer(10_000);
         pTimer.Elapsed += RefreshTimerTick;
         pTimer.Enabled = true;
     }

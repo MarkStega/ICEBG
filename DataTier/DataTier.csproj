@@ -15,7 +15,7 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
-		<PackageReference Include="Google.Protobuf" Version="3.27.1" />
+		<PackageReference Include="Google.Protobuf" Version="3.27.2" />
 		<PackageReference Include="Grpc.Net.Client" Version="2.63.0" />
 	</ItemGroup>
 
@@ -29,7 +29,6 @@
 
 	<ItemGroup>
 	  <Folder Include="BusinessLogic\BusinessLogicExtended\" />
-	  <Folder Include="DataDefinitions\" />
 	  <Folder Include="SQL\Extended\" />
 	  <Folder Include="SQL\OneTimeSetup\" />
 	</ItemGroup>

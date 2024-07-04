@@ -18,7 +18,7 @@
 	<ItemGroup>
 		<PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
 		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.3" />
-		<PackageReference Include="libphonenumber-csharp" Version="8.13.38" />
+		<PackageReference Include="libphonenumber-csharp" Version="8.13.39" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.6" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.6" />
 	</ItemGroup>
@@ -56,6 +56,12 @@
 		<UpToDateCheckOutput Include="@(OutputStaticAssetsScripts)" Set="Scripts" />
 		<UpToDateCheckInput Include="@(InputStaticAssetsStyles)" Set="Styles" />
 		<UpToDateCheckOutput Include="@(OutputStaticAssetsStyles)" Set="Styles" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="Components\FlowLabeledText2.razor">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	  </Content>
 	</ItemGroup>
 
 	<!--Change Importance="low" to Importance="high" to see this step logged in the VS build-->

@@ -1,18 +1,18 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Grpc.Core;
 
-using Grpc.Core;
+using ICEBG.AppConfig;
+using ICEBG.DataTier.BusinessLogic;
+using ICEBG.DataTier.DataDefinitions;
+using ICEBG.DataTier.gRPCClient;
+using ICEBG.SystemFramework;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-using ICEBG.DataTier.BusinessLogic;
-using ICEBG.DataTier.DataDefinitions;
-using ICEBG.DataTier.gRPCClient;
-using ICEBG.SystemFramework;
-using ICEBG.AppConfig;
+using System;
 using System.Reflection;
+using System.Threading.Tasks;
 
 //
 //  2022-05-24  Mark Stega
@@ -65,11 +65,12 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
             {
                 pLogger.LogInformation("   pConfigurationBL.Select succeeded");
 
-                var reply = new ConfigurationSelectReply();
-
-                reply.SuccessIndicator = true;
-                reply.ErrorMessage = "";
-                reply.ServerVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split('+')[0];
+                var reply = new ConfigurationSelectReply
+                {
+                    SuccessIndicator = true,
+                    ErrorMessage = "",
+                    ServerVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split('+')[0]
+                };
 
                 var ConfigurationDD = new ConfigurationDD
                 {
@@ -121,11 +122,12 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
                     "   pConfigurationBL.SelectAll succeeded, returning " +
                     Configurations.Count.ToString() + " Configuration record(s)");
 
-                var reply = new ConfigurationSelectAllReply();
-
-                reply.SuccessIndicator = true;
-                reply.ServerVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split('+')[0];
-                reply.ErrorMessage = "";
+                var reply = new ConfigurationSelectAllReply
+                {
+                    SuccessIndicator = true,
+                    ServerVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split('+')[0],
+                    ErrorMessage = ""
+                };
 
                 foreach (var Configuration in Configurations)
                 {
@@ -183,6 +185,47 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
             var error = "Exception in Configuration.Upsert of " + ex.ToString();
             pLogger.LogError(error);
             var badReply = new ConfigurationUpsertReply
+            {
+                SuccessIndicator = false,
+                ErrorMessage = ex.ToString()
+            };
+            return Task.FromResult(badReply);
+        }
+    }
+
+    #endregion
+
+    #region SelectStatistics
+
+    public override Task<StatisticsReportReply> SelectStatisticsReport(StatisticsReportRequest request, ServerCallContext context)
+    {
+        try
+        {
+            pLogger.LogInformation("Configuration.StatisticsReport initiated.");
+
+            var reply = new StatisticsReportReply
+            {
+                SuccessIndicator = true,
+                ErrorMessage = "",
+                ServerVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split('+')[0]
+            };
+
+            var StatisticsReportDD = new StatisticsReportDD
+                {
+                    PiAverageSpan = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiAverageSpan.ToString(),
+                    PiHeartbeat = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiHeartbeat.ToString(),
+                    PiIterations = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiIterations.ToString(),
+                    PiStartTime = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiStartTime.ToString()
+                };
+                reply.StatisticsReport = StatisticsReportDD;
+
+                return Task.FromResult(reply);
+        }
+        catch (Exception ex)
+        {
+            var error = "Exception in Configuration.StatisticsReport of " + ex.ToString();
+            pLogger.LogError(error);
+            var badReply = new StatisticsReportReply
             {
                 SuccessIndicator = false,
                 ErrorMessage = ex.ToString()
