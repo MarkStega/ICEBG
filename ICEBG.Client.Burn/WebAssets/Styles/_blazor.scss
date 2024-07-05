@@ -1,0 +1,41 @@
+﻿.validation-errors {
+    justify-content: left;
+    text-align: left;
+}
+
+.validation-errors .ul {
+    justify-content: left;
+    text-align: left;
+}
+
+.validation-message {
+    color: var(--mdc-theme-error);
+}
+
+/*
+    Blazor Error UI
+*/
+#blazor-error-ui {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+
+    & .mdc-dialog__title {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    & .material-icons-outlined {
+        margin-right: 18px;
+        color: var(--mdc-theme-error);
+    }
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}

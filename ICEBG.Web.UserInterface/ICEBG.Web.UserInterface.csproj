@@ -8,7 +8,6 @@
 
 	<ItemGroup>
 	  <Compile Remove="Program - SansSecurity.cs" />
-	  <Compile Remove="Program - WithIntegrity.cs" />
 	  <Compile Remove="Program - WithSecurity.cs" />
 	</ItemGroup>
 

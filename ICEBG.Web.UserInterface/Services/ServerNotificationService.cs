@@ -47,7 +47,7 @@ public class ServerNotificationService : INotification
     //            throw new NotSupportedException($"Received failed result {response.StatusCode} when posting events to Microsoft Teams.");
     //        }
 
-    //        _logger.LogInformation($"Sent message to Teams using {_messagingWebhook}; received this response: {response.StatusCode}", message, response.StatusCode);
+    //        _logger.LogDebug($"Sent message to Teams using {_messagingWebhook}; received this response: {response.StatusCode}", message, response.StatusCode);
     //    }
     //    catch (Exception ex)
     //    {

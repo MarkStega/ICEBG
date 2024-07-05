@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "ICEBG.Web.Burn": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "hotReloadEnabled": false,
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7177"
+    }
+  }
+}

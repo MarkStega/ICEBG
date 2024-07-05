@@ -528,7 +528,7 @@ public sealed class MBDecimalField : InputComponent<decimal>
     public void ConsoleLog(string message)
     {
 #if LOGGING
-        LoggingService.LogInformation("DECIMALFIELD: " + message);
+        LoggingService.LogDebug("DECIMALFIELD: " + message);
 #endif
     }
 

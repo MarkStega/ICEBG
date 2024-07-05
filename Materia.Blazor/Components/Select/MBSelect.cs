@@ -189,7 +189,7 @@ public class MBSelect<TItem> : SingleSelectComponent<TItem, MBSingleSelectElemen
     public void ConsoleLog(string message)
     {
 #if LOGGING
-        LoggingService.LogInformation("SELECT: " + message);
+        LoggingService.LogDebug("SELECT: " + message);
 #endif
     }
 

@@ -52,7 +52,7 @@ public partial class ConfigurationServiceWorker : BackgroundService
         pConfiguration = configuration;
         pConfigurationBL = new Configuration_BL(ApplicationConfiguration.pSqlConnectionString);
         pLogger = logger;
-        pLogger.LogInformation("ConfigurationServiceWorker ctor()");
+        pLogger.LogDebug("ConfigurationServiceWorker ctor()");
 
         WorkerServiceReference.pConfigurationWorkerServiceReference = this;
     }
@@ -101,5 +101,6 @@ public partial class ConfigurationServiceWorker : BackgroundService
 #region resource log
 
 // 2024-07-04 1135 - $4,737
+// 2024-07-05 0707 - $4,770
 
 #endregion

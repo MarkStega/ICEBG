@@ -1,0 +1,71 @@
+﻿@namespace ICEBG.Client.Components
+
+<h2>Time is @time</h2>
+<h2>Duration is @duration</h2>
+@if (statisticsReportResult == null)
+{
+    <h2>Loading...</h2>
+}
+else
+{
+    @if (statisticsReportResult.pSuccess)
+    {
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td><b>SelectStatisticsReport result</b></td>
+                    <td>true</td>
+                </tr>
+                <br/>
+                <tr>
+                    <td><b>Pi start time</b></td>
+                    <td>@statisticsReportResult.pResult.pPiStartTime</td>
+                </tr>
+                <tr>
+                    <td><b>Pi last heartbeat</b></td>
+                    <td>@statisticsReportResult.pResult.pPiHeartbeat</td>
+                </tr>
+                <tr>
+                    <td><b>Pi average execution time</b></td>
+                    <td>@statisticsReportResult.pResult.pPiAverageSpan</td>
+                </tr>
+                <tr>
+                    <td><b>Pi iterations</b></td>
+                    <td>@statisticsReportResult.pResult.pPiIterations</td>
+                </tr>
+@*                 <br/>
+                <tr>
+                    <td><b>Sql start time</b></td>
+                    <td>@statisticsReportResult.pResult.pSqlStartTime</td>
+                </tr>
+                <tr>
+                    <td><b>Sql last heartbeat</b></td>
+                    <td>@statisticsReportResult.pResult.pSqlHeartbeat</td>
+                </tr>
+                <tr>
+                    <td><b>Sql average execution time</b></td>
+                    <td>@statisticsReportResult.pResult.pSqlAverageSpan</td>
+                </tr>
+                <tr>
+                    <td><b>Sql iterations</b></td>
+                    <td>@statisticsReportResult.pResult.pSqlIterations</td>
+                </tr>
+ *@            </tbody>
+        </table>
+    }
+    else
+    {
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td><b>Success</b></td>
+                    <td>false</td>
+                </tr>
+                <tr>
+                    <td><b>pError</b></td>
+                    <td>@statisticsReportResult.pError</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+}
