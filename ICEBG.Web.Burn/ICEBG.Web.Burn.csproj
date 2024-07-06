@@ -2,25 +2,12 @@
 
 	<PropertyGroup>
 		<UserSecretsId>ICEBG.Data.Server-9042ECD1-A92B-4B48-B0EA-E54F5A5A6F9A</UserSecretsId>
-		<WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
 
 		<!--<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-rc1</ContainerBaseImage>-->
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Program_BURN.cs" />
-	  <Compile Remove="Program_DS.cs" />
-	  <Compile Remove="Program_UI.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ContainerPort Include="8080" Type="tcp" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="Program_BURN.cs" />
-	  <None Include="Program_DS.cs" />
-	  <None Include="Program_UI.cs" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -44,11 +31,8 @@
 	  <ProjectReference Include="..\ICEBG.Client.Burn\ICEBG.Client.Burn.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Content Update="Pages\host.cshtml">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
+	<ItemGroup Condition="'$(Configuration)'=='DevWebAssembly'">
+		<ProjectReference Include="..\ICEBG.Blazor\ICEBG.Blazor.csproj" />
 	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
