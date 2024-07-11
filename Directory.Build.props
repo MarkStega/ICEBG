@@ -11,15 +11,15 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='Azure'">
-		<DefineConstants>AZURE;BLAZOR_SERVER;NOT_BLAZOR_WEBASSEMBLY</DefineConstants>
+		<DefineConstants>AZURE;BLAZOR_SERVER;NOT_BLAZOR_WEBASSEMBLY;BURN</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='DevServer'">
-		<DefineConstants>DEVSERVER;BLAZOR_SERVER</DefineConstants>
+		<DefineConstants>DEVSERVER;BLAZOR_SERVER;xBURN</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='DevWebAssembly'">
-		<DefineConstants>DEVWEBASSEMBLY;BLAZOR_WEBASSEMBLY</DefineConstants>
+		<DefineConstants>DEVWEBASSEMBLY;BLAZOR_WEBASSEMBLY;xBURN</DefineConstants>
 	</PropertyGroup>
 
 </Project>

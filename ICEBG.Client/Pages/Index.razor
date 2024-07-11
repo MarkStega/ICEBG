@@ -10,24 +10,40 @@
 @using ICEBG.SharedUtilities
 @using ICEBG.SystemFramework
 
+@inject iConfigurationClient ConfigurationClient
+
+@implements IDisposable
+
+
+@inherits ComponentBase
+
+
 <div class="dw-section-regular">
     <div class="dw-max-width-content">
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell--span-12 dw-tagline">
+                    @if (pBurn)
+                    {
+                        <h1>Report on consumed resources</h1>
+                        <FlowLabeledText2 time="@currentTime.ToString()"
+                                          duration="@duration"
+                                          statisticsReportResult="@currentStatisticsReport" />
+                    }
+                    else
+                    {
+                        <div class="dw-picture-right">
+                            <p class="mdc-typography--headline4">More work...</p>
+                            <p class="mdc-typography--body1">
+                                We need these shelves organized.
+                            </p>
 
-                    <div class="dw-picture-right">
-                        <p class="mdc-typography--headline4">More work...</p>
-                        <p class="mdc-typography--body1">
-                            We need these shelves organized.
-                        </p>
+                            <br />
+                        </div>
 
-                    </div>
-
-                    <br />
-                    <img src="_content/ICEBG.Client/images/book-shelves.jpg" alt="book-shelves" width="640px" height="420px">
-                    <br />
-
+                        <img src="_content/ICEBG.Client/images/book-shelves.jpg" alt="book-shelves" width="640px" height="420px">
+                        <br />
+                    }
                 </div>
 
             </div>

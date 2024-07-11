@@ -2,8 +2,6 @@
 
 using GoogleAnalytics.Blazor;
 
-using ICEBG.Client.Pages;
-
 using Materia.Blazor;
 using Materia.Blazor.MD2;
 
@@ -30,15 +28,6 @@ public partial class MainLayout : LayoutComponentBase
                                     name: "home",
                                     color: "darkblue"),
                 MenuItemType=MBMenuItemType.Regular },
-#if !AZURE
-        new MBMenuItem {
-                Headline="Consume resources",
-                HeadlineColor="darkblue",
-                LeadingIcon=MBIcon.IconDescriptorConstructor(
-                                    name: "error",
-                                    color: "darkblue"),
-                MenuItemType=MBMenuItemType.Regular },
-#endif
             new MBMenuItem {
                 Headline="GRPC configuration",
                 HeadlineColor="darkblue",
@@ -66,7 +55,6 @@ public partial class MainLayout : LayoutComponentBase
     {
         var destination = args.menuHeadline.ToLower() switch
         {
-            "consume resources" => "consumeresources",
             "grpc configuration" => "configuration",
             "rest weather" => "weather",
             "about" => "about",

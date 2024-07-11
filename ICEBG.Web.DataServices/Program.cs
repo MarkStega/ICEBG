@@ -34,6 +34,9 @@ try
 
     logger.Debug("ClientServices.Inject");
     ClientServices.Inject(ApplicationConfiguration.pDataServicesEndpointPrefix, builder.Services);
+#if BURN
+    builder.Services.AddHostedService<ConfigurationServiceWorker>();
+#endif
 
     // Add services to the container.
 
