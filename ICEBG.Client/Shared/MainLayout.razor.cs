@@ -30,13 +30,15 @@ public partial class MainLayout : LayoutComponentBase
                                     name: "home",
                                     color: "darkblue"),
                 MenuItemType=MBMenuItemType.Regular },
-            new MBMenuItem {
+#if !AZURE
+        new MBMenuItem {
                 Headline="Consume resources",
                 HeadlineColor="darkblue",
                 LeadingIcon=MBIcon.IconDescriptorConstructor(
                                     name: "error",
                                     color: "darkblue"),
                 MenuItemType=MBMenuItemType.Regular },
+#endif
             new MBMenuItem {
                 Headline="GRPC configuration",
                 HeadlineColor="darkblue",

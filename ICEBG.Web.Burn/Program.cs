@@ -4,8 +4,6 @@ using Blazored.LocalStorage;
 
 using CompressedStaticFiles.AspNet;
 
-using GoogleAnalytics.Blazor;
-
 using ICEBG.AppConfig;
 using ICEBG.Client.Infrastructure.ClientServices;
 using ICEBG.Web.DataServices;
@@ -90,12 +88,6 @@ try
 
     logger.Debug("AddBlazoredLocalStorage");
     builder.Services.AddBlazoredLocalStorage();
-
-    logger.Debug("AddGBService");
-    builder.Services.AddGBService(options =>
-    {
-        options.TrackingId = "G-2VZJ2X14RH";
-    });
 
     builder.WebHost.ConfigureKestrel(serverOptions =>
     {

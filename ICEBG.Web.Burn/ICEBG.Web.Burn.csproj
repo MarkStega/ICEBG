@@ -29,6 +29,7 @@
 	  <ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
 	  <ProjectReference Include="..\DataTier\DataTier.csproj" />
 	  <ProjectReference Include="..\ICEBG.Client.Burn\ICEBG.Client.Burn.csproj" />
+	  <ProjectReference Include="..\Materia.Blazor\Materia.Blazor.csproj" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)'=='DevWebAssembly'">

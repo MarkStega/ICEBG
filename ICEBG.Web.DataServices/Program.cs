@@ -35,8 +35,6 @@ try
     logger.Debug("ClientServices.Inject");
     ClientServices.Inject(ApplicationConfiguration.pDataServicesEndpointPrefix, builder.Services);
 
-    builder.Services.AddHostedService<ConfigurationServiceWorker>();
-
     // Add services to the container.
 
     logger.Debug("Adding razor pages");
