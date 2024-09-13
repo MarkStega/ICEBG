@@ -1,5 +1,4 @@
-﻿//#if gRPC
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Security.Cryptography;
 
 using Grpc.Net.Client;
@@ -12,7 +11,6 @@ using Materia.Blazor;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-//#endif
 
 namespace ICEBG.Client.Infrastructure.ClientServices;
 
