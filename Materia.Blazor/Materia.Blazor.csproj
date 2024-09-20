@@ -74,10 +74,11 @@
 	</ItemGroup>
 
 	<Target Name="CheckIfNpmExists" BeforeTargets="PreBuildEvent">
-		<Message Importance="high" Text="***** Building M.B" />
-		<Exec Command="npm install" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
+		<Message Text="***** pnpm i --frozen-lockfile (test)" Importance="high" />
+		<Exec Command="pnpm i --frozen-lockfile" ContinueOnError="true" StandardOutputImportance="high" StandardErrorImportance="high" LogStandardErrorAsError="false" IgnoreExitCode="true">
 			<Output TaskParameter="ExitCode" PropertyName="NpmReturnCode" />
 		</Exec>
+		<Message Text="***** 'pnpm i --frozen-lockfile' return code was $(NpmReturnCode) (0 indicates npm is available)" Importance="high" />
 	</Target>
 
 	<Target Name="ErrorOutput" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' != '0' ">
@@ -135,9 +136,6 @@
 	<Target Name="BuildScripts" Inputs="@(InputStaticAssetsScripts)" Outputs="@(OutputStaticAssetsScripts)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
 		<Message Importance="high" Text="***** MakeDir wwwroot (M.B Scripts)" />
 		<MakeDir Directories="wwwroot" />
-
-		<Message Importance="high" Text="***** npm install @material/web@nightly (M.B Scripts)" />
-		<Exec Command="npm install @material/web@nightly" />
 
 		<Message Importance="high" Text="***** npm run build-js (M.B Scripts)" />
 		<Exec Command="npm run build-js" />

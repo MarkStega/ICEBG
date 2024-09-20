@@ -65,46 +65,46 @@ jobs:
 ############################################################################################################
 # Build and deploy blazor BURN image
 ############################################################################################################
-  build-deploy-burn:
-    name: Build and deploy ICEBG BURN
-    needs: [set-unified-version]
-    runs-on: ubuntu-latest
+  # build-deploy-burn:
+  #   name: Build and deploy ICEBG BURN
+  #   needs: [set-unified-version]
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - name: Retrieve the global UnifiedVersion
-      run: echo "unifiedVersion=${{needs.set-unified-version.outputs.unifiedVersion}}" >> $GITHUB_ENV
-      shell: bash
+  #   steps:
+  #   - name: Retrieve the global UnifiedVersion
+  #     run: echo "unifiedVersion=${{needs.set-unified-version.outputs.unifiedVersion}}" >> $GITHUB_ENV
+  #     shell: bash
 
-    - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
-      uses: actions/checkout@v4
+  #   - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
+  #     uses: actions/checkout@v4
 
-    - name: Setup dotnet
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.x'
+  #   - name: Setup dotnet
+  #     uses: actions/setup-dotnet@v3
+  #     with:
+  #       dotnet-version: '8.x'
 
-    - name: Docker login
-      uses: azure/docker-login@v1
-      with:
-        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
+  #   - name: Docker login
+  #     uses: azure/docker-login@v1
+  #     with:
+  #       login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+  #       username: ${{ secrets.REGISTRY_USERNAME }}
+  #       password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    - name: Publish tagged BURN image
-      run: >
-        dotnet publish ICEBG.Web.Burn/ICEBG.Web.Burn.csproj
-        --arch x64
-        --os linux
-        --configuration Azure
-        --no-self-contained
-        -p:ContainerImageTag=${{ env.unifiedVersion }}
-        -p:ContainerRegistry=${{env.containerRegistry}}
-        -p:ContainerRepository=${{env.appNameBURN}}
-        -p:PublishProfile=DefaultContainer
-        -p:Version=${{ env.unifiedVersion }}
+  #   - name: Publish tagged BURN image
+  #     run: >
+  #       dotnet publish ICEBG.Web.Burn/ICEBG.Web.Burn.csproj
+  #       --arch x64
+  #       --os linux
+  #       --configuration Azure
+  #       --no-self-contained
+  #       -p:ContainerImageTag=${{ env.unifiedVersion }}
+  #       -p:ContainerRegistry=${{env.containerRegistry}}
+  #       -p:ContainerRepository=${{env.appNameBURN}}
+  #       -p:PublishProfile=DefaultContainer
+  #       -p:Version=${{ env.unifiedVersion }}
 
-    - name: Display package output for brotli & gzip compressed files
-      run: find ${{ github.workspace }} -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
+  #   - name: Display package output for brotli & gzip compressed files
+  #     run: find ${{ github.workspace }} -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
 
 ############################################################################################################
 # Build and deploy blazor DS image
@@ -126,6 +126,11 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.x'
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
 
     - name: Docker login
       uses: azure/docker-login@v1
@@ -172,6 +177,11 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.x'
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
 
     - name: 'Docker login'
       uses: azure/docker-login@v1

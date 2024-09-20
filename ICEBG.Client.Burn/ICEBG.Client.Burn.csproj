@@ -63,13 +63,12 @@
 	  </Content>
 	</ItemGroup>
 
-	<!--Change Importance="low" to Importance="high" to see this step logged in the VS build-->
 	<Target Name="CheckIfNpmExists" BeforeTargets="PreBuildEvent">
-		<Message Text="***** npm --version (test)" Importance="low" />
-		<Exec Command="npm --version" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
+		<Message Text="***** pnpm i --frozen-lockfile (test)" Importance="high" />
+		<Exec Command="pnpm i --frozen-lockfile" ContinueOnError="true" StandardOutputImportance="high" StandardErrorImportance="high" LogStandardErrorAsError="false" IgnoreExitCode="true">
 			<Output TaskParameter="ExitCode" PropertyName="NpmReturnCode" />
 		</Exec>
-		<Message Text="***** 'npm --version' return code was $(NpmReturnCode) (0 indicates npm is available)" Importance="low" />
+		<Message Text="***** 'pnpm i --frozen-lockfile' return code was $(NpmReturnCode) (0 indicates npm is available)" Importance="high" />
 	</Target>
 
 	<Target Name="ErrorOutput" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' != '0' ">
@@ -86,9 +85,6 @@
 	<Target Name="BuildScripts" Inputs="@(InputStaticAssetsScripts)" Outputs="@(OutputStaticAssetsScripts)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
 		<RemoveDir Directories="$(ProjectDir)wwwroot/js" />
 
-		<Message Importance="high" Text="***** npm install (scripts)" />
-		<Exec Command="npm install" />
-
 		<Message Importance="high" Text="***** npm run build-js" />
 		<Exec Command="npm run build-js" />
 
@@ -97,9 +93,6 @@
 	</Target>
 
 	<Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
-		<Message Importance="high" Text="***** npm install (styles)" />
-		<Exec Command="npm install" />
-
 		<Message Importance="high" Text="***** npm run build-css" />
 		<Exec Command="npm run build-css" />
 
