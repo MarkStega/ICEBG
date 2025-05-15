@@ -1,14 +1,6 @@
-﻿using System.Threading.Tasks;
-
-using GoogleAnalytics.Blazor;
-
-using ICEBG.Client;
-
-using Materia.Blazor;
-using Materia.Blazor.MD2;
+﻿using Materia.Blazor;
 
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Http.Authentication.Internal;
 using Microsoft.JSInterop;
 
 namespace ICEBG.Client;

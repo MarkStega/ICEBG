@@ -12,6 +12,8 @@ using Materia.Blazor;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+using OpenTelemetry.Metrics;
+
 namespace ICEBG.Client.Infrastructure.ClientServices;
 
 public static class ClientServices
@@ -85,6 +87,17 @@ public static class ClientServices
 
         pLogger?.LogDebug("Add WeatherForecastService");
         serviceCollection.AddSingleton<WeatherForecastService>();
+
+        // Add Aspire telemetry
+        serviceCollection.AddOpenTelemetry()
+            .WithTracing(builder => builder
+                .AddSource("ICEBG.Client")
+                .AddHttpClientInstrumentation()
+                .AddGrpcClientInstrumentation())
+            .WithMetrics(builder => builder
+                .AddMeter("ICEBG.Client")
+                .AddHttpClientInstrumentation()
+                .AddProcessInstrumentation());
 
     }
 }

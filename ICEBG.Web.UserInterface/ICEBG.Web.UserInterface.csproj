@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
+	<Sdk Name="Aspire.Apphost.Sdk" Version="9.0.0" />
+
 	<PropertyGroup>
 		<UserSecretsId>ICEBG.UI.Server-9042ECD1-A92B-4B48-B0EA-E54F5A5A6F9A</UserSecretsId>
 
@@ -22,22 +24,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Aspire.Hosting.AppHost" Version="9.2.1" />
 		<PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
-		<PackageReference Include="CompressedStaticFiles.AspNet" Version="2.1.0" />
-		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.3" />
-		<PackageReference Include="Grpc.AspNetCore" Version="2.65.0" />
-		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.65.0" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
+		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.71.0" />
 		<PackageReference Include="HttpSecurity.AspNet" Version="1.2.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
-		<PackageReference Include="NLog.Extensions.AzureBlobStorage" Version="4.4.0" />
-		<PackageReference Include="NLog.Web.AspNetCore" Version="5.3.12" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.5" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2" />
+		<PackageReference Include="NLog.Extensions.AzureBlobStorage" Version="4.4.1" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.4.0" />
+		<PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.12.0" />
+		<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.12.0" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationConfigurationServer\ApplicationConfigurationServer.csproj" />
 		<ProjectReference Include="..\ApplicationConfiguration\ApplicationConfiguration.csproj" />
 		<ProjectReference Include="..\ICEBG.Client\ICEBG.Client.csproj" />
+		<ProjectReference Include="..\Materia.Blazor\Materia.Blazor.csproj" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)'=='DevWebAssembly'">

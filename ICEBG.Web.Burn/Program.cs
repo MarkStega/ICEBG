@@ -2,8 +2,6 @@
 
 using Blazored.LocalStorage;
 
-using CompressedStaticFiles.AspNet;
-
 using ICEBG.AppConfig;
 using ICEBG.Client.Infrastructure.ClientServices;
 using ICEBG.Web.DataServices;
@@ -103,7 +101,7 @@ try
     });
 
     // Add compressed static files service 
-    builder.Services.AddCompressedStaticFiles();
+    //builder.Services.AddCompressedStaticFiles();
 
     var app = builder.Build();
 
@@ -123,7 +121,7 @@ try
         app.UseHsts();
     }
 
-    app.UseCompressedStaticFiles();
+    //app.UseCompressedStaticFiles();
 
     app.UseHttpsRedirection();
 

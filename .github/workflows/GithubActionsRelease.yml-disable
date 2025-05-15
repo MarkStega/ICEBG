@@ -1,18 +1,20 @@
-﻿name: GithubActionsWIP
+﻿name: GithubActionsRelease
+
+############################################################################################################
+# All of thes jobs runs commands only on a tag push in the MarkStega\ICEBG repository
+# An 'ExitWorkflow' action is sorely needed
+############################################################################################################
+# NUGET_API_KEY is valid through 9/11/2021
+############################################################################################################
 
 on:
   push:
-    branches:
-      - 'main'
-
-  pull_request:
-    branches:
-      - 'main'
+    tags:
+      - '*' # Push events to matching *, i.e. 1.0, 20.15.10
 
 env:
-  appNameBURN: 'icebg.web.burn.wip'
-  appNameDS: 'icebg.web.ds.wip'
-  appNameUI: 'icebg.web.ui.wip'
+  appNameDS: 'icebg.web.ds'
+  appNameUI: 'icebg.web.ui'
   containerRegistry: 'cricebg.azurecr.io'
   images-to-keep: '10'
 
@@ -51,7 +53,7 @@ jobs:
 # Set unified version for the two deployed applications
 ############################################################################################################
   set-unified-version:
-    name: Create the date based UnifiedVersion
+    name: Create the date based unifiedVersion
     needs: [deployment-allowed]
     runs-on: ubuntu-latest
     outputs:
@@ -59,52 +61,8 @@ jobs:
 
     steps:
     - id: setUnifiedVersion
-      run: echo "LocalUnifiedVersion=$(date +'%Y-%m-%d--%H-%M-%S')--WIP" >> $GITHUB_OUTPUT
+      run: echo "LocalUnifiedVersion=$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
       shell: bash
-
-############################################################################################################
-# Build and deploy blazor BURN image
-############################################################################################################
-  # build-deploy-burn:
-  #   name: Build and deploy ICEBG BURN
-  #   needs: [set-unified-version]
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #   - name: Retrieve the global UnifiedVersion
-  #     run: echo "unifiedVersion=${{needs.set-unified-version.outputs.unifiedVersion}}" >> $GITHUB_ENV
-  #     shell: bash
-
-  #   - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
-  #     uses: actions/checkout@v4
-
-  #   - name: Setup dotnet
-  #     uses: actions/setup-dotnet@v3
-  #     with:
-  #       dotnet-version: '8.x'
-
-  #   - name: Docker login
-  #     uses: azure/docker-login@v1
-  #     with:
-  #       login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-  #       username: ${{ secrets.REGISTRY_USERNAME }}
-  #       password: ${{ secrets.REGISTRY_PASSWORD }}
-
-  #   - name: Publish tagged BURN image
-  #     run: >
-  #       dotnet publish ICEBG.Web.Burn/ICEBG.Web.Burn.csproj
-  #       --arch x64
-  #       --os linux
-  #       --configuration Azure
-  #       --no-self-contained
-  #       -p:ContainerImageTag=${{ env.unifiedVersion }}
-  #       -p:ContainerRegistry=${{env.containerRegistry}}
-  #       -p:ContainerRepository=${{env.appNameBURN}}
-  #       -p:PublishProfile=DefaultContainer
-  #       -p:Version=${{ env.unifiedVersion }}
-
-  #   - name: Display package output for brotli & gzip compressed files
-  #     run: find ${{ github.workspace }} -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
 
 ############################################################################################################
 # Build and deploy blazor DS image
@@ -115,24 +73,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Retrieve the global UnifiedVersion
+    - name: Retrieve the global unifiedVersion
       run: echo "unifiedVersion=${{needs.set-unified-version.outputs.unifiedVersion}}" >> $GITHUB_ENV
       shell: bash
 
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
       uses: actions/checkout@v4
+      with:
+        persist-credentials: false
 
     - name: Setup dotnet
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.x'
+        dotnet-version: '9.x'
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 9
-
-    - name: Docker login
+    - name: 'Docker login'
       uses: azure/docker-login@v1
       with:
         login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
@@ -142,10 +97,11 @@ jobs:
     - name: Publish tagged DS image
       run: >
         dotnet publish ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj
-        --arch x64
         --os linux
+        --arch x64
         --configuration Azure
         --no-self-contained
+        -p:ContainerImageName=${{env.appNameDS}}
         -p:ContainerImageTag=${{ env.unifiedVersion }}
         -p:ContainerRegistry=${{env.containerRegistry}}
         -p:ContainerRepository=${{env.appNameDS}}
@@ -164,7 +120,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Retrieve the global UnifiedVersion
+    - name: Retrieve the global unifiedVersion
       run: echo "unifiedVersion=${{needs.set-unified-version.outputs.unifiedVersion}}" >> $GITHUB_ENV
       shell: bash
 
@@ -178,11 +134,6 @@ jobs:
       with:
         dotnet-version: '8.x'
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 9
-
     - name: 'Docker login'
       uses: azure/docker-login@v1
       with:
@@ -193,10 +144,11 @@ jobs:
     - name: Publish tagged UI image
       run: >
         dotnet publish ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj
-        --arch x64
         --os linux
+        --arch x64
         --configuration Azure
         --no-self-contained
+        -p:ContainerImageName=${{env.appNameUI}}
         -p:ContainerImageTag=${{ env.unifiedVersion }}
         -p:ContainerRegistry=${{env.containerRegistry}}
         -p:ContainerRepository=${{env.appNameUI}}
@@ -211,12 +163,12 @@ jobs:
 ############################################################################################################
   build-ds:
     name: Build ICEBG DS
-    needs: [deployment-not-allowed, build-allowed]
+    needs: [deployment-not-allowed]
     runs-on: ubuntu-latest
 
     steps:
     - name: Set unifiedVersion as env variable
-      run: echo "unifiedVersion=$(date +'%Y-%m-%d--%H-%M-%S')--WIP" >> $GITHUB_ENV
+      run: echo "unifiedVersion=$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
       shell: bash
 
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
@@ -232,8 +184,8 @@ jobs:
     - name: Build DS image
       run: >
         dotnet build ICEBG.Web.DataServices/ICEBG.Web.DataServices.csproj
-        --arch x64
         --os linux
+        --arch x64
         --configuration Azure
         -p:Version=${{ env.unifiedVersion }}
 
@@ -242,12 +194,12 @@ jobs:
 ############################################################################################################
   build-ui:
     name: Build ICEBG UI
-    needs: [deployment-not-allowed, build-allowed]
+    needs: [deployment-not-allowed]
     runs-on: ubuntu-latest
 
     steps:
     - name: Set unifiedVersion as env variable
-      run: echo "unifiedVersion=$(date +'%Y-%m-%d--%H-%M-%S')--WIP" >> $GITHUB_ENV
+      run: echo "unifiedVersion=$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
       shell: bash
 
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
@@ -263,8 +215,8 @@ jobs:
     - name: Build UI image
       run: >
         dotnet build ICEBG.Web.UserInterface/ICEBG.Web.UserInterface.csproj
-        --arch x64
         --os linux
+        --arch x64
         --configuration Azure
         -p:Version=${{ env.unifiedVersion }}
 

@@ -1,14 +1,10 @@
-// ICEBG.Web.UserInterface/Program.cs
-
 using System;
 using System.IO.Compression;
 using System.Threading.RateLimiting;
 
 using Blazored.LocalStorage;
 
-using CompressedStaticFiles.AspNet;
-
-using GoogleAnalytics.Blazor;
+//using CompressedStaticFiles.AspNet;
 
 using ICEBG.AppConfig;
 using ICEBG.Client;
@@ -94,11 +90,11 @@ try
     logger.Debug("AddBlazoredLocalStorage");
     builder.Services.AddBlazoredLocalStorage();
 
-    logger.Debug("AddGBService");
-    builder.Services.AddGBService(options =>
-    {
-        options.TrackingId = "G-2VZJ2X14RH";
-    });
+    //logger.Debug("AddGBService");
+    //builder.Services.AddGBService(options =>
+    //{
+    //    options.TrackingId = "G-2VZJ2X14RH";
+    //});
 
     builder.WebHost.ConfigureKestrel(serverOptions =>
     {
@@ -114,7 +110,7 @@ try
     });
 
     // Add compressed static files service 
-    builder.Services.AddCompressedStaticFiles();
+    //builder.Services.AddCompressedStaticFiles();
 
     var app = builder.Build();
 
@@ -134,7 +130,8 @@ try
         app.UseHsts();
     }
 
-    app.UseCompressedStaticFiles();
+    //app.UseCompressedStaticFiles();
+    app.UseStaticFiles();
 
     app.UseHttpsRedirection();
 

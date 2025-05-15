@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
+	<Sdk Name="Aspire.Apphost.Sdk" Version="9.0.0" />
+
 	<PropertyGroup>
 		<UserSecretsId>ICEBG.Data.Server-9042ECD1-A92B-4B48-B0EA-E54F5A5A6F9A</UserSecretsId>
 		<WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
@@ -12,12 +14,13 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Grpc.AspNetCore" Version="2.65.0" />
-		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.65.0" />
-		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.65.0" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
-		<PackageReference Include="NLog.Extensions.AzureBlobStorage" Version="4.4.0" />
-		<PackageReference Include="NLog.Web.AspNetCore" Version="5.3.12" />
+		<PackageReference Include="Aspire.Hosting.AppHost" Version="9.2.1" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
+		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.71.0" />
+		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.71.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2" />
+		<PackageReference Include="NLog.Extensions.AzureBlobStorage" Version="4.4.1" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>

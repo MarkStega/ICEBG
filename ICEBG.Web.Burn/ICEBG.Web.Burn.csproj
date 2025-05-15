@@ -11,17 +11,16 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="CompressedStaticFiles.AspNet" Version="2.1.0" />
-		<PackageReference Include="Grpc.AspNetCore" Version="2.65.0" />
-		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.65.0" />
-		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.65.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.8" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8" />
-		<PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="8.0.0" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
-		<PackageReference Include="NLog.Extensions.AzureBlobStorage" Version="4.4.0" />
-		<PackageReference Include="NLog.Web.AspNetCore" Version="5.3.12" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
+		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.71.0" />
+		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.71.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.5" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="9.0.5" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2" />
+		<PackageReference Include="NLog.Extensions.AzureBlobStorage" Version="4.4.1" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>

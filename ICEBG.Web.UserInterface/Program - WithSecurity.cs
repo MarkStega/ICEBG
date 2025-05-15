@@ -6,8 +6,6 @@ using Blazored.LocalStorage;
 
 using CompressedStaticFiles.AspNet;
 
-using GoogleAnalytics.Blazor;
-
 using HttpSecurity.AspNet;
 
 using ICEBG.AppConfig;

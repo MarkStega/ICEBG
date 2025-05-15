@@ -13,8 +13,6 @@ using Blazor.Extensions.Logging;
 
 using Blazored.LocalStorage;
 
-using GoogleAnalytics.Blazor;
-
 using ICEBG.AppConfig;
 using ICEBG.Blazor;
 using ICEBG.Client;
@@ -54,14 +52,14 @@ ClientServices.Inject(ApplicationConfiguration.pDataServicesEndpointPrefix, buil
 
 builder.Services.AddBlazoredLocalStorage();
 
-builder.Services.AddGBService(options =>
-{
-    options.TrackingId = "G-2VZJ2X14RH";
-    options.GlobalEventParams = new Dictionary<string, object>()
-{
-        { Utilities.EventCategory, Utilities.DialogActions },
-        { Utilities.NonInteraction, true },
-};
-});
+//builder.Services.AddGBService(options =>
+//{
+//    options.TrackingId = "G-2VZJ2X14RH";
+//    options.GlobalEventParams = new Dictionary<string, object>()
+//{
+//        { Utilities.EventCategory, Utilities.DialogActions },
+//        { Utilities.NonInteraction, true },
+//};
+//});
 
 await builder.Build().RunAsync();
