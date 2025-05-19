@@ -9,8 +9,12 @@
 
 on:
   push:
-    tags:
-      - '*' # Push events to matching *, i.e. 1.0, 20.15.10
+    # tags:
+    #   - '*' # Push events to matching *, i.e. 1.0, 20.15.10
+    # To have a valid 'on' we add the following to the workflow
+    branches:
+      - 'mainDisabled'
+
 
 env:
   appNameDS: 'icebg.web.ds'

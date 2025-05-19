@@ -88,17 +88,6 @@ public static class ClientServices
         pLogger?.LogDebug("Add WeatherForecastService");
         serviceCollection.AddSingleton<WeatherForecastService>();
 
-        // Add Aspire telemetry
-        serviceCollection.AddOpenTelemetry()
-            .WithTracing(builder => builder
-                .AddSource("ICEBG.Client")
-                .AddHttpClientInstrumentation()
-                .AddGrpcClientInstrumentation())
-            .WithMetrics(builder => builder
-                .AddMeter("ICEBG.Client")
-                .AddHttpClientInstrumentation()
-                .AddProcessInstrumentation());
-
     }
 }
 
