@@ -16,14 +16,14 @@ public static class ApplicationConfigurationServer
 {
     #region Methods
 
-    public static void Initialize(WebApplicationBuilder builder)
+    public static void Initialize(IApplicationBuilder builder = null)
     {
         ApplicationConfiguration.Initialize();
 
-        ApplicationConfiguration.pConfigurationIdentifier = builder.Configuration["ICEBG:BaseConfiguration:ConfigurationIdentifier"];
-        ApplicationConfiguration.pDataServicesEndpointPrefix = builder.Configuration["ICEBG:BaseConfiguration:DataServicesEndpointPrefix"];
-        ApplicationConfiguration.pSqlConnectionString = builder.Configuration["ICEBG:BaseConfiguration:SqlConnectionString"];
-        ApplicationConfiguration.pWeatherEndpoint = builder.Configuration["ICEBG:BaseConfiguration:WeatherEndpoint"];
+        //ApplicationConfiguration.pConfigurationIdentifier = builder.Configuration["ICEBG:BaseConfiguration:ConfigurationIdentifier"];
+        //ApplicationConfiguration.pDataServicesEndpointPrefix = builder.Configuration["ICEBG:BaseConfiguration:DataServicesEndpointPrefix"];
+        //ApplicationConfiguration.pSqlConnectionString = builder.Configuration["ICEBG:BaseConfiguration:SqlConnectionString"];
+        //ApplicationConfiguration.pWeatherEndpoint = builder.Configuration["ICEBG:BaseConfiguration:WeatherEndpoint"];
     }
 
     #endregion

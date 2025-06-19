@@ -40,7 +40,7 @@ try
     logger.Debug("");
 
     logger.Debug("ApplicationConfiguration.Initialize");
-    ApplicationConfigurationServer.Initialize(builder);
+    ApplicationConfigurationServer.Initialize();
 
     // Add services to the container.
     logger.Debug("ClientServices.Inject");

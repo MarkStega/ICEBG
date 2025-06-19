@@ -30,7 +30,7 @@ try
     logger.Debug("");
 
     logger.Debug("ApplicationConfiguration.Initialize");
-    ApplicationConfigurationServer.Initialize(builder);
+    ApplicationConfigurationServer.Initialize();
 
     logger.Debug("ClientServices.Inject");
     ClientServices.Inject(ApplicationConfiguration.pDataServicesEndpointPrefix, builder.Services);
