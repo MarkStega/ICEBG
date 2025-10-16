@@ -18,7 +18,7 @@ public class CspReportingController : Controller
     public CspReportingController(ILogger<CspReportingController> logger)
     {
         pLogger = logger;
-        pLogger.LogInformation("CspReportingController.ctor()");
+        pLogger.LogDebug("CspReportingController.ctor()");
     }
 
     [HttpPost("UriReport")]

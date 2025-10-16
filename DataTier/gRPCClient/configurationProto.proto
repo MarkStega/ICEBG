@@ -6,6 +6,7 @@ service ConfigurationProto {
   rpc Select (ConfigurationSelectRequest) returns (ConfigurationSelectReply);
   rpc SelectAll (ConfigurationSelectAllRequest) returns (ConfigurationSelectAllReply);
   rpc Upsert (ConfigurationUpsertRequest) returns (ConfigurationUpsertReply);
+  rpc SelectStatisticsReport(StatisticsReportRequest) returns (StatisticsReportReply);
 }
 
 message ConfigurationDD {
@@ -42,4 +43,24 @@ message ConfigurationUpsertReply {
 	bool successIndicator = 1;
 	string errorMessage = 2;
 	string serverVersion = 3;
+}
+
+message StatisticsReportDD {
+	string piAverageSpan = 1;
+    string piStartTime = 2;
+    string piHeartbeat = 3;
+    string piIterations = 4;
+	string sqlAverageSpan = 5;
+    string sqlStartTime = 6;
+    string sqlHeartbeat = 7;
+    string sqlIterations = 8;
+}
+
+message StatisticsReportRequest{}
+
+message StatisticsReportReply {
+	bool successIndicator = 1;
+	string errorMessage = 2;
+	string serverVersion = 3;
+	StatisticsReportDD StatisticsReport = 4;
 }

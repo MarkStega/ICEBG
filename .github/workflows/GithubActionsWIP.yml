@@ -3,13 +3,14 @@
 on:
   push:
     branches:
-      - 'main'
+      - 'mainDisabled'
 
   pull_request:
     branches:
-      - 'main'
+      - 'mainDisabled'
 
 env:
+  appNameBURN: 'icebg.web.burn.wip'
   appNameDS: 'icebg.web.ds.wip'
   appNameUI: 'icebg.web.ui.wip'
   containerRegistry: 'cricebg.azurecr.io'
@@ -62,6 +63,50 @@ jobs:
       shell: bash
 
 ############################################################################################################
+# Build and deploy blazor BURN image
+############################################################################################################
+  # build-deploy-burn:
+  #   name: Build and deploy ICEBG BURN
+  #   needs: [set-unified-version]
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #   - name: Retrieve the global UnifiedVersion
+  #     run: echo "unifiedVersion=${{needs.set-unified-version.outputs.unifiedVersion}}" >> $GITHUB_ENV
+  #     shell: bash
+
+  #   - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
+  #     uses: actions/checkout@v4
+
+  #   - name: Setup dotnet
+  #     uses: actions/setup-dotnet@v3
+  #     with:
+  #       dotnet-version: '8.x'
+
+  #   - name: Docker login
+  #     uses: azure/docker-login@v1
+  #     with:
+  #       login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+  #       username: ${{ secrets.REGISTRY_USERNAME }}
+  #       password: ${{ secrets.REGISTRY_PASSWORD }}
+
+  #   - name: Publish tagged BURN image
+  #     run: >
+  #       dotnet publish ICEBG.Web.Burn/ICEBG.Web.Burn.csproj
+  #       --arch x64
+  #       --os linux
+  #       --configuration Azure
+  #       --no-self-contained
+  #       -p:ContainerImageTag=${{ env.unifiedVersion }}
+  #       -p:ContainerRegistry=${{env.containerRegistry}}
+  #       -p:ContainerRepository=${{env.appNameBURN}}
+  #       -p:PublishProfile=DefaultContainer
+  #       -p:Version=${{ env.unifiedVersion }}
+
+  #   - name: Display package output for brotli & gzip compressed files
+  #     run: find ${{ github.workspace }} -type f \( -iname "*.br" -o -iname "*.gz" \) | sort
+
+############################################################################################################
 # Build and deploy blazor DS image
 ############################################################################################################
   build-deploy-ds:
@@ -80,7 +125,12 @@ jobs:
     - name: Setup dotnet
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.x'
+        dotnet-version: '9.x'
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 10
 
     - name: Docker login
       uses: azure/docker-login@v1
@@ -126,7 +176,12 @@ jobs:
     - name: Setup dotnet
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.x'
+        dotnet-version: '9.x'
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 10
 
     - name: 'Docker login'
       uses: azure/docker-login@v1
@@ -224,12 +279,12 @@ jobs:
     steps:
 
     - name: Login to Azure
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
         
     - name: Azure CLI script to purge old DS & UI WIP container images
-      uses: azure/CLI@v1
+      uses: azure/CLI@v2
       with:
         inlineScript: >
           az acr run

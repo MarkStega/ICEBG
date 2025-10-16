@@ -9,14 +9,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Grpc.Net.Client.Web" Version="2.59.0" />
-		<PackageReference Include="Grpc.Tools" Version="2.59.0">
+		<PackageReference Include="Grpc.Net.Client.Web" Version="2.71.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.72.0">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
-		<PackageReference Include="Google.Protobuf" Version="3.25.0" />
-		<PackageReference Include="Grpc.Net.Client" Version="2.59.0" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+		<PackageReference Include="Google.Protobuf" Version="3.33.0" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.71.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -29,7 +29,6 @@
 
 	<ItemGroup>
 	  <Folder Include="BusinessLogic\BusinessLogicExtended\" />
-	  <Folder Include="DataDefinitions\" />
 	  <Folder Include="SQL\Extended\" />
 	  <Folder Include="SQL\OneTimeSetup\" />
 	</ItemGroup>

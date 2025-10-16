@@ -65,9 +65,13 @@ namespace ICEBG.DataTier.gRPCClient
             {
                 var exception = ex.ToString() + "(InnerException: ";
                 if (ex.InnerException == null)
+                {
                     exception += "NULL)";
+                }
                 else
+                {
                     exception += ex.InnerException.ToString() + ")";
+                }
 
                 return new ServiceResult<Configuration_DD>
                     (result: null, success: false, error: exception);
@@ -109,9 +113,13 @@ namespace ICEBG.DataTier.gRPCClient
             {
                 var exception = ex.ToString() + "(InnerException: ";
                 if (ex.InnerException == null)
+                {
                     exception += "NULL)";
+                }
                 else
+                {
                     exception += ex.InnerException.ToString() + ")";
+                }
 
                 return new ServiceResult<List<Configuration_DD>>
                     (result: null, success: false, error: exception);
@@ -149,11 +157,65 @@ namespace ICEBG.DataTier.gRPCClient
             {
                 var exception = ex.ToString() + "(InnerException: ";
                 if (ex.InnerException == null)
+                {
                     exception += "NULL)";
+                }
                 else
+                {
                     exception += ex.InnerException.ToString() + ")";
+                }
 
                 return new ServiceResult<string>
+                    (result: null, success: false, error: exception);
+            }
+        }
+
+        public async Task<ServiceResult<StatisticsReport_DD>> StatisticsReportAsync(
+            )
+        {
+            try
+            {
+                pLogger.LogDebug("StatisticsReportAsync initiated");
+
+                var request = new StatisticsReportRequest { };
+
+                var reply = await pConfigurationProtoClient.SelectStatisticsReportAsync(request);
+
+                if (reply.SuccessIndicator)
+                {
+                    var statisticsReport = new StatisticsReport_DD(
+                        reply.StatisticsReport.PiAverageSpan,
+                        reply.StatisticsReport.PiHeartbeat,
+                        reply.StatisticsReport.PiIterations,
+                        reply.StatisticsReport.PiStartTime,
+                        reply.StatisticsReport.SqlAverageSpan,
+                        reply.StatisticsReport.SqlHeartbeat,
+                        reply.StatisticsReport.SqlIterations,
+                        reply.StatisticsReport.SqlStartTime
+                        );
+
+                    return new ServiceResult<StatisticsReport_DD>
+                        (result: statisticsReport, success: true);
+                }
+                else
+                {
+                    return new ServiceResult<StatisticsReport_DD>
+                        (result: null, success: false, error: reply.ErrorMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                var exception = ex.ToString() + "(InnerException: ";
+                if (ex.InnerException == null)
+                {
+                    exception += "NULL)";
+                }
+                else
+                {
+                    exception += ex.InnerException.ToString() + ")";
+                }
+
+                return new ServiceResult<StatisticsReport_DD>
                     (result: null, success: false, error: exception);
             }
         }

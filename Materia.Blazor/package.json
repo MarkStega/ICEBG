@@ -1,0 +1,32 @@
+{
+  "name": "Materia.Blazor.MD3",
+  "version": "1.0.0-wip",
+  "description": "NPM build steps for Materia.Blazor.MD3",
+  "repository": "https://github.com/Materia-Technologies-Inc/Materia",
+  "scripts": {
+    "build-acquire-font-MSO": "curl \"https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL,GRAD@0..1,-50..200\" --output styles\\_material-symbols-outlined.scss --user-agent \"Mozilla/5.0,(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36\" --no-progress-meter",
+    "build-acquire-font-MSR": "curl \"https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL,GRAD@0..1,-50..200\" --output styles\\_material-symbols-rounded.scss --user-agent \"Mozilla/5.0,(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36\" --no-progress-meter",
+    "build-acquire-font-MSS": "curl \"https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:FILL,GRAD@0..1,-50..200\" --output styles\\_material-symbols-sharp.scss --user-agent \"Mozilla/5.0,(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36\" --no-progress-meter",
+    "build-css": "sass --no-color --unicode --style=expanded --load-path=node_modules --no-source-map Styles/Materia.Blazor.scss wwwroot/Materia.Blazor.css",
+    "build-css-minify": "sass --no-color --unicode --style=compressed --load-path=node_modules --no-source-map Styles/Materia.Blazor.scss wwwroot/Materia.Blazor.min.css",
+    "build-js": "tsc --pretty",
+    "build-js-custom-events": "tsc -b tsconfig.event.scripts.json --pretty",
+    "build-js-rollup": "rollup -c",
+    "build-js-rollup-minify": "terser wwwroot/Materia.Blazor.js --compress --mangle --ecma 2016 --output wwwroot/Materia.Blazor.min.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@material/web": "^2.2.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-replace": "^5.0.7",
+    "material-components-web": "14.0.0",
+    "regexp": "^1.0.0",
+    "rollup-plugin-summary": "^1.4.3",
+    "sass": "1.39.2",
+    "terser": "^5.33.0",
+    "typescript": "^5.6.2"
+  },
+  "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c"
+}

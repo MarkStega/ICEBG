@@ -2,26 +2,20 @@
 
 @namespace ICEBG.Client
 
+@using ICEBG.Client.Components
+@using ICEBG.DataTier.DataDefinitions
+@using ICEBG.DataTier.gRPCClient
+@using ICEBG.DataTier.HelperClasses
+@using ICEBG.DataTier.Interfaces
+@using ICEBG.SharedUtilities
+@using ICEBG.SystemFramework
+
+@inject iConfigurationClient ConfigurationClient
+
+@implements IDisposable
+
+
 @inherits ComponentBase
-
-
-<div class="dw-section-condensed">
-    <div class="dw-max-width-content">
-        <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell--span-12 dw-tagline">
-                    <picture>
-                        <source media="(max-width: 1019px)" srcset="@SkylineImages[2].Uri" width="@SkylineImages[2].Width" height="@SkylineImages[2].Height">
-                        <source media="(min-width: 1020px) and (max-width: 1219px)" srcset="@SkylineImages[1].Uri" width="@SkylineImages[1].Width" height="@SkylineImages[1].Height">
-                        <source media="(min-width: 1220px)" srcset="@SkylineImages[0].Uri" width="@SkylineImages[0].Width" height="@SkylineImages[0].Height">
-                        <img src="@SkylineImages[0].Uri" alt="@SkylineImages[0].Caption">
-                    </picture>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <div class="dw-section-regular">
@@ -29,16 +23,27 @@
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell--span-12 dw-tagline">
-                    <div class="dw-picture-right">
-                        <p class="mdc-typography--headline4">More work...</p>
-                        <p class="mdc-typography--body1">
-                            We need these shelves organized.
-                        </p>
-                    </div>
+                    @if (pBurn)
+                    {
+                        <h1>Report on consumed resources</h1>
+                        <FlowLabeledText2 time="@currentTime.ToString()"
+                                          duration="@duration"
+                                          statisticsReportResult="@currentStatisticsReport" />
+                    }
+                    else
+                    {
+                        <div class="dw-picture-right">
+                            <p class="mdc-typography--headline4">More work...</p>
+                            <p class="mdc-typography--body1">
+                                We need these shelves organized.
+                            </p>
 
-                    <br />
-                    <img src="_content/ICEBG.Client/images/book-shelves.jpg" alt="book-shelves" width="640px" height="420px">
+                            <br />
+                        </div>
 
+                        <img src="_content/ICEBG.Client/images/book-shelves.jpg" alt="book-shelves" width="640px" height="420px">
+                        <br />
+                    }
                 </div>
 
             </div>

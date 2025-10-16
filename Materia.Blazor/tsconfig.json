@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "ES2021",
+    "module": "ES2015",
+    "moduleResolution": "Node",
+    "noFallthroughCasesInSwitch": true,
+    "noEmitOnError": false,
+    "noImplicitAny": false,
+    "noUnusedParameters": true,
+    "paths": {
+      "@material/web/*": [ "../../materia.webcomponents/*" ]
+    },
+    "removeComments": false,
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "strict": true
+  },
+  "include": [ "Components/**/*.ts", "Components.MD2/**/*.ts", "Scripts/**/*.ts" ],
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ],
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Recommended"
+}

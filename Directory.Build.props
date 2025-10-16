@@ -4,22 +4,22 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 		<Configurations>Azure;DevServer;DevWebAssembly</Configurations>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='Azure'">
-		<DefineConstants>AZURE;BLAZOR_SERVER;NOT_BLAZOR_WEBASSEMBLY</DefineConstants>
+		<DefineConstants>AZURE;BLAZOR_SERVER;NOT_BLAZOR_WEBASSEMBLY;xBURN</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='DevServer'">
-		<DefineConstants>DEVELOP;BLAZOR_SERVER</DefineConstants>
+		<DefineConstants>DEVSERVER;BLAZOR_SERVER;xBURN</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='DevWebAssembly'">
-		<DefineConstants>DEVELOP;BLAZOR_WEBASSEMBLY</DefineConstants>
+		<DefineConstants>DEVWEBASSEMBLY;BLAZOR_WEBASSEMBLY;xBURN</DefineConstants>
 	</PropertyGroup>
 
 </Project>

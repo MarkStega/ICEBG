@@ -1,12 +1,4 @@
 {
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:53414/",
-      "sslPort": 44325
-    }
-  },
   "profiles": {
     "ICEBG.Web.DataServices": {
       "commandName": "Project",

@@ -10,6 +10,9 @@ using ICEBG.DataTier.HelperClasses;
 //  2022-05-23  Mark Stega
 //              Created
 //
+//  2024-07-04  Mark Stega
+//              Added StatisticsReportAsync
+//
 
 namespace ICEBG.DataTier.Interfaces;
 
@@ -22,5 +25,7 @@ public interface iConfigurationClient
     Task<ServiceResult<string>> UpsertAsync(
         Configuration_DD Configuration,
         Metadata header);
+    Task<ServiceResult<StatisticsReport_DD>> StatisticsReportAsync(
+        );
 }
 

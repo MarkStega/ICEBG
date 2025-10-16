@@ -1,18 +1,15 @@
-﻿//#if gRPC
-using System.Net.Http;
-using System.Security.Cryptography;
-
-using Grpc.Net.Client;
+﻿using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 
 using ICEBG.DataTier.gRPCClient;
 using ICEBG.DataTier.Interfaces;
 
-using Material.Blazor;
+using Materia.Blazor;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-//#endif
+
+using System.Net.Http;
 
 namespace ICEBG.Client.Infrastructure.ClientServices;
 
@@ -25,7 +22,7 @@ public static class ClientServices
         //
         // Third party library services
         //
-        pLogger?.LogInformation("Adding MBServices...");
+        pLogger?.LogDebug("Adding MBServices...");
         //serviceCollection.AddMBServices(options =>
         //{
         //    options.LoggingServiceConfiguration = new MBLoggingServiceConfiguration()
@@ -77,9 +74,9 @@ public static class ClientServices
             });
 #endif
 
-        pLogger?.LogInformation("Adding gRPC iConfigurationClient...");
+        pLogger?.LogDebug("Adding gRPC iConfigurationClient...");
         serviceCollection.AddScoped<iConfigurationClient, ConfigurationClientGRPC>();
-        pLogger?.LogInformation("Adding gRPC ConfigurationProtoClient...");
+        pLogger?.LogDebug("Adding gRPC ConfigurationProtoClient...");
         serviceCollection.AddScoped(user =>
         {
             return new ConfigurationProto.ConfigurationProtoClient(channel);

@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="Material.Blazor.MD3" Version="5.0.0" />
+    <ProjectReference Include="..\Materia.Blazor\Materia.Blazor.csproj" />
   </ItemGroup>
 </Project>

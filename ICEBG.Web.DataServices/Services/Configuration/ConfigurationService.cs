@@ -1,18 +1,18 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Grpc.Core;
 
-using Grpc.Core;
+using ICEBG.AppConfig;
+using ICEBG.DataTier.BusinessLogic;
+using ICEBG.DataTier.DataDefinitions;
+using ICEBG.DataTier.gRPCClient;
+using ICEBG.SystemFramework;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-using ICEBG.DataTier.BusinessLogic;
-using ICEBG.DataTier.DataDefinitions;
-using ICEBG.DataTier.gRPCClient;
-using ICEBG.SystemFramework;
-using ICEBG.AppConfig;
+using System;
 using System.Reflection;
+using System.Threading.Tasks;
 
 //
 //  2022-05-24  Mark Stega
@@ -38,7 +38,7 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
         pConfiguration = configuration;
         pConfigurationBL = new Configuration_BL(ApplicationConfiguration.pSqlConnectionString);
         pLogger = logger;
-        pLogger.LogInformation("ConfigurationService ctor");
+        pLogger.LogDebug("ConfigurationService ctor");
     }
 
     #endregion
@@ -49,11 +49,11 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
     {
         try
         {
-            pLogger.LogInformation("Configuration.Select initiated.");
+            pLogger.LogDebug("Configuration.Select initiated.");
             var configuration = pConfigurationBL.Select(request.Id);
             if (configuration == null)
             {
-                pLogger.LogInformation("   pConfigurationBL.Select failed with a null Configuration.");
+                pLogger.LogDebug("   pConfigurationBL.Select failed with a null Configuration.");
                 var badReply = new ConfigurationSelectReply
                 {
                     SuccessIndicator = false,
@@ -63,13 +63,14 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
             }
             else
             {
-                pLogger.LogInformation("   pConfigurationBL.Select succeeded");
+                pLogger.LogDebug("   pConfigurationBL.Select succeeded");
 
-                var reply = new ConfigurationSelectReply();
-
-                reply.SuccessIndicator = true;
-                reply.ErrorMessage = "";
-                reply.ServerVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split('+')[0];
+                var reply = new ConfigurationSelectReply
+                {
+                    SuccessIndicator = true,
+                    ErrorMessage = "",
+                    ServerVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split('+')[0]
+                };
 
                 var ConfigurationDD = new ConfigurationDD
                 {
@@ -103,11 +104,11 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
     {
         try
         {
-            pLogger.LogInformation("Configuration.SelectAll initiated.");
+            pLogger.LogDebug("Configuration.SelectAll initiated.");
             var Configurations = pConfigurationBL.SelectAll();
             if (Configurations == null)
             {
-                pLogger.LogInformation("   pConfigurationBL.SelectAll failed with a null Configuration list.");
+                pLogger.LogDebug("   pConfigurationBL.SelectAll failed with a null Configuration list.");
                 var badReply = new ConfigurationSelectAllReply
                 {
                     SuccessIndicator = false,
@@ -117,15 +118,16 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
             }
             else
             {
-                pLogger.LogInformation(
+                pLogger.LogDebug(
                     "   pConfigurationBL.SelectAll succeeded, returning " +
                     Configurations.Count.ToString() + " Configuration record(s)");
 
-                var reply = new ConfigurationSelectAllReply();
-
-                reply.SuccessIndicator = true;
-                reply.ServerVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split('+')[0];
-                reply.ErrorMessage = "";
+                var reply = new ConfigurationSelectAllReply
+                {
+                    SuccessIndicator = true,
+                    ServerVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split('+')[0],
+                    ErrorMessage = ""
+                };
 
                 foreach (var Configuration in Configurations)
                 {
@@ -162,14 +164,14 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
     {
         try
         {
-            pLogger.LogInformation("Configuration.Upsert initiated.");
+            pLogger.LogDebug("Configuration.Upsert initiated.");
 
             var Configuration = new Configuration_DD(
                 request.Configuration.Id,
                 "",
                 request.Configuration.Configuration);
             pConfigurationBL.Upsert(Configuration);
-            pLogger.LogInformation("   pConfigurationBL.Upsert succeeded");
+            pLogger.LogDebug("   pConfigurationBL.Upsert succeeded");
 
             var goodReply = new ConfigurationUpsertReply
             {
