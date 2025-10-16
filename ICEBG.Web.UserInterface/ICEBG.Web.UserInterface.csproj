@@ -22,17 +22,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Aspire.Hosting.AppHost" Version="9.3.1" />
+		<PackageReference Include="Aspire.Hosting.AppHost" Version="9.5.1" />
 		<PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
 		<PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
 		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.71.0" />
 		<PackageReference Include="HttpSecurity.AspNet" Version="1.2.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.10" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
-		<PackageReference Include="NLog.Extensions.AzureBlobStorage" Version="4.5.0" />
-		<PackageReference Include="NLog.Web.AspNetCore" Version="6.0.1" />
-		<PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.12.0" />
-		<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.12.0" />
+		<PackageReference Include="NLog.Extensions.AzureBlobStorage" Version="4.6.0" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="6.0.5" />
+		<PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.13.1" />
+		<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.13.1" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
 	</ItemGroup>
 

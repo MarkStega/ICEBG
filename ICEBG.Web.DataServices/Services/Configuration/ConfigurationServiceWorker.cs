@@ -24,18 +24,6 @@ public partial class ConfigurationServiceWorker : BackgroundService
 {
     #region members
 
-    // ComputePiWorker stats
-    public TimeSpan pPiAverageSpan { get; set; } = new TimeSpan(0);
-    public DateTime pPiStartTime { get; set; }
-    public DateTime pPiHeartbeat { get; set; }
-    public int pPiIterations { get; set; } = 0;
-
-    // ManipulateSqlDataWorker stats
-    public TimeSpan pSqlAverageSpan { get; set; } = new TimeSpan(0);
-    public DateTime pSqlStartTime { get; set; }
-    public DateTime pSqlHeartbeat { get; set; }
-    public int pSqlIterations { get; set; } = 0;
-
     // Miscellaneous
     protected IConfiguration pConfiguration { get; private set; }
     protected Configuration_BL pConfigurationBL { get; private set; }
@@ -70,12 +58,6 @@ public partial class ConfigurationServiceWorker : BackgroundService
                 {
                     kInitialized = true;
 
-                    pLogger.Log(Microsoft.Extensions.Logging.LogLevel.Debug, "ConfigurationServiceWorker.ExecuteAsync starting ComputePiWorker()");
-                    ComputePiWorker();
-
-                    pLogger.Log(Microsoft.Extensions.Logging.LogLevel.Debug, "ConfigurationServiceWorker.ExecuteAsync starting ManipulateSqlDataWorker()");
-                    ManipulateSqlDataWorker();
-
                     pLogger.Log(Microsoft.Extensions.Logging.LogLevel.Debug, "ConfigurationServiceWorker.ExecuteAsync sleeping for 1 minute before allowing worker threads to start");
                     await Task.Delay(1000 * 60); // 1 minute
                     pStartWorkerThreads = true;
@@ -96,28 +78,3 @@ public partial class ConfigurationServiceWorker : BackgroundService
 
     #endregion
 }
-
-
-#region resource log
-
-// 2024-07-04 1135 -  $4,737
-// 2024-07-05 0707 -  $4,770 - Created aseICEBG-BURN-1,
-//                             Created waICEBG-BURN-1,
-//                             Deployed waICEBG-BURN-1, not running
-// 2024-07-06 0745 -  $5,450 - waICEBG-BURN-1 running, not displaying stats,
-//                             aseICEBG-BURN-2 creation started
-// 2024-07-07 0645 -  $6,369 - waICEBG-BURN-1 running, not displaying stats,
-//                             aseICEBG-BURN-2 creation failure reported & restarted
-// 2024-07-08 0600 -  $7,316 - waICEBG-BURN-1 running, not displaying stats,
-//                             aseICEBG-BURN-2 creation failure reported,
-//                             Created aseICEBG-BURN-3,
-//                             Created waICEBG-BURN-3,
-//                             Deployed waICEBG-BURN-3
-// 2024-07-09 0630 -  $9,062 - waICEBG-BURN-1 running, not displaying stats,
-//                             waICEBG-BURN-3 running, not displaying stats
-// 2024-07-10 1330 - $11,401 - waICEBG-BURN-1 running, not displaying stats,
-//                             waICEBG-BURN-3 running, not displaying stats
-// 2024-07-11 0800 - $12,797 - waICEBG-BURN-1 running, not displaying stats,
-//                             waICEBG-BURN-3 running, not displaying stats
-
-#endregion

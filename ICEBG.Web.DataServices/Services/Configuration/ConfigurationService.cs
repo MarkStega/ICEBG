@@ -195,50 +195,5 @@ public class ConfigurationService : ConfigurationProto.ConfigurationProtoBase
 
     #endregion
 
-    #region SelectStatistics
-
-    public override Task<StatisticsReportReply> SelectStatisticsReport(StatisticsReportRequest request, ServerCallContext context)
-    {
-        try
-        {
-            pLogger.LogDebug("Configuration.StatisticsReport initiated.");
-
-            var reply = new StatisticsReportReply
-            {
-                SuccessIndicator = true,
-                ErrorMessage = "",
-                ServerVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split('+')[0]
-            };
-
-            var StatisticsReportDD = new StatisticsReportDD
-            {
-                PiAverageSpan = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiAverageSpan.ToString(),
-                PiHeartbeat = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiHeartbeat.ToString(),
-                PiIterations = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiIterations.ToString(),
-                PiStartTime = WorkerServiceReference.pConfigurationWorkerServiceReference.pPiStartTime.ToString(),
-                SqlAverageSpan = WorkerServiceReference.pConfigurationWorkerServiceReference.pSqlAverageSpan.ToString(),
-                SqlHeartbeat = WorkerServiceReference.pConfigurationWorkerServiceReference.pSqlHeartbeat.ToString(),
-                SqlIterations = WorkerServiceReference.pConfigurationWorkerServiceReference.pSqlIterations.ToString(),
-                SqlStartTime = WorkerServiceReference.pConfigurationWorkerServiceReference.pSqlStartTime.ToString()
-            };
-            reply.StatisticsReport = StatisticsReportDD;
-
-            return Task.FromResult(reply);
-        }
-        catch (Exception ex)
-        {
-            var error = "Exception in Configuration.StatisticsReport of " + ex.ToString();
-            pLogger.LogError(error);
-            var badReply = new StatisticsReportReply
-            {
-                SuccessIndicator = false,
-                ErrorMessage = ex.ToString()
-            };
-            return Task.FromResult(badReply);
-        }
-    }
-
-    #endregion
-
 }
 

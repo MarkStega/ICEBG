@@ -8,12 +8,12 @@
     "build-min-js": "terser wwwroot/js/icebg.js --compress --mangle --ecma 2016 --output wwwroot/js/icebg.min.js"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.0",
-    "@babel/core": "^7.28.0",
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.4",
     "@babel/plugin-transform-class-properties": "^7.27.1",
-    "@babel/plugin-transform-object-rest-spread": "^7.28.0",
-    "@babel/plugin-transform-runtime": "^7.28.0",
-    "@babel/preset-env": "^7.28.0",
+    "@babel/plugin-transform-object-rest-spread": "^7.28.4",
+    "@babel/plugin-transform-runtime": "^7.28.3",
+    "@babel/preset-env": "^7.28.3",
     "@babel/preset-typescript": "^7.27.1",
     "babel-loader": "^9.2.1",
     "fork-ts-checker-webpack-plugin": "^7.3.0",
@@ -21,10 +21,10 @@
     "regexp": "1.0.0",
     "sass": "1.39.2",
     "source-map-loader": "4.0.1",
-    "terser": "^5.43.1",
-    "ts-loader": "^9.5.2",
-    "typescript": "^5.8.3",
-    "webpack": "^5.100.0",
+    "terser": "^5.44.0",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "webpack": "^5.102.1",
     "webpack-cli": "^5.1.4"
   },
   "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c"

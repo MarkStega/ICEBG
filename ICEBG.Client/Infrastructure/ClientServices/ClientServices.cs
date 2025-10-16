@@ -1,7 +1,4 @@
-﻿using System.Net.Http;
-using System.Security.Cryptography;
-
-using Grpc.Net.Client;
+﻿using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 
 using ICEBG.DataTier.gRPCClient;
@@ -12,7 +9,7 @@ using Materia.Blazor;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-using OpenTelemetry.Metrics;
+using System.Net.Http;
 
 namespace ICEBG.Client.Infrastructure.ClientServices;
 
